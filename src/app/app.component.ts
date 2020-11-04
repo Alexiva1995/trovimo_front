@@ -8,6 +8,7 @@ import {TranslateService} from '@ngx-translate/core';
 export class AppComponent {
   title = 'trovimo';
   constructor(translate: TranslateService){
-    translate.use('en');
+    translate.addLangs(['en', 'es']);
+    translate.setDefaultLang('en');
   }
 }

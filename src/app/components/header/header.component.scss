@@ -1,0 +1,13 @@
+@import "../../theme/vars.scss";
+.header {
+  background-color: $primary;
+  color: white;
+  .content {
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    span {
+      font-family: "Nunito-Italic";
+    }
+  }
+}
