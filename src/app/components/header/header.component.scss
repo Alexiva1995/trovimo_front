@@ -5,9 +5,41 @@
   .content {
     padding: 5px 0;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     span {
       font-family: "Nunito-Italic";
+      font-size: 12px;
+    }
+  }
+
+  .options {
+    display: flex;
+    align-items: center;
+    ul {
+      margin: 0;
+      li {
+        list-style: none;
+        display: flex;
+        float: left;
+        padding: 0 25px;
+        border-right: 1px solid;
+        font-size: 12px;
+        cursor: pointer;
+        i {
+          margin-left: 10px;
+        }
+        img {
+          margin-left: 4px;
+          width: 1rem;
+        }
+      }
+    }
+    .user {
+      i {
+        margin-right: 5px;
+      }
+      padding: 0 25px;
     }
   }
 }

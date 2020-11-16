@@ -15,6 +15,12 @@ import { MenuHeaderComponent } from './components/menu-header/menu-header.compon
 import { SignInComponent } from './modules/auth/sign-in/sign-in.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { HomeComponent } from './modules/home/home.component';
+import { AboutComponent } from './modules/about/about.component';
+import { LegalComponent } from './modules/legal/legal.component';
+import { FaqComponent } from './modules/faq/faq.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -28,7 +34,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     MenuHeaderComponent,
     SignInComponent,
     SignUpComponent,
-    AuthComponent
+    AuthComponent,
+    FooterComponent,
+    SearchbarComponent,
+    HomeComponent,
+    AboutComponent,
+    LegalComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +54,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     }),
   ],
-  providers: []
+  providers: [],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

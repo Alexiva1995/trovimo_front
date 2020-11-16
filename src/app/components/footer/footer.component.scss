@@ -1,0 +1,36 @@
+@import "../../theme/vars.scss";
+
+.footer {
+  width: 100%;
+  bottom: 0;
+  padding-top: 30px;
+  p {
+    margin: 0;
+    font-size: 14px;
+    color: $primary;
+  }
+  ul {
+    li {
+      list-style: none;
+      color: $primary;
+      &.tittle {
+        font-weight: bold;
+      }
+    }
+  }
+  .copy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary;
+    font-size: 12px;
+    padding: 20px 0;
+    p {
+      margin: 0;
+    }
+    .icons i {
+      margin: 0 10px;
+      font-size: 20px;
+    }
+  }
+}

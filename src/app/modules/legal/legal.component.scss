@@ -1,0 +1,16 @@
+@import "../../theme/vars";
+.hero {
+  background-color: $primary;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 10rem;
+  justify-content: center;
+  h2 {
+    font-weight: bold;
+  }
+}
+.container {
+  margin: 30px auto;
+}

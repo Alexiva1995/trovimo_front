@@ -1,0 +1,7 @@
+@import "./vars.scss";
+button.btn.btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  border-radius: 50px;
+  width: 100%;
+}

@@ -1,1 +1,8 @@
+@use './theme/index.scss';
 @import "./theme/index.scss";
+
+header {
+  position: relative;
+  width: 100%;
+  z-index: 300;
+}

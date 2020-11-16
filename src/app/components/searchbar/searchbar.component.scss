@@ -1,0 +1,52 @@
+@import "../../theme/vars";
+
+.hero {
+  background: url("../../../assets/images/slider1.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32rem;
+  margin-bottom: 30px;
+  .intro {
+    text-align: center;
+    color: white;
+
+    h1 {
+      font-weight: bold;
+    }
+
+    .search {
+      margin-top: 40px;
+      input {
+        border: none !important;
+      }
+      .nav {
+        &.nav-tabs {
+          border-bottom: none !important;
+        }
+        .nav-item .nav-link {
+          font-weight: bold;
+          background-color: #d8d8d8;
+          color: $primary;
+          border-color: #d8d8d8;
+          padding: 0.3rem 1.5rem;
+          &.active {
+            color: #fff !important;
+            background-color: $primary !important;
+            border-color: $primary !important;
+          }
+        }
+      }
+      .filter {
+        .btn {
+          font-size: 12px;
+          width: 7rem;
+          float: right;
+        }
+      }
+    }
+  }
+}

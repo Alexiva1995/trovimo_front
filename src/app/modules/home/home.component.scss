@@ -1,0 +1,60 @@
+@import "../../theme/vars";
+
+.card-home-img {
+  background-size: 130% 120%;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 35px 45px;
+  color: white;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  p {
+    font-size: 12px;
+  }
+  h4 {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+
+.content {
+  background-image: url("../../../assets/images/fondo-services.png");
+  background-size: cover;
+  margin-bottom: 20px;
+  padding-top: 40px;
+  h4 {
+    font-weight: bold;
+    color: $primary;
+  }
+  .about {
+    background-image: url("../../../assets/images/casa.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position-x: 0px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+  }
+  .services {
+    margin: 60px auto;
+  }
+  .card {
+    padding: 30px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #135aa0;
+    border: none;
+    box-shadow: 0 10px 20px 0px #135aa029;
+    h6 {
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    img {
+      width: 30%;
+    }
+  }
+}
