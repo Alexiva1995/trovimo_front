@@ -62,15 +62,12 @@
             </ul>
           </div>
         </li>
-        <li>
-          <img
-            src="../../../assets/images/logo-trovimo.png"
-            alt="Trovimo logo"
-          />
+        <li [routerLink]="['/home']">
+          <img src="/assets/images/logo-trovimo.png" alt="Trovimo logo" />
         </li>
         <li>Find experts <i class="fas fa-sort-down"></i></li>
         <li>Find Inspiration <i class="fas fa-sort-down"></i></li>
-        <li>
+        <li [routerLink]="['/new']">
           <button
             class="btn btn-outline-primary"
             style="border-radius: 60px"

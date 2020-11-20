@@ -1,7 +1,25 @@
 @import "./vars.scss";
-button.btn.btn-primary {
+.btn-primary {
   background-color: $primary !important;
   border-color: $primary !important;
   border-radius: 50px;
   width: 100%;
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $primary !important;
+  border: 2px solid !important;
+  color: $primary !important;
+  border-radius: 50px;
+  width: 100%;
+  &:hover {
+    background-color: $primary !important;
+    color: white !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+  }
 }

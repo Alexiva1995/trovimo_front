@@ -1,0 +1,71 @@
+<h6>What would you like to do?</h6>
+<div class="actions-btn">
+  <button
+    (click)="setAction(1)"
+    class="btn"
+    [ngClass]="{
+      'btn-primary': first_action === 1,
+      'btn-outline-primary': first_action !== 1
+    }"
+  >
+    Sale
+  </button>
+  <button
+    (click)="setAction(2)"
+    class="btn"
+    [ngClass]="{
+      'btn-primary': first_action === 2,
+      'btn-outline-primary': first_action !== 2
+    }"
+  >
+    Rent
+  </button>
+  <button
+    (click)="setAction(3)"
+    class="btn"
+    [ngClass]="{
+      'btn-primary': first_action === 3,
+      'btn-outline-primary': first_action !== 3
+    }"
+  >
+    Shared spaces
+  </button>
+  <button
+    (click)="setAction(4)"
+    class="btn"
+    [ngClass]="{
+      'btn-primary': first_action === 4,
+      'btn-outline-primary': first_action !== 4
+    }"
+  >
+    New projects
+  </button>
+</div>
+
+<!-- 
+
+ -->
+<h6>Select your type property</h6>
+<div class="property-btn">
+  <button (click)="setAction(1)" class="btn btn-primary">
+    <img src="/assets/images/casa(1).svg" alt="" />
+    House
+  </button>
+  <button (click)="setAction(2)" class="btn btn-outline-primary">
+    <img src="/assets/images/apartamento.svg" alt="" />
+    Apartament
+  </button>
+  <button (click)="setAction(3)" class="btn btn-outline-primary">
+    <img src="/assets/images/chalet.svg" alt="" />
+    Chalet
+  </button>
+  <button (click)="setAction(4)" class="btn btn-outline-primary">
+    <img src="/assets/images/proyecto.svg" alt="" />
+    New projects
+  </button>
+  <button (click)="setAction(4)" class="btn btn-outline-primary">
+    <img src="/assets/images/tienda.svg" alt="" />
+    Comercial spaces
+  </button>
+  <button (click)="setAction(4)" class="btn btn-outline-primary">Other</button>
+</div>

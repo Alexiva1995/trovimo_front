@@ -18,9 +18,14 @@ import { SignUpComponent } from './modules/auth/sign-up/sign-up.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { HomeComponent } from './modules/home/home.component';
-import { AboutComponent } from './modules/about/about.component';
-import { LegalComponent } from './modules/legal/legal.component';
-import { FaqComponent } from './modules/faq/faq.component';
+import { AboutComponent } from './modules/help/about/about.component';
+import { LegalComponent } from './modules/help/legal/legal.component';
+import { FaqComponent } from './modules/help/faq/faq.component';
+import { NewPublishComponent } from './modules/new-publish/new-publish.component';
+import { DetailsComponent } from './modules/new-publish/components/details/details.component';
+import { InfoComponent } from './modules/new-publish/components/info/info.component';
+import { PublishComponent } from './modules/new-publish/components/publish/publish.component';
+import { FindExpertsComponent } from './modules/find-experts/find-experts.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -40,7 +45,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HomeComponent,
     AboutComponent,
     LegalComponent,
-    FaqComponent
+    FaqComponent,
+    NewPublishComponent,
+    DetailsComponent,
+    InfoComponent,
+    PublishComponent,
+    FindExpertsComponent,
   ],
   imports: [
     BrowserModule,

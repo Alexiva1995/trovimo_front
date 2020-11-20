@@ -6,42 +6,29 @@
         <ul>
           <li class="dropdown">
             Colombia
-            <img src="../../../assets/flags/colombia.svg" alt="colombia" />
+            <img src="/assets/flags/colombia.svg" alt="colombia" />
             <i class="fas fa-sort-down"></i>
             <div class="dropdown-content">
               <ul>
                 <li>
                   Switzerland
-                  <img
-                    src="../../../assets/flags/switzerland.svg"
-                    alt="Switzerland"
-                  />
+                  <img src="/assets/flags/switzerland.svg" alt="Switzerland" />
                 </li>
                 <li>International</li>
               </ul>
             </div>
           </li>
           <li class="dropdown">
-            EN <img src="../../../assets/flags/england.svg" alt="ES" />
+            EN <img src="/assets/flags/england.svg" alt="ES" />
             <i class="fas fa-sort-down"></i>
             <div class="dropdown-content">
               <ul>
                 <li class="tittle">Languaje</li>
-                <li>
-                  EN <img src="../../../assets/flags/england.svg" alt="ES" />
-                </li>
-                <li>
-                  ES <img src="../../../assets/flags/spain.svg" alt="ES" />
-                </li>
-                <li>
-                  DE <img src="../../../assets/flags/germany.svg" alt="DE" />
-                </li>
-                <li>
-                  IT <img src="../../../assets/flags/italy.svg" alt="IT" />
-                </li>
-                <li>
-                  FR <img src="../../../assets/flags/france.svg" alt="FR" />
-                </li>
+                <li>EN <img src="/assets/flags/england.svg" alt="ES" /></li>
+                <li>ES <img src="/assets/flags/spain.svg" alt="ES" /></li>
+                <li>DE <img src="/assets/flags/germany.svg" alt="DE" /></li>
+                <li>IT <img src="/assets/flags/italy.svg" alt="IT" /></li>
+                <li>FR <img src="/assets/flags/france.svg" alt="FR" /></li>
               </ul>
             </div>
           </li>
@@ -59,7 +46,7 @@
             </div>
           </li>
         </ul>
-        <div class="user">
+        <div [routerLink]="['/auth/sign-in']" class="user">
           <i class="fas fa-user"></i>
           <span>Sign in / Register</span>
         </div>

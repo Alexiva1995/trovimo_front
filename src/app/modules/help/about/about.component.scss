@@ -1,4 +1,4 @@
-@import "../../theme/vars";
+@import "../../../theme/vars";
 .hero {
   background-color: $primary;
   color: white;
@@ -13,4 +13,9 @@
 }
 .container {
   margin: 30px auto;
+  margin-bottom: 50px;
+  h6 {
+    font-weight: bold;
+    color: $primary;
+  }
 }

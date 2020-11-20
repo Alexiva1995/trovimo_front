@@ -7,3 +7,7 @@
 header {
   box-shadow: 0px 3px 20px 0px #135aa029;
 }
+
+li:focus {
+  outline: none !important;
+}
