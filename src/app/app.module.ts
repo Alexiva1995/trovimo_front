@@ -26,16 +26,24 @@ import { DetailsComponent } from './modules/new-publish/components/details/detai
 import { InfoComponent } from './modules/new-publish/components/info/info.component';
 import { PublishComponent } from './modules/new-publish/components/publish/publish.component';
 import { FindExpertsComponent } from './modules/find-experts/find-experts.component';
+import { FeedbackComponent } from './components/feedback/feedback.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PublishListComponent } from './modules/publish-list/publish-list.component';
+import { PublishCardComponent } from './component/publish-card/publish-card.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
+const NGX_MODULES = [
+  ModalModule.forRoot()
+]
+
+const APP_COMPONENTS = [
+  HeaderComponent,
     MenuHeaderComponent,
     SignInComponent,
     SignUpComponent,
@@ -51,8 +59,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     InfoComponent,
     PublishComponent,
     FindExpertsComponent,
+    FeedbackComponent,
+]
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    APP_COMPONENTS,
+    PublishListComponent,
+    PublishCardComponent
   ],
   imports: [
+    NGX_MODULES,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -63,6 +82,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [ AppComponent ]

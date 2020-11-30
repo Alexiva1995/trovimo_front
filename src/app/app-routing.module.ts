@@ -8,6 +8,7 @@ import { FaqComponent } from './modules/help/faq/faq.component';
 import { HomeComponent } from './modules/home/home.component';
 import { LegalComponent } from './modules/help/legal/legal.component';
 import { NewPublishComponent } from './modules/new-publish/new-publish.component';
+import { PublishListComponent } from './modules/publish-list/publish-list.component';
 
 const routes: Routes = [
   /* {path:'',redirectTo:'/home',pathMatch:'full'}, */
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path:'home',
     component:HomeComponent,
+  },
+  {
+    path:'publish-list',
+    component:PublishListComponent,
   },
   {
     path:'new',

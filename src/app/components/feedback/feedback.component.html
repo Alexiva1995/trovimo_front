@@ -1,0 +1,27 @@
+<div class="btn-feedback" (click)="openModal(feedbackmodal)">feedback</div>
+
+<ng-template #feedbackmodal>
+  <div class="modal-body">
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <p class="feedback-title">
+      You couldn't find what you were looking for? Help us improve here
+    </p>
+    <textarea
+      class="form-control feedback-textarea"
+      name="feedback"
+      id="feedback"
+      rows="3"
+      placeholder="Write here"
+    ></textarea>
+    <button style="margin-top: 20px" class="btn btn-primary" type="button">
+      Send
+    </button>
+  </div>
+</ng-template>

@@ -1,0 +1,30 @@
+@import "../../theme/vars";
+
+.btn-feedback {
+  background-color: #d8d8d8;
+  position: fixed;
+  right: 2.5rem;
+  text-orientation: upright;
+  transform: rotate(-90deg);
+  padding: 6px 25px;
+  top: 50%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: $primary;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.close {
+  color: $primary;
+}
+.feedback-title {
+  font-weight: bold;
+  color: $primary;
+}
+
+.feedback-textarea {
+  background-color: #efefef !important;
+  border: none !important;
+}

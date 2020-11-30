@@ -1,0 +1,48 @@
+@import "../../theme/vars";
+
+.publish-card {
+  .counter {
+    background-color: $primary;
+    color: white !important;
+    position: absolute;
+    top: 128px;
+    right: 26px;
+    padding: 0px 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    img {
+      width: 10px;
+    }
+    span {
+      font-size: 10px;
+      margin-right: 5px;
+    }
+  }
+  .content {
+    h6 {
+      color: white;
+      margin-bottom: 0;
+    }
+    p {
+      margin-bottom: 0;
+      font-size: 12px;
+    }
+    .icons-details {
+      display: flex;
+      justify-content: space-between;
+      img {
+        width: 12px;
+      }
+      span {
+        margin-left: 5px;
+        font-size: 12px;
+        margin-right: 25px;
+      }
+    }
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    background-color: $primary;
+    padding: 10px 15px;
+    color: white !important;
+  }
+}
