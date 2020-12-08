@@ -1,0 +1,43 @@
+<div class="container">
+    <h2>{{ setNamePage() }}</h2>
+  
+    <div class="buttons-headers">
+      <button
+        (click)="setPage(1)"
+        class="btn"
+        [ngClass]="{
+          'btn-primary': page === 1,
+          'btn-outline-primary': page !== 1
+        }"
+      >
+        Publish
+      </button>
+      <button
+        (click)="setPage(2)"
+        class="btn"
+        [ngClass]="{
+          'btn-primary': page === 2,
+          'btn-outline-primary': page !== 2
+        }"
+      >
+        Main info
+      </button>
+      <button
+        (click)="setPage(3)"
+        class="btn"
+        [ngClass]="{
+          'btn-primary': page === 3,
+          'btn-outline-primary': page !== 3
+        }"
+      >
+        Details
+      </button>
+    </div>
+    <div class="card-content">
+      <div class="container">
+          <p>Work!</p>
+      </div>
+    </div>
+  </div>
+  
+  

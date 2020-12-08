@@ -40,6 +40,7 @@ import { PublishCardComponent } from './component/publish-card/publish-card.comp
 import { environment } from 'src/environments/environment';
 import { DoubleRangeComponent } from './component/double-range/double-range.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -79,6 +80,7 @@ const APP_COMPONENTS = [
     APP_COMPONENTS,
     DoubleRangeComponent,
     ProfileComponent,
+    InfoPublishComponent,
     
   ],
   imports: [
