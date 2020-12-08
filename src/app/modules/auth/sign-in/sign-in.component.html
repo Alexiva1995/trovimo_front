@@ -5,10 +5,11 @@
 </div>
 
 <div class="container" style="padding: 50px">
-  <form>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
       <label for="exampleInputEmail1">Email address or Username</label>
       <input
+        FormControlName="email"
         type="email"
         class="form-control"
         id="exampleInputEmail1"
@@ -19,6 +20,7 @@
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input
+        FormControlName="password"
         type="password"
         class="form-control"
         id="exampleInputPassword1"
@@ -27,13 +29,26 @@
     </div>
     <div class="form-check">
       <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-      <label class="form-check-label" for="exampleCheck1">Remenber me</label>
+      <label
+        FormControlName="rememberme"
+        class="form-check-label"
+        for="exampleCheck1"
+        >Remenber me</label
+      >
     </div>
     <button style="margin-top: 20px" type="submit" class="btn btn-primary">
       <i class="fas fa-sign-in-alt"></i> Login
     </button>
   </form>
   <p class="alter">or connect with:</p>
+  <div class="social">
+    <div class="facebook" (click)="loginWithFacebook()">
+      <i class="fab fa-facebook-f"></i>
+    </div>
+    <div class="google" (click)="loginWithGoogle()">
+      <i class="fab fa-google"></i>
+    </div>
+  </div>
   <p class="redirect">
     Don't have an account yet? <a [routerLink]="['/auth/sign-up']">Sign up</a>
   </p>

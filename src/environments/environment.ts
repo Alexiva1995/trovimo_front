@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api: 'https://valdusoft.com/trovimo/api',
+  auth: {
+    domain:'dev-fjz9g6wl.auth0.com',
+    clientId:'funcAvDRUs0Na4z1fGy0CfksM0IfeJoz',
+    redirectUri: window.location.origin,
+  },
 };
 
 /*

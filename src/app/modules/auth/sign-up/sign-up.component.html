@@ -5,32 +5,35 @@
 </div>
 
 <div class="container" style="padding: 50px">
-  <form>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
       <label for="exampleInputEmail1">Email address or Username</label>
       <input
         type="email"
+        FormControlName="email"
         class="form-control"
         id="exampleInputEmail1"
         aria-describedby="emailHelp"
         placeholder="Enter email"
       />
+      <label *ngIf="form.get('email').invalid"> Email is required. </label>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input
         type="password"
+        FormControlName="password"
         class="form-control"
         id="exampleInputPassword1"
         placeholder="Password"
       />
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">Reset password</label>
+      <label for="exampleInputPassword2">Repeat password</label>
       <input
         type="password"
         class="form-control"
-        id="exampleInputPassword1"
+        id="exampleInputPassword2"
         placeholder="Password"
       />
     </div>
@@ -40,11 +43,24 @@
         >Check our <a>terms and conditions</a> for the use of Trovimo</label
       >
     </div>
-    <button style="margin-top: 20px" type="submit" class="btn btn-primary">
+    <button
+      [disabled]="form.disabled"
+      style="margin-top: 20px"
+      type="submit"
+      class="btn btn-primary"
+    >
       <i class="fas fa-sign-in-alt"></i> Login
     </button>
   </form>
   <p class="alter">or connect with:</p>
+  <div class="social">
+    <div class="facebook" (click)="loginWithFacebook()">
+      <i class="fab fa-facebook-f"></i>
+    </div>
+    <div class="google" (click)="loginWithGoogle()">
+      <i class="fab fa-google"></i>
+    </div>
+  </div>
   <p class="redirect">
     Already have an account? <a [routerLink]="['/auth/sign-in']">Sign in</a>
   </p>

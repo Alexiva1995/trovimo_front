@@ -23,9 +23,15 @@
     align-items: center;
     justify-content: center;
     line-height: 1;
+
     img {
       width: 25px;
       margin-bottom: 3px;
+      }
+    &:hover{
+      img {
+        filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(193deg) brightness(103%) contrast(101%);
+      }
     }
   }
 }

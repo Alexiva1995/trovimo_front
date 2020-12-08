@@ -7,8 +7,13 @@ import { AppComponent } from './app.component';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
+import {FormsModule,ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
 
 import { HeaderComponent } from './components/header/header.component';
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
@@ -32,6 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PublishListComponent } from './modules/publish-list/publish-list.component';
 import { PublishCardComponent } from './component/publish-card/publish-card.component';
+import { environment } from 'src/environments/environment';
+import { DoubleRangeComponent } from './component/double-range/double-range.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -44,22 +52,24 @@ const NGX_MODULES = [
 
 const APP_COMPONENTS = [
   HeaderComponent,
-    MenuHeaderComponent,
-    SignInComponent,
-    SignUpComponent,
-    AuthComponent,
-    FooterComponent,
-    SearchbarComponent,
-    HomeComponent,
-    AboutComponent,
-    LegalComponent,
-    FaqComponent,
-    NewPublishComponent,
-    DetailsComponent,
-    InfoComponent,
-    PublishComponent,
-    FindExpertsComponent,
-    FeedbackComponent,
+  MenuHeaderComponent,
+  SignInComponent,
+  SignUpComponent,
+  AuthComponent,
+  FooterComponent,
+  SearchbarComponent,
+  HomeComponent,
+  AboutComponent,
+  LegalComponent,
+  FaqComponent,
+  NewPublishComponent,
+  DetailsComponent,
+  InfoComponent,
+  PublishComponent,
+  FindExpertsComponent,
+  FeedbackComponent,
+  PublishListComponent,
+  PublishCardComponent
 ]
 
 
@@ -67,14 +77,18 @@ const APP_COMPONENTS = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
-    PublishListComponent,
-    PublishCardComponent
+    DoubleRangeComponent,
+    ProfileComponent,
+    
   ],
   imports: [
     NGX_MODULES,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    SocialLoginModule,
+    FormsModule,
+    ReactiveFormsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -84,7 +98,26 @@ const APP_COMPONENTS = [
     }),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '63126014045-cov6re06h38audhm3svsuv3d8vuu1p68.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('807965019778637')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

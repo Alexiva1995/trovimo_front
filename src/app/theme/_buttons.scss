@@ -23,3 +23,27 @@
     box-shadow: none !important;
   }
 }
+
+.social {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  div {
+    margin: 0 10px;
+    border-radius: 34px;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 12px;
+    cursor:pointer;
+  }
+  .facebook {
+    background-color: $facebook;
+  }
+  .google {
+    background-color: $google;
+  }
+}
