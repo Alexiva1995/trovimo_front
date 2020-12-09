@@ -35,7 +35,18 @@
     </div>
     <div class="card-content">
       <div class="container">
-          <p>Work!</p>
+        <app-maininfo *ngIf="page === 2"></app-maininfo>
+        <div style="display: flex; justify-content: flex-end;align-items: center;">
+          <a href="#" class="a-custom">Save draft</a>
+          <a href="#" class="a-custom">View draft</a>
+          <button
+            style="width: 20%"
+            (click)="setPage(page + 1)"
+            class="btn btn-primary"
+          >
+            Save and continue
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -41,6 +41,8 @@ import { environment } from 'src/environments/environment';
 import { DoubleRangeComponent } from './component/double-range/double-range.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
+import { MaininfoComponent } from './modules/info-publish/components/maininfo/maininfo.component';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -66,6 +68,7 @@ const APP_COMPONENTS = [
   NewPublishComponent,
   DetailsComponent,
   InfoComponent,
+  MaininfoComponent,
   PublishComponent,
   FindExpertsComponent,
   FeedbackComponent,
@@ -81,7 +84,7 @@ const APP_COMPONENTS = [
     DoubleRangeComponent,
     ProfileComponent,
     InfoPublishComponent,
-    
+    InfoComponent, 
   ],
   imports: [
     NGX_MODULES,
