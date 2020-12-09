@@ -40,6 +40,8 @@ import { PublishCardComponent } from './component/publish-card/publish-card.comp
 import { environment } from 'src/environments/environment';
 import { DoubleRangeComponent } from './component/double-range/double-range.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -83,6 +85,7 @@ const APP_COMPONENTS = [
   ],
   imports: [
     NGX_MODULES,
+    CommonModule,      
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -97,6 +100,7 @@ const APP_COMPONENTS = [
       }
     }),
     BrowserAnimationsModule,
+    ToastrModule.forRoot(), // ToastrModule added
   ],
   providers: [
     {

@@ -1,17 +1,37 @@
 @import "./vars.scss";
-.form-group label {
-  color: $primary !important;
+.form-group {
+  label {
+    color: $primary !important;
+  }
+
+  span {
+    color:red;
+    font-size: 12px;
+  }
 }
+
+
 .form-control {
   border: 2px solid $primary !important;
   &:focus {
     border-color: $primary-accent !important;
     box-shadow: 0 0 0 0.2rem #135aa038 !important;
   }
+  &.is-invalid {
+    border-color:red !important;
+  }
 }
 
 .form-check {
   label {
     color: $primary !important;
+  }
+  a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  span {
+    color:red;
+    font-size: 12px;
   }
 }
