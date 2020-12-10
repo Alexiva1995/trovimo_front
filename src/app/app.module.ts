@@ -42,6 +42,7 @@ import { DoubleRangeComponent } from './component/double-range/double-range.comp
 import { ProfileComponent } from './modules/profile/profile.component';
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
 import { MaininfoComponent } from './modules/info-publish/components/maininfo/maininfo.component';
+import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
 
 
 // AoT requires an exported function for factories
@@ -84,7 +85,8 @@ const APP_COMPONENTS = [
     DoubleRangeComponent,
     ProfileComponent,
     InfoPublishComponent,
-    InfoComponent, 
+    InfoComponent,
+    FindPhotosComponent, 
   ],
   imports: [
     NGX_MODULES,

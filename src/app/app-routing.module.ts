@@ -10,6 +10,7 @@ import { LegalComponent } from './modules/help/legal/legal.component';
 import { NewPublishComponent } from './modules/new-publish/new-publish.component';
 import { PublishListComponent } from './modules/publish-list/publish-list.component';
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
+import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
 
 const routes: Routes = [
   /* {path:'',redirectTo:'/home',pathMatch:'full'}, */
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path:'info-publish',
     component:InfoPublishComponent,
+  },
+  {
+    path:'find-photos',
+    component:FindPhotosComponent,
   },
   /* {path:'', redirectTo:'/home',pathMatch:'full'},
   {path:'**', redirectTo:'',pathMatch:'full'} */
