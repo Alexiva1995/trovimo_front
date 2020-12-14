@@ -1,0 +1,31 @@
+.form-customsearch {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #D8D8D8;
+  padding-right: 4rem;
+  padding-left: 5rem;
+}
+
+input[type=search] {
+  background-color: transparent;
+}
+
+.justify-content-custom {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-result {
+  text-align: right;
+  margin: 0;
+  color: #073558;
+}
+
+.btn-load {
+  width: 20%;
+  border-radius: 20px;
+}
+
+.custom-select {
+  border-color: #073558;
+}
