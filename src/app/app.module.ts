@@ -47,6 +47,10 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 import { ProfileAboutComponent } from './modules/profile/profile-about/profile-about.component';
 import { AcountProfileComponent } from './modules/acount-profile/acount-profile.component';
 import { MainInfoComponent } from './modules/acount-profile/components/main-info/main-info.component';
+import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
+import { MaininfoComponent } from './modules/info-publish/components/maininfo/maininfo.component';
+import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -72,6 +76,7 @@ const APP_COMPONENTS = [
   NewPublishComponent,
   DetailsComponent,
   InfoComponent,
+  MaininfoComponent,
   PublishComponent,
   FindExpertsComponent,
   FeedbackComponent,
@@ -93,7 +98,9 @@ const APP_COMPONENTS = [
     AppComponent,
     APP_COMPONENTS,
     
-    
+    InfoPublishComponent,
+    InfoComponent,
+    FindPhotosComponent, 
   ],
   imports: [
     NGX_MODULES,
