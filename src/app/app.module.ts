@@ -42,6 +42,11 @@ import { DoubleRangeComponent } from './component/double-range/double-range.comp
 import { ProfileComponent } from './modules/profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
+import { ReviewComponent } from './components/review/review.component';
+import { ReviewFormComponent } from './components/review-form/review-form.component';
+import { ProfileAboutComponent } from './modules/profile/profile-about/profile-about.component';
+import { AcountProfileComponent } from './modules/acount-profile/acount-profile.component';
+import { MainInfoComponent } from './modules/acount-profile/components/main-info/main-info.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -71,7 +76,15 @@ const APP_COMPONENTS = [
   FindExpertsComponent,
   FeedbackComponent,
   PublishListComponent,
-  PublishCardComponent
+  PublishCardComponent,
+  DoubleRangeComponent,
+    ProfileComponent,
+    ReviewComponent,
+    ReviewFormComponent,
+    ProfileAboutComponent,
+    ProfileComponent,
+    AcountProfileComponent,
+    MainInfoComponent
 ]
 
 
@@ -79,8 +92,7 @@ const APP_COMPONENTS = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
-    DoubleRangeComponent,
-    ProfileComponent,
+    
     
   ],
   imports: [

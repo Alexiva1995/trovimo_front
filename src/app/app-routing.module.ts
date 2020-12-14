@@ -9,6 +9,8 @@ import { HomeComponent } from './modules/home/home.component';
 import { LegalComponent } from './modules/help/legal/legal.component';
 import { NewPublishComponent } from './modules/new-publish/new-publish.component';
 import { PublishListComponent } from './modules/publish-list/publish-list.component';
+import { ProfileComponent } from './modules/profile/profile.component';
+import { AcountProfileComponent } from './modules/acount-profile/acount-profile.component';
 
 const routes: Routes = [
   /* {path:'',redirectTo:'/home',pathMatch:'full'}, */
@@ -21,12 +23,20 @@ const routes: Routes = [
     ]
   },
   {
+    path:'acount-profile',
+    component:AcountProfileComponent
+  },
+  {
     path:'home',
     component:HomeComponent,
   },
   {
     path:'publish-list',
     component:PublishListComponent,
+  },
+  {
+    path:'profile',
+    component:ProfileComponent
   },
   {
     path:'new',
