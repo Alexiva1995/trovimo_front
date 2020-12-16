@@ -1,0 +1,43 @@
+@import "../../theme/vars";
+h6 {
+  font-weight: bold;
+}
+.hero {
+  background: url("../../../assets/images/search_expert/fondo-experts.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32rem;
+  .intro {
+    text-align: center;
+    color: white;
+
+    h1 {
+      font-weight: bold;
+      color: white;
+    }
+    .search {
+      margin-top: 40px;
+      input {
+        border: none !important;
+      }
+    }
+  }
+}
+
+.service-card{
+  font-weight: bold;
+          font-size: 10px;
+          text-align: center;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+          padding: 30px;
+          color: white;
+          height: 180px;
+          background-position: center;
+          background-size: cover;
+}

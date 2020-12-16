@@ -13,9 +13,13 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { AcountProfileComponent } from './modules/acount-profile/acount-profile.component';
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
 import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
+import { FindExpertsComponent } from './modules/find-experts/find-experts.component';
+import { PagesComponent } from './component/pages/pages.component';
+import { BlogComponent } from './modules/blog/blog.component';
+import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 
 const routes: Routes = [
-  /* {path:'',redirectTo:'/home',pathMatch:'full'}, */
+   {path:'pages',component:PagesComponent},
   {
     path:'auth',
     component:AuthComponent,
@@ -27,6 +31,10 @@ const routes: Routes = [
   {
     path:'acount-profile',
     component:AcountProfileComponent
+  },
+  {
+    path:'find-experts',
+    component:FindExpertsComponent,
   },
   {
     path:'home',
@@ -64,6 +72,14 @@ const routes: Routes = [
     path:'find-photos',
     component:FindPhotosComponent,
   },
+  {
+    path:'blog',
+    component:BlogComponent
+  },
+  {
+    path:'blog-detail',
+    component:BlogDetailComponent
+  }
   /* {path:'', redirectTo:'/home',pathMatch:'full'},
   {path:'**', redirectTo:'',pathMatch:'full'} */
 ];

@@ -1,0 +1,61 @@
+@import "../../theme/vars";
+.hero {
+  background-color: $primary;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  height: 10rem;
+  justify-content: center;
+  h2 {
+    font-weight: bold;
+    color:white;
+  }
+}
+
+.menu {
+  ul {
+    padding-inline-start: 0;
+    background-color: rgb(221, 221, 221);
+    border-radius: 8px;
+    li {
+      list-style: none;
+      padding: 15px;
+      padding-left: 35px;
+      font-weight: bold;
+      color:$primary;
+      
+      &.active {
+        border-radius: 8px;
+        color:white;
+        background-color: $primary;
+      }
+    }
+  }
+}
+
+.blog_publish {
+  background-color: $primary;
+  display: flex;
+  border-radius: 8px;
+  .content {
+    padding: 10px;
+    color:white;
+    h6 {
+      color:white
+    }
+    p {
+      font-size: 12px;
+    }
+    .date {
+      text-align: end;
+      i {
+        font-size: 12px;
+        margin-right: 10px;
+      }
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+}

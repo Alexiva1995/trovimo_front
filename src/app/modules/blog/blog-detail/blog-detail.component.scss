@@ -1,0 +1,45 @@
+@import "../../../theme/vars";
+.hero {
+  background-color: $primary;
+  color: white;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+
+  h2 {
+    font-weight: bold;
+    color:white;
+  }
+  
+}
+
+.date {
+  i {
+    font-size: 12px;
+    margin-right: 10px;
+  }
+  span {
+    font-size: 12px;
+  }
+}
+
+.footer{
+  background-color: $primary;
+  border-radius: 8px;
+  padding: 10px;
+  .container {
+    color:white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h6 {
+      color:white;
+      margin: 0;
+    }
+    .shared {
+      span,i {
+        margin: 0 10px;
+      }
+    }
+  }
+}
