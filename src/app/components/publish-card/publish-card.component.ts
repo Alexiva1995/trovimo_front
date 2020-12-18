@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-publish-card',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./publish-card.component.scss']
 })
 export class PublishCardComponent implements OnInit {
-
+  @Input() type;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.type)
   }
 
 }

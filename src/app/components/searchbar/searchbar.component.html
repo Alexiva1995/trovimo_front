@@ -1,52 +1,231 @@
 <div class="hero">
   <div class="intro">
-    <h5>The best way to find your place</h5>
+    <h5 >The best way to find your place</h5>
     <h1>Where would you like to live?</h1>
     <div class="search">
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Buy</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Rent</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Shared</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Experts</a>
-        </li>
-      </ul>
-      <div class="input-group mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter address, city, country"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <div class="input-group-append">
+      <div>
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Buy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Rent</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Shared</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Experts</a>
+          </li>
+        </ul>
+        <div style="display:flex;margin-bottom: 20px">
+          <div class="search-bar">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter address, city, country"
+              aria-label="Recipient's username"
+              aria-describedby="basic-addon2"
+            />
+          </div>
           <button
             class="btn btn-primary"
-            style="border-radius: 6px"
+            style="padding: 15px 20px;border-radius: 6px;width: fit-content;margin-left: 10px"
             type="button"
           >
             <i class="fas fa-search"></i>
           </button>
         </div>
+        <div class="filter" [ngClass]="{'active': showFilter}">
+          <button
+            class="btn btn-primary"
+            style="border-radius: 6px"
+            type="button"
+            (click)="showFilter = !showFilter"
+          >
+            <i *ngIf="!showFilter" class="fas fa-plus"></i> <i *ngIf="showFilter" class="fas fa-minus"></i> Filters
+          </button>
+        </div>
       </div>
-      <div class="filter">
-        <button
-          class="btn btn-primary"
-          style="border-radius: 6px"
-          type="button"
-        >
-          <i class="fas fa-plus"></i> Filter
-        </button>
+
+      <div class="filter-content" *ngIf="showFilter">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5">
+              <h6>Type</h6>
+              <div style="display: flex;flex-wrap: wrap" >
+                <button
+                  *ngFor="let item of TYPE_OPTIONS "
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  {{item.title}}
+                </button>
+              </div>
+            </div>
+
+            <div class="col-lg-5">
+              <div>
+                <button
+                  class="btn option"
+                  [ngClass]="{'active':activeFilter == 0}"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                  (click)="activeFilter = 0"
+
+                >
+                  Price
+                  <img src="../../../assets/images/icons_filters/Icon%20metro-money.svg" alt="">
+                </button>
+                <button
+                  class="btn option"
+                  [ngClass]="{'active':activeFilter == 1}"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                  (click)="activeFilter = 1"
+                >
+                  Area
+                  <img src="../../../assets/images/icons_filters/Icon%20ionic-md-resize.svg" alt="">
+                </button>
+                <button
+                  class="btn option"
+                  [ngClass]="{'active':activeFilter == 2}"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                  (click)="activeFilter = 2"
+                >
+                  Rooms
+                  <img src="../../../assets/images/icons_filters/cama.svg" alt="">
+                </button>
+                <button
+                  class="btn option"
+                  [ngClass]="{'active':activeFilter == 3}"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                  (click)="activeFilter = 3"
+                >
+                  Baths
+                  <img src="../../../assets/images/icons_filters/banera.svg" alt="">
+                </button>
+              </div>
+
+              <div style="margin-top: 30px" *ngIf="activeFilter == 0">
+                <div style="display: flex;justify-content: space-between">
+                  <h6>Price range</h6>
+                  <h6>${{min}} - ${{max}}</h6>
+                </div>
+                <app-double-range [min]="min" [max]="max" [steps]="steps"></app-double-range>
+              </div>
+
+              <div style="margin-top: 30px" *ngIf="activeFilter == 1">
+                <div style="display: flex;justify-content: space-between">
+                  <h6>Area range</h6>
+                  <h6>{{min}}m2 - {{max}}m2</h6>
+                </div>
+                <app-double-range [min]="min" [max]="max" [steps]="steps"></app-double-range>
+              </div>
+
+              <div style="margin-top: 30px" *ngIf="activeFilter == 3">
+                <!-- BATHS-->
+                <h6>Baths</h6>
+                <button
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  Any
+                </button>
+                <button
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  +1
+                </button>
+                <button
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  +2
+                </button>
+                <button
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  +3
+                </button>
+                <button
+                  class="btn option"
+                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  type="button"
+                >
+                  +4
+                </button>
+              </div>
+
+              <div style="margin-top: 30px" *ngIf="activeFilter == 2">
+                <!-- ROOMS-->
+                <h6>Rooms</h6>
+                <div >
+                  <button
+                    class="btn option"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    Studio
+                  </button>
+                  <button
+                    class="btn option"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    +1
+                  </button>
+                  <button
+                    class="btn option"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    +2
+                  </button>
+                  <button
+                    class="btn option"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    +3
+                  </button>
+                  <button
+                    class="btn option"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    +4
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="col-lg-2">
+              <button
+                class="btn btn-primary"
+                style="border-radius: 28px"
+                type="button"
+              >
+                <i class="fas fa-search"></i> Search
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

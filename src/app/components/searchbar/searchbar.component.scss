@@ -8,24 +8,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32rem;
+  height: 50rem;
   margin-bottom: 30px;
   .intro {
-    text-align: center;
-    color: white;
-
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     h1 {
       font-weight: bold;
       color: white;
+      text-align: center;
     }
-    h5 {
+    h5 {    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+      text-align: center;
       color: white;
+      font-weight:lighter !important;
     }
     .search {
       margin-top: 40px;
-      input {
-        border: none !important;
-      }
+      width: 60%;
       .nav {
         &.nav-tabs {
           border-bottom: none !important;
@@ -35,7 +40,8 @@
           background-color: #d8d8d8;
           color: $primary;
           border-color: #d8d8d8;
-          padding: 0.3rem 1.5rem;
+          padding: 0.5rem 2rem;
+          font-size: 14px;
           &.active {
             color: #fff !important;
             background-color: $primary !important;
@@ -44,12 +50,83 @@
         }
       }
       .filter {
+        text-align: end;
+        &.active {
+          .btn {
+          background-color: white !important;
+          color:$primary;
+          border: none;
+            border-bottom-left-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+          }
+        }
         .btn {
           font-size: 12px;
           width: 7rem;
-          float: right;
+
         }
       }
     }
   }
+}
+
+.search-bar {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px 40px;
+  border-top-left-radius: 0;
+  width: 100%;
+  input {
+    border-bottom: 1px solid #094d82 !important;
+    border-radius: 0px !important;
+    border:none;
+    padding: 0px;
+    height: calc(1.5em + 0.75em + 0px);
+  }
+}
+
+.filter-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 70%;
+  transform: translateX(20%);
+  z-index: 100;
+  .option {
+    background-color: white;
+    border: 1px solid $primary;
+    color:$primary;
+    img {
+      margin-left: 20px;
+    }
+    &.active {
+      background-color: $primary;
+      color:white;
+      img {
+        filter:  invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+
+      }
+    }
+    &:hover {
+      background-color: $primary;
+      color:white;
+      img {
+        filter:  invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+
+      }
+    }
+  }
+  button {
+    font-size: 12px;
+  }
+}
+
+
+.nav-tabs .nav-link {
+  border: 1px solid transparent;
+  border-top-left-radius: .50rem;
+  border-top-right-radius: .50rem;
 }

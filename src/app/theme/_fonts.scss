@@ -13,7 +13,10 @@
   src: url("../../assets/fonts/Nunito-Italic.ttf");
   font-family: "Nunito-Italic";
 }
-
+@font-face {
+  src: url("../../assets/fonts/Nunito-Light.ttf");
+  font-family: "Nunito-Light";
+}
 body {
   font-family: "Nunito-Regular" !important;
 }

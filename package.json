@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-slider/ngx-slider": "^2.0.3",
     "@angular/animations": "~10.2.0",
     "@angular/common": "~10.2.0",
     "@angular/compiler": "~10.2.0",
@@ -27,6 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
+    "angular-responsive-carousel": "^2.0.1",
     "angularx-social-login": "^3.5.2",
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",

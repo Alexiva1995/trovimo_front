@@ -12,7 +12,7 @@
 
 
 .form-control {
-  border: 2px solid $primary !important;
+  border: 2px solid $primary;
   &:focus {
     border-color: $primary-accent !important;
     box-shadow: 0 0 0 0.2rem #135aa038 !important;

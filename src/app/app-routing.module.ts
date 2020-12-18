@@ -19,66 +19,66 @@ import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 
 const routes: Routes = [
-   {path:'pages',component:PagesComponent},
+   {path: 'pages', component: PagesComponent},
   {
-    path:'auth',
-    component:AuthComponent,
-    children:[
-      {path:'sign-in',component:SignInComponent},
-      {path:'sign-up',component:SignUpComponent}
+    path: 'auth',
+    component: AuthComponent,
+    children: [
+      {path: 'sign-in', component: SignInComponent},
+      {path: 'sign-up', component: SignUpComponent}
     ]
   },
   {
-    path:'acount-profile',
-    component:AcountProfileComponent
+    path: 'acount-profile',
+    component: AcountProfileComponent
   },
   {
-    path:'find-experts',
-    component:FindExpertsComponent,
+    path: 'find-experts',
+    component: FindExpertsComponent,
   },
   {
-    path:'home',
-    component:HomeComponent,
+    path: 'home',
+    component: HomeComponent,
   },
   {
-    path:'publish-list',
-    component:PublishListComponent,
+    path: 'publish-list/:type',
+    component: PublishListComponent,
   },
   {
-    path:'profile',
-    component:ProfileComponent
+    path: 'profile',
+    component: ProfileComponent
   },
   {
-    path:'new',
-    component:NewPublishComponent,
+    path: 'new',
+    component: NewPublishComponent,
   },
   {
-    path:'about-us',
-    component:AboutComponent,
+    path: 'about-us',
+    component: AboutComponent,
   },
   {
-    path:'faq',
-    component:FaqComponent,
+    path: 'faq',
+    component: FaqComponent,
   },
   {
-    path:'legal',
-    component:LegalComponent,
+    path: 'legal',
+    component: LegalComponent,
   },
   {
-    path:'info-publish',
-    component:InfoPublishComponent,
+    path: 'info-publish',
+    component: InfoPublishComponent,
   },
   {
-    path:'find-photos',
-    component:FindPhotosComponent,
+    path: 'find-photos',
+    component: FindPhotosComponent,
   },
   {
-    path:'blog',
-    component:BlogComponent
+    path: 'blog',
+    component: BlogComponent
   },
   {
-    path:'blog-detail',
-    component:BlogDetailComponent
+    path: 'blog-detail',
+    component: BlogDetailComponent
   }
   /* {path:'', redirectTo:'/home',pathMatch:'full'},
   {path:'**', redirectTo:'',pathMatch:'full'} */

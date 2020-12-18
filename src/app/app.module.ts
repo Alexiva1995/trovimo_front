@@ -14,6 +14,7 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 
 import { HeaderComponent } from './components/header/header.component';
 import { MenuHeaderComponent } from './components/menu-header/menu-header.component';
@@ -36,9 +37,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PublishListComponent } from './modules/publish-list/publish-list.component';
-import { PublishCardComponent } from './component/publish-card/publish-card.component';
-import { environment } from 'src/environments/environment';
-import { DoubleRangeComponent } from './component/double-range/double-range.component';
+import { PublishCardComponent } from './components/publish-card/publish-card.component';
+import { DoubleRangeComponent } from './components/double-range/double-range.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { ToastrModule } from 'ngx-toastr';
@@ -54,6 +54,7 @@ import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 import { PublishDetailComponent } from './modules/publish-detail/publish-detail.component';
+import {NgxSliderModule} from '@angular-slider/ngx-slider';
 
 
 // AoT requires an exported function for factories
@@ -101,24 +102,26 @@ const APP_COMPONENTS = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
-    
+
     InfoPublishComponent,
     InfoComponent,
     FindPhotosComponent,
     PagesComponent,
     BlogComponent,
     BlogDetailComponent,
-    PublishDetailComponent, 
+    PublishDetailComponent,
   ],
   imports: [
     NGX_MODULES,
-    CommonModule,      
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
     FormsModule,
+    IvyCarouselModule,
     ReactiveFormsModule,
+    NgxSliderModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
