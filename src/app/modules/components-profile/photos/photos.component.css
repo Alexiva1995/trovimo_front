@@ -1,0 +1,41 @@
+.grid {
+  width: fit-content;
+}
+
+.grid-item-title {
+  margin: 0 !important;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.grid-item-container {
+  font-size: 14px;
+  position: absolute;
+  color: #fff;
+  width: 160px;
+  bottom: 0px;
+  height: 80px;
+  text-align: center;
+  background: linear-gradient(to top, #073558, 48%, transparent 95%);
+}
+
+.grid-item-box {
+  position: absolute;
+  bottom: 7px;
+  width: 100%;
+}
+
+.grid-item-raiting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.grid-item-raiting span:first-child {
+  display: flex;
+  align-items: center;
+}
+
+.custom-icon {
+  font-size: 10px;
+}
