@@ -43,6 +43,10 @@ import { ProfileComponent } from './modules/profile/profile.component';
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
 import { MaininfoComponent } from './modules/info-publish/components/maininfo/maininfo.component';
 import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
+import { MyListingsComponent } from './modules/components-profile/my-listings/my-listings.component';
+import { MyActivityComponent } from './modules/components-profile/my-activity/my-activity.component';
+import { PhotosComponent } from './modules/components-profile/photos/photos.component';
+import { SettingComponent } from './modules/components-profile/setting/setting.component';
 
 
 // AoT requires an exported function for factories
@@ -86,7 +90,11 @@ const APP_COMPONENTS = [
     ProfileComponent,
     InfoPublishComponent,
     InfoComponent,
-    FindPhotosComponent, 
+    FindPhotosComponent,
+    MyListingsComponent,
+    MyActivityComponent,
+    PhotosComponent,
+    SettingComponent, 
   ],
   imports: [
     NGX_MODULES,

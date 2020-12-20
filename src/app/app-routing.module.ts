@@ -12,6 +12,7 @@ import { PublishListComponent } from './modules/publish-list/publish-list.compon
 import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
 import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
 
+
 const routes: Routes = [
   /* {path:'',redirectTo:'/home',pathMatch:'full'}, */
   {
