@@ -55,6 +55,10 @@ import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 import { PublishDetailComponent } from './modules/publish-detail/publish-detail.component';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
+import { MyListingsComponent } from './modules/components-profile/my-listings/my-listings.component';
+import { MyActivityComponent } from './modules/components-profile/my-activity/my-activity.component';
+import { PhotosComponent } from './modules/components-profile/photos/photos.component';
+import { SettingComponent } from './modules/components-profile/setting/setting.component';
 
 
 // AoT requires an exported function for factories
@@ -64,7 +68,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 const NGX_MODULES = [
   ModalModule.forRoot()
-]
+];
 
 const APP_COMPONENTS = [
   HeaderComponent,
@@ -110,6 +114,10 @@ const APP_COMPONENTS = [
     BlogComponent,
     BlogDetailComponent,
     PublishDetailComponent,
+    MyListingsComponent,
+    MyActivityComponent,
+    PhotosComponent,
+    SettingComponent,
   ],
   imports: [
     NGX_MODULES,

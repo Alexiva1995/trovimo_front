@@ -18,6 +18,7 @@ import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 
+
 const routes: Routes = [
    {path: 'pages', component: PagesComponent},
   {
