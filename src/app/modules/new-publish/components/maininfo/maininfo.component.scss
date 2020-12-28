@@ -1,18 +1,25 @@
+@import "src/app/theme/vars";
 .input-group-text-custom{
     display: flex;
-        align-items: center;
-        padding: .375rem .75rem;
-        margin-bottom: 0;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #fff;
-        text-align: center;
-        white-space: nowrap;
-        background-color: #073558 !important;
-        border: 1px solid #073558 !important;
+    align-items: center;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #073558 !important;
 }
 
+.form-control {
+
+  border: 2px solid $primary;
+}
+.form-select{
+  border: 2px solid $primary;
+}
 .row-custom{
     display: flex;
     flex-wrap: wrap;

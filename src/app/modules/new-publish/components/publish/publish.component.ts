@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output,EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-publish',
@@ -6,12 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./publish.component.scss']
 })
 export class PublishComponent implements OnInit {
-  first_action: number = 1;
-  constructor() { }
+  @Output() setType = new EventEmitter<number>();
+  first_action = 1;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
+
   setAction(i: number) {
     this.first_action = i;
+    this.setType.emit(i);
   }
 }

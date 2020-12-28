@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InfoPublishComponent } from './info-publish.component';
+import { NumberSelectorComponent } from './number-selector.component';
 
-describe('InfoPublishComponent', () => {
-  let component: InfoPublishComponent;
-  let fixture: ComponentFixture<InfoPublishComponent>;
+describe('NumberSelectorComponent', () => {
+  let component: NumberSelectorComponent;
+  let fixture: ComponentFixture<NumberSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InfoPublishComponent ]
+      declarations: [ NumberSelectorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InfoPublishComponent);
+    fixture = TestBed.createComponent(NumberSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

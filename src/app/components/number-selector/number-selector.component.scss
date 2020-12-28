@@ -1,0 +1,11 @@
+.number-selector {
+  display: flex;
+  align-items: center;
+  button {
+    color:white
+  }
+  .value {
+    background-color: #D8D8D8;
+    padding: .375rem 3rem;
+  }
+}

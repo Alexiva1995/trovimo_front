@@ -29,7 +29,6 @@ import { LegalComponent } from './modules/help/legal/legal.component';
 import { FaqComponent } from './modules/help/faq/faq.component';
 import { NewPublishComponent } from './modules/new-publish/new-publish.component';
 import { DetailsComponent } from './modules/new-publish/components/details/details.component';
-import { InfoComponent } from './modules/new-publish/components/info/info.component';
 import { PublishComponent } from './modules/new-publish/components/publish/publish.component';
 import { FindExpertsComponent } from './modules/find-experts/find-experts.component';
 import { FeedbackComponent } from './components/feedback/feedback.component';
@@ -47,18 +46,18 @@ import { ReviewFormComponent } from './components/review-form/review-form.compon
 import { ProfileAboutComponent } from './modules/profile/profile-about/profile-about.component';
 import { AcountProfileComponent } from './modules/acount-profile/acount-profile.component';
 import { MainInfoComponent } from './modules/acount-profile/components/main-info/main-info.component';
-import { InfoPublishComponent } from './modules/info-publish/info-publish.component';
-import { MaininfoComponent } from './modules/info-publish/components/maininfo/maininfo.component';
+import { MaininfoComponent } from './modules/new-publish/components/maininfo/maininfo.component';
 import { FindPhotosComponent } from './modules/find-photos/find-photos.component';
 import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 import { PublishDetailComponent } from './modules/publish-detail/publish-detail.component';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
-import { MyListingsComponent } from './modules/components-profile/my-listings/my-listings.component';
-import { MyActivityComponent } from './modules/components-profile/my-activity/my-activity.component';
-import { PhotosComponent } from './modules/components-profile/photos/photos.component';
-import { SettingComponent } from './modules/components-profile/setting/setting.component';
+import { MyListingsComponent } from './modules/acount-profile/components/my-listings/my-listings.component';
+import { MyActivityComponent } from './modules/acount-profile/components/my-activity/my-activity.component';
+import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';
+import { SettingComponent } from './modules/acount-profile/components/setting/setting.component';
+import { NumberSelectorComponent } from './components/number-selector/number-selector.component';
 
 
 // AoT requires an exported function for factories
@@ -84,7 +83,6 @@ const APP_COMPONENTS = [
   FaqComponent,
   NewPublishComponent,
   DetailsComponent,
-  InfoComponent,
   MaininfoComponent,
   PublishComponent,
   FindExpertsComponent,
@@ -107,8 +105,6 @@ const APP_COMPONENTS = [
     AppComponent,
     APP_COMPONENTS,
 
-    InfoPublishComponent,
-    InfoComponent,
     FindPhotosComponent,
     PagesComponent,
     BlogComponent,
@@ -118,6 +114,7 @@ const APP_COMPONENTS = [
     MyActivityComponent,
     PhotosComponent,
     SettingComponent,
+    NumberSelectorComponent,
   ],
   imports: [
     NGX_MODULES,

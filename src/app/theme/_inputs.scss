@@ -1,7 +1,13 @@
 @import "./vars.scss";
 .form-group {
-  label {
+  label:not(.form-check-label) {
     color: $primary !important;
+    font-weight: bold;
+    &.required::after {
+      content: ' *';
+      color: red;
+
+    }
   }
 
   span {
@@ -9,6 +15,9 @@
     font-size: 12px;
   }
 }
+label:not(.form-check-label) {
+  color: $primary !important;
+  font-weight: bold;}
 
 
 .form-control {

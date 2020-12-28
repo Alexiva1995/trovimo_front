@@ -1,6 +1,6 @@
 @import "../../../theme/vars";
 .hero {
-  background-color: $primary;
+  background-color: #135AA0;
   color: white;
   height: 10rem;
   display: flex;
@@ -10,7 +10,10 @@
     font-weight: bold;
     color:white;
   }
-  
+  span {
+    color: white;
+  }
+
 }
 
 .date {
@@ -32,6 +35,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    span {
+      color: white;
+    }
     h6 {
       color:white;
       margin: 0;

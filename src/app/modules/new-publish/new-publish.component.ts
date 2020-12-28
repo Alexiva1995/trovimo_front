@@ -6,21 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-publish.component.scss']
 })
 export class NewPublishComponent implements OnInit {
-  page: number = 1;
+  page = 1;
+  type = 1;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   setPage(i: number) {
-    this.page = i
+    this.page = i;
   }
 
   setNamePage() {
     switch (this.page) {
-      case 1: return 'publish'
-      case 2: return 'main info'
-      case 3: return 'details'
+      case 1: return 'Publish';
+      case 2: return 'Main info';
+      case 3: return 'Details';
       default:
         return 'publish';
     }

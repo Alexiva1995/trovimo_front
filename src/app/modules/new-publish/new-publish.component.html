@@ -35,13 +35,13 @@
   </div>
   <div class="card-content">
     <div class="container">
-      <app-publish *ngIf="page === 1"></app-publish>
-      <app-info *ngIf="page === 2"></app-info>
+      <app-publish (setType)="type = $event" *ngIf="page === 1"></app-publish>
+      <app-maininfo [type]="type" *ngIf="page === 2"></app-maininfo>
       <div style="display: flex; justify-content: flex-end">
         <button
           style="width: 20%"
           (click)="setPage(page + 1)"
-          class="btn btn-primary"
+          class="btn btn-primary next"
         >
           Save and continue
         </button>
