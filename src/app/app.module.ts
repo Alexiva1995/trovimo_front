@@ -58,6 +58,8 @@ import { MyActivityComponent } from './modules/acount-profile/components/my-acti
 import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';
 import { SettingComponent } from './modules/acount-profile/components/setting/setting.component';
 import { NumberSelectorComponent } from './components/number-selector/number-selector.component';
+import { PlansFormComponent } from './modules/new-publish/components/maininfo/components/plans-form/plans-form.component';
+import { TypesFormComponent } from './modules/new-publish/components/maininfo/components/types/types-form/types-form.component';
 
 
 // AoT requires an exported function for factories
@@ -115,6 +117,8 @@ const APP_COMPONENTS = [
     PhotosComponent,
     SettingComponent,
     NumberSelectorComponent,
+    PlansFormComponent,
+    TypesFormComponent,
   ],
   imports: [
     NGX_MODULES,

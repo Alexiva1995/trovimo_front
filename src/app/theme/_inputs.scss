@@ -17,11 +17,16 @@
 }
 label:not(.form-check-label) {
   color: $primary !important;
-  font-weight: bold;}
+  font-weight: bold;
+  &.required::after {
+    content: ' *';
+    color: red;
+
+  }
+}
 
 
 .form-control {
-  border: 2px solid $primary;
   &:focus {
     border-color: $primary-accent !important;
     box-shadow: 0 0 0 0.2rem #135aa038 !important;
@@ -42,5 +47,16 @@ label:not(.form-check-label) {
   span {
     color:red;
     font-size: 12px;
+  }
+}
+
+.form-select {
+  background-color: white !important;
+  border: 2px solid $primary !important;
+  padding: 0 15px;
+  option {
+    background-color: white !important;
+    color: $primary;
+    padding: .3rem;
   }
 }

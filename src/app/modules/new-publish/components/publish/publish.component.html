@@ -4,8 +4,8 @@
     (click)="setAction(1)"
     class="btn"
     [ngClass]="{
-      'btn-primary': first_action === 1,
-      'btn-outline-primary': first_action !== 1
+      'btn-primary': idType === 1,
+      'btn-outline-primary': idType !== 1
     }"
   >
     Sale
@@ -14,8 +14,8 @@
     (click)="setAction(2)"
     class="btn"
     [ngClass]="{
-      'btn-primary': first_action === 2,
-      'btn-outline-primary': first_action !== 2
+      'btn-primary': idType === 2,
+      'btn-outline-primary': idType !== 2
     }"
   >
     Rent
@@ -24,8 +24,8 @@
     (click)="setAction(3)"
     class="btn"
     [ngClass]="{
-      'btn-primary': first_action === 3,
-      'btn-outline-primary': first_action !== 3
+      'btn-primary': idType === 3,
+      'btn-outline-primary': idType !== 3
     }"
   >
     Shared spaces
@@ -34,38 +34,30 @@
     (click)="setAction(4)"
     class="btn"
     [ngClass]="{
-      'btn-primary': first_action === 4,
-      'btn-outline-primary': first_action !== 4
+      'btn-primary': idType === 4,
+      'btn-outline-primary': idType !== 4
     }"
   >
     New projects
   </button>
 </div>
 
-<!-- 
+<!--
 
  -->
 <h6>Select your type property</h6>
-<div class="property-btn">
-  <button (click)="setAction(1)" class="btn btn-outline-primary">
-    <img src="/assets/images/new_publish/publish/casa.svg" alt="" />
-    House
-  </button>
-  <button (click)="setAction(2)" class="btn btn-outline-primary">
-    <img src="/assets/images/new_publish/publish/apartamento.svg" alt="" />
-    Apartament
-  </button>
-  <button (click)="setAction(3)" class="btn btn-outline-primary">
-    <img src="/assets/images/new_publish/publish/chalet.svg" alt="" />
-    Chalet
-  </button>
-  <button (click)="setAction(4)" class="btn btn-outline-primary">
-    <img src="/assets/images/new_publish/publish/proyecto.svg" alt="" />
-    New projects
-  </button>
-  <button (click)="setAction(4)" class="btn btn-outline-primary">
-    <img src="/assets/images/new_publish/publish/tienda.svg" alt="" />
-    Comercial spaces
-  </button>
-  <button (click)="setAction(4)" class="btn btn-outline-primary">Other</button>
+<div class="property-btn" >
+  <div *ngFor="let option of options" >
+    <button
+      *ngIf="isEnable(option.enable)"
+      (click)="selectOption(option.value)"
+      class="btn"
+      [ngClass]="{
+      'btn-primary': idOption === option.value,
+      'btn-outline-primary': idOption !== option.value
+    }">
+      <img *ngIf="option.icon !== ''" [src]="option.icon" alt="" />
+      {{option.label}}
+    </button>
+  </div>
 </div>

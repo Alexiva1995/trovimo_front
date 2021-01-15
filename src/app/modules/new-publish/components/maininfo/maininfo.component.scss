@@ -12,14 +12,6 @@
     white-space: nowrap;
     background-color: #073558 !important;
 }
-
-.form-control {
-
-  border: 2px solid $primary;
-}
-.form-select{
-  border: 2px solid $primary;
-}
 .row-custom{
     display: flex;
     flex-wrap: wrap;
@@ -46,4 +38,35 @@
     margin-left: 1rem;
     margin-right: 1rem;
     margin-bottom: 1.5rem;
+}
+
+.area .form-select{
+  background-color: $primary !important;
+  color: white;
+  border-top-right-radius: .3rem;
+  border-bottom-right-radius: .3rem;
+}
+.area input {
+  border-right: none !important;
+}
+
+.add-plan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .add-icon {
+    font-size: 35px;
+    color: $primary;
+    background-color: #D8D8D8;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 55px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
 }

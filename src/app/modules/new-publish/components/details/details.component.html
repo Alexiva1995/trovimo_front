@@ -1,1 +1,132 @@
-<p>details works!</p>
+<div style="display: flex;justify-content: space-between">
+  <p >This part is optional, you can see the draft of your listing or list it skipping this part.</p>
+  <a href="">Skip this part</a>
+</div>
+
+<div class="home_details">
+  <p>Home details</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      style="width: 30%"
+    />
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let homeDetail of homeDetails" class="form-check form-check-inline col-2">
+      <input checked class="form-check-input " id="homeDetail" name="exampleRadios" type="checkbox"
+             value="homeDetail">
+      <label class="form-check-label" for="homeDetail">
+        {{homeDetail}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="home_details">
+  <p>Building / unit details</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <input
+      type="text"
+      class="form-control form-control-lg"
+      style="width: 30%"
+    />
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let homeDetail of homeDetails" class="form-check form-check-inline col-2">
+      <input checked class="form-check-input " id="homeDetail" name="exampleRadios" type="checkbox"
+             value="homeDetail">
+      <label class="form-check-label" for="homeDetail">
+        {{homeDetail}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="home_details">
+  <p>Cost</p>
+  <div style="display: flex">
+    <div class="form-group">
+      <label>Service name</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+      />
+    </div>
+    <div class="form-group">
+      <label>Price (Optional)</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        style="width: 60%;margin-left: 20px"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="home_details">
+  <p>Condition</p>
+  <div style="display: flex;flex-wrap: wrap">
+    <div class="form-check form-check-inline">
+      <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
+             value="option1">
+      <label class="form-check-label" for="exampleRadios1">
+        New
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+        Used
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="home_details">
+  <p>Condition</p>
+  <div style="display: flex;flex-wrap: wrap">
+    <div class="form-check form-check-inline">
+      <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
+             value="option1">
+      <label class="form-check-label" for="exampleRadios1">
+        Full
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+        Partially
+      </label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
+      <label class="form-check-label" for="exampleRadios2">
+        No
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="home_details">
+  <p>Close to</p>
+  <div style="display: flex">
+    <div class="form-group">
+      <label>Reference point</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+      />
+    </div>
+    <div class="form-group">
+      <label>Name (Optional)</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        style="width: 60%;margin-left: 20px"
+      />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+@import "src/app/theme/vars";
+p {
+  font-weight: bold;
+}
+
+input{
+  border: 2px solid $primary;
+}
+
+.form-group {
+  label {
+    font-weight: normal;
+  }
+}
+
+.home_details {
+  margin-bottom: 20px;
+}

@@ -1,4 +1,5 @@
 <div class="section-form">
+  <!--PRECIO-->
   <div class="row" style="align-items: center">
     <div class="col-lg-6">
       <div class="form-group">
@@ -10,58 +11,108 @@
             <span class="input-group-text-custom" style="
               border-radius: 8px;
               margin-left: -10px;
-              z-index: 1;"
-            >COP</span>
-            <span *ngIf="type != 1" class="input-group-text-custom" style="border-radius: 8px;">Month</span>
+              z-index: 1;">COP</span>
+            <span *ngIf="type != 1 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" *ngIf="type != 3">
       <div class="form-check form-check-inline" style="margin-top: 20px">
-        <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="checkbox" value="option3">
+        <input class="form-check-input" name="exampleRadios" type="checkbox" value="option3">
         <label class="form-check-label" for="exampleRadios3">
           Do not show price ( Price upon request)
         </label>
       </div>
     </div>
+  </div>
+  <!---->
 
+  <!-- SELECTOR NUMERICOS -->
+  <div *ngIf="type == 1 || type == 4"  class="row">
+    <div class="col-6 col-lg-4" *ngIf="type !== 1">
+      <div class="form-group">
+        <label class="required" for="exampleInputEmail1">Area</label>
+        <div class="input-group area">
+          <input type="text" class="form-control  form-control-lg" style="width: 70%">
+          <select class="form-select">
+            <option selected value="1">M2</option>
+            <option value="2">sqft</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-2">
+      <div class="form-group">
+        <label class="required">Rooms</label>
+        <app-number-selector></app-number-selector>
+      </div>
+    </div>
+    <div class="col-6 col-lg-2">
+      <div class="form-group">
+        <label class="required" >Bath</label>
+        <app-number-selector></app-number-selector>
+      </div>
+    </div>
+    <div class="col-6 col-lg-2">
+      <div class="form-group">
+        <label class="required" >Parking spots</label>
+        <app-number-selector></app-number-selector>
+      </div>
+    </div>
+    <div class="col-6 col-lg-2" *ngIf="type == 1">
+      <div class="form-group">
+        <label class="required">N° pieces</label>
+        <app-number-selector></app-number-selector>
+      </div>
+    </div>
+  </div>
+  <!-- -->
+
+  <div *ngIf="type == 1" class="row">
+    <div class="col-4">
+      <div class="form-group">
+        <label class="required" for="exampleInputEmail1">Area</label>
+        <div class="input-group area">
+          <input type="text" class="form-control  form-control-lg" style="width: 70%">
+          <select class="form-select">
+            <option selected value="1">M2</option>
+            <option value="2">sqft</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-4">
+
+      <div class="form-group">
+        <label>Year built</label>
+        <select class="form-control-lg form-select" style="width: 100%">
+          <option value="">No defined</option>
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-4">
+
+      <div class="form-group">
+        <label>Year remodeled</label>
+        <select class="form-control-lg form-select" style="width: 100%">
+          <option value="">No defined</option>
+          <option *ngFor="let year of years" [value]="year">{{year}}</option>
+        </select>
+      </div>
+    </div>
   </div>
 
-  <div class="row">
-    <div class="col-3">
-      <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Rooms</label>
-        <app-number-selector></app-number-selector>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Bath</label>
-        <app-number-selector></app-number-selector>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Parking spots</label>
-        <app-number-selector></app-number-selector>
-      </div>
-    </div>
-    <div class="col-3">
-      <div class="form-group">
-        <label class="required" for="exampleInputEmail1">N° pieces</label>
-        <app-number-selector></app-number-selector>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
+  <!-- -->
+  <div *ngIf="type == 3"  class="row">
     <div class="col-4">
       <div class="form-group">
         <label for="exampleInputEmail1">Bathroom *</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
-            <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
+            <input checked class="form-check-input" id="exampleRadios1" name="exampleRadios" type="radio"
                    value="option1">
             <label class="form-check-label" for="exampleRadios1">
               Private
@@ -82,26 +133,26 @@
         </div>
       </div>
     </div>
-    <div class="col-4">
+    <div  class="col-4">
       <div class="form-group">
         <label for="exampleInputEmail1">Furnished *</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
-            <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
+            <input checked class="form-check-input " id="exampleRadios4" name="exampleRadios" type="radio"
                    value="option1">
-            <label class="form-check-label" for="exampleRadios1">
+            <label class="form-check-label" for="exampleRadios4">
               Full
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
+            <input class="form-check-input" id="exampleRadios5" name="exampleRadios" type="radio" value="option2">
+            <label class="form-check-label" for="exampleRadios5">
               Partially
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="radio" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
+            <input class="form-check-input" id="exampleRadios6" name="exampleRadios" type="radio" value="option3">
+            <label class="form-check-label" for="exampleRadios6">
               No
             </label>
           </div>
@@ -110,38 +161,38 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="type == 3" class="row">
     <div class="col-4">
       <div class="form-group">
         <label for="exampleInputEmail1">Pets *</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
-            <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="checkbox"
+            <input checked class="form-check-input " id="exampleRadios7" name="exampleRadios" type="checkbox"
                    value="option1">
-            <label class="form-check-label" for="exampleRadios1">
+            <label class="form-check-label" for="exampleRadios7">
               Dogs
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="checkbox" value="option2">
-            <label class="form-check-label" for="exampleRadios2">
+            <input class="form-check-input" id="exampleRadios8" name="exampleRadios" type="checkbox" value="option2">
+            <label class="form-check-label" for="exampleRadios8">
               Cats
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
+            <input class="form-check-input" id="exampleRadios9" name="exampleRadios" type="checkbox" value="option3">
+            <label class="form-check-label" for="exampleRadios9">
               Birds
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
+            <input class="form-check-input" id="exampleRadios10" name="exampleRadios" type="checkbox" value="option3">
+            <label class="form-check-label" for="exampleRadios10">
               All
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="checkbox" value="option3">
+            <input class="form-check-input" id="exampleRadios11" name="exampleRadios" type="checkbox" value="option3">
             <label class="form-check-label" for="exampleRadios3">
               No
             </label>
@@ -157,14 +208,13 @@
             <input
               aria-describedby="emailHelp"
               class="form-control form-control-lg"
-              id="exampleInputEmail1"
               required
               type="date"
             />
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
+            <input class="form-check-input" id="exampleRadios12" name="exampleRadios" type="checkbox" value="option3">
+            <label class="form-check-label" for="exampleRadios12">
               Show (immediatly)
             </label>
           </div>
@@ -180,7 +230,6 @@
       aria-describedby="emailHelp"
       class="form-control"
       cols="5"
-      id="exampleInputEmail1"
       required
       rows="5"
     ></textarea>
@@ -194,21 +243,18 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="exampleInputEmail1">Country *</label>
-        <select class="form-select custom-select form-select-lg">
+        <label class="required">Country</label>
+        <select class="form-control-lg form-select" style="width: 100%">
           <option selected value="1">Colombia</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
         </select>
       </div>
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="exampleInputEmail1">City *</label>
+        <label class="required">City</label>
         <input
           aria-describedby="emailHelp"
           class="form-control form-control-lg"
-          id="exampleInputEmail1"
           required
           type="text"
         />
@@ -216,11 +262,10 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="exampleInputEmail1">Postal code - state</label>
+        <label>Postal code - state</label>
         <input
           aria-describedby="emailHelp"
           class="form-control form-control-lg"
-          id="exampleInputEmail1"
           required
           type="text"
         />
@@ -231,12 +276,38 @@
 
   <div class="map">
     <img alt="example img" src="https://via.placeholder.com/800x400">
-    <div class="row justify-content-end">
-      <div class="col-2">
-        <button class="btn btn-outline-primary">
-          Coordinates
-        </button>
-      </div>
+        <input
+          class="form-control form-control-lg"
+          required
+          type="text"
+          placeholder="Coordinates"
+          style="width: 20%"
+        />
+  </div>
+</div>
+
+<!--PLANS-->
+<div *ngIf="type == 2" style="margin-top: 30px;margin-bottom: 30px">
+  <h5 style="margin-bottom: 20px">Plans</h5>
+  <div class="row">
+    <div *ngFor="let plan of plans" class="col-12 col-lg-4">
+      <app-plans-form></app-plans-form>
+    </div>
+    <div class="add-plan Scol-12 col-lg-3">
+      <div class="add-icon"><i class="fas fa-plus"></i></div>
+    </div>
+  </div>
+</div>
+
+<!--TYPES-->
+<div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
+  <h5 style="margin-bottom: 20px">Types of properties</h5>
+  <div class="row">
+    <div *ngFor="let typep of typesp" class="col-12 col-lg-4">
+      <app-types-form></app-types-form>
+    </div>
+    <div class="add-plan Scol-12 col-lg-3">
+      <div class="add-icon"><i class="fas fa-plus"></i></div>
     </div>
   </div>
 </div>
@@ -247,7 +318,7 @@
       <h5>Media</h5>
     </div>
     <div class="col-12">
-      <label for="exampleInputEmail1">photos *</label>
+      <label class="required">Photos</label>
     </div>
     <div class="grid">
       <div class="grid-item">
@@ -268,7 +339,7 @@
 
   <div class="row">
     <div class="col-12">
-      <label for="exampleInputEmail1">Video *</label>
+      <label class="required">Video</label>
       <p>Copy the URL of the youtube video you want to include</p>
     </div>
     <div class="col-6">
@@ -305,8 +376,8 @@
 
   <div class="row">
     <div class="col-12">
-      <label for="exampleInputEmail1">360 tour *</label>
-      <p>Copy the URL of the 360 ​​tour you want to include</p>
+      <label class="required">360 tour</label>
+      <p>Copy the URL of the 360 tour you want to include</p>
     </div>
     <div class="col-6">
       <div class="form-group">
@@ -330,7 +401,7 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="exampleInputEmail1">Name *</label>
+        <label>Name</label>
         <input
           aria-describedby="emailHelp"
           class="form-control"
@@ -342,11 +413,10 @@
     </div>
     <div class="col-4">
       <div class="form-group">
-        <label for="exampleInputEmail1">Email *</label>
+        <label>Email</label>
         <input
           aria-describedby="emailHelp"
           class="form-control"
-          id="exampleInputEmail1"
           required
           type="text"
         />
@@ -358,7 +428,6 @@
         <input
           aria-describedby="emailHelp"
           class="form-control"
-          id="exampleInputEmail1"
           required
           type="text"
         />

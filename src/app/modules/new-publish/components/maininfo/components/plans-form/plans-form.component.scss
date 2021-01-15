@@ -1,0 +1,19 @@
+@import "src/app/theme/vars";
+.input-group-text-custom{
+  display: flex;
+  align-items: center;
+  padding: .375rem .75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #073558 !important;
+}
+
+.card-plans {
+  padding: 10px;
+  box-shadow: 0px 3px 20px 0px #135aa029;
+}

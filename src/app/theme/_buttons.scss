@@ -4,6 +4,9 @@
   border-color: $primary !important;
   border-radius: 8px;
   width: 100%;
+  img {
+    filter: invert(99%) sepia(0%) saturate(2%) hue-rotate(193deg) brightness(103%) contrast(101%);
+  }
   &:focus {
     box-shadow: none !important;
   }

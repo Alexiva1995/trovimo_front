@@ -15,10 +15,12 @@ export class NumberSelectorComponent implements OnInit {
   }
 
   plus(): void {
-    this.value += this.value;
+    this.value += 1;
   }
 
   minus(): void {
-    this.value -= this.value;
+    if (this.value > 0) {
+      this.value -= 1;
+    }
   }
 }
