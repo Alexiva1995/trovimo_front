@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+/* Pages and Components */
 import { AboutComponent } from './modules/help/about/about.component';
 import { AuthComponent } from './modules/auth/auth.component';
 import { SignInComponent } from './modules/auth/sign-in/sign-in.component';
@@ -16,21 +18,24 @@ import { FindExpertsComponent } from './modules/find-experts/find-experts.compon
 import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
-
+import { SettingComponent } from './modules/acount-profile/components/setting/setting.component';
+import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';
+import { MyActivityComponent } from './modules/acount-profile/components/my-activity/my-activity.component';
+import { MyListingsComponent } from './modules/acount-profile/components/my-listings/my-listings.component';
 
 const routes: Routes = [
-   {path: 'pages', component: PagesComponent},
+  { path: 'pages', component: PagesComponent },
   {
     path: 'auth',
     component: AuthComponent,
     children: [
-      {path: 'sign-in', component: SignInComponent},
-      {path: 'sign-up', component: SignUpComponent}
-    ]
+      { path: 'sign-in', component: SignInComponent },
+      { path: 'sign-up', component: SignUpComponent },
+    ],
   },
   {
     path: 'acount-profile',
-    component: AcountProfileComponent
+    component: AcountProfileComponent,
   },
   {
     path: 'find-experts',
@@ -46,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
   },
   {
     path: 'new',
@@ -70,18 +75,18 @@ const routes: Routes = [
   },
   {
     path: 'blog',
-    component: BlogComponent
+    component: BlogComponent,
   },
   {
     path: 'blog-detail',
-    component: BlogDetailComponent
+    component: BlogDetailComponent,
   },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', redirectTo: ''}
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
