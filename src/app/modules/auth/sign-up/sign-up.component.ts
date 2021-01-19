@@ -12,6 +12,7 @@ import {
 } from 'angularx-social-login';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,7 +26,8 @@ export class SignUpComponent implements OnInit {
     private socialAuthService: SocialAuthService,
     private _authService: AuthService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -62,6 +64,7 @@ export class SignUpComponent implements OnInit {
         this.form.enable();
         this.form.reset({});
         this.toastr.success('User created successfully');
+        this.router.navigateByUrl('auth/sign-in');
       },
       (err) => {
         this.form.enable();

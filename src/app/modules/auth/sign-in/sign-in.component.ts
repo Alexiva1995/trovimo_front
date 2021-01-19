@@ -5,6 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   FacebookLoginProvider,
   GoogleLoginProvider,
@@ -27,7 +28,8 @@ export class SignInComponent implements OnInit {
     private socialAuthService: SocialAuthService,
     private _authService: AuthService,
     private fb: FormBuilder,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -111,6 +113,8 @@ export class SignInComponent implements OnInit {
         this.form.reset({});
         this.toastr.success('Welcome');
         localStorage.setItem('access_token', res['access_token']);
+        localStorage.setItem('user', JSON.stringify(res['user']));
+        this.router.navigateByUrl('home');
       },
       (err) => {
         this.form.enable();

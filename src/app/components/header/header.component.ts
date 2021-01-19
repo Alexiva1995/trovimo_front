@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-    
+  ngOnInit(): void {}
+
+  public getUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
-
 }
