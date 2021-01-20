@@ -34,7 +34,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'acount-profile',
+    path: 'account-profile',
     component: AcountProfileComponent,
   },
   {
