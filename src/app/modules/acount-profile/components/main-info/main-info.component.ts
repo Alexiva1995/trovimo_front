@@ -33,6 +33,7 @@ export class MainInfoComponent implements OnInit {
       }
     );
   }
+
   fill() {
     this.form = this.fb.group({
       username: [this.user.username || '', Validators.required],
@@ -53,6 +54,7 @@ export class MainInfoComponent implements OnInit {
       (res) => {
         /* User data */
         this.user = res['data'];
+        this.fill();
       },
       (err) => {
         this.toastr.error('Problems obtaining user information');

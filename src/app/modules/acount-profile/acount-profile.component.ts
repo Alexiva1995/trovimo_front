@@ -9,35 +9,35 @@ export class AcountProfileComponent implements OnInit {
   public menu = [
     {
       name: 'My Account',
-      router: 'acount-profile',
+      router: 'account-profile',
     },
     {
       name: 'My activity',
-      router: 'acount-profile/my-activity',
+      router: 'account-profile/my-activity',
     },
     {
       name: 'My listing',
-      router: 'acount-profile/my-listing',
+      router: 'account-profile/my-listing',
     },
     {
       name: 'Photos',
-      router: 'acount-profile/photos',
+      router: 'account-profile/photos',
     },
     {
       name: 'Expert profile',
-      router: 'acount-profile/expert-profile',
+      router: 'account-profile/expert-profile',
     },
     {
       name: 'My projects',
-      router: 'acount-profile/my-projects',
+      router: 'account-profile/my-projects',
     },
     {
       name: 'Statics',
-      router: 'acount-profile/statics',
+      router: 'account-profile/statics',
     },
     {
       name: 'Settings',
-      router: 'acount-profile/settins',
+      router: 'account-profile/settigs',
     },
   ];
   selectedPage: string = this.menu[0].router;

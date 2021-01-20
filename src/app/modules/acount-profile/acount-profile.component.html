@@ -2,32 +2,20 @@
   <div class="menu">
     <ul>
       <ng-container *ngFor="let item of menu">
-        <li (click)="selectedPage = item.router">
+        <li
+          (click)="selectedPage = item.router"
+          [class.active]="selectedPage === item.router"
+        >
           {{ item.name }}
         </li>
       </ng-container>
     </ul>
   </div>
   <div class="container">
-    <app-main-info
-      *ngIf="selectedPage === menu[0].router"
-      [class.active]="selectedPage === menu[0].router"
-    ></app-main-info>
-    <app-my-activity
-      *ngIf="selectedPage === menu[1].router"
-      [class.active]="selectedPage === menu[1].router"
-    ></app-my-activity>
-    <app-photos
-      *ngIf="selectedPage === menu[2].router"
-      [class.active]="selectedPage === menu[2].router"
-    ></app-photos>
-    <app-my-listings
-      *ngIf="selectedPage === menu[3].router"
-      [class.active]="selectedPage === menu[3].router"
-    ></app-my-listings>
-    <app-setting
-      *ngIf="selectedPage === menu[4].router"
-      [class.active]="selectedPage === menu[4].router"
-    ></app-setting>
+    <app-main-info *ngIf="selectedPage === menu[0].router"></app-main-info>
+    <app-my-activity *ngIf="selectedPage === menu[1].router"></app-my-activity>
+    <app-photos *ngIf="selectedPage === menu[2].router"></app-photos>
+    <app-my-listings *ngIf="selectedPage === menu[3].router"></app-my-listings>
+    <app-setting *ngIf="selectedPage === menu[4].router"></app-setting>
   </div>
 </div>
