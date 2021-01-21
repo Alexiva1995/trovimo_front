@@ -1,14 +1,24 @@
 <div class="info">
   <h6>My account</h6>
 
-  <form>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="form-group">
       <label>Username</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        formControlName="username"
+        [ngClass]="{ 'is-invalid': form.get('username').hasError('required') }"
+        class="form-control"
+      />
     </div>
     <div class="form-group">
       <label>Name and surname</label>
-      <input type="text" class="form-control" />
+      <input
+        type="text"
+        formControlName="name"
+        [ngClass]="{ 'is-invalid': form.get('name').hasError('required') }"
+        class="form-control"
+      />
     </div>
     <label>Phones</label>
     <div class="input-group" style="margin-bottom: 20px">
@@ -26,7 +36,12 @@
         <li>+58</li>
         <li>+59</li>
       </ul>
-      <input type="text" class="form-control" />
+      <input
+        type="tel"
+        class="form-control"
+        formControlName="phone"
+        [ngClass]="{ 'is-invalid': form.get('phone').hasError('required') }"
+      />
       <button
         style="width: auto"
         class="btn btn-primary"
@@ -39,7 +54,11 @@
     <div class="row">
       <div class="form-group col-4">
         <label>Country</label>
-        <select class="form-control form-select">
+        <select
+          class="form-control form-select"
+          formControlName="country"
+          [ngClass]="{ 'is-invalid': form.get('country').hasError('required') }"
+        >
           <option selected>Colombia</option>
           <option value="1">Colombia</option>
           <option value="2">Colombia</option>
@@ -52,12 +71,25 @@
       </div>
       <div class="form-group col-4">
         <label>Postal code - state</label>
-        <input type="text" class="form-control" />
+        <input
+          type="text"
+          class="form-control"
+          formControlName="postal_code"
+          [ngClass]="{
+            'is-invalid': form.get('postal_code').hasError('required')
+          }"
+        />
       </div>
     </div>
     <span>Select the city of your work (You can select more than one) </span>
     <div class="input-group" style="margin-bottom: 20px">
-      <input type="text" placeholder="Insert Address" class="form-control" />
+      <input
+        type="text"
+        placeholder="Insert Address"
+        class="form-control"
+        formControlName="city"
+        [ngClass]="{ 'is-invalid': form.get('city').hasError('required') }"
+      />
       <button
         style="width: auto"
         class="btn btn-primary"

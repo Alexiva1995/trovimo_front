@@ -52,13 +52,21 @@
             </div>
           </li>
         </ul>
-        <div [routerLink]="['/auth/sign-in']" class="user" *ngIf="!token" >
+
+        <div [routerLink]="['/auth/sign-in']" class="user" *ngIf="!getUser()">
           <i class="fas fa-user"></i>
           <span >Sign in / Register</span>
         </div>
         <div class="user" *ngIf="token">
           <i class="fas fa-user"></i>
           <span>Profile</span>
+        </div>
+        <div [routerLink]="['/account-profile']" class="user" *ngIf="getUser()">
+          <i class="fas fa-user"></i>
+          <span
+            >Bienvenido
+            {{ getUser().username || getUser().name || getUser().email }}</span
+          >
         </div>
       </div>
     </div>

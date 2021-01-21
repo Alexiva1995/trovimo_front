@@ -27,10 +27,16 @@
 
 .redirect {
   text-align: center;
-  color: $primary;
+  color: $primary-accent;
   a {
     font-weight: bold;
     text-decoration: none;
     color: $primary;
+  }
+}
+.forgot {
+  a {
+    color: $primary;
+    font-size: 15px;
   }
 }

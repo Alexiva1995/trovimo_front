@@ -1,17 +1,21 @@
 <div class="acount">
   <div class="menu">
     <ul>
-      <li class="active">My account</li>
-      <li>My listing</li>
-      <li>My activity</li>
-      <li>Photos</li>
-      <li>Expert profile</li>
-      <li>My projects</li>
-      <li>Statics</li>
-      <li>Setting</li>
+      <ng-container *ngFor="let item of menu">
+        <li
+          (click)="selectedPage = item.router"
+          [class.active]="selectedPage === item.router"
+        >
+          {{ item.name }}
+        </li>
+      </ng-container>
     </ul>
   </div>
   <div class="container">
-    <app-main-info></app-main-info>
+    <app-main-info *ngIf="selectedPage === menu[0].router"></app-main-info>
+    <app-my-activity *ngIf="selectedPage === menu[1].router"></app-my-activity>
+    <app-photos *ngIf="selectedPage === menu[2].router"></app-photos>
+    <app-my-listings *ngIf="selectedPage === menu[3].router"></app-my-listings>
+    <app-setting *ngIf="selectedPage === menu[4].router"></app-setting>
   </div>
 </div>

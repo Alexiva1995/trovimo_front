@@ -1,24 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthService,
+} from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  styleUrls: ['./sign-in.component.scss'],
 })
 export class SignInComponent implements OnInit {
   form: FormGroup;
   user: any;
   loggedIn: any;
+  submitted = false;
   constructor(
     private socialAuthService: SocialAuthService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private toastr: ToastrService
-  ) { }
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -28,10 +40,9 @@ export class SignInComponent implements OnInit {
     });
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
+      this.loggedIn = user != null;
     });
   }
-
   loginWithFacebook(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
     .then(res => {

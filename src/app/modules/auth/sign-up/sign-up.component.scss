@@ -38,3 +38,16 @@
 label a {
   color: $primary;
 }
+form-check span {
+  float: left !important;
+}
+@media (min-width: 768px) {
+  .form-check span {
+    float: right;
+  }
+}
+@media (max-width: 768px) {
+  .form-check span {
+    float: left;
+  }
+}

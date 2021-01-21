@@ -15,9 +15,11 @@
         placeholder="Enter email"
         [ngClass]="{ 'is-invalid': form.get('email').hasError('required') }"
       />
-      <span *ngIf="form.get('email').hasError('required')">
-        Email is required
-      </span>
+      <div *ngIf="submitted && getForm.email.errors" class="invalid-feedback">
+        <div *ngIf="getForm.email.errors.required">
+          Please, enter a valid email
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -28,9 +30,14 @@
         placeholder="Password"
         [ngClass]="{ 'is-invalid': form.get('password').hasError('required') }"
       />
-      <span *ngIf="form.get('password').hasError('required')"
-        >Password is required
-      </span>
+      <div
+        *ngIf="submitted && getForm.password.errors"
+        class="invalid-feedback"
+      >
+        <div *ngIf="getForm.password.errors.required">
+          Please enter your password
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label>Repeat password</label>
@@ -73,7 +80,7 @@
     </div>
     <button
       [disabled]="form.disabled"
-      style="margin-top: 20px; border-radius: 30px;"
+      style="margin-top: 20px; border-radius: 30px"
       type="submit"
       class="btn btn-primary"
     >

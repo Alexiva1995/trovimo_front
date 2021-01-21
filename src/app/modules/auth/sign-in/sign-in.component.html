@@ -12,8 +12,14 @@
         formControlName="email"
         type="email"
         class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && getForm.email.errors }"
         placeholder="Enter email"
       />
+      <div *ngIf="submitted && getForm.email.errors" class="invalid-feedback">
+        <div *ngIf="getForm.email.errors.required">
+          Please, enter a valid email
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
@@ -21,8 +27,10 @@
         formControlName="password"
         type="password"
         class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && getForm.email.errors }"
         placeholder="Password"
       />
+      `
     </div>
     <div class="form-check">
       <input
@@ -30,11 +38,14 @@
         type="checkbox"
         class="form-check-input"
       />
-      <label class="form-check-label" for="exampleCheck1">Remenber me</label>
+      <label class="form-check-label" for="exampleCheck1">Remember me</label>
+      <p class="forgot float-right">
+        <a href=""> Forgot password?</a>
+      </p>
     </div>
     <button
       [disabled]="form.disabled"
-      style="margin-top: 20px;border-radius: 30px;"
+      style="margin-top: 20px; border-radius: 30px"
       type="submit"
       class="btn btn-primary"
     >

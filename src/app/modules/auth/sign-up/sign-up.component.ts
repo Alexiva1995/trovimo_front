@@ -1,33 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthService,
+} from 'angularx-social-login';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
   form: FormGroup;
+  submitted: boolean = false;
   constructor(
     private socialAuthService: SocialAuthService,
-    private authService: AuthService,
+    private _authService: AuthService,
     private fb: FormBuilder,
-    private toastr: ToastrService
-  ) {
-
-  }
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
-      password_confirm: ['', Validators.required],
-      politics: ['', Validators.required]
-    },
-    { validator: this.checkPasswords });
+    this.form = this.fb.group(
+      {
+        email: ['', Validators.required],
+        password: ['', Validators.required],
+        password_confirm: ['', Validators.required],
+        politics: ['', Validators.required],
+      },
+      { validator: this.checkPasswords }
+    );
   }
   checkPasswords(group: FormGroup): { notSame: boolean } {
     // here we have the 'passwords' group
@@ -36,7 +48,9 @@ export class SignUpComponent implements OnInit {
 
     return pass === confirmPass ? null : { notSame: true };
   }
-  onSubmit(): void {
+
+  onSubmit() {
+    this.submitted = true;
     if (this.form.invalid) {
       return;
     }
@@ -44,11 +58,13 @@ export class SignUpComponent implements OnInit {
     const data = this.form.value;
     data.register_type = 0;
     data.role = 1;
-    this.authService.signUp(data).subscribe(
+    this._authService.signUp(data).subscribe(
       response => {
       this.form.enable();
       this.form.reset({});
       this.toastr.success('User created successfully');
+      localStorage.setItem('access_token', response.access_token);
+      localStorage.setItem('user', JSON.stringify(response.user));
     }, err => {
       this.form.enable();
       if (err.status === 401) {
@@ -66,7 +82,7 @@ export class SignUpComponent implements OnInit {
         role: 1,
         register_type: 2
       };
-      this.authService.alterLogin(data).subscribe(
+      this._authService.alterLogin(data).subscribe(
         response => {
           if (!response.user) {
             this.toastr.error('User not found');
@@ -96,7 +112,7 @@ export class SignUpComponent implements OnInit {
         register_type: 1
       };
       this.form.disable();
-      this.authService.alterLogin(data).subscribe(
+      this._authService.alterLogin(data).subscribe(
         response => {
           if (!response.user) {
             this.toastr.error('User not found');
