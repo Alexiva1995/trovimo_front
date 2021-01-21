@@ -6,10 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  token = localStorage.getItem('access_token');
   constructor() { }
 
-  ngOnInit(): void {
-    
-  }
-
+  ngOnInit(): void {}
 }

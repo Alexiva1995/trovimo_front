@@ -49,4 +49,11 @@
   .google {
     background-color: $google;
   }
+  btn {
+    background-color: white;
+  }
+  .btn-outline-primary, .btn-outline-primary:disabled {
+    color: #007bff;
+    background-color: white !important;
+  }
 }

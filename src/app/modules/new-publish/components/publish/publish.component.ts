@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {OPTIONS} from './typeOptions';
 
 @Component({
@@ -8,8 +8,9 @@ import {OPTIONS} from './typeOptions';
 })
 export class PublishComponent implements OnInit {
   @Output() setType = new EventEmitter<number>();
-  idType = 1;
-  idOption = 0;
+  @Output() setOption = new EventEmitter<number>();
+  @Input() idType = 1;
+  @Input() idOption = 0;
   options = OPTIONS;
   constructor() {
   }
@@ -21,9 +22,11 @@ export class PublishComponent implements OnInit {
     this.idType = i;
     this.idOption = 0;
     this.setType.emit(i);
+    this.setOption.emit(0);
   }
   selectOption(i: number): void {
     this.idOption = i;
+    this.setOption.emit(i);
   }
 
   isEnable(enable): boolean {

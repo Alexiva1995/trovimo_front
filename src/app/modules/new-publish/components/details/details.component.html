@@ -1,23 +1,41 @@
 <div style="display: flex;justify-content: space-between">
-  <p >This part is optional, you can see the draft of your listing or list it skipping this part.</p>
-  <a href="">Skip this part</a>
+  <p>This part is optional, you can see the draft of your listing or list it skipping this part.</p>
+  <a href="" (click)="emitData(true)">Skip this part</a>
 </div>
 
 <div class="home_details">
   <p>Home details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
-    <input
-      type="text"
-      class="form-control form-control-lg"
-      style="width: 30%"
-    />
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+
+  </div>
+  <div class="tags">
+    <div *ngFor="let homeDetails of detail.homeDetailsTags;let i = index" class="tag-item">
+      {{homeDetails}}
+      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+    </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
-    <div *ngFor="let homeDetail of homeDetails" class="form-check form-check-inline col-2">
-      <input checked class="form-check-input " id="homeDetail" name="exampleRadios" type="checkbox"
-             value="homeDetail">
-      <label class="form-check-label" for="homeDetail">
+    <div *ngFor="let homeDetail of homeDetails" class="custom-control custom-checkbox col-2">
+      <input
+        class="custom-control-input"
+        type="checkbox"
+        [id]="homeDetail"
+        [name]="homeDetail"
+        [value]="homeDetail"
+        (change)="onChangeDetails($event)"
+        [checked]="isChecked('homeDetailsTags',homeDetail)"
+      >
+      <label class="custom-control-label" [for]="homeDetail">
         {{homeDetail}}
       </label>
     </div>
@@ -28,18 +46,34 @@
   <p>Building / unit details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
-    <input
-      type="text"
-      class="form-control form-control-lg"
-      style="width: 30%"
-    />
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="buildingInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addBuildingTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let building of detail.buildingTags;let i = index" class="tag-item">
+      {{building}}
+      <i class="fas fa-times-circle" (click)="removeBuildingTags(i)"></i>
+    </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
-    <div *ngFor="let homeDetail of homeDetails" class="form-check form-check-inline col-2">
-      <input checked class="form-check-input " id="homeDetail" name="exampleRadios" type="checkbox"
-             value="homeDetail">
-      <label class="form-check-label" for="homeDetail">
-        {{homeDetail}}
+    <div *ngFor="let buildingDetail of buildingDetails" class="custom-control custom-checkbox col-2">
+      <input
+        class="custom-control-input"
+        name="exampleRadios"
+        type="checkbox"
+        [id]="buildingDetail"
+        [value]="buildingDetail"
+        (change)="onChangeBuilding($event)"
+        [checked]="isChecked('buildingTags', buildingDetail)"
+      >
+      <label class="custom-control-label" [for]="buildingDetail">
+        {{buildingDetail}}
       </label>
     </div>
   </div>
@@ -47,21 +81,46 @@
 
 <div class="home_details">
   <p>Cost</p>
-  <div style="display: flex">
-    <div class="form-group">
+  <div style="display: flex; flex-wrap: wrap">
+    <div class="form-group" style="margin-right: 20px">
       <label>Service name</label>
       <input
         type="text"
         class="form-control form-control-lg"
+        [(ngModel)]="serviceName"
       />
     </div>
     <div class="form-group">
       <label>Price (Optional)</label>
-      <input
-        type="text"
-        class="form-control form-control-lg"
-        style="width: 60%;margin-left: 20px"
-      />
+      <div style="display: flex;align-items: baseline">
+        <div class="input-group area">
+          <input
+            aria-label="Amount (to the nearest dollar)"
+            class="form-control form-control-lg"
+            required
+            style="border-right: none"
+            type="number"
+            [(ngModel)]="servicePrice"
+          >
+          <div class="input-group-append">
+            <select class="form-select">
+              <option selected value="1">COP</option>
+              <option value="2">USD</option>
+            </select>
+            <span *ngIf="type != 1 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addService()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let service of detail.services;let i = index" class="tag-item">
+      {{service[0]}} - {{service[1]}} COP
+      <i class="fas fa-times-circle" (click)="removeService(i)"></i>
     </div>
   </div>
 </div>
@@ -70,14 +129,29 @@
   <p>Condition</p>
   <div style="display: flex;flex-wrap: wrap">
     <div class="form-check form-check-inline">
-      <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
-             value="option1">
+      <input
+        [(ngModel)]="detail.condition"
+        (change)="emitData(false)"
+        class="form-check-input"
+        id="exampleRadios1"
+        name="condition"
+        type="radio"
+        value="1"
+      >
       <label class="form-check-label" for="exampleRadios1">
         New
       </label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
+      <input
+        [(ngModel)]="detail.condition"
+        (change)="emitData(false)"
+        class="form-check-input"
+        id="exampleRadios2"
+        name="condition"
+        type="radio"
+        value="2"
+      >
       <label class="form-check-label" for="exampleRadios2">
         Used
       </label>
@@ -86,24 +160,41 @@
 </div>
 
 <div class="home_details">
-  <p>Condition</p>
+  <p>Furnished</p>
   <div style="display: flex;flex-wrap: wrap">
     <div class="form-check form-check-inline">
-      <input checked class="form-check-input " id="exampleRadios1" name="exampleRadios" type="radio"
-             value="option1">
-      <label class="form-check-label" for="exampleRadios1">
+      <input [(ngModel)]="detail.furnished"
+             (change)="emitData(false)"
+             class="form-check-input "
+             id="exampleRadios3"
+             type="radio"
+             name="furnished"
+             value="1">
+      <label class="form-check-label" for="exampleRadios3">
         Full
       </label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
+      <input [(ngModel)]="detail.furnished"
+             (change)="emitData(false)"
+             class="form-check-input"
+             id="exampleRadios4"
+             type="radio"
+             name="furnished"
+             value="2">
+      <label class="form-check-label" for="exampleRadios4">
         Partially
       </label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
-      <label class="form-check-label" for="exampleRadios2">
+      <input [(ngModel)]="detail.furnished"
+             (change)="emitData(false)"
+             class="form-check-input"
+             id="exampleRadios5"
+             type="radio"
+             name="furnished"
+             value="3">
+      <label class="form-check-label" for="exampleRadios5">
         No
       </label>
     </div>
@@ -112,21 +203,31 @@
 
 <div class="home_details">
   <p>Close to</p>
-  <div style="display: flex">
+  <div style="display: flex; align-items: center">
     <div class="form-group">
       <label>Reference point</label>
       <input
+        [(ngModel)]="referencePoint"
         type="text"
         class="form-control form-control-lg"
       />
     </div>
-    <div class="form-group">
+    <div class="form-group"  style="width: 30%;margin-left: 20px">
       <label>Name (Optional)</label>
       <input
+        [(ngModel)]="referenceName"
         type="text"
         class="form-control form-control-lg"
-        style="width: 60%;margin-left: 20px"
       />
+    </div>
+    <button class="btn btn-primary" style="width: 38px;margin-left: 30px;margin-top: 15px" (click)="addReference()">
+      <i class="fas fa-plus"></i>
+    </button>
+  </div>
+  <div class="tags">
+    <div *ngFor="let reference of detail.reference_points;let i = index" class="tag-item">
+      {{reference[0]}} - {{reference[1]}}
+      <i class="fas fa-times-circle" (click)="removeReference(i)"></i>
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu-header.component.scss']
 })
 export class MenuHeaderComponent implements OnInit {
-
+  token = localStorage.getItem('access_token');
   constructor() { }
 
   ngOnInit(): void {

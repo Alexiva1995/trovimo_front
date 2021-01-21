@@ -20,7 +20,7 @@ export const OPTIONS = [
   {
     label: 'Land',
     value: 4,
-    icon: '',
+    icon: '/assets/images/new_publish/publish/proyecto.svg',
     enable: [1, 2, 4],
   },
   {
@@ -32,7 +32,7 @@ export const OPTIONS = [
   {
     label: 'Parking',
     value: 6,
-    icon: '',
+    icon: '/assets/images/new_publish/publish/garaje.svg',
     enable: [1, 2],
   },
   {
@@ -56,13 +56,13 @@ export const OPTIONS = [
   {
     label: 'Tiny house',
     value: 10,
-    icon: '',
+    icon: '/assets/images/new_publish/publish/tiny.svg',
     enable: [1, 2],
   },
   {
     label: 'Rent a room',
     value: 11,
-    icon: '/assets/images/new_publish/publish/tiny.svg',
+    icon: '',
     enable: [3],
   },
   {

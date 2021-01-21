@@ -12,6 +12,9 @@
     white-space: nowrap;
     background-color: #073558 !important;
 }
+.form-control {
+  border: 2px solid $primary !important;
+}
 .row-custom{
     display: flex;
     flex-wrap: wrap;
@@ -70,3 +73,57 @@
     margin-bottom: 30px;
   }
 }
+
+
+/*   */
+.custom-input-file {
+  background-color: $primary;
+  color: #fff;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  min-height: 15px;
+  overflow: hidden;
+  padding: 35px;
+  position: relative;
+  text-align: center;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  span {
+    color: white;
+  }
+  i {
+    font-size: 65px;
+  }
+}
+
+.custom-input-file .input-file {
+  border: 10000px solid transparent;
+  cursor: pointer;
+  font-size: 10000px;
+  opacity: 0;
+  outline: 0 none;
+  padding: 0;
+  position: absolute;
+  right: -1000px;
+  top: -1000px;
+}
+.image-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -46px;
+  margin-right: 10px;
+  .delete {
+    background-color: #CD0000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 3px;
+    font-size: 12px;
+  }
+}
+

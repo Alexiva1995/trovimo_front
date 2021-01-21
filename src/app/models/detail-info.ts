@@ -1,0 +1,9 @@
+export class DetailInfo {
+  buildingTags = [];
+  homeDetailsTags = [];
+  services = [];
+  reference_points = [];
+  condition = 0;
+  furnished = 0;
+  product_id = 0;
+}

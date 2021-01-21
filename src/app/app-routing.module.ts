@@ -16,16 +16,21 @@ import { FindExpertsComponent } from './modules/find-experts/find-experts.compon
 import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
+import {AuthGuard} from './guards/auth.guard';
 
 
 const routes: Routes = [
    {path: 'pages', component: PagesComponent},
   {
+    path: '',
+    component: HomeComponent,
+  },
+  {
     path: 'auth',
     component: AuthComponent,
     children: [
-      {path: 'sign-in', component: SignInComponent},
-      {path: 'sign-up', component: SignUpComponent}
+      {path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard]},
+      {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]}
     ]
   },
   {
@@ -35,10 +40,6 @@ const routes: Routes = [
   {
     path: 'find-experts',
     component: FindExpertsComponent,
-  },
-  {
-    path: 'home',
-    component: HomeComponent,
   },
   {
     path: 'publish-list/:type',
@@ -76,7 +77,6 @@ const routes: Routes = [
     path: 'blog-detail',
     component: BlogDetailComponent
   },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', redirectTo: ''}
 ];
 

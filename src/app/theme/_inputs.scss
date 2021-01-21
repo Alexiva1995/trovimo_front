@@ -1,6 +1,6 @@
 @import "./vars.scss";
 .form-group {
-  label:not(.form-check-label) {
+  label:not(.form-check-label),label:not(.custom-control-label) {
     color: $primary !important;
     font-weight: bold;
     &.required::after {
@@ -15,7 +15,7 @@
     font-size: 12px;
   }
 }
-label:not(.form-check-label) {
+label:not(.form-check-label), label:not(.custom-control-label){
   color: $primary !important;
   font-weight: bold;
   &.required::after {
@@ -24,7 +24,12 @@ label:not(.form-check-label) {
 
   }
 }
-
+.custom-control-label, .form-check-label {
+  font-weight: normal !important;
+}
+.form-check-label {
+  margin-left: 5px;
+}
 
 .form-control {
   &:focus {
@@ -53,10 +58,47 @@ label:not(.form-check-label) {
 .form-select {
   background-color: white !important;
   border: 2px solid $primary !important;
-  padding: 0 15px;
   option {
     background-color: white !important;
     color: $primary;
     padding: .3rem;
   }
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: $primary !important;
+}
+
+.custom-checkbox .custom-control-input:checked:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgb(129, 186, 229)
+}
+.custom-checkbox .custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25)
+}
+.custom-checkbox .custom-control-input:active ~ .custom-control-label::before {
+  background-color: #073558;
+}
+
+input[type='radio']:after {
+  width: 18px;
+  height: 18px;
+  border-radius: 15px;
+  border-spacing: 15px !important;
+  position: relative;
+  background-color: white;
+  border: 2px solid $primary !important;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+}
+
+input[type='radio']:checked:after {
+  width: 18px;
+  height: 18px;
+  border-radius: 15px;
+  position: relative;
+  background-color: $primary;
+  content: '';
+  display: inline-block;
+  visibility: visible;
 }

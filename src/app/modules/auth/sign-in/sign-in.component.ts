@@ -11,100 +11,106 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class SignInComponent implements OnInit {
   form: FormGroup;
-  user:any
-  loggedIn:any;
+  user: any;
+  loggedIn: any;
   constructor(
     private socialAuthService: SocialAuthService,
-    private _authService: AuthService,
+    private authService: AuthService,
     private fb: FormBuilder,
     private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: new FormControl('',[Validators.required]),
-      password: new FormControl('',[Validators.required]),
+      email: new FormControl('admin@gmail.com', [Validators.required]),
+      password: new FormControl('123456789', [Validators.required]),
       rememberme: new FormControl(false)
-    })
+    });
     this.socialAuthService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
     });
   }
 
-  loginWithFacebook() {
+  loginWithFacebook(): void {
     this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID)
-    .then(res=>{
-      let data = {
-        email:res.email,
-        password:res.email+'#facebook',
-        role:1,
-        register_type:2
-      }
-      this._authService.alterlogin(data).subscribe(
-        res=>{
-          if (!res['user']) {
+    .then(res => {
+      const data = {
+        email: res.email,
+        password: res.email + '#facebook',
+        role: 1,
+        register_type: 2
+      };
+      this.authService.alterLogin(data).subscribe(
+        response => {
+          if (!response.user) {
             this.toastr.error('User not found');
           } else {
             this.toastr.success('Welcome');
-          }
-          this.form.enable()
-        },
-        err=>{
-          this.form.enable()
-          console.log(err)
-        }
-      )
+            localStorage.setItem('access_token', response.access_token);
+            localStorage.setItem('user', JSON.stringify(response.user));
 
-    })
+            window.location.reload();
+          }
+          this.form.enable();
+        },
+        err => {
+          this.form.enable();
+          console.log(err);
+        }
+      );
+
+    });
   }
 
-  loginWithGoogle() {
+  loginWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
-    .then(res=>{
-      let data = {
-        email:res.email,
-        password:res.email+'#google',
-        role:1,
-        register_type:1
-      }
-      this.form.disable()
-      this._authService.alterlogin(data).subscribe(
-        res=>{
-          if (!res['user']) {
+    .then(res => {
+      const data = {
+        email: res.email,
+        password: res.email + '#google',
+        role: 1,
+        register_type: 1
+      };
+      this.form.disable();
+      this.authService.alterLogin(data).subscribe(
+        response => {
+          if (!response.user) {
             this.toastr.error('User not found');
           }else {
             this.toastr.success('Welcome');
+            localStorage.setItem('access_token', response.access_token);
+            localStorage.setItem('user', JSON.stringify(response.user));
+            window.location.reload();
           }
-          this.form.enable()
-          console.log(res)
+          this.form.enable();
+          console.log(res);
         },
-        err=>{
-          this.form.enable()
-          console.log(err)
+        err => {
+          this.form.enable();
+          console.log(err);
         }
-      )
-    })
-  
+      );
+    });
+
   }
-  onSubmit() {
-    this.form.disable()
-    console.log(this.form)
-    let data = this.form.value;
-    this._authService.signin(data).subscribe(res=>{
+  onSubmit(): void {
+    this.form.disable();
+    console.log(this.form);
+    const data = this.form.value;
+    this.authService.signIn(data).subscribe(
+      response => {
         this.form.enable();
-        this.form.reset({})
+        this.form.reset({});
         this.toastr.success('Welcome');
-        localStorage.setItem('access_token',res['access_token'])
-    },err=>{
-      this.form.enable()
-      
+        localStorage.setItem('access_token', response.access_token);
+        localStorage.setItem('user', JSON.stringify(response.user));
+        window.location.reload();
+    }, err => {
+      this.form.enable();
       if (err.status === 401) {
-        
           this.toastr.error('Email or password invalid');
-          
-        
       }
-    })
+    });
   }
 }
