@@ -6,4 +6,7 @@ export class DetailInfo {
   condition = 0;
   furnished = 0;
   product_id = 0;
+  placeEquipmetsTags = [];
+  preferencesTags = [];
+  placeDetailsTags = [];
 }

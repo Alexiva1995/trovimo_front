@@ -124,4 +124,7 @@ export class SignInComponent implements OnInit {
       }
     });
   }
+  get getForm() {
+    return this.form.controls;
+  }
 }

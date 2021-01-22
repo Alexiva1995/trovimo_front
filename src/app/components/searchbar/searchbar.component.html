@@ -6,19 +6,19 @@
       <div>
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link active" href="#">Buy</a>
+            <a class="nav-link" [ngClass]="{'active': type === 1}" (click)="setType(1)">Buy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Rent</a>
+            <a class="nav-link" [ngClass]="{'active': type === 2}" (click)="setType(2)">Rent</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Shared</a>
+            <a class="nav-link" [ngClass]="{'active': type === 3}" (click)="setType(3)">Shared</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Projects</a>
+            <a class="nav-link" [ngClass]="{'active': type === 4}" (click)="setType(4)">Projects</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Experts</a>
+            <a class="nav-link" [ngClass]="{'active': type === 5}" (click)="setType(5)">Experts</a>
           </li>
         </ul>
         <div style="display:flex;margin-bottom: 20px">
@@ -30,6 +30,36 @@
               aria-label="Recipient's username"
               aria-describedby="basic-addon2"
             />
+            <select *ngIf="type === 3">
+              <option value="Shared Office" selected>Shared Office</option>
+              <option value="Co-working Place">Co-working Place</option>
+            </select>
+            <select  *ngIf="type === 4">
+              <option value="Residencial" selected>Residencial</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+            <div *ngIf="type === 5" class="dropdown">
+              <p>Write your category</p>
+              <div class="dropdown-content">
+                <ul>
+                  <li class="tittle">Services</li>
+                  <li>Moving</li>
+                  <li>Cleaning</li>
+                  <li>Real state</li>
+                  <li>Photos</li>
+                  <li>3D Virtual tours</li>
+                  <li>Storage & Transport</li>
+                  <li>Gardeners</li>
+                  <li>Painters</li>
+                  <li>Plumbers</li>
+                  <li>Carpenters</li>
+                  <li>Electricians</li>
+                  <li>Heating & AC</li>
+                  <li>Pool Services</li>
+                  <li>Other Services</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <button
             class="btn btn-primary"
@@ -39,7 +69,7 @@
             <i class="fas fa-search"></i>
           </button>
         </div>
-        <div class="filter" [ngClass]="{'active': showFilter}">
+        <div class="filter" [ngClass]="{'active': showFilter}" *ngIf="type !== 5">
           <button
             class="btn btn-primary"
             style="border-radius: 6px"
@@ -54,17 +84,19 @@
       <div class="filter-content" *ngIf="showFilter">
         <div class="container">
           <div class="row">
-            <div class="col-lg-5">
+            <div class="col-lg-5" *ngIf="type === 1 || type === 2 || type === 4">
               <h6>Type</h6>
               <div style="display: flex;flex-wrap: wrap" >
-                <button
-                  *ngFor="let item of TYPE_OPTIONS "
-                  class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
-                  type="button"
-                >
-                  {{item.title}}
-                </button>
+                <div *ngFor="let item of options ">
+                  <button
+                    *ngIf="isEnable(item.enable)"
+                    class="btn option oprincipal"
+                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    type="button"
+                  >
+                    <img [src]="item.icon" alt="">{{item.label}}
+                  </button>
+                </div>
               </div>
             </div>
 

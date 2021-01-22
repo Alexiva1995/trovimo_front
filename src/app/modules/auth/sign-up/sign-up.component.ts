@@ -131,4 +131,7 @@ export class SignUpComponent implements OnInit {
       );
     });
   }
+  get getForm() {
+    return this.form.controls;
+  }
 }

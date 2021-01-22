@@ -20,7 +20,11 @@
               <option selected value="1">COP</option>
               <option value="2">USD</option>
             </select>
-            <span *ngIf="type != 1 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
+            <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
+            <div style="margin-left: 10px">
+
+              <app-help-tooltip *ngIf="type != 1 && type != 2 && type != 4" ></app-help-tooltip>
+            </div>
           </div>
         </div>
       </div>
@@ -44,15 +48,14 @@
   <!---->
 
   <!-- SELECTOR NUMERICOS -->
-  <div *ngIf="type == 1 || type == 4"  class="row">
-    <div class="col-6 col-lg-4" *ngIf="type !== 1">
+  <div *ngIf="type == 1 || type == 2 || type == 4"  class="row">
+    <div class="col-6 col-lg-3" *ngIf="type !== 1 && type !== 2">
       <div class="form-group">
         <label class="required" for="exampleInputEmail1">Area</label>
         <div class="input-group area">
           <input
             class="form-control  form-control-lg"
             type="number"
-            style="width: 70%"
             [(ngModel)]="mainInfo.area"
             (ngModelChange)="onChange()"
           >
@@ -77,20 +80,20 @@
     </div>
     <div class="col-6 col-lg-3">
       <div class="form-group">
-        <label class="required" >Parking spots</label>
+        <label >Parking spots</label>
         <app-number-selector (setValue)="mainInfo.parking_spots = $event"></app-number-selector>
       </div>
     </div>
-    <div class="col-6 col-lg-3" *ngIf="type == 1">
+    <div class="col-6 col-lg-3" *ngIf="type == 1 || type == 2">
       <div class="form-group">
-        <label class="required">N° pieces</label>
+        <label>N° pieces</label>
         <app-number-selector (setValue)="mainInfo.n_pieces = $event"></app-number-selector>
       </div>
     </div>
   </div>
   <!-- -->
 
-  <div *ngIf="type == 1" class="row">
+  <div *ngIf="type == 1 || type == 2" class="row">
     <div class="col-12 col-lg-4">
       <div class="form-group">
         <label class="required" for="exampleInputEmail1">Area</label>
@@ -112,7 +115,7 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label>Year built</label>
+        <label style="display: flex; justify-content: space-between">Year built <app-help-tooltip></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
@@ -127,7 +130,7 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label>Year remodeled</label>
+        <label style="display: flex; justify-content: space-between">Year remodeled <app-help-tooltip></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
@@ -137,15 +140,16 @@
           <option value="">No defined</option>
           <option *ngFor="let year of years" [value]="year">{{year}}</option>
         </select>
+
       </div>
     </div>
   </div>
 
   <!-- -->
-  <div *ngIf="type == 3"  class="row">
-    <div class="col-4">
+  <div *ngIf="type == 3 && (optionType == 11 || optionType  == 12)"  class="row">
+    <div class="col-12 col-lg-6">
       <div class="form-group">
-        <label for="exampleInputEmail1">Bathroom *</label>
+        <label class="required" for="exampleInputEmail1">Bathroom</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
             <input checked class="form-check-input" id="exampleRadios1" name="exampleRadios" type="radio"
@@ -169,9 +173,9 @@
         </div>
       </div>
     </div>
-    <div  class="col-4">
+    <div  class="col-12-lg-6">
       <div class="form-group">
-        <label for="exampleInputEmail1">Furnished *</label>
+        <label class="required" for="exampleInputEmail1">Furnished *</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
             <input checked class="form-check-input " id="exampleRadios4" name="exampleRadios" type="radio"
@@ -197,10 +201,10 @@
     </div>
   </div>
 
-  <div *ngIf="type == 3" class="row">
-    <div class="col-4">
+  <div *ngIf="type == 3 && (optionType == 11 || optionType  == 12)" class="row">
+    <div class="col-12 col-lg-6">
       <div class="form-group">
-        <label for="exampleInputEmail1">Pets *</label>
+        <label class="required" for="exampleInputEmail1">Pets *</label>
         <div class="row-custom">
           <div class="form-check form-check-inline">
             <input checked class="form-check-input " id="exampleRadios7" name="exampleRadios" type="checkbox"
@@ -236,9 +240,9 @@
         </div>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-12 col-lg-6">
       <div class="form-group">
-        <label for="exampleInputEmail1">Avaliable Date *</label>
+        <label class="required" for="exampleInputEmail1">Avaliable Date *</label>
         <div class="row-custom">
           <div class="col-6 remove-padding-left">
             <input
@@ -321,28 +325,48 @@
     </div>
   </div>
 
+  <!--TYPES-->
+  <div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
+    <h5 style="margin-bottom: 20px">Types of properties</h5>
+    <div class="row">
+      <div *ngFor="let typep of typesp" class="col-12 col-lg-6">
+        <app-types-form></app-types-form>
+      </div>
+      <div class="add-plan col-12 col-lg-3">
+        <div class="add-icon" (click)="addProperty()"><i class="fas fa-plus"></i></div>
+      </div>
+    </div>
+  </div>
 
   <div class="map">
     <!--mapa-->
     <app-map [lng]="mainInfo.lon" [lat]="mainInfo.lat"></app-map>
-        <input
-          class="form-control form-control-lg"
-          required
-          type="text"
-          id="coordinates"
-          placeholder="Coordinates"
-          [(ngModel)]="coordinates"
-          (ngModelChange)="setCoordinates()"
-          style="width: 30rem;margin: auto;margin-right: 0;"
-        />
+    <div style="display: flex; justify-content: flex-end">
+
+      <button class="btn btn-outline-primary" style="width: 10rem;margin: auto;margin-right: 0;" (click)="showCoordinates = !showCoordinates">Coordinates</button>
+    </div>
+    <div style="">
+      <input
+        *ngIf="showCoordinates"
+        class="form-control form-control-lg"
+        required
+        type="text"
+        id="coordinates"
+        placeholder="Coordinates"
+        [(ngModel)]="coordinates"
+        (ngModelChange)="setCoordinates()"
+        style="width: 30rem;margin: auto;margin-right: 0;"
+      />
+    </div>
+
   </div>
 </div>
 
 <!--PLANS-->
-<div *ngIf="type == 2" style="margin-top: 30px;margin-bottom: 30px">
+<div *ngIf="type == 3 && optionType == 13" style="margin-top: 30px;margin-bottom: 30px">
   <h5 style="margin-bottom: 20px">Plans</h5>
   <div class="row">
-    <div *ngFor="let plan of plans" class="col-12 col-lg-4">
+    <div *ngFor="let plan of plans" class="col-12 col-lg-6">
       <app-plans-form></app-plans-form>
     </div>
     <div class="add-plan col-12 col-lg-3">
@@ -351,18 +375,6 @@
   </div>
 </div>
 
-<!--TYPES-->
-<div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
-  <h5 style="margin-bottom: 20px">Types of properties</h5>
-  <div class="row">
-    <div *ngFor="let typep of typesp" class="col-12 col-lg-4">
-      <app-types-form></app-types-form>
-    </div>
-    <div class="add-plan col-12 col-lg-3">
-      <div class="add-icon" (click)="addProperty()"><i class="fas fa-plus"></i></div>
-    </div>
-  </div>
-</div>
 
 <!--Media-->
 <div class="section-media">
@@ -402,11 +414,11 @@
             <i class="far fa-file-video"></i>
             <span>Add videos</span>
           </div>
-          <div *ngFor="let video of videosReader; let i = index" style="margin: 10px">
-            <div *ngIf="!isVideoUrl(i)">
+          <div *ngFor="let video of videosReader; let i = index" style="margin: 10px;">
+            <div *ngIf="!isVideoUrl(i)" style="z-index: 0">
               <video style="width: 165px;height: 165px;background-color: black" [src]="video" controls></video>
             </div>
-            <div *ngIf="isVideoUrl(i)">
+            <div *ngIf="isVideoUrl(i)" style="z-index: 0">
               <iframe width="165" height="165" [src]="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
             <div class="image-actions">

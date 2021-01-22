@@ -16,16 +16,19 @@
     span {
       font-size: 10px;
       margin-right: 5px;
+      color: white !important;
     }
   }
   .content {
     h6 {
       color: white;
       margin-bottom: 0;
+      color: white !important;
     }
     p {
       margin-bottom: 0;
       font-size: 12px;
+      color: white !important;
     }
     .icons-details {
       display: flex;
@@ -33,6 +36,7 @@
       align-items: center;
       p {
         margin-right: 20px;
+        color: white !important;
       }
       img {
         width: 12px;
@@ -41,6 +45,7 @@
         margin-left: 5px;
         font-size: 12px;
         margin-right: 25px;
+        color: white !important;
       }
     }
     border-bottom-left-radius: 8px;

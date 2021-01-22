@@ -32,10 +32,10 @@ export class MapService {
     this.marker.addTo(this.map);
     /* ON CLICK*/
     this.map.on('click', (e) => {
-      /* Agrega el valor al input */
-      document.getElementById('coordinates')["value"] =  e.lngLat.lng + ',' + e.lngLat.lat
       /* Agrega el punto en el mapa */
       this.marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
+      /* Agrega el valor al input */
+      document.getElementById('coordinates')["value"] =  e.lngLat.lng + ',' + e.lngLat.lat
     });
   }
 

@@ -35,17 +35,22 @@
         &.nav-tabs {
           border-bottom: none !important;
         }
-        .nav-item .nav-link {
-          font-weight: bold;
-          background-color: #d8d8d8;
-          color: $primary;
-          border-color: #d8d8d8;
-          padding: 0.5rem 2rem;
-          font-size: 14px;
-          &.active {
-            color: #fff !important;
-            background-color: $primary !important;
-            border-color: $primary !important;
+
+        .nav-item {
+          cursor: pointer;
+          .nav-link {
+            font-weight: bold;
+            background-color: #d8d8d8;
+            color: $primary;
+            border-color: #d8d8d8;
+            padding: 0.5rem 2rem;
+            font-size: 14px;
+
+            &.active {
+              color: #fff !important;
+              background-color: $primary !important;
+              border-color: $primary !important;
+            }
           }
         }
       }
@@ -76,12 +81,37 @@
   padding: 10px 40px;
   border-top-left-radius: 0;
   width: 100%;
+  display: flex;
   input {
     border-bottom: 1px solid #094d82 !important;
     border-radius: 0px !important;
     border:none;
     padding: 0px;
     height: calc(1.5em + 0.75em + 0px);
+    margin-right: 20px;
+  }
+  select {
+    border-bottom: 1px solid #094d82 !important;
+    border-radius: 0px !important;
+    border:none;
+    padding: 0px;
+    background-color: white;
+    height: calc(1.5em + 0.75em + 0px);
+    width: 100%;
+  }
+  .dropdown {
+    border-bottom: 1px solid #094d82 !important;
+    border-radius: 0px !important;
+    border:none;
+    padding: 0px;
+    background-color: white;
+    height: calc(1.5em + 0.75em + 0px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    p {
+      margin: 0;
+    }
   }
 }
 
@@ -95,6 +125,13 @@
   width: 70%;
   transform: translateX(20%);
   z-index: 100;
+  .oprincipal {
+    img {
+      width: 20px;
+      margin-left: 0 !important;
+      margin-right: 10px;
+    }
+  }
   .option {
     background-color: white;
     border: 1px solid $primary;

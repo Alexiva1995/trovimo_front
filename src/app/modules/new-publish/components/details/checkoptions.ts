@@ -42,7 +42,63 @@ const BUILDING_OPTIONS = [
   'Elevator',
   'Skate park',
 ];
+const PLACE_DETAILS_OPTIONS = [
+  'Meeting rooms',
+  'Parking',
+  'Showers',
+  'Vending machines',
+  'Day care',
+  'Wifi',
+  'Bicycle storage',
+  'Access 24/7',
+  'Coffee shop',
+  'Gym',
+  'Private offices',
+  'Outdoor rest area',
+  'Access 7am - 10pm',
+  'AC / Heating',
+  'Tv',
+  'Dedicated desk',
+  'Indoor rest area',
+  'Disabled facilities',
+  'Major transports links',
+  'Dry cleaning'
+];
+
+const PLACE_EQUIPMENT_OPTIONS = [
+  'Fridge space',
+  'Sauna',
+  'Microwave',
+  'Desk',
+  'Wifi',
+  'Conference room',
+  'Cable',
+  'Parking',
+  'Computer',
+  'Storage space',
+  'Coffee maker',
+  'TV',
+  'Gym',
+  'Balcony',
+  'Laundry room',
+  'Pool',
+  'Elevator',
+  'AC / Heating',
+];
+
+const PREFERENCES_OPTIONS = [
+  'Non smoker',
+  'No visits',
+  'Students only',
+  'Women',
+  'Professional only',
+  'Men',
+  'No parties',
+];
 export {
   HOME_DETAILS_OPTIONS,
-  BUILDING_OPTIONS
+  BUILDING_OPTIONS,
+  PLACE_DETAILS_OPTIONS,
+  PLACE_EQUIPMENT_OPTIONS,
+  PREFERENCES_OPTIONS
 };

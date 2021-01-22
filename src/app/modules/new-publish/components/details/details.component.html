@@ -3,7 +3,7 @@
   <a href="" (click)="emitData(true)">Skip this part</a>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1">
   <p>Home details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
@@ -25,7 +25,7 @@
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
-    <div *ngFor="let homeDetail of homeDetails" class="custom-control custom-checkbox col-2">
+    <div *ngFor="let homeDetail of homeDetails" class="custom-control custom-checkbox col-4 col-lg-3">
       <input
         class="custom-control-input"
         type="checkbox"
@@ -42,7 +42,46 @@
   </div>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1">
+  <p>Home details</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+
+
+  </div>
+  <div class="tags">
+    <div *ngFor="let homeDetails of detail.homeDetailsTags;let i = index" class="tag-item">
+      {{homeDetails}}
+      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+    </div>
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let homeDetail of homeDetails" class="custom-control custom-checkbox col-4 col-lg-3">
+      <input
+        class="custom-control-input"
+        type="checkbox"
+        [id]="homeDetail"
+        [name]="homeDetail"
+        [value]="homeDetail"
+        (change)="onChangeDetails($event)"
+        [checked]="isChecked('homeDetailsTags',homeDetail)"
+      >
+      <label class="custom-control-label" [for]="homeDetail">
+        {{homeDetail}}
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="home_details" *ngIf="type == 1 || type == 4">
   <p>Building / unit details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
@@ -62,7 +101,7 @@
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
-    <div *ngFor="let buildingDetail of buildingDetails" class="custom-control custom-checkbox col-2">
+    <div *ngFor="let buildingDetail of buildingDetails" class="custom-control custom-checkbox col-4 col-lg-3">
       <input
         class="custom-control-input"
         name="exampleRadios"
@@ -79,7 +118,7 @@
   </div>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1">
   <p>Cost</p>
   <div style="display: flex; flex-wrap: wrap">
     <div class="form-group" style="margin-right: 20px">
@@ -125,10 +164,10 @@
   </div>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1">
   <p>Condition</p>
   <div style="display: flex;flex-wrap: wrap">
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline col-2">
       <input
         [(ngModel)]="detail.condition"
         (change)="emitData(false)"
@@ -142,7 +181,7 @@
         New
       </label>
     </div>
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline col-2">
       <input
         [(ngModel)]="detail.condition"
         (change)="emitData(false)"
@@ -159,10 +198,10 @@
   </div>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1">
   <p>Furnished</p>
   <div style="display: flex;flex-wrap: wrap">
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline col-2">
       <input [(ngModel)]="detail.furnished"
              (change)="emitData(false)"
              class="form-check-input "
@@ -174,7 +213,7 @@
         Full
       </label>
     </div>
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline col-2">
       <input [(ngModel)]="detail.furnished"
              (change)="emitData(false)"
              class="form-check-input"
@@ -186,7 +225,7 @@
         Partially
       </label>
     </div>
-    <div class="form-check form-check-inline">
+    <div class="form-check form-check-inline col-2">
       <input [(ngModel)]="detail.furnished"
              (change)="emitData(false)"
              class="form-check-input"
@@ -201,8 +240,9 @@
   </div>
 </div>
 
-<div class="home_details">
+<div class="home_details" *ngIf="type == 1 || type == 4">
   <p>Close to</p>
+  <label style="font-weight: normal">Add or select the options from the list</label>
   <div style="display: flex; align-items: center">
     <div class="form-group">
       <label>Reference point</label>
@@ -230,4 +270,125 @@
       <i class="fas fa-times-circle" (click)="removeReference(i)"></i>
     </div>
   </div>
+</div>
+
+<!-- rent a room, shared spaces  -->
+<div class="home_details" *ngIf="type == 3 && (optionType == 11 || optionType  == 12)">
+  <p>Place equipment / amenities</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let placeE of detail.placeEquipmetsTags;let i = index" class="tag-item">
+      {{placeE}}
+      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+    </div>
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let placeE of placeEquipment" class="custom-control custom-checkbox col-4 col-lg-3">
+      <input
+        class="custom-control-input"
+        type="checkbox"
+        [id]="placeE"
+        [name]="placeE"
+        [value]="placeE"
+        (change)="onChangeDetails($event)"
+        [checked]="isChecked('homeDetailsTags',placeE)"
+      >
+      <label class="custom-control-label" [for]="placeE">
+        {{placeE}}
+      </label>
+    </div>
+  </div>
+</div>
+
+
+<div class="home_details" *ngIf="type == 3 && (optionType == 11 || optionType  == 12)">
+  <p>Preferences</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let preferences of detail.preferencesTags;let i = index" class="tag-item">
+      {{preferences}}
+      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+    </div>
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let preference of preferences" class="custom-control custom-checkbox col-4 col-lg-3">
+      <input
+        class="custom-control-input"
+        type="checkbox"
+        [id]="preference"
+        [name]="preference"
+        [value]="preference"
+        (change)="onChangeDetails($event)"
+        [checked]="isChecked('homeDetailsTags',preference)"
+      >
+      <label class="custom-control-label" [for]="preference">
+        {{preference}}
+      </label>
+    </div>
+  </div>
+</div>
+<!---->
+
+<!-- coworking -->
+<div class="home_details" *ngIf="type == 3 && ( optionType  == 13)">
+  <p>Preferences</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let placeDetail of detail.placeDetailsTags;let i = index" class="tag-item">
+      {{placeDetail}}
+      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+    </div>
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let placeDetail of placeDetails" class="custom-control custom-checkbox col-4 col-lg-3">
+      <input
+        class="custom-control-input"
+        type="checkbox"
+        [id]="placeDetail"
+        [name]="placeDetail"
+        [value]="placeDetail"
+        (change)="onChangeDetails($event)"
+        [checked]="isChecked('homeDetailsTags',placeDetail)"
+      >
+      <label class="custom-control-label" [for]="placeDetail">
+        {{placeDetail}}
+      </label>
+    </div>
+  </div>
+</div>
+<!---->
+
+<!-- Profesional group 0-->
+<div>
+
 </div>

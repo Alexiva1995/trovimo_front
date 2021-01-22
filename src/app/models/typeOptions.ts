@@ -62,7 +62,7 @@ export const OPTIONS = [
   {
     label: 'Rent a room',
     value: 11,
-    icon: '',
+    icon: '/assets/images/new_publish/publish/rent-a-room.svg',
     enable: [3],
   },
   {
@@ -72,9 +72,9 @@ export const OPTIONS = [
     enable: [3],
   },
   {
-    label: 'Coworking placeF',
+    label: 'Coworking place',
     value: 13,
-    icon: '',
+    icon: '/assets/images/new_publish/publish/coworking-place.svg',
     enable: [3],
   },
   {

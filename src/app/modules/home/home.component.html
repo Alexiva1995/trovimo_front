@@ -72,21 +72,9 @@
 
     <div class="services">
       <carousel [cellsToShow]="4" [loop]="true">
-        <div class="card carousel-cell">
-          <img src="/assets/images/home/direccion(1).svg" alt="svg" />
-          <h6>Real Estate Company</h6>
-        </div>
-        <div class="card carousel-cell">
-          <img src="/assets/images/home/direccion(1).svg" alt="svg" />
-          <h6>Real Estate Company</h6>
-        </div>
-        <div class="card carousel-cell">
-          <img src="/assets/images/home/direccion(1).svg" alt="svg" />
-          <h6>Real Estate Company</h6>
-        </div>
-        <div class="card carousel-cell">
-          <img src="/assets/images/home/direccion(1).svg" alt="svg" />
-          <h6>Real Estate Company</h6>
+        <div class="card carousel-cell" *ngFor="let service of services">
+          <img [src]="service.icon" alt="svg" />
+          <h6>{{service.label}}</h6>
         </div>
       </carousel>
 

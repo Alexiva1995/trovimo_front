@@ -22,6 +22,7 @@ export class MaininfoComponent implements OnInit {
   typesp = [{}];
   videoUrl: string;
   coordinates = '';
+  showCoordinates = false
   constructor(
     private sanitizer: DomSanitizer,
     private mapService: MapService

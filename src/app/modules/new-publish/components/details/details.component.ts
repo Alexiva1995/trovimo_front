@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BUILDING_OPTIONS, HOME_DETAILS_OPTIONS} from './checkoptions';
+import {BUILDING_OPTIONS, HOME_DETAILS_OPTIONS, PLACE_DETAILS_OPTIONS, PLACE_EQUIPMENT_OPTIONS, PREFERENCES_OPTIONS} from './checkoptions';
 import {DetailInfo} from '../../../../models/detail-info';
 @Component({
   selector: 'app-details',
@@ -9,10 +9,14 @@ import {DetailInfo} from '../../../../models/detail-info';
 
 export class DetailsComponent implements OnInit {
   @Input() type;
+  @Input() optionType;
   @Input() detail: DetailInfo;
   @Output() setDetailInfo = new EventEmitter<any>();
   homeDetails = HOME_DETAILS_OPTIONS;
   buildingDetails = BUILDING_OPTIONS;
+  placeDetails = PLACE_DETAILS_OPTIONS;
+  placeEquipment = PLACE_EQUIPMENT_OPTIONS;
+  preferences = PREFERENCES_OPTIONS;
   homeInput: string;
   buildingInput: string;
   serviceName = '';

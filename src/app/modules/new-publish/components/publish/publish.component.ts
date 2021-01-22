@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
-import {OPTIONS} from './typeOptions';
+import {OPTIONS} from '../../../../models/typeOptions';
 
 @Component({
   selector: 'app-publish',

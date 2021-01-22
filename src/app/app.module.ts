@@ -18,10 +18,12 @@ import {
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import {NgxSliderModule} from '@angular-slider/ngx-slider';
 
 import APP_COMPONENTS from './components';
+import { HelpTooltipComponent } from './components/help-tooltip/help-tooltip.component';
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -32,14 +34,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 const NGX_MODULES = [
   ModalModule.forRoot()
 ];
+const BOOSTRAP = [
+  TooltipModule.forRoot()
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     APP_COMPONENTS,
+    HelpTooltipComponent,
   ],
   imports: [
     NGX_MODULES,
+    BOOSTRAP,
     CommonModule,
     BrowserModule,
     AppRoutingModule,

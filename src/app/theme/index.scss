@@ -18,3 +18,17 @@ header {
 li:focus {
   outline: none !important;
 }
+
+.tooltip-inner {
+  max-width: 200px;
+  padding: .25rem .5rem;
+  color: #fff;
+  text-align: center;
+  background-color: #073558 !important;
+  border-radius: .25rem;
+}
+.bs-tooltip-auto[x-placement^=top] .arrow::before, .bs-tooltip-top .arrow::before {
+  top: 0;
+  border-width: .4rem .4rem 0;
+  border-top-color: #073558 !important;
+}
