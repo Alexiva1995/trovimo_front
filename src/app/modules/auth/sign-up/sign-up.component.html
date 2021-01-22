@@ -13,7 +13,7 @@
         formControlName="email"
         class="form-control"
         placeholder="Enter email"
-        [ngClass]="{ 'is-invalid': form.get('email').hasError('required') }"
+        [ngClass]="{ 'is-invalid': submitted && getForm.email.errors }"
       />
       <div *ngIf="submitted && getForm.email.errors" class="invalid-feedback">
         <div *ngIf="getForm.email.errors.required">
@@ -28,7 +28,7 @@
         formControlName="password"
         class="form-control"
         placeholder="Password"
-        [ngClass]="{ 'is-invalid': form.get('password').hasError('required') }"
+        [ngClass]="{ 'is-invalid': submitted && getForm.password.errors }"
       />
       <div
         *ngIf="submitted && getForm.password.errors"
@@ -48,15 +48,17 @@
         placeholder="Password"
         [ngClass]="{
           'is-invalid':
-            form.get('password_confirm').hasError('required') ||
-            form.hasError('notSame')
+            (submitted && form.get('password_confirm').hasError('required')) ||
+            (submitted && form.hasError('notSame'))
         }"
       />
-      <span *ngIf="form.get('password_confirm').hasError('required')"
+      <span
+        *ngIf="submitted && form.get('password_confirm').hasError('required')"
         >Confirm password is required
       </span>
       <span
         *ngIf="
+          submitted &&
           !form.get('password_confirm').hasError('required') &&
           form.hasError('notSame')
         "
@@ -74,7 +76,7 @@
         >Check our <a [routerLink]="['/legal']">terms and conditions</a> for the
         use of Trovimo</label
       >
-      <span *ngIf="form.get('politics').hasError('required')"
+      <span *ngIf="submitted && form.get('politics').hasError('required')"
         >Check is required
       </span>
     </div>

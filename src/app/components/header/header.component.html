@@ -55,12 +55,12 @@
 
         <div [routerLink]="['/auth/sign-in']" class="user" *ngIf="!getUser()">
           <i class="fas fa-user"></i>
-          <span >Sign in / Register</span>
+          <span>Sign in / Register</span>
         </div>
-        <div class="user" *ngIf="token">
+        <!--     <div class="user" *ngIf="getUser()">
           <i class="fas fa-user"></i>
           <span>Profile</span>
-        </div>
+        </div> -->
         <div [routerLink]="['/account-profile']" class="user" *ngIf="getUser()">
           <i class="fas fa-user"></i>
           <span
