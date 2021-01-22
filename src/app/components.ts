@@ -40,6 +40,7 @@ import { PlansFormComponent } from './modules/new-publish/components/maininfo/co
 import { TypesFormComponent } from './modules/new-publish/components/maininfo/components/types/types-form/types-form.component';
 import { MapComponent } from './components/map/map.component';
 
+import { HelpTooltipComponent } from './components/help-tooltip/help-tooltip.component';
 const APP_COMPONENTS = [
   HeaderComponent,
   MenuHeaderComponent,
@@ -81,6 +82,7 @@ const APP_COMPONENTS = [
   PlansFormComponent,
   TypesFormComponent,
   MapComponent,
+  HelpTooltipComponent
 ];
 
 export default APP_COMPONENTS;

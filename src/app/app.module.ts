@@ -2,28 +2,31 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 import {
   GoogleLoginProvider,
-  FacebookLoginProvider
+  FacebookLoginProvider,
 } from 'angularx-social-login';
-import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
-import {NgxSliderModule} from '@angular-slider/ngx-slider';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import APP_COMPONENTS from './components';
-import { HelpTooltipComponent } from './components/help-tooltip/help-tooltip.component';
+import { RouterModule } from '@angular/router';
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -42,12 +45,12 @@ const BOOSTRAP = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
-    HelpTooltipComponent,
   ],
   imports: [
     NGX_MODULES,
     BOOSTRAP,
     CommonModule,
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -61,8 +64,8 @@ const BOOSTRAP = [
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
@@ -77,16 +80,16 @@ const BOOSTRAP = [
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
               '63126014045-cov6re06h38audhm3svsuv3d8vuu1p68.apps.googleusercontent.com'
-            )
+            ),
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('807965019778637')
-          }
-        ]
+            provider: new FacebookLoginProvider('807965019778637'),
+          },
+        ],
       } as SocialAuthServiceConfig,
-    }
+    },
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
