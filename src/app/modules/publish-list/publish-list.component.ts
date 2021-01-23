@@ -1,10 +1,13 @@
+import { ProjectService } from './../../services/project/project.service';
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Project } from 'src/app/models/project.model';
 
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
-  styleUrls: ['./publish-list.component.scss']
+  styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
   type: any;
@@ -12,12 +15,28 @@ export class PublishListComponent implements OnInit {
   min = 0;
   max = 100;
   steps = 1;
-  constructor(private route: ActivatedRoute) {
+  projects: Project;
+  constructor(
+    private route: ActivatedRoute,
+    private service: ProjectService,
+    private toastr: ToastrService
+  ) {
     this.type = this.route.snapshot.paramMap.get('type');
-    console.log(this.type)
+    console.log(this.type);
   }
 
   ngOnInit(): void {
+    this.getProjects();
   }
 
+  getProjects() {
+    this.service.showProjects().subscribe(
+      (res) => {
+        this.projects = res;
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
 }

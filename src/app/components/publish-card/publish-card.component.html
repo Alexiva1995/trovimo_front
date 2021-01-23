@@ -1,99 +1,145 @@
 <div class="publish-card">
   <div>
-    <div style="z-index: 10100" class="hearts"><i class="far fa-heart"></i></div>
-    <div class="counter" style="z-index: 10100">
-      <span>1/3</span>
-      <img src="../../../assets/images/publish/Icon%20material-photo.svg" alt="bed" />
+    <div style="z-index: 10100" class="hearts">
+      <i class="far fa-heart"></i>
     </div>
-    <carousel [cellsToShow]="1" [loop]="true" [height]="220" >
-      <div class=" carousel-cell">
-        <img style="height: 117%" src="../../../assets/images/publish/publish.png" alt="" />
-      </div>
-      <div class="carousel-cell">
-        <img style="height: 117%" src="../../../assets/images/publish/publish.png" alt="" />
-      </div>
-      <div class=" carousel-cell">
-        <img style="height: 117%" src="../../../assets/images/publish/publish.png" alt="" />
+    <div class="counter" style="z-index: 10100">
+      <span>1/{{ data.photos.length }}</span>
+      <img
+        src="../../../assets/images/publish/Icon%20material-photo.svg"
+        alt="bed"
+      />
+    </div>
+    <carousel [cellsToShow]="1" [loop]="true" [height]="220">
+      <div
+        class="carousel-cell"
+        *ngFor="let item of data.photos; let i = index"
+      >
+        <img style="height: 117%" [src]="baseUrl + data.photos[i]" alt="" />
       </div>
     </carousel>
-
-
   </div>
   <div class="content">
-    <div style="display: flex;justify-content: space-between;    align-items: flex-start;
-    margin: 8px 0;
-">
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin: 8px 0;
+      "
+    >
       <div>
-        <h6 *ngIf="type == 0 " >$580.000</h6>
-        <h6 *ngIf="type == 1 " >$580.000 / Month</h6>
-        <h6 *ngIf="type == 2 " >From $580.000 / Month / Person</h6>
-        <h6 *ngIf="type == 3 " >From $580.000 </h6>
-        <p><i class="fas fa-map-marker-alt"></i> 2304 Grand Councorse</p>
-
+        <h6 *ngIf="type == 0">{{ data.price }}</h6>
+        <h6 *ngIf="type == 1">{{ data.price }} / Month</h6>
+        <h6 *ngIf="type == 2">From {{ data.price }} / Month / Person</h6>
+        <h6 *ngIf="type == 3">From {{ data.price }}</h6>
+        <p>
+          <i class="fas fa-map-marker-alt"></i> {{ data.postal_code }}
+          {{ data.city }}
+        </p>
       </div>
-      <img *ngIf="type == 0 || type == 3" style="width: 14%" src="../../../assets/images/logo.svg" alt="">
-      <div *ngIf="type == 1 ">
+      <img
+        *ngIf="type == 0 || type == 3"
+        style="width: 14%"
+        [src]="baseUrl + data.photos[0]"
+        alt=""
+      />
+      <div *ngIf="type == 1">
         <p style="text-align: end">Avaliable Date</p>
-        <p style="text-align: end;font-weight: bold">02-05-20</p>
+        <p style="text-align: end; font-weight: bold">{{ data.created_at }}</p>
       </div>
       <div *ngIf="type == 2" style="text-align: end">
-        <p>5.2 <i style="color:#FFE21B" class="fas fa-star"></i></p>
-        <img *ngIf="type == 2" style="width: 70%;margin-top: 10px;" src="../../../assets/images/logo.svg" alt="">
+        <p>5.2 <i style="color: #ffe21b" class="fas fa-star"></i></p>
+        <img
+          *ngIf="type == 2"
+          style="width: 70%; margin-top: 10px"
+          src="../../../assets/images/logo.svg"
+          alt=""
+        />
       </div>
     </div>
     <div
-      *ngIf="type == 0 "
+      *ngIf="type == 0"
       style="display: flex; justify-content: space-between; align-items: center"
     >
       <div class="icons-details">
         <div>
           <img src="../../../assets/images/publish/cama.svg" alt="bed" />
-          <span>4</span>
+          <span>{{ data.rooms }}</span>
         </div>
         <div>
           <img src="../../../assets/images/publish/banera.svg" alt="banera" />
-          <span>2</span>
+          <span>{{ data.bath }}</span>
         </div>
         <div>
           <img
             src="../../../assets/images/publish/Icon%20awesome-car-alt.svg"
             alt="cama"
           />
-          <span>1</span>
+          <span>{{ data.parking_spots }}</span>
         </div>
       </div>
-      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">250m2</div>
-    </div>
-    <div *ngIf="type == 1" style="display: flex; justify-content: space-between; align-items: center">
-      <div *ngIf="type == 1 " style="display: flex;align-items: center"><div style="width: 10px;
-    height: 10px;
-    background-color: #135AA0;
-    border-radius: 20px;margin-right: 5px"></div> <p>Room to Rent</p>
+      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">
+        {{ data.area }}m2
       </div>
-      <div *ngIf="type == 1" style="font-size: 12px" class="verified"><i class="far fa-check-circle"></i> User verified</div>
     </div>
-    <div *ngIf="type == 2" style="display: flex; justify-content: space-between; align-items: center">
-      <div *ngIf="type == 2 " style="display: flex;align-items: center"><div style="width: 10px;
-    height: 10px;
-    background-color: #135AA0;
-    border-radius: 20px;margin-right: 5px"></div> <p>Coworking Placet</p>
-      </div></div>
     <div
-      *ngIf="type == 3 "
+      *ngIf="type == 1"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <div *ngIf="type == 1" style="display: flex; align-items: center">
+        <div
+          style="
+            width: 10px;
+            height: 10px;
+            background-color: #135aa0;
+            border-radius: 20px;
+            margin-right: 5px;
+          "
+        ></div>
+        <p>Room to Rent</p>
+      </div>
+      <div *ngIf="type == 1" style="font-size: 12px" class="verified">
+        <i class="far fa-check-circle"></i> User verified
+      </div>
+    </div>
+    <div
+      *ngIf="type == 2"
+      style="display: flex; justify-content: space-between; align-items: center"
+    >
+      <div *ngIf="type == 2" style="display: flex; align-items: center">
+        <div
+          style="
+            width: 10px;
+            height: 10px;
+            background-color: #135aa0;
+            border-radius: 20px;
+            margin-right: 5px;
+          "
+        ></div>
+        <p>Coworking Placet</p>
+      </div>
+    </div>
+    <div
+      *ngIf="type == 3"
       style="display: flex; justify-content: space-between; align-items: center"
     >
       <div class="icons-details">
-        <p>From: <b>100m2</b></p>
+        <p>
+          From: <b>{{ data.area }}m2</b>
+        </p>
         <div>
           <img src="../../../assets/images/publish/cama.svg" alt="bed" />
-          <span>4</span>
+          <span>{{ data.rooms }}</span>
         </div>
         <div>
           <img src="../../../assets/images/publish/banera.svg" alt="banera" />
-          <span>2</span>
+          <span>{{ data.bath }}</span>
         </div>
       </div>
-      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">250m2</div>
+      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">
+        {{ data.area }}m2
+      </div>
     </div>
   </div>
 </div>
