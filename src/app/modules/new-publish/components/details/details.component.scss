@@ -47,3 +47,23 @@ input{
     }
   }
 }
+.add-plan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .add-icon {
+    font-size: 35px;
+    color: $primary;
+    background-color: #D8D8D8;
+    padding: 20px;
+    width: fit-content;
+    border-radius: 55px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+}

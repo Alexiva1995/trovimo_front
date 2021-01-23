@@ -38,6 +38,10 @@
     }
     .user {
       cursor: pointer;
+      span {
+
+        color: white !important;
+      }
       i {
         margin-right: 5px;
       }

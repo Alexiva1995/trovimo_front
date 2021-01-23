@@ -16,11 +16,14 @@
             required
           >
           <div class="input-group-append">
-            <select class="form-select">
+            <select class="form-select" [ngStyle]="{'border-top-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px',
+            'border-bottom-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px'}">
               <option selected value="1">COP</option>
               <option value="2">USD</option>
+              <option value="3">EUR</option>
+              <option value="4">CHF</option>
             </select>
-            <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
+            <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px; color: white !important;">Month</span>
             <div style="margin-left: 10px">
 
               <app-help-tooltip *ngIf="type != 1 && type != 2 && type != 4" ></app-help-tooltip>
@@ -29,17 +32,16 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="type != 3">
-      <div class="form-check form-check-inline" style="margin-top: 20px">
+    <div class="col-lg-6">
+      <div class="custom-control custom-checkbox">
         <input
           [(ngModel)]="mainInfo.show_price"
           (ngModelChange)="onChange()"
-          class="form-check-input"
-          name="exampleRadios"
+          class="custom-control-input"
           type="checkbox"
-          value="option3"
+          id="show_price"
         >
-        <label class="form-check-label" for="exampleRadios3">
+        <label class="custom-control-label" for="show_price">
           Do not show price ( Price upon request)
         </label>
       </div>
@@ -69,25 +71,25 @@
     <div class="col-6 col-lg-3">
       <div class="form-group">
         <label class="required">Rooms</label>
-        <app-number-selector (setValue)="mainInfo.rooms = $event"></app-number-selector>
+        <app-number-selector [min]="1" [value]="mainInfo.rooms" (setValue)="mainInfo.rooms = $event"></app-number-selector>
       </div>
     </div>
     <div class="col-6 col-lg-3">
       <div class="form-group">
         <label class="required" >Bath</label>
-        <app-number-selector (setValue)="mainInfo.bath = $event"></app-number-selector>
+        <app-number-selector  min="1" [value]="mainInfo.bath" (setValue)="mainInfo.bath = $event"></app-number-selector>
       </div>
     </div>
     <div class="col-6 col-lg-3">
       <div class="form-group">
         <label >Parking spots</label>
-        <app-number-selector (setValue)="mainInfo.parking_spots = $event"></app-number-selector>
+        <app-number-selector [min]="0" [value]="mainInfo.parking_spots" (setValue)="mainInfo.parking_spots = $event"></app-number-selector>
       </div>
     </div>
     <div class="col-6 col-lg-3" *ngIf="type == 1 || type == 2">
       <div class="form-group">
         <label>N° pieces</label>
-        <app-number-selector (setValue)="mainInfo.n_pieces = $event"></app-number-selector>
+        <app-number-selector [min]="0" [value]="mainInfo.n_pieces" (setValue)="mainInfo.n_pieces = $event"></app-number-selector>
       </div>
     </div>
   </div>
@@ -150,22 +152,22 @@
     <div class="col-12 col-lg-6">
       <div class="form-group">
         <label class="required" for="exampleInputEmail1">Bathroom</label>
-        <div class="row-custom">
+        <div class="row">
           <div class="form-check form-check-inline">
-            <input checked class="form-check-input" id="exampleRadios1" name="exampleRadios" type="radio"
-                   value="option1">
+            <input [(ngModel)]="mainInfo.bathroom" class="form-check-input" id="exampleRadios1" type="radio"
+                   value="Private">
             <label class="form-check-label" for="exampleRadios1">
               Private
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios2" name="exampleRadios" type="radio" value="option2">
+            <input [(ngModel)]="mainInfo.bathroom" class="form-check-input" id="exampleRadios2" type="radio" value="Shared">
             <label class="form-check-label" for="exampleRadios2">
               Shared
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios3" name="exampleRadios" type="radio" value="option3">
+            <input [(ngModel)]="mainInfo.bathroom" class="form-check-input" name="noBathroom" id="exampleRadios3" type="radio" value="No ">
             <label class="form-check-label" for="exampleRadios3">
               No
             </label>
@@ -173,25 +175,25 @@
         </div>
       </div>
     </div>
-    <div  class="col-12-lg-6">
+    <div  class="col-12 col-lg-6">
       <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Furnished *</label>
-        <div class="row-custom">
+        <label class="required" for="exampleInputEmail1">Furnished</label>
+        <div class="row">
           <div class="form-check form-check-inline">
-            <input checked class="form-check-input " id="exampleRadios4" name="exampleRadios" type="radio"
-                   value="option1">
+            <input [(ngModel)]="mainInfo.furnished" class="form-check-input " id="exampleRadios4" type="radio"
+                   value="Full">
             <label class="form-check-label" for="exampleRadios4">
               Full
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios5" name="exampleRadios" type="radio" value="option2">
+            <input [(ngModel)]="mainInfo.furnished" class="form-check-input" id="exampleRadios5" type="radio" value="Partially">
             <label class="form-check-label" for="exampleRadios5">
               Partially
             </label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios6" name="exampleRadios" type="radio" value="option3">
+            <input [(ngModel)]="mainInfo.furnished" class="form-check-input" id="exampleRadios6" type="radio" value="No">
             <label class="form-check-label" for="exampleRadios6">
               No
             </label>
@@ -204,62 +206,69 @@
   <div *ngIf="type == 3 && (optionType == 11 || optionType  == 12)" class="row">
     <div class="col-12 col-lg-6">
       <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Pets *</label>
-        <div class="row-custom">
-          <div class="form-check form-check-inline">
-            <input checked class="form-check-input " id="exampleRadios7" name="exampleRadios" type="checkbox"
-                   value="option1">
-            <label class="form-check-label" for="exampleRadios7">
-              Dogs
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios8" name="exampleRadios" type="checkbox" value="option2">
-            <label class="form-check-label" for="exampleRadios8">
-              Cats
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios9" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios9">
-              Birds
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios10" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios10">
-              All
-            </label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios11" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios3">
-              No
-            </label>
+        <label class="required" for="exampleInputEmail1">Pets</label>
+        <div class="container">
+          <div class="row">
+            <div class="col-4 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.peths[0]" class="custom-control-input " id="exampleRadios7" type="checkbox"
+                     value="Dogs">
+              <label class="custom-control-label" for="exampleRadios7">
+                Dogs
+              </label>
+            </div>
+            <div class="col-4 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.peths[1]" class="custom-control-input" id="exampleRadios8" type="checkbox" value="Cats">
+              <label class="custom-control-label" for="exampleRadios8">
+                Cats
+              </label>
+            </div>
+            <div class="col-4 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.peths[2]" class="custom-control-input" id="exampleRadios9" type="checkbox" value="Birds">
+              <label class="custom-control-label" for="exampleRadios9">
+                Birds
+              </label>
+            </div>
+            <div class="col-4 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.peths[3]" class="custom-control-input" id="exampleRadios10" type="checkbox" value="All">
+              <label class="custom-control-label" for="exampleRadios10">
+                All
+              </label>
+            </div>
+            <div class="col-4 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.peths[4]" class="custom-control-input" name="noPeths" id="exampleRadios11" type="checkbox" value="No">
+              <label class="custom-control-label" for="exampleRadios11">
+                No
+              </label>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
     <div class="col-12 col-lg-6">
       <div class="form-group">
-        <label class="required" for="exampleInputEmail1">Avaliable Date *</label>
-        <div class="row-custom">
-          <div class="col-6 remove-padding-left">
-            <input
-              aria-describedby="emailHelp"
-              class="form-control form-control-lg"
-              required
-              type="date"
-            />
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" id="exampleRadios12" name="exampleRadios" type="checkbox" value="option3">
-            <label class="form-check-label" for="exampleRadios12">
-              Show (immediatly)
-            </label>
-          </div>
+        <label class="required" for="exampleInputEmail1">Avaliable Date</label>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 remove-padding-left">
+              <input
+                [(ngModel)]="mainInfo.available_date"
+                aria-describedby="emailHelp"
+                class="form-control form-control-lg"
+                required
+                type="date"
+              />
+            </div>
+            <div class="col-12 custom-control custom-checkbox">
+              <input [(ngModel)]="mainInfo.show_available_date" class="custom-control-input" id="exampleRadios12" name="exampleRadios" type="checkbox" value="option3">
+              <label class="custom-control-label" for="exampleRadios12">
+                Show (immediatly)
+              </label>
+            </div>
 
+          </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -275,6 +284,19 @@
       required
       rows="5"
     ></textarea>
+  </div>
+</div>
+
+<!--TYPES-->
+<div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
+  <h5 style="margin-bottom: 20px">Types of properties</h5>
+  <div class="row">
+    <div *ngFor="let typep of mainInfo.typesp" class="col-12 col-lg-6">
+      <app-types-form [type]="typep"></app-types-form>
+    </div>
+    <div class="add-plan col-12 col-lg-3">
+      <div class="add-icon" (click)="addProperty()"><i class="fas fa-plus"></i></div>
+    </div>
   </div>
 </div>
 
@@ -325,38 +347,24 @@
     </div>
   </div>
 
-  <!--TYPES-->
-  <div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
-    <h5 style="margin-bottom: 20px">Types of properties</h5>
-    <div class="row">
-      <div *ngFor="let typep of typesp" class="col-12 col-lg-6">
-        <app-types-form></app-types-form>
-      </div>
-      <div class="add-plan col-12 col-lg-3">
-        <div class="add-icon" (click)="addProperty()"><i class="fas fa-plus"></i></div>
-      </div>
-    </div>
-  </div>
+
 
   <div class="map">
     <!--mapa-->
     <app-map [lng]="mainInfo.lon" [lat]="mainInfo.lat"></app-map>
+    <input [(ngModel)]="coordinates"
+           (ngModelChange)="setCoordinates()"
+           id="ocultInfo" style="font-size: 8px;color: white;border: none"/>
+
     <div style="display: flex; justify-content: flex-end">
 
       <button class="btn btn-outline-primary" style="width: 10rem;margin: auto;margin-right: 0;" (click)="showCoordinates = !showCoordinates">Coordinates</button>
     </div>
     <div style="">
-      <input
+      <div
         *ngIf="showCoordinates"
-        class="form-control form-control-lg"
-        required
-        type="text"
-        id="coordinates"
-        placeholder="Coordinates"
-        [(ngModel)]="coordinates"
-        (ngModelChange)="setCoordinates()"
         style="width: 30rem;margin: auto;margin-right: 0;"
-      />
+      >{{coordinates}}<div>
     </div>
 
   </div>
@@ -366,8 +374,8 @@
 <div *ngIf="type == 3 && optionType == 13" style="margin-top: 30px;margin-bottom: 30px">
   <h5 style="margin-bottom: 20px">Plans</h5>
   <div class="row">
-    <div *ngFor="let plan of plans" class="col-12 col-lg-6">
-      <app-plans-form></app-plans-form>
+    <div *ngFor="let plan of mainInfo.plans" class="col-12 col-lg-6">
+      <app-plans-form [plan]="plan"></app-plans-form>
     </div>
     <div class="add-plan col-12 col-lg-3">
       <div class="add-icon" (click)="addPlans()"><i class="fas fa-plus"></i></div>

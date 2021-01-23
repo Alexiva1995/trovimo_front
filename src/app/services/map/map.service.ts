@@ -23,9 +23,9 @@ export class MapService {
     this.map.addControl(new mapBox.NavigationControl());
     const el = document.createElement('div');
     el.className = 'marker';
-    el.style.backgroundImage = 'url(https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png)';
-    el.style.width = '32px';
-    el.style.height = '40px';
+    el.style.backgroundImage = 'url("/assets/images/untitled.svg")';
+    el.style.width = '30px';
+    el.style.height = '43px';
 
     this.marker = new mapBox.Marker(el);
     this.marker.setLngLat([lng, lat]);
@@ -35,7 +35,8 @@ export class MapService {
       /* Agrega el punto en el mapa */
       this.marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
       /* Agrega el valor al input */
-      document.getElementById('coordinates')["value"] =  e.lngLat.lng + ',' + e.lngLat.lat
+      document.getElementById('ocultInfo')["value"] =  e.lngLat.lng + ',' + e.lngLat.lat;
+      document.getElementById('coordinates')["value"] =  lng + ',' + lat;
     });
   }
 
@@ -47,6 +48,12 @@ export class MapService {
   }
   changeCenterMap(lng, lat): void {
     this.marker.setLngLat([lng, lat]);
+    this.map.flyTo({
+      center: [lng, lat],
+      essential: false
+    });
+    document.getElementById('ocultInfo')["value"] =  lng + ',' + lat;
+    document.getElementById('coordinates')["value"] =  lng + ',' + lat;
   }
   getPointByCountry(): void {
 

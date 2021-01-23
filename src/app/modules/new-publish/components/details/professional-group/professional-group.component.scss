@@ -41,3 +41,30 @@
     font-size: 65px;
   }
 }
+
+.custom-input-file .input-file {
+  border: 10000px solid transparent;
+  cursor: pointer;
+  font-size: 10000px;
+  opacity: 0;
+  outline: 0 none;
+  padding: 0;
+  position: absolute;
+  right: -1000px;
+  top: -1000px;
+}
+.image-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -46px;
+  margin-right: 10px;
+  z-index: 4;
+  .delete {
+    background-color: #CD0000;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin: 3px;
+    font-size: 12px;
+  }
+}

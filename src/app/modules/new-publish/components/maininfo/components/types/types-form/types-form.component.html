@@ -3,12 +3,15 @@
     <div class="form-group">
       <label>Area</label>
       <div class="input-group area">
-        <input class="form-control form-control-lg" required style="border-right: none"
-               type="text">
+        <input
+          [(ngModel)]="type.area"
+          class="form-control form-control-lg"
+          style="border-right: none"
+          type="text">
         <div class="input-group-append">
-          <select class="form-select">
-            <option selected value="1">M2</option>
-            <option value="2">sqft</option>
+          <select [(ngModel)]="type.areaType" class="form-select">
+            <option selected value="m2">M2</option>
+            <option value="sqft">sqft</option>
           </select>
         </div>
       </div>
@@ -16,6 +19,7 @@
     <div class="form-group">
       <label>Especifications</label>
       <textarea
+        [(ngModel)]="type.especifications"
         class="form-control"
         cols="3"
         required
@@ -25,25 +29,31 @@
     <div class="form-group">
       <label>Price from</label>
       <div class="input-group area">
-        <input class="form-control form-control-lg" required style="border-right: none"
-               type="text">
+        <input
+          [(ngModel)]="type.priceFrom"
+          class="form-control form-control-lg"
+          style="border-right: none"
+          type="text"
+        >
         <div class="input-group-append">
-          <select class="form-select">
-            <option selected value="1">USD</option>
-            <option value="2">COB</option>
+          <select [(ngModel)]="type.priceCurrency" class="form-select">
+            <option selected value="COP">COP</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="CHF">CHF</option>
           </select>
         </div>
       </div>
     </div>
     <div class="form-group">
       <label>Rooms</label>
-      <app-number-selector></app-number-selector>
+      <app-number-selector (setValue)="type.rooms" [value]="type.rooms"></app-number-selector>
     </div>
     <div class="form-group">
       <label>Bathrooms</label>
-      <app-number-selector></app-number-selector>
+      <app-number-selector (setValue)="type.bathrooms" [value]="type.bathrooms"></app-number-selector>
     </div>
-    <div *ngIf="images.length <= 0" class="custom-input-file">
+    <div *ngIf="type.images.length <= 0" class="custom-input-file">
       <input #file type="file" accept='image/*' (change)="addImage(file.files)" class="input-file">
       <i class="far fa-file-image"></i>
       <span>Add photos</span>
