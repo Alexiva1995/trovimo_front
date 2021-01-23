@@ -240,7 +240,7 @@
       <div style="display: flex; justify-content: space-between">
         <div>
           <h6>Apartments in rent</h6>
-          <p>{{ projects.data.length }} Results</p>
+          <p>{{ projects?.data.length }} Results</p>
         </div>
         <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
@@ -251,7 +251,7 @@
       </div>
 
       <div class="row">
-        <div class="col-6" *ngFor="let item of projects.data">
+        <div class="col-6" *ngFor="let item of projects?.data">
           <app-publish-card [type]="type" [data]="item"></app-publish-card>
         </div>
       </div>

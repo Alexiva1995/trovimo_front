@@ -54,6 +54,9 @@ export class SignUpComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    if (this.form.controls.politics.value != true) {
+      return;
+    }
     this.form.disable();
     const data = this.form.value;
     data.register_type = 0;
@@ -71,6 +74,8 @@ export class SignUpComponent implements OnInit {
       (err) => {
         this.form.enable();
         if (err.status === 401) {
+          this.toastr.error('Email already taken');
+        } else {
           this.toastr.error('Email already taken');
         }
       }

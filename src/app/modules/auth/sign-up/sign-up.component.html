@@ -65,18 +65,18 @@
         >Passwords do not match
       </span>
     </div>
-    <div class="form-check">
+    <div class="form-check_">
       <input
-        formControlName="politics"
         type="checkbox"
+        formControlName="politics"
         class="form-check-input"
         id="exampleCheck1"
       />
-      <label class="form-check-label" for="exampleCheck1"
+      <label id="checkbox-label"
         >Check our <a [routerLink]="['/legal']">terms and conditions</a> for the
         use of Trovimo</label
       >
-      <span *ngIf="submitted && form.get('politics').hasError('required')"
+      <span *ngIf="submitted && getForm.politics.value != true"
         >Check is required
       </span>
     </div>

@@ -30,7 +30,10 @@ export class PublishListComponent implements OnInit {
   }
 
   getProjects() {
-    this.service.showProjects().subscribe(
+    let data = {
+      type: this.type,
+    };
+    this.service.searchProject(data).subscribe(
       (res) => {
         this.projects = res;
       },
