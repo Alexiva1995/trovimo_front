@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Plans} from '../../../../../../models/plans';
 
 @Component({
   selector: 'app-plans-form',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./plans-form.component.scss']
 })
 export class PlansFormComponent implements OnInit {
-
+  @Input() plan: Plans;
   constructor() { }
 
   ngOnInit(): void {

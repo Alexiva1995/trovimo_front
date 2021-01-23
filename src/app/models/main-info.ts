@@ -1,10 +1,13 @@
+import {Plans} from './plans';
+import {TypeProperty} from './type-property';
+
 export class MainInfo {
   price = 1;              // required
-  show_price = 0;
+  show_price = false;
   option_id: number;
   category_id: number;
-  rooms = 0;              // required en sale
-  bath = 0;               // required en sale
+  rooms = 1;              // required en sale
+  bath = 1;               // required en sale
   parking_spots = 0;      // required en sale
   n_pieces = 0;           // required en sale
   area = 1;               // required en sale
@@ -22,8 +25,11 @@ export class MainInfo {
   year_remodeled = '';
   bathroom = '';               // required en rent
   furnished = '';              // required en rent
-  peths = [];                  // required en rent
+  peths = ['', '', '', ''];                  // required en rent
   available_date = '';         // required en rent
+  show_available_date = false;
+  plans = [new Plans()];
+  typesp = [new TypeProperty()];
   private _invalid = true;
   constructor(optionId: number, categoryId: number) {
     this.option_id = optionId;

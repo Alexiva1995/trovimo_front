@@ -6,25 +6,55 @@
         type="text"
         class="form-control form-control-lg"
         placeholder="Insert name"
+        [(ngModel)]="plan.planName"
       >
     </div>
     <div class="form-group">
-      <label>Insert plan name</label>
+      <label>Price (from)</label>
       <div class="input-group">
-        <input class="form-control form-control-lg" required style="border-right: none"
-               type="number">
+        <input
+          class="form-control form-control-lg"
+          style="border-right: none;"
+          type="number"
+          [(ngModel)]="plan.priceFrom"
+        >
         <div class="input-group-append">
-            <span class="input-group-text-custom" style="
+          <select
+            [(ngModel)]="plan.priceCurrency"
+            class="form-select"
+            style="color: white !important;
+              background-color:#073558 !important;
               border-radius: 8px;
               margin-left: -10px;
-              z-index: 1;">COP</span>
-          <span class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
+              z-index: 1;border-top-right-radius: 0px;
+              border-bottom-right-radius: 0px"
+          >
+            <option selected value="COP">COP</option>
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="CHF">CHF</option>
+          </select>
+          <select
+            [(ngModel)]="plan.priceType"
+            class="input-group-text-custom form-select"
+            style="
+              color: white !important;
+              background-color:#073558 !important;
+              border-radius: 8px;border-top-left-radius: 0px;
+              border-bottom-left-radius: 0px"
+          >
+            <option selected value="Month">Month</option>
+            <option value="Week">Week</option>
+            <option value="Day">Day</option>
+            <option value="Hour">Hour</option>
+          </select>
         </div>
       </div>
     </div>
     <div class="form-group">
       <label>Description</label>
       <textarea
+        [(ngModel)]="plan.description"
         class="form-control"
         cols="5"
         required

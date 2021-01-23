@@ -2,6 +2,8 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {MainInfo} from '../../../../models/main-info';
 import {DomSanitizer} from '@angular/platform-browser';
 import {MapService} from '../../../../services/map/map.service';
+import {Plans} from '../../../../models/plans';
+import {TypeProperty} from '../../../../models/type-property';
 
 @Component({
   selector: 'app-maininfo',
@@ -18,8 +20,6 @@ export class MaininfoComponent implements OnInit {
   @Input() videosReader = [];
   @Output() setMainInfo = new EventEmitter();
   years = [];
-  plans = [{}];
-  typesp = [{}];
   videoUrl: string;
   coordinates = '';
   showCoordinates = false
@@ -130,9 +130,9 @@ export class MaininfoComponent implements OnInit {
     this.emitData();
   }
   addPlans(): void {
-    this.plans.push({});
+    this.mainInfo.plans.push(new Plans());
   }
   addProperty(): void {
-    this.typesp.push({});
+    this.mainInfo.typesp.push(new TypeProperty());
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-number-selector',
@@ -7,7 +7,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class NumberSelectorComponent implements OnInit {
   @Output() setValue = new EventEmitter<number>();
-  value = 0;
+  @Input() value;
+  @Input() min = 0;
   constructor() {
   }
 
@@ -20,7 +21,7 @@ export class NumberSelectorComponent implements OnInit {
   }
 
   minus(): void {
-    if (this.value > 0) {
+    if (this.value > this.min) {
       this.value -= 1;
       this.setValue.emit(this.value);
     }

@@ -3,7 +3,7 @@
   <a href="" (click)="emitData(true)">Skip this part</a>
 </div>
 
-<div class="home_details" *ngIf="type == 1">
+<div class="home_details" *ngIf="type == 1 || type == 2">
   <p>Home details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
@@ -42,46 +42,8 @@
   </div>
 </div>
 
-<div class="home_details" *ngIf="type == 1">
-  <p>Home details</p>
-  <div class="form-group">
-    <label>Add or select the options from the list</label>
-    <div style="display: flex;align-items: baseline">
-      <div class="form-group">
-        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
-      </div>
-      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
-        <i class="fas fa-plus"></i>
-      </button>
-    </div>
 
-
-  </div>
-  <div class="tags">
-    <div *ngFor="let homeDetails of detail.homeDetailsTags;let i = index" class="tag-item">
-      {{homeDetails}}
-      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
-    </div>
-  </div>
-  <div style="display: flex;flex-wrap: wrap">
-    <div *ngFor="let homeDetail of homeDetails" class="custom-control custom-checkbox col-4 col-lg-3">
-      <input
-        class="custom-control-input"
-        type="checkbox"
-        [id]="homeDetail"
-        [name]="homeDetail"
-        [value]="homeDetail"
-        (change)="onChangeDetails($event)"
-        [checked]="isChecked('homeDetailsTags',homeDetail)"
-      >
-      <label class="custom-control-label" [for]="homeDetail">
-        {{homeDetail}}
-      </label>
-    </div>
-  </div>
-</div>
-
-<div class="home_details" *ngIf="type == 1 || type == 4">
+<div class="home_details" *ngIf="type == 1||type == 2">
   <p>Building / unit details</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
@@ -118,7 +80,43 @@
   </div>
 </div>
 
-<div class="home_details" *ngIf="type == 1">
+<div class="home_details" *ngIf="type == 4">
+  <p>Projects details</p>
+  <div class="form-group">
+    <label>Add or select the options from the list</label>
+    <div style="display: flex;align-items: baseline">
+      <div class="form-group">
+        <input [(ngModel)]="buildingInput" class="form-control-lg" type="text">
+      </div>
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addBuildingTags()">
+        <i class="fas fa-plus"></i>
+      </button>
+    </div>
+  </div>
+  <div class="tags">
+    <div *ngFor="let building of detail.buildingTags;let i = index" class="tag-item">
+      {{building}}
+      <i class="fas fa-times-circle" (click)="removeBuildingTags(i)"></i>
+    </div>
+  </div>
+  <div style="display: flex;flex-wrap: wrap">
+    <div *ngFor="let buildingDetail of buildingDetails" class="custom-control custom-checkbox col-4 col-lg-3">
+      <input
+        class="custom-control-input"
+        name="exampleRadios"
+        type="checkbox"
+        [id]="buildingDetail"
+        [value]="buildingDetail"
+        (change)="onChangeBuilding($event)"
+        [checked]="isChecked('buildingTags', buildingDetail)"
+      >
+      <label class="custom-control-label" [for]="buildingDetail">
+        {{buildingDetail}}
+      </label>
+    </div>
+  </div>
+</div>
+<div class="home_details" *ngIf="type == 1 || type == 2">
   <p>Cost</p>
   <div style="display: flex; flex-wrap: wrap">
     <div class="form-group" style="margin-right: 20px">
@@ -164,7 +162,7 @@
   </div>
 </div>
 
-<div class="home_details" *ngIf="type == 1">
+<div class="home_details" *ngIf="type == 1 || type == 2">
   <p>Condition</p>
   <div style="display: flex;flex-wrap: wrap">
     <div class="form-check form-check-inline col-2">
@@ -198,7 +196,7 @@
   </div>
 </div>
 
-<div class="home_details" *ngIf="type == 1">
+<div class="home_details" *ngIf="type == 1 || type == 2">
   <p>Furnished</p>
   <div style="display: flex;flex-wrap: wrap">
     <div class="form-check form-check-inline col-2">
@@ -240,7 +238,7 @@
   </div>
 </div>
 
-<div class="home_details" *ngIf="type == 1 || type == 4">
+<div class="home_details" *ngIf="type == 1 || type == 2 || type == 4">
   <p>Close to</p>
   <label style="font-weight: normal">Add or select the options from the list</label>
   <div style="display: flex; align-items: center">
@@ -279,9 +277,9 @@
     <label>Add or select the options from the list</label>
     <div style="display: flex;align-items: baseline">
       <div class="form-group">
-        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+        <input [(ngModel)]="placeEquipmentInput" class="form-control-lg" type="text">
       </div>
-      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addPlaceEquipment()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -289,7 +287,7 @@
   <div class="tags">
     <div *ngFor="let placeE of detail.placeEquipmetsTags;let i = index" class="tag-item">
       {{placeE}}
-      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+      <i class="fas fa-times-circle" (click)="removePlaceEquipment(i)"></i>
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
@@ -300,8 +298,8 @@
         [id]="placeE"
         [name]="placeE"
         [value]="placeE"
-        (change)="onChangeDetails($event)"
-        [checked]="isChecked('homeDetailsTags',placeE)"
+        (change)="onChangePlaceEquipment($event)"
+        [checked]="isChecked('placeEquipmetsTags',placeE)"
       >
       <label class="custom-control-label" [for]="placeE">
         {{placeE}}
@@ -310,16 +308,16 @@
   </div>
 </div>
 
-
+<!-- Prefeences -->
 <div class="home_details" *ngIf="type == 3 && (optionType == 11 || optionType  == 12)">
   <p>Preferences</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
     <div style="display: flex;align-items: baseline">
       <div class="form-group">
-        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+        <input [(ngModel)]="preferencesInput" class="form-control-lg" type="text">
       </div>
-      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addPreferences()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -327,7 +325,7 @@
   <div class="tags">
     <div *ngFor="let preferences of detail.preferencesTags;let i = index" class="tag-item">
       {{preferences}}
-      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+      <i class="fas fa-times-circle" (click)="removePreferenceTags(i)"></i>
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
@@ -338,8 +336,8 @@
         [id]="preference"
         [name]="preference"
         [value]="preference"
-        (change)="onChangeDetails($event)"
-        [checked]="isChecked('homeDetailsTags',preference)"
+        (change)="onChangePreference($event)"
+        [checked]="isChecked('preferencesTags',preference)"
       >
       <label class="custom-control-label" [for]="preference">
         {{preference}}
@@ -351,7 +349,7 @@
 
 <!-- coworking -->
 <div class="home_details" *ngIf="type == 3 && ( optionType  == 13)">
-  <p>Preferences</p>
+  <p>Place details / amenities</p>
   <div class="form-group">
     <label>Add or select the options from the list</label>
     <div style="display: flex;align-items: baseline">
@@ -389,6 +387,15 @@
 <!---->
 
 <!-- Profesional group 0-->
-<div>
-
+<div *ngIf="type == 4" style="margin-top: 30px;margin-bottom: 30px">
+  <h5 style="margin-bottom: 20px">Plans</h5>
+  <div class="row">
+    <div *ngFor="let professional of detail.professional_groups" class="col-12 col-lg-4">
+      <app-professional-group [professional]="professional"></app-professional-group>
+    </div>
+    <div class="add-plan col-12 col-lg-3">
+      <div class="add-icon" (click)="addProfessional()"><i class="fas fa-plus"></i></div>
+    </div>
+  </div>
 </div>
+

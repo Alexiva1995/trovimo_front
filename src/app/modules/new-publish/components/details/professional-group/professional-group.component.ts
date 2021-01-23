@@ -1,14 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TypeProperty} from '../../../../../../../models/type-property';
+import {Professional} from '../../../../../models/professional';
 
 @Component({
-  selector: 'app-types-form',
-  templateUrl: './types-form.component.html',
-  styleUrls: ['./types-form.component.scss']
+  selector: 'app-professional-group',
+  templateUrl: './professional-group.component.html',
+  styleUrls: ['./professional-group.component.scss']
 })
-export class TypesFormComponent implements OnInit {
-  @Input() type: TypeProperty
-  images = [];
+export class ProfessionalGroupComponent implements OnInit {
+  @Input() professional: Professional;
   imagesReader = [];
   constructor() { }
 
@@ -22,7 +21,7 @@ export class TypesFormComponent implements OnInit {
     if (mimeType.match(/image\/*/) == null) {
       return;
     }
-    this.type.images.push(files[0]);
+    this.professional.photo.push(files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(files[0]);
     reader.onload = (event) => {
@@ -31,6 +30,6 @@ export class TypesFormComponent implements OnInit {
   }
   removeImage(index): void {
     this.imagesReader.splice(index, 1);
-    this.type.images.splice(index, 1);
+    this.professional.photo.splice(index, 1);
   }
 }

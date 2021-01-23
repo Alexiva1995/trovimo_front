@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {BUILDING_OPTIONS, HOME_DETAILS_OPTIONS, PLACE_DETAILS_OPTIONS, PLACE_EQUIPMENT_OPTIONS, PREFERENCES_OPTIONS} from './checkoptions';
 import {DetailInfo} from '../../../../models/detail-info';
+import {Professional} from '../../../../models/professional';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -23,6 +24,8 @@ export class DetailsComponent implements OnInit {
   servicePrice = 0;
   referencePoint = '';
   referenceName = '';
+  placeEquipmentInput = '';
+  preferencesInput = '';
   constructor() {
     this.homeInput = '';
     this.buildingInput = '';
@@ -103,7 +106,7 @@ export class DetailsComponent implements OnInit {
   /* REFERENCE POINTS */
   addReference(): void {
     if (this.referencePoint !== '') {
-      this.detail.reference_points.push([this.referencePoint,this.referenceName]);
+      this.detail.reference_points.push([this.referencePoint, this.referenceName]);
       this.referencePoint = '';
       this.referenceName = '';
     }
@@ -111,6 +114,59 @@ export class DetailsComponent implements OnInit {
   }
   removeReference(index): void {
     this.detail.reference_points.splice(index, 1);
+    this.emitData(false);
+  }
+  addProfessional(): void {
+    this.detail.professional_groups.push(new Professional());
+  }
+  /* place equipment */
+  addPlaceEquipment(): void {
+    if (this.placeEquipmentInput !== '') {
+      const option = this.homeDetails.find(a => a.toLowerCase() === this.placeEquipmentInput.toLowerCase());
+      if (option) {
+        this.detail.placeDetailsTags.push(option);
+        this.placeEquipmentInput = '';
+      }
+    }
+    this.emitData(false);
+  }
+  removePlaceEquipment(index): void {
+    this.detail.placeEquipmetsTags.splice(index, 1);
+    this.emitData(false);
+  }
+  onChangePlaceEquipment(event): void {
+    const value = event.target.value;
+    const index = this.detail.placeEquipmetsTags.findIndex(a => a === value);
+    if (index >= 0) {
+      this.detail.placeEquipmetsTags.splice(index, 1);
+    } else {
+      this.detail.placeEquipmetsTags.push(value);
+    }
+    this.emitData(false);
+  }
+  /*  */
+  addPreferences(): void {
+    if (this.preferencesInput !== '') {
+      const option = this.preferences.find(a => a.toLowerCase() === this.preferencesInput.toLowerCase());
+      if (option) {
+        this.detail.preferencesTags.push(option);
+        this.preferencesInput = '';
+      }
+    }
+    this.emitData(false);
+  }
+  removePreferenceTags(index): void {
+    this.detail.preferencesTags.splice(index, 1);
+    this.emitData(false);
+  }
+  onChangePreference(event): void {
+    const value = event.target.value;
+    const index = this.detail.preferencesTags.findIndex(a => a === value);
+    if (index >= 0) {
+      this.detail.preferencesTags.splice(index, 1);
+    } else {
+      this.detail.preferencesTags.push(value);
+    }
     this.emitData(false);
   }
 }

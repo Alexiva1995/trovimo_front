@@ -1,3 +1,5 @@
+import {Professional} from './professional';
+
 export class DetailInfo {
   buildingTags = [];
   homeDetailsTags = [];
@@ -9,4 +11,5 @@ export class DetailInfo {
   placeEquipmetsTags = [];
   preferencesTags = [];
   placeDetailsTags = [];
+  professional_groups = [new Professional()];
 }
