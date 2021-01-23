@@ -38,4 +38,23 @@ export class ProjectService {
     });
     return this.http.post(this.api + '/auth/services/' + typeName, data, {headers});
   };
+
+  getAreas(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(this.api + '/auth/show-areas',null, {headers});
+  }
+
+  getExpert(address, area): Observable<any> {
+      const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      "Accept":"application/json",
+    });
+    const formData = new FormData(); 
+    formData.append('address', address); 
+    formData.append('area', area); 
+    return this.http.post(this.api + '/auth/services/search-expert',formData, {headers});
+  }
 }
