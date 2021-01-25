@@ -18,7 +18,7 @@ import { FindExpertsComponent } from './modules/find-experts/find-experts.compon
 import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
-import {AuthGuard} from './guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 import { SettingComponent } from './modules/acount-profile/components/setting/setting.component';
 import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';

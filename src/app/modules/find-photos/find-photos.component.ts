@@ -1,3 +1,4 @@
+import { FindPhotosService }  from '../../services/find-photos/find-photos.service';
 import {
   Component, OnInit, ElementRef, Renderer2, ViewChild, HostListener
 } from '@angular/core';
@@ -12,34 +13,54 @@ export class FindPhotosComponent implements OnInit {
 
   @ViewChild('grid', { static: true }) grid: ElementRef;
 
-  show: boolean = true;
-  searchValue: string;
+  show = true;
+  result = null;
+  loading = false;
+  searchValues  = {
+    title: '',
+    types: '',
+    styles: '',
+    colors: '',
+    tags: ''
+  };
+  types: any;
+  styles: any;
+  colors: any;
+  tags: any;
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2, 
+    private service: FindPhotosService ) { }
 
-  ngOnInit(): void {
-    setTimeout(() => this.resizeAllItem(), 1000);
+  ngOnInit(): void {}
+
+  getFindPhotos(search: string){
+
+      if( search.length === 0 ){
+        return;
+      }
+
+      this.loading = !this.loading;
+
+      this.searchValues.title = search;
+
+      this.service.getPhotos(this.searchValues).subscribe(async ( resp: any ) => {
+
+        this.result = resp;
+        this.loading = !this.loading;
+
+      })
+
   }
 
-  @HostListener('window:keydown', ['$event'])
-  getFindPhotosKeyDown(event){
-
-    if(event.keyCode === 13){
-
-      console.log( this.searchValue );
-
-    }
-
-  }
-
-  getFindPhotosClick(){
-      console.log( this.searchValue );
-  }
 
   @HostListener('window:resize')
   resizeAllItemonEvent(): void {
-    this.resizeAllItem();
+    if (this.result?.length > 0) {
+      this.resizeAllItem();
+    }
   }
+
 
   resizeAllItem(): void {
 
@@ -49,6 +70,7 @@ export class FindPhotosComponent implements OnInit {
 
   }
 
+  // calcular el grid-row-end
   resizeGridItem(child: any): void {
 
     const rowHeight = this.getParserIntComputedStyle(this.grid.nativeElement, 'grid-auto-rows');
@@ -61,8 +83,22 @@ export class FindPhotosComponent implements OnInit {
 
   }
 
-  getParserIntComputedStyle(element: any, selector: string): number {
-    return parseInt(window.getComputedStyle(element).getPropertyValue(selector));
+  // formatear el computedStyle
+  getParserIntComputedStyle( element: any, selector: string ): number {
+    return parseInt( window.getComputedStyle( element ).getPropertyValue( selector ) );
+  }
+
+
+  setType( value: any ){
+    this.searchValues.types = value
+  }
+
+  setStyles( value: any ){
+    this.searchValues.styles = value
+  }
+
+  setColor( value: any ){
+    this.searchValues.colors = value
   }
 
 }

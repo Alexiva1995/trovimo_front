@@ -4,7 +4,8 @@
     <div class="find-photos__searchBox">
       <div class="find-photos__inputContainer">
         <input
-          [(ngModel)]="searchValue"
+          (keyup.enter)="getFindPhotos(search.value)"
+          #search
           name="searchValue"
           type="text"
           class="form-control find-photos__input"
@@ -14,17 +15,22 @@
         />
       </div>
       <button
-        (click)="getFindPhotos()"
+        (click)="getFindPhotos(search.value)"
         class="btn btn-primary find-photos__button"
         type="button"
       >
-        <i class="fas fa-search"></i>
+        <i *ngIf="!loading" class="fas fa-search"></i>
+        <i *ngIf="loading" class="fas fa-sync fa-spin"></i>
       </button>
     </div>
   </div>
 </div>
 
-<div class="container-fluid form-customsearch">
+<div class="not-found" *ngIf="result?.length === 0">
+    No results found for: {{ searchValues.title }}
+</div>
+
+<div *ngIf="result?.length > 0" class="container-fluid form-customsearch">
     <div class="row justify-content-custom">
         <div class="col-12 col-md-5">
             <div class="input-search">
@@ -40,19 +46,19 @@
         </div>
         <div class="col-12 col-md-5">
             <p class="search-result text-center mt-2">
-                Find photos / 80 Results for "Kitchen" {{searchValue}}
+                Find photos / {{ result.length }} Results for "{{ searchValues.title }}"
             </p>
         </div>
     </div>
 </div>
 
-<div class="container mt-4">
+<div *ngIf="result?.length > 0" class="container mt-4">
     <div class="row justify-content-between">
         <div class="col-12 col-lg-6">
             <div class="row">
                 <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #type (change)="setType(type.value)" class="custom-select">
                             <option value="1" selected>Type</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -61,7 +67,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #style (change)="setStyles(style.value)" class="custom-select">
                             <option value="1" selected>Style</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -70,7 +76,7 @@
                 </div>
                 <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #color (change)="setColor(color.value)" class="custom-select">
                             <option value="1" selected>Color</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -91,83 +97,8 @@
     </div>
 </div>
 
-<div class="grid-element container mt-5 ">
+<div  *ngIf="result?.length > 0" class="grid-element container mt-5 ">
     <div class="grid-container" #grid>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/700x320" alt="example img">
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="content">
-                <img src="https://via.placeholder.com/360" alt="example img">
-            </div>
-        </div>
         <div class="grid-item">
             <div class="content">
                 <img src="https://via.placeholder.com/700x320" alt="example img">
@@ -176,7 +107,7 @@
     </div>
 </div>
 
-<div class="col-12 text-center mt-4">
+<div  *ngIf="result?.length > 20" class="col-12 text-center mt-4">
     <button  class="btn btn-primary btn-load">
         Load more images
     </button>
