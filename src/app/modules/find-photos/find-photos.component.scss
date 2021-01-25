@@ -1,18 +1,87 @@
+@import "../../theme/vars";
+
+.find-photos {
+  background: url("../../../assets/images/search_expert/fondo-experts.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  @at-root #{&}__container {
+    text-align: center;
+    color: white;
+    width: 100%;
+    margin-top: 40px;
+  }
+  @at-root #{&}__title {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    @media (min-width:992px) {
+      max-width: 60%;
+    }
+    @media (min-width:1440px) {
+      max-width: 40%;
+    }
+  }
+  @at-root #{&}__inputContainer {
+     background-color: white;
+     border-radius: 8px;
+     padding: 10px 40px;
+     width: 100%;
+     display: flex;
+  }
+  @at-root #{&}__searchBox {
+    display: flex;
+    align-items: center;
+    max-width: 90%;
+    margin: auto;
+    @media (min-width:992px) {
+      max-width: 70%;
+    }
+    @media (min-width:1440px) {
+      max-width: 50%;
+    }
+  }
+  @at-root #{&}__input {
+    border: none;
+    border-bottom: 1px solid $primary !important;
+    &:focus{
+        outline: none;
+    }
+  }
+  @at-root #{&}__button{
+    margin-left: 10px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+}
+
 .form-customsearch{
     padding-top: 1rem;
     padding-bottom: 1rem;
     background-color: #D8D8D8;
-    padding-right: 4rem;
-    padding-left: 5rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
 }
    
 input[type=search]{
     background-color: transparent;
 }
+
 .justify-content-custom {
     justify-content: space-between;
     align-items: center;
 }
+
 .search-result{
     text-align: right;
     margin: 0;
@@ -20,10 +89,44 @@ input[type=search]{
 }
 
 .btn-load{
-    width: 20%;
+    max-width: 250px;
     border-radius: 20px;
 }
 
 .custom-select{
-    border-color: #073558
+    border-color: $primary;
+}
+
+.border-primary{
+  border: 1px solid $primary;
+}
+
+.grid-element{
+  min-height: 500px;
+}
+
+.grid-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat( auto-fill , minmax( 250px ,1fr ) );
+  grid-auto-rows: 30px;
+}
+
+.not-found{
+  color: $primary;
+  text-align: center;
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 1rem;
+  border-radius: 6px;
 }

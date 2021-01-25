@@ -1,9 +1,41 @@
-<div class="container-fluid form-customsearch">
+<div class="find-photos">
+  <div class="find-photos__container">
+    <h1 class="find-photos__title">Find inspiration for your place in our photo section</h1>
+    <div class="find-photos__searchBox">
+      <div class="find-photos__inputContainer">
+        <input
+          (keyup.enter)="getFindPhotos(search.value)"
+          #search
+          name="searchValue"
+          type="text"
+          class="form-control find-photos__input"
+          placeholder="Search your photos"
+          aria-label="Search your photos"
+          aria-describedby="Search photos by name"
+        />
+      </div>
+      <button
+        (click)="getFindPhotos(search.value)"
+        class="btn btn-primary find-photos__button"
+        type="button"
+      >
+        <i *ngIf="!loading" class="fas fa-search"></i>
+        <i *ngIf="loading" class="fas fa-sync fa-spin"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="result?.length === 0">
+    No results found for: {{ searchValues.title }}
+</div>
+
+<div *ngIf="result?.length > 0" class="container-fluid form-customsearch">
     <div class="row justify-content-custom">
-        <div class="col-4">
+        <div class="col-12 col-md-5">
             <div class="input-search">
                 <div class="input-group">
-                    <input class="form-control py-2 rounded-pill mr-1 pr-5" type="search" value="search">
+                    <input class="form-control py-2 rounded-pill mr-1 pr-5 border-primary" type="search" value="search">
                     <span class="input-group-append">
                         <button class="btn rounded-pill border-0 ml-n5" type="button">
                               <i class="fa fa-search"></i>
@@ -12,39 +44,39 @@
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <p class="search-result">
-                Find photos / 80 Results for "Kitchen"
+        <div class="col-12 col-md-5">
+            <p class="search-result text-center mt-2">
+                Find photos / {{ result.length }} Results for "{{ searchValues.title }}"
             </p>
         </div>
     </div>
 </div>
 
-<div class="container mt-4">
+<div *ngIf="result?.length > 0" class="container mt-4">
     <div class="row justify-content-between">
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
             <div class="row">
-                <div class="col-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #type (change)="setType(type.value)" class="custom-select">
                             <option value="1" selected>Type</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #style (change)="setStyles(style.value)" class="custom-select">
                             <option value="1" selected>Style</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                         </select>
                     </div>
                 </div>
-                <div class="col-3">
+                <div class="col-12 col-md-4">
                     <div class="form-group">
-                        <select class="custom-select">
+                        <select #color (change)="setColor(color.value)" class="custom-select">
                             <option value="1" selected>Color</option>
                             <option value="2">Two</option>
                             <option value="3">Three</option>
@@ -53,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-lg-4">
             <div class="form-group">
                 <select class="custom-select">
                     <option value="1" selected>Recently added</option>
@@ -63,107 +95,22 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="grid">
-        <div class="row mb-2">
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
+<div  *ngIf="result?.length > 0" class="grid-element container mt-5 ">
+    <div class="grid-container" #grid>
+        <div class="grid-item">
+            <div class="content">
+                <img src="https://via.placeholder.com/700x320" alt="example img">
             </div>
         </div>
-
-        <div class="row mb-2">
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-2">
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/160" alt="example img">
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="grid-item">
-                    <img src="https://via.placeholder.com/350x160" alt="example img">
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 text-center mt-4">
-            <button  class="btn btn-primary btn-load">
-                Load more images
-            </button>
-        </div>
-
     </div>
+</div>
+
+<div  *ngIf="result?.length > 20" class="col-12 text-center mt-4">
+    <button  class="btn btn-primary btn-load">
+        Load more images
+    </button>
 </div>
 
 
