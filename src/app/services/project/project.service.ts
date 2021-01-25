@@ -52,10 +52,10 @@ export class ProjectService {
 
   showProjects(params?: any, reqOpts?: any): Observable<any> {
     // Modelo de params
-    let dummy = {
+    const dummy = {
       shared_space_id: 1,
     };
-    //Id de ejemplo para que traiga data
+    // Id de ejemplo para que traiga data
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
     });
@@ -82,5 +82,24 @@ export class ProjectService {
     return this.http.post(this.api + '/auth/services/search-project', {
       headers,
     });
+  }
+
+  getAreas(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      'Content-Type': 'application/json',
+    });
+    return this.http.post(this.api + '/auth/show-areas', null, {headers});
+  }
+
+  getExpert(address, area): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('address', address);
+    formData.append('area', area);
+    return this.http.post(this.api + '/auth/services/search-expert', formData, {headers});
   }
 }
