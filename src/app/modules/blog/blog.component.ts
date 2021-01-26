@@ -1,4 +1,7 @@
+import { BlogService } from './../../services/blog/blog.service';
 import { Component, OnInit } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-blog',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BlogComponent implements OnInit {
 
-  constructor() { }
+  blogsData = undefined;
+  errorMsg = '';
+
+  constructor(private blogService: BlogService) { }
 
   ngOnInit(): void {
+
+    this.blogService.getBlogs().subscribe(
+      data => {
+        this.blogsData = data;
+      },
+      error => {
+        console.log( { ...error } )
+      }
+    );
+
   }
 
 }

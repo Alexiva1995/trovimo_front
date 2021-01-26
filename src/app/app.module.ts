@@ -30,6 +30,8 @@ import { RouterModule } from '@angular/router';
 import { ProfessionalGroupComponent } from './modules/new-publish/components/details/professional-group/professional-group.component';
 import { ProjectCardComponent } from './modules/profile/project-card/project-card.component';
 
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -49,6 +51,7 @@ const BOOSTRAP = [
     APP_COMPONENTS,
     ProfessionalGroupComponent,
     ProjectCardComponent,
+    SafeHtmlPipe,
   ],
   imports: [
     NGX_MODULES,
