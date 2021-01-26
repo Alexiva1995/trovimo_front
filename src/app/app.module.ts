@@ -32,19 +32,14 @@ import { ProjectCardComponent } from './modules/profile/project-card/project-car
 
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
-
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient);
 }
 
-const NGX_MODULES = [
-  ModalModule.forRoot()
-];
-const BOOSTRAP = [
-  TooltipModule.forRoot()
-];
+const NGX_MODULES = [ModalModule.forRoot()];
+const BOOSTRAP = [TooltipModule.forRoot()];
 
 @NgModule({
   declarations: [
@@ -92,7 +87,7 @@ const BOOSTRAP = [
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('807965019778637'),
+            provider: new FacebookLoginProvider('929568467790273'),
           },
         ],
       } as SocialAuthServiceConfig,
