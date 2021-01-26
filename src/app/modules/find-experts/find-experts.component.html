@@ -1,112 +1,166 @@
 <div class="hero">
-    <div class="intro">
-        <h1>Find the right company to help you</h1>
-        <div style="width:60%; display: flex;align-items: center">
-            <div class="search-bar">
-                <input type="text" [(ngModel)]='address' class="form-control address" placeholder="Enter address, city, country" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                <input type="text" [(ngModel)]='area' class="form-control category" placeholder="Write your category" aria-label="Recipient's username" aria-describedby="basic-addon2" />
-                <div class="dropdown" id="p">
-                    <p><i class="fa fa-search"></i></p>
-                    <div class="dropdown-content" style="z-index:1000;">
-                        <ul>
-                            <li class="tittle">Services</li>
-                            <li>Moving</li>
-                            <li>Cleaning</li>
-                            <li>Real state</li>
-                            <li>Photos</li>
-                            <li>3D Virtual tours</li>
-                            <li>Storage & Transport</li>
-                            <li>Gardeners</li>
-                            <li>Painters</li>
-                            <li>Plumbers</li>
-                            <li>Carpenters</li>
-                            <li>Electricians</li>
-                            <li>Heating & AC</li>
-                            <li>Pool Services</li>
-                            <li>Other Services</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-primary" style="padding: 15px 20px;border-radius: 6px;width: fit-content;margin-left: 10px" (click)="BuscarCompany(addres, area)" type="button">
+  <div class="intro">
+    <h1>Find the right company to help you</h1>
+    <div style="width: 60%; display: flex; align-items: center">
+      <div class="search-bar">
+        <input
+          type="text"
+          [(ngModel)]="address"
+          class="form-control address"
+          placeholder="Enter address, city, country"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <input
+          type="text"
+          [(ngModel)]="area"
+          class="form-control category"
+          placeholder="Write your category"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+        />
+        <div class="dropdown" id="p">
+          <p><i class="fa fa-search"></i></p>
+          <div class="dropdown-content" style="z-index: 1000">
+            <ul>
+              <li class="tittle">Services</li>
+              <li>Moving</li>
+              <li>Cleaning</li>
+              <li>Real state</li>
+              <li>Photos</li>
+              <li>3D Virtual tours</li>
+              <li>Storage & Transport</li>
+              <li>Gardeners</li>
+              <li>Painters</li>
+              <li>Plumbers</li>
+              <li>Carpenters</li>
+              <li>Electricians</li>
+              <li>Heating & AC</li>
+              <li>Pool Services</li>
+              <li>Other Services</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <button
+        class="btn btn-primary"
+        style="
+          padding: 15px 20px;
+          border-radius: 6px;
+          width: fit-content;
+          margin-left: 10px;
+        "
+        (click)="BuscarCompany(address, area)"
+        type="button"
+      >
         <i class="fas fa-search"></i>
       </button>
-        </div>
     </div>
+  </div>
 </div>
 
 <div class="container" style="margin-top: 30px" *ngIf="!loading">
-    <h4>Popular services for you</h4>
-    <carousel style="margin-bottom: 40px" [cellsToShow]="4" [loop]="false" [height]="270">
-        <div class=" carousel-cell" *ngFor="let area of filterItemsOfType('1')">
-            <div class="service-card" style="
-              background-image: url('/assets/images/search_expert/real-estate.png');
-            ">
-                <span>{{area.services}}</span>
-            </div>
-        </div>
-    </carousel>
-
-    <h4>Are you remodeling? Find the right company for you</h4>
-    <carousel style="margin-bottom: 40px" [cellsToShow]="4" [loop]="false" [height]="270">
-        <div class=" carousel-cell" *ngFor="let area of filterItemsOfType('2')">
-            <div class="service-card" style="
+  <h4>Popular services for you</h4>
+  <carousel
+    style="margin-bottom: 40px"
+    [cellsToShow]="4"
+    [loop]="false"
+    [height]="270"
+  >
+    <div class="carousel-cell" *ngFor="let area of filterItemsOfType('1')">
+      <div
+        class="service-card"
+        style="
           background-image: url('/assets/images/search_expert/real-estate.png');
-        ">
-                <span>{{area.services}}</span>
-            </div>
-        </div>
-    </carousel>
+        "
+      >
+        <span>{{ area.services }}</span>
+      </div>
+    </div>
+  </carousel>
 
-    <h4>Find the experts to help you desing your project</h4>
-    <carousel style="margin-bottom: 40px" [cellsToShow]="4" [loop]="false" [height]="270">
-        <div class=" carousel-cell" *ngFor="let area of filterItemsOfType('3')">
-            <div class="service-card" style="
+  <h4>Are you remodeling? Find the right company for you</h4>
+  <carousel
+    style="margin-bottom: 40px"
+    [cellsToShow]="4"
+    [loop]="false"
+    [height]="270"
+  >
+    <div class="carousel-cell" *ngFor="let area of filterItemsOfType('2')">
+      <div
+        class="service-card"
+        style="
           background-image: url('/assets/images/search_expert/real-estate.png');
-        ">
-                <span>{{area.services}}</span>
-            </div>
-        </div>
-    </carousel>
+        "
+      >
+        <span>{{ area.services }}</span>
+      </div>
+    </div>
+  </carousel>
 
-    <h4>Providers</h4>
-    <carousel style="margin-bottom: 40px" [cellsToShow]="4" [loop]="false" [height]="270">
-        <div class=" carousel-cell" *ngFor="let area of filterItemsOfType('4')">
-            <div class="service-card" style="
+  <h4>Find the experts to help you desing your project</h4>
+  <carousel
+    style="margin-bottom: 40px"
+    [cellsToShow]="4"
+    [loop]="false"
+    [height]="270"
+  >
+    <div class="carousel-cell" *ngFor="let area of filterItemsOfType('3')">
+      <div
+        class="service-card"
+        style="
           background-image: url('/assets/images/search_expert/real-estate.png');
-        ">
-                <span>{{area.services}}</span>
-            </div>
-        </div>
-    </carousel>
-
-
-    <h6>Services</h6>
-    <div class="row" style="margin-bottom: 40px">
-        <div class="col-2" *ngFor="let area of filterItemsOfType('1')">
-            <a href="">{{area.services}}</a>
-        </div>
+        "
+      >
+        <span>{{ area.services }}</span>
+      </div>
     </div>
+  </carousel>
 
-    <h6>Remodeling</h6>
-    <div class="row" style="margin-bottom: 40px">
-        <div class="col-3" *ngFor="let area of filterItemsOfType('2')">
-            <a href="">{{area.services}}</a>
-        </div>
+  <h4>Providers</h4>
+  <carousel
+    style="margin-bottom: 40px"
+    [cellsToShow]="4"
+    [loop]="false"
+    [height]="270"
+  >
+    <div class="carousel-cell" *ngFor="let area of filterItemsOfType('4')">
+      <div
+        class="service-card"
+        style="
+          background-image: url('/assets/images/search_expert/real-estate.png');
+        "
+      >
+        <span>{{ area.services }}</span>
+      </div>
     </div>
+  </carousel>
 
-    <h6>Desing & Contruction</h6>
-    <div class="row" style="margin-bottom: 40px">
-        <div class="col-3" *ngFor="let area of filterItemsOfType('3')">
-            <a href="">{{area.services}}</a>
-        </div>
+  <h6>Services</h6>
+  <div class="row" style="margin-bottom: 40px">
+    <div class="col-2" *ngFor="let area of filterItemsOfType('1')">
+      <a href="">{{ area.services }}</a>
     </div>
+  </div>
 
-    <h6>Providers</h6>
-    <div class="row" style="margin-bottom: 40px">
-        <div class="col-2" *ngFor="let area of filterItemsOfType('4')">
-            <a href="">{{area.services}}</a>
-        </div>
+  <h6>Remodeling</h6>
+  <div class="row" style="margin-bottom: 40px">
+    <div class="col-3" *ngFor="let area of filterItemsOfType('2')">
+      <a href="">{{ area.services }}</a>
     </div>
+  </div>
 
+  <h6>Desing & Contruction</h6>
+  <div class="row" style="margin-bottom: 40px">
+    <div class="col-3" *ngFor="let area of filterItemsOfType('3')">
+      <a href="">{{ area.services }}</a>
+    </div>
+  </div>
+
+  <h6>Providers</h6>
+  <div class="row" style="margin-bottom: 40px">
+    <div class="col-2" *ngFor="let area of filterItemsOfType('4')">
+      <a href="">{{ area.services }}</a>
+    </div>
+  </div>
 </div>
