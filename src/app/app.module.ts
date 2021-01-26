@@ -32,6 +32,7 @@ import { ProjectCardComponent } from './modules/profile/project-card/project-car
 
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
+
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
 export function HttpLoaderFactory(httpClient: HttpClient) {

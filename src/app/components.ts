@@ -30,6 +30,8 @@ import { PagesComponent } from './component/pages/pages.component';
 import { BlogComponent } from './modules/blog/blog.component';
 import { BlogDetailComponent } from './modules/blog/blog-detail/blog-detail.component';
 import { PublishDetailComponent } from './modules/publish-detail/publish-detail.component';
+import { FormComponent } from './modules/publish-detail/components/form/form.component';
+import { MainViewDetailComponent } from './modules/publish-detail/components/main-view-detail/main-view-detail.component';
 
 import { MyListingsComponent } from './modules/acount-profile/components/my-listings/my-listings.component';
 import { MyActivityComponent } from './modules/acount-profile/components/my-activity/my-activity.component';
@@ -76,6 +78,8 @@ const APP_COMPONENTS = [
   PublishDetailComponent,
   MyListingsComponent,
   MyActivityComponent,
+  FormComponent,
+  MainViewDetailComponent,
   PhotosComponent,
   SettingComponent,
   NumberSelectorComponent,

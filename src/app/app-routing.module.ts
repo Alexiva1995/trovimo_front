@@ -24,6 +24,7 @@ import { SettingComponent } from './modules/acount-profile/components/setting/se
 import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';
 import { MyActivityComponent } from './modules/acount-profile/components/my-activity/my-activity.component';
 import { MyListingsComponent } from './modules/acount-profile/components/my-listings/my-listings.component';
+import { PublishDetailComponent } from './modules/publish-detail/publish-detail.component';
 
 const routes: Routes = [
   { path: 'pages', component: PagesComponent },
@@ -35,8 +36,8 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
-      {path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard]},
-      {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard]}
+      {path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] },
+      {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] }
     ]
 
   },
@@ -72,6 +73,12 @@ const routes: Routes = [
     path: 'legal',
     component: LegalComponent,
   },
+
+  {
+    path: 'publish-detail',
+    component: PublishDetailComponent,
+  },
+
   {
     path: 'find-photos',
     component: FindPhotosComponent,

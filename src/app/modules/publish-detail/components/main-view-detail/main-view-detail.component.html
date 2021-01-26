@@ -1,0 +1,119 @@
+<div class="container-fluid">
+  <div style="display: flex;">
+    <div style="width: 70%;">
+      <!-- header -->
+      <div class="header-box">
+        <div class="container-box">
+            <div class="container-buttons">
+                <button class="btn-top-custom">
+                <i class="fas fa-camera"></i>
+                Photos
+              </button>
+                <button class="btn-top-custom">
+                <i class="fas fa-video"></i>
+                Videos
+              </button>
+                <button class="btn-top-custom">
+                <i class="fas fa-map"></i>
+                Map
+              </button>   
+              <button class="btn-top-custom">
+                <i class="fas fa-print"></i>
+                Tour 360
+              </button>
+    
+            </div>
+            
+            <div class="container-shared">
+                <button style="border: none;"
+                class="rounded-circle">
+                <i class="far fa-heart"></i>
+              </button>
+                <button  style="border: none;"
+                class="rounded-circle">
+                <i class="fas fa-share-alt"></i>
+              </button>
+                <button  style="border: none;"
+                class="rounded-circle">
+                <i class="fas fa-print"></i>
+              </button>
+            </div>
+        </div>
+      </div>
+    
+        <!-- body -->
+      <carousel style="height:600px; z-index: 1;" [cellsToShow]="1" >
+          <img src="/assets/images/login-splash.png" alt="svg" />
+          <img src="/assets/images/login-splash.png" alt="svg" />
+          <img src="/assets/images/login-splash.png" alt="svg" />
+          <img src="/assets/images/login-splash.png" alt="svg" />
+      </carousel>
+    
+      <!-- footer -->
+      <div class="container-footer-box">
+        <!-- 1 pagina vista inmuebles detalle (BUY / RENT)-->
+        <div style="display: flex;">
+          <div class="container-price">
+              <p style="display: inline; margin-right: 2rem; margin-left: 2rem; font-weight: bold;">$500.000</p>
+          </div>
+          <div class="container-pieces">
+            <p style="display: inline;"> 
+              <img src="../../../../../assets/images/publish/cama.svg" alt="">
+            3 Pieces</p>
+          </div>
+        </div>
+        
+        <div class="container-statistics">
+          <p style="display: inline;">150m2</p>
+          <p style="display: inline;"> 
+            <img src="../../../../../assets/images/publish/cama.svg" alt="">
+          4</p>
+          <p style="display: inline;"> 
+            <img src="../../../../../assets/images/publish/banera.svg" alt="">
+          2</p>
+          <p style="display: inline;"> 
+            <img src="../../../../../assets/images/publish/Icon awesome-car-alt.svg" alt="">
+          1</p>
+        </div>
+
+
+
+        <!-- 2 pagina vista vista inmuebles detalle shared (RENT A ROOM, SHARED OFFICE) -->
+        <!-- <div style="display: flex;">
+          <div class="container-price">
+              <p style="display: inline; margin-right: 2rem; margin-left: 2rem; font-weight: bold;">$500.000 / Month</p>
+          </div>
+        </div>
+        
+        <div class="container-statistics-2">
+          <p style="display: inline; margin-right: 1rem;">Avaliable Date 02-05-20</p>
+        </div> -->
+
+
+        <!-- 3 vista inmuebles detalle shared (Coworking)-->
+        <!-- <div style="display: flex;">
+          <div class="container-price">
+              <p style="display: inline; margin-right: 2rem; margin-left: 2rem; font-weight: bold;">$500.000 / Month</p>
+          </div>
+        </div>
+        
+        <div class="container-statistics-3">
+          <p style="display: inline; margin: 0; margin-right: 1rem; ">5.0</p>
+          <img src="../../../../../assets/images/publish/Icon awesome-star.svg" alt="">
+          <img src="../../../../../assets/images/publish/Icon awesome-star.svg" alt="">
+          <img src="../../../../../assets/images/publish/Icon awesome-star.svg" alt="">
+          <img src="../../../../../assets/images/publish/Icon awesome-star.svg" alt="">
+          <img src="../../../../../assets/images/publish/Icon awesome-star.svg" alt="">
+        </div> -->
+        
+      </div> 
+
+
+    </div>
+
+    <!-- componenteForm -->
+    <div style="width: 30%;">
+      <app-form></app-form>
+    </div>
+  </div>
+</div>
