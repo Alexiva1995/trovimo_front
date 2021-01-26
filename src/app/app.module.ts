@@ -28,6 +28,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
 import { ProfessionalGroupComponent } from './modules/new-publish/components/details/professional-group/professional-group.component';
+import { ProjectCardComponent } from './modules/profile/project-card/project-card.component';
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -47,6 +48,7 @@ const BOOSTRAP = [
     AppComponent,
     APP_COMPONENTS,
     ProfessionalGroupComponent,
+    ProjectCardComponent,
   ],
   imports: [
     NGX_MODULES,

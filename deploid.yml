@@ -1,0 +1,18 @@
+
+image: node:8
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - echo "$(ls -la)"
+          - npm install
+          - npm install -g @angular/cli
+          - ng build --prod --aot
+          - echo "$(ls -la dist/)"
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/trovimo/public_html/
+    - /bin/cp -R * $DEPLOYPATH

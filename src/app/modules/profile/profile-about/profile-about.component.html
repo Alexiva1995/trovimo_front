@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-4">
       <div class="card" style="margin-top: 20px">
         <div class="container">
           <h6>Contact Info</h6>
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-lg-6">
+    <div class="col-12 col-lg-8">
       <div class="card" style="margin-top: 20px">
         <div class="container">
           <h6>About Us</h6>
@@ -54,6 +54,19 @@
       <div class="card" style="margin-top: 20px">
         <div class="container">
           <h6>27 Projects for Arquitectura y Concreto</h6>
+          <div class="container">
+            <div class="row">
+              <div class="col-6 col-lg-4" style="margin-top: 10px; margin-bottom: 10px">
+                <app-project-card></app-project-card>
+              </div>
+              <div class="col-6 col-lg-4"  style="margin-top: 10px; margin-bottom: 10px">
+                <app-project-card></app-project-card>
+              </div>
+            </div>
+            <div style="display: flex" class="justify-content-center">
+              <button class="btn btn-primary more">Load Next 12 Projects</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -63,6 +76,14 @@
           <app-review></app-review>
         </div>
       </div>
+
+      <div class="card" style="margin-top: 20px">
+        <div class="container">
+          <h6>Rate and write a review for Arquitectura y Concreto</h6>
+          <app-review-form></app-review-form>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

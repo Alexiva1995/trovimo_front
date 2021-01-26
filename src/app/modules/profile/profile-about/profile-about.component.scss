@@ -16,7 +16,7 @@
       margin-right: 10px;
       font-size: 12px;
     }
-    
+
   }
   .icons {
     i {
@@ -24,4 +24,10 @@
       color:$primary-accent;
     }
   }
+}
+.more {
+  border-radius: 50px !important;
+  background-color: #135AA0;
+  width: 50%;
+  margin: 20px auto ;
 }
