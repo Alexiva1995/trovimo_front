@@ -87,6 +87,10 @@ export class ProjectService {
       }
     }
 
-    return this.http.post(this.api + '/auth/services/search-project', reqOpts);
+    return this.http.post(
+      this.api + '/auth/services/search-project',
+      filter,
+      reqOpts
+    );
   }
 }

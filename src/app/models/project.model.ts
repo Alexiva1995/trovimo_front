@@ -44,4 +44,5 @@ export interface Project {
   prev_page_url?: any;
   to: number;
   total: number;
+  length?: number;
 }

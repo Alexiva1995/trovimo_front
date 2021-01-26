@@ -29,6 +29,8 @@
           style="width: fit-content; border-radius: 8px"
           type="button"
           (click)="openFilter = 2"
+          id="dropdownForm1"
+          ngbDropdownToggle
         >
           Residential
           <img src="../../../assets/images/icons_filters/cama.svg" alt="" />
@@ -92,16 +94,15 @@
         </button>
         <button
           class="btn option icon-only"
-          [ngClass]="{ active: openFilter == 3 }"
           style="
             width: fit-content;
             border-radius: 8px;
-            background: #073558;
             color: white;
             margin-left: 34px;
           "
           type="button"
-          (click)="openFilter = 3"
+          [class.active]="viewType == 0"
+          (click)="viewType = 0"
         >
           <img
             src="../../../assets/images/publish_list/cuadricula.svg"
@@ -111,14 +112,14 @@
         </button>
         <button
           class="btn option icon-only"
-          [ngClass]="{ active: openFilter == 3 }"
+          [class.active]="viewType == 1"
           style="
             width: fit-content;
             border-radius: 8px;
             border: none !important;
           "
           type="button"
-          (click)="openFilter = 3"
+          (click)="viewType = 1"
         >
           <img
             src="../../../assets/images/publish_list/list.svg"
@@ -236,11 +237,11 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6" *ngIf="viewType == 0">
       <div style="display: flex; justify-content: space-between">
         <div>
           <h6>Apartments in rent</h6>
-          <p>{{ projects?.data.length }} Results</p>
+          <p>{{ projects?.length }} Results</p>
         </div>
         <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
@@ -251,11 +252,39 @@
       </div>
 
       <div class="row">
-        <div class="col-6" *ngFor="let item of projects?.data">
-          <app-publish-card [type]="type" [data]="item"></app-publish-card>
+        <div class="col-6" *ngFor="let item of projects">
+          <app-publish-card
+            [type]="type"
+            [data]="item"
+            *ngIf="item"
+          ></app-publish-card>
         </div>
       </div>
     </div>
-    <div class="col-lg-6"></div>
+    <div class="col-lg-4" *ngIf="viewType == 1">
+      <div style="display: flex; justify-content: space-between">
+        <div>
+          <h6>Apartments in rent</h6>
+          <p>{{ projects?.length }} Results</p>
+        </div>
+        <select style="width: 30%" class="form-control" name="" id="">
+          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (low to high)">Price (low to high)</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <div class="col-6" *ngFor="let item of projects">
+          <app-publish-card
+            [type]="type"
+            [data]="item"
+            *ngIf="item"
+          ></app-publish-card>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6" *ngIf="viewType == 0"></div>
   </div>
 </div>
