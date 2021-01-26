@@ -27,6 +27,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
+import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -45,6 +46,7 @@ const BOOSTRAP = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
+    SafeHtmlPipe,
   ],
   imports: [
     NGX_MODULES,

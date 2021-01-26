@@ -15,33 +15,42 @@
         <h5>All Topics</h5>
         <div class="input-search">
           <div class="input-group">
-            <input class="form-control py-2 rounded-pill mr-1 pr-5" type="search" placeholder="Search themes">
+            <input
+              class="form-control py-2 rounded-pill mr-1 pr-5"
+              type="search"
+              placeholder="Search themes"
+            />
             <span class="input-group-append">
-                        <button class="btn rounded-pill border-0 ml-n5" type="button">
-                              <i class="fa fa-search"></i>
-                        </button>
-                    </span>
+              <button class="btn rounded-pill border-0 ml-n5" type="button">
+                <i class="fa fa-search"></i>
+              </button>
+            </span>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-lg-6">
+      <ul *ngIf="blogsData" class="row listBlog">
+        <li
+          *ngFor="let blog of blogsData.data; index as i"
+          class="col-lg-6 mb-3"
+        >
           <div class="blog_publish">
-            <img src="https://via.placeholder.com/150x150" alt="example img">
+            <picture class="blog_publish_picture">
+              <a [routerLink]="[ '/blog', blog.id ]">
+                <img [src]="blog.picture" [alt]="blog.title" />
+              </a>
+            </picture>
+
             <div class="content">
-              <h6>Aliquam tincidunt mauris eu risus.</h6>
-              <p>
-                Sed pretium, ligula sollicitudin laoreet viverra, tortor libero
-                sodales leo, eget blandit nunc tortor eu nibh ...
-              </p>
+              <h6>{{ blog.title }}</h6>
+              <p [innerHtml]="blog.content | safeHtml"></p>
               <div class="date">
                 <i class="far fa-calendar"></i>
-                <span>Oct 20, 2018</span>
+                <span>{{ blog.created_at | date: "MMM d, y" }}</span>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
     <div class="col-lg-4">
       <div class="menu">

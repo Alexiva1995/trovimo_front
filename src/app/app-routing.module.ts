@@ -81,7 +81,7 @@ const routes: Routes = [
     component: BlogComponent,
   },
   {
-    path: 'blog-detail',
+    path: 'blog/:id',
     component: BlogDetailComponent,
   },
   {path: '**', redirectTo: ''}
