@@ -131,8 +131,7 @@ export class SignInComponent implements OnInit {
       }
     );
   }
-
-  get getForm() {
+  get getForm(): any{
     return this.form.controls;
   }
 }
