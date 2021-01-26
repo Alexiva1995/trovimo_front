@@ -28,6 +28,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
 
+
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -45,6 +46,7 @@ const BOOSTRAP = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
+
   ],
   imports: [
     NGX_MODULES,
