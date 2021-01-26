@@ -25,10 +25,10 @@
         </button>
         <button
           class="btn option"
-          [ngClass]="{ active: openFilter == 2 }"
+          [ngClass]="{ active: openFilter == 1 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 2"
+          (click)="openFilter = 1"
           id="dropdownForm1"
           ngbDropdownToggle
         >
@@ -58,10 +58,10 @@
 
         <button
           class="btn option"
-          [ngClass]="{ active: openFilter == 1 }"
+          [ngClass]="{ active: openFilter == 4 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 1"
+          (click)="openFilter = 4"
         >
           Area
           <img
@@ -71,20 +71,20 @@
         </button>
         <button
           class="btn option"
-          [ngClass]="{ active: openFilter == 3 }"
+          [ngClass]="{ active: openFilter == 5 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 3"
+          (click)="openFilter = 5"
         >
           Type
           <i class="fas fa-sort-down"></i>
         </button>
         <button
           class="btn option"
-          [ngClass]="{ active: openFilter == 4 }"
+          [ngClass]="{ active: openFilter == 6 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 4"
+          (click)="openFilter = 6"
         >
           More filters
           <img
@@ -129,7 +129,16 @@
         </button>
       </div>
     </div>
-    <div style="margin-top: 30px; width: 20%" *ngIf="openFilter == 0">
+    <div
+      style="
+        width: 20%;
+        border-radius: 20px !important;
+        position: relative;
+        left: 20%;
+      "
+      *ngIf="openFilter == 0"
+      class="shadow-lg p-3 mb-5 bg-white"
+    >
       <div style="display: flex; justify-content: space-between">
         <h6>Price range</h6>
         <h6>${{ min }} - ${{ max }}</h6>
@@ -139,7 +148,17 @@
       </div>
     </div>
 
-    <div style="margin-top: 30px; width: 20%" *ngIf="openFilter == 1">
+    <div
+      style="
+        width: 20%;
+        border-radius: 20px !important;
+        position: relative;
+        left: 20%;
+        left: 57%;
+      "
+      class="shadow-lg p-3 mb-5 bg-white"
+      *ngIf="openFilter == 4"
+    >
       <div style="display: flex; justify-content: space-between">
         <h6>Area range</h6>
         <h6>{{ min }}m2 - {{ max }}m2</h6>
@@ -151,7 +170,65 @@
       ></app-double-range>
     </div>
 
-    <div style="margin-top: 30px; width: 20%" *ngIf="openFilter == 3">
+    <div
+      style="
+        width: 20%;
+        border-radius: 20px !important;
+        position: relative;
+        left: 28%;
+      "
+      class="shadow-lg p-3 mb-5 bg-white"
+      *ngIf="openFilter == 1"
+    >
+      <!-- BATHS-->
+      <h6>Residential</h6>
+      <button
+        class="btn option"
+        style="width: fit-content; border-radius: 8px; margin: 5px"
+        type="button"
+      >
+        Any
+      </button>
+      <button
+        class="btn option"
+        style="width: fit-content; border-radius: 8px; margin: 5px"
+        type="button"
+      >
+        +1
+      </button>
+      <button
+        class="btn option"
+        style="width: fit-content; border-radius: 8px; margin: 5px"
+        type="button"
+      >
+        +2
+      </button>
+      <button
+        class="btn option"
+        style="width: fit-content; border-radius: 8px; margin: 5px"
+        type="button"
+      >
+        +3
+      </button>
+      <button
+        class="btn option"
+        style="width: fit-content; border-radius: 8px; margin: 5px"
+        type="button"
+      >
+        +4
+      </button>
+    </div>
+
+    <div
+      style="
+        width: 20%;
+        border-radius: 20px !important;
+        position: relative;
+        left: 48%;
+      "
+      class="shadow-lg p-3 mb-5 bg-white"
+      *ngIf="openFilter == 3"
+    >
       <!-- BATHS-->
       <h6>Baths</h6>
       <button
@@ -190,8 +267,16 @@
         +4
       </button>
     </div>
-
-    <div style="margin-top: 30px; width: 20%" *ngIf="openFilter == 2">
+    <div
+      style="
+        width: 20%;
+        border-radius: 20px !important;
+        position: relative;
+        left: 39%;
+      "
+      class="shadow-lg p-3 mb-5 bg-white"
+      *ngIf="openFilter == 2"
+    >
       <!-- ROOMS-->
       <h6>Rooms</h6>
       <div>
