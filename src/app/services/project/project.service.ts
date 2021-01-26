@@ -51,27 +51,34 @@ export class ProjectService {
   }
 
   showProjects(params?: any, reqOpts?: any): Observable<any> {
-    // Modelo de params
-    const dummy = {
-      shared_space_id: 1,
+    reqOpts = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      }),
     };
-    // Id de ejemplo para que traiga data
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-    });
+
+    reqOpts.params = new HttpParams();
+    for (const k in params) {
+      if (params[k] !== undefined) {
+        reqOpts.params = reqOpts.params.append(k, params[k]);
+      }
+    }
 
     return this.http.post(
       this.api + '/auth/services/show-shared-space',
-      params || dummy,
-      { headers }
+      reqOpts
     );
   }
 
-  searchProject(filter, reqOpts?: any): Observable<any> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      'Content-Type': 'application/json',
-    });
+  searchProject(filter?, reqOpts?: any): Observable<any> {
+    reqOpts = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      }),
+    };
+    console.log(reqOpts);
 
     reqOpts.params = new HttpParams();
     for (const k in filter) {
@@ -79,9 +86,12 @@ export class ProjectService {
         reqOpts.params = reqOpts.params.append(k, filter[k]);
       }
     }
-    return this.http.post(this.api + '/auth/services/search-project', {
-      headers,
-    });
+
+    return this.http.post(
+      this.api + '/auth/services/search-project',
+      filter,
+      reqOpts
+    );
   }
 
   getAreas(): Observable<any> {
@@ -89,7 +99,7 @@ export class ProjectService {
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       'Content-Type': 'application/json',
     });
-    return this.http.post(this.api + '/auth/show-areas', null, {headers});
+    return this.http.post(this.api + '/auth/show-areas', null, { headers });
   }
 
   getExpert(address, area): Observable<any> {
@@ -100,6 +110,8 @@ export class ProjectService {
     const formData = new FormData();
     formData.append('address', address);
     formData.append('area', area);
-    return this.http.post(this.api + '/auth/services/search-expert', formData, {headers});
+    return this.http.post(this.api + '/auth/services/search-expert', formData, {
+      headers,
+    });
   }
 }

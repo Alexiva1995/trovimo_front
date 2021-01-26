@@ -1,5 +1,6 @@
 import { environment } from './../../../environments/environment.prod';
 import { Component, Input, OnInit } from '@angular/core';
+import { isThisTypeNode } from 'typescript';
 
 @Component({
   selector: 'app-publish-card',
@@ -13,6 +14,10 @@ export class PublishCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.type);
+    console.log(this.data);
+    if (this.data) {
+      this.data.photos = JSON.parse(this.data.photos);
+      console.log(this.data);
+    }
   }
 }

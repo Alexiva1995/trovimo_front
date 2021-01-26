@@ -4,7 +4,7 @@
       <i class="far fa-heart"></i>
     </div>
     <div class="counter" style="z-index: 10100">
-      <span>1/{{ data.photos.length }}</span>
+      <span>1/{{ data.photos?.length }}</span>
       <img
         src="../../../assets/images/publish/Icon%20material-photo.svg"
         alt="bed"
@@ -15,7 +15,12 @@
         class="carousel-cell"
         *ngFor="let item of data.photos; let i = index"
       >
-        <img style="height: 117%" [src]="baseUrl + data.photos[i]" alt="" />
+        <img
+          style="height: 117%"
+          [src]="baseUrl + '/' + data.photos[i]"
+          onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'"
+          alt=""
+        />
       </div>
     </carousel>
   </div>
@@ -29,10 +34,12 @@
       "
     >
       <div>
-        <h6 *ngIf="type == 0">{{ data.price }}</h6>
-        <h6 *ngIf="type == 1">{{ data.price }} / Month</h6>
-        <h6 *ngIf="type == 2">From {{ data.price }} / Month / Person</h6>
-        <h6 *ngIf="type == 3">From {{ data.price }}</h6>
+        <h6 *ngIf="type == 0">{{ data.price | currency }}</h6>
+        <h6 *ngIf="type == 1">{{ data.price | currency }} / Month</h6>
+        <h6 *ngIf="type == 2">
+          From {{ data.price | currency }} / Month / Person
+        </h6>
+        <h6 *ngIf="type == 3">From {{ data.price | currency }}</h6>
         <p>
           <i class="fas fa-map-marker-alt"></i> {{ data.postal_code }}
           {{ data.city }}
@@ -42,11 +49,14 @@
         *ngIf="type == 0 || type == 3"
         style="width: 14%"
         [src]="baseUrl + data.photos[0]"
+        onerror="this.src='https://dummyimage.com/200x300&text=dummyimage.com+rocks!'"
         alt=""
       />
       <div *ngIf="type == 1">
         <p style="text-align: end">Avaliable Date</p>
-        <p style="text-align: end; font-weight: bold">{{ data.created_at }}</p>
+        <p style="text-align: end; font-weight: bold">
+          {{ data.created_at | date: "shortDate" }}
+        </p>
       </div>
       <div *ngIf="type == 2" style="text-align: end">
         <p>5.2 <i style="color: #ffe21b" class="fas fa-star"></i></p>

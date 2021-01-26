@@ -15,6 +15,7 @@ export class PublishListComponent implements OnInit {
   min = 0;
   max = 100;
   steps = 1;
+  viewType = 0;
   projects: Project;
   constructor(
     private route: ActivatedRoute,
@@ -30,9 +31,13 @@ export class PublishListComponent implements OnInit {
   }
 
   getProjects() {
-    this.service.showProjects().subscribe(
+    /*   let data = {
+      type: this.type,
+    }; */
+    this.service.searchProject().subscribe(
       (res) => {
-        this.projects = res;
+        this.projects = res.project;
+        console.log(this.projects);
       },
       (err) => {
         this.toastr.error('Error al realizar al consulta.');
