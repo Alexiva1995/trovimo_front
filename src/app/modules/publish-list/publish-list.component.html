@@ -71,16 +71,16 @@
             alt=""
           />
         </button>
-        <select
+        <button
           class="btn option"
           [ngClass]="{ active: openFilter == 5 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
           (click)="openFilter = 5"
         >
-          <option>Type</option>
-        </select>
-        <button
+          Type
+        </button>
+        <!--     <button
           class="btn option"
           [ngClass]="{ active: openFilter == 6 }"
           style="width: fit-content; border-radius: 8px"
@@ -92,9 +92,9 @@
             src="../../../assets/images/icons_filters/Icon%20awesome-filter.svg"
             alt=""
           />
-        </button>
+        </button> -->
         <button
-          class="btn option icon-only"
+          class="btn option"
           style="
             width: fit-content;
             border-radius: 8px;
@@ -112,7 +112,7 @@
           />
         </button>
         <button
-          class="btn option icon-only"
+          class="btn option"
           [class.active]="viewType == 1"
           style="
             width: fit-content;
@@ -346,6 +346,27 @@
         </button>
       </div>
     </div>
+    <div
+      class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
+      *ngIf="openFilter == 5"
+    >
+      <div class="container">
+        <div class="col-lg-12">
+          <h6>Type</h6>
+          <div style="display: flex; flex-wrap: wrap">
+            <div *ngFor="let item of options" style="order: 5">
+              <button
+                class="btn option oprincipal"
+                style="width: fit-content; border-radius: 8px; margin: 5px"
+                type="button"
+              >
+                <img [src]="item.icon" alt="" />{{ item.label }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -359,9 +380,9 @@
         </div>
         <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (high to low)">Price (high to low)</option>
+          <option value="Area(low to high)">Area(low to high)</option>
+          <option value="Area (high to low)">Area (high to low)</option>
         </select>
       </div>
 

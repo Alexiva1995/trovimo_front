@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
+import { OPTIONS } from 'src/app/models/typeOptions';
 
 @Component({
   selector: 'app-publish-list',
@@ -20,6 +21,7 @@ export class PublishListComponent implements OnInit {
   filter: any = [];
   price: any = {};
   area: any = {};
+  options = OPTIONS;
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
@@ -34,10 +36,7 @@ export class PublishListComponent implements OnInit {
   }
 
   getProjects() {
-    /*   let data = {
-      type: this.type,
-    }; */
-    this.service.searchProject().subscribe(
+    this.service.searchProject(this.filter).subscribe(
       (res) => {
         this.projects = res.project;
         console.log(this.projects);

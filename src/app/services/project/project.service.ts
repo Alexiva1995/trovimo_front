@@ -78,7 +78,6 @@ export class ProjectService {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       }),
     };
-    console.log(reqOpts);
 
     reqOpts.params = new HttpParams();
     for (const k in filter) {
