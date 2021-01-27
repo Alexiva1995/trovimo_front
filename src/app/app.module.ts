@@ -43,8 +43,8 @@ const BOOSTRAP = [TooltipModule.forRoot()];
 
 @NgModule({
   declarations: [
-    AppComponent,
     APP_COMPONENTS,
+    AppComponent,
     ProfessionalGroupComponent,
     ProjectCardComponent,
     SafeHtmlPipe,

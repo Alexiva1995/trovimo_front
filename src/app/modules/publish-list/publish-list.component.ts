@@ -12,11 +12,14 @@ import { Project } from 'src/app/models/project.model';
 export class PublishListComponent implements OnInit {
   type: any;
   openFilter = -1;
-  min = 0;
-  max = 100;
-  steps = 1;
+  min = 10;
+  max = 10000000;
+  steps = 10;
   viewType = 0;
   projects: Project;
+  filter: any = [];
+  price: any = {};
+  area: any = {};
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
@@ -43,5 +46,21 @@ export class PublishListComponent implements OnInit {
         this.toastr.error('Error al realizar al consulta.');
       }
     );
+  }
+
+  show(evt) {
+    console.log(evt);
+  }
+
+  setArea(min, max) {
+    this.area.min = min;
+    this.area.max = max;
+    console.log(this.area);
+  }
+
+  setPrice(min, max) {
+    this.price.min = min;
+    this.price.max = max;
+    console.log(this.price);
   }
 }

@@ -1,3 +1,8 @@
 <div class="custom-slider">
-  <ngx-slider [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+  <ngx-slider
+    [(value)]="value"
+    [(highValue)]="highValue"
+    [options]="options"
+    (valueChange)="show()"
+  ></ngx-slider>
 </div>

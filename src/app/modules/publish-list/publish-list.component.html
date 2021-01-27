@@ -7,6 +7,7 @@
           class="form-control"
           style="display: inline"
           placeholder="Location"
+          readonly
           aria-label="Recipient's username"
           aria-describedby="basic-addon2"
         />
@@ -23,18 +24,19 @@
             alt=""
           />
         </button>
-        <button
+        <select
           class="btn option"
           [ngClass]="{ active: openFilter == 1 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 1"
           id="dropdownForm1"
           ngbDropdownToggle
         >
-          Residential
+          <option>Residential</option>
+          <option>Commercial</option>
+
           <img src="../../../assets/images/icons_filters/cama.svg" alt="" />
-        </button>
+        </select>
         <button
           class="btn option"
           [ngClass]="{ active: openFilter == 2 }"
@@ -69,16 +71,15 @@
             alt=""
           />
         </button>
-        <button
+        <select
           class="btn option"
           [ngClass]="{ active: openFilter == 5 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
           (click)="openFilter = 5"
         >
-          Type
-          <i class="fas fa-sort-down"></i>
-        </button>
+          <option>Type</option>
+        </select>
         <button
           class="btn option"
           [ngClass]="{ active: openFilter == 6 }"
@@ -137,14 +138,19 @@
         left: 20%;
       "
       *ngIf="openFilter == 0"
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
     >
       <div style="display: flex; justify-content: space-between">
         <h6>Price range</h6>
-        <h6>${{ min }} - ${{ max }}</h6>
+        <h6>${{ price.min }} - ${{ price.max }}</h6>
       </div>
       <div>
-        <app-double-range [min]="0" [max]="100" [steps]="1"></app-double-range>
+        <app-double-range
+          [min]="min"
+          [max]="max"
+          [steps]="steps"
+          (setValue)="setPrice($event.min, $event.max)"
+        ></app-double-range>
       </div>
     </div>
 
@@ -156,17 +162,18 @@
         left: 20%;
         left: 57%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 4"
     >
       <div style="display: flex; justify-content: space-between">
         <h6>Area range</h6>
-        <h6>{{ min }}m2 - {{ max }}m2</h6>
+        <h6>{{ area.min }}m2 - {{ area.max }}m2</h6>
       </div>
       <app-double-range
         [min]="min"
         [max]="max"
         [steps]="steps"
+        (setValue)="setArea($event.min, $event.max)"
       ></app-double-range>
     </div>
 
@@ -177,7 +184,7 @@
         position: relative;
         left: 28%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 1"
     >
       <!-- BATHS-->
@@ -186,6 +193,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = null"
+        [class.active]="filter.bath == null"
       >
         Any
       </button>
@@ -226,7 +235,7 @@
         position: relative;
         left: 48%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 3"
     >
       <!-- BATHS-->
@@ -235,6 +244,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = null"
+        [class.active]="filter.bath == null"
       >
         Any
       </button>
@@ -242,6 +253,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 1"
+        [class.active]="filter.bath == 1"
       >
         +1
       </button>
@@ -249,6 +262,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 2"
+        [class.active]="filter.bath == 2"
       >
         +2
       </button>
@@ -256,6 +271,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 3"
+        [class.active]="filter.bath == 3"
       >
         +3
       </button>
@@ -263,6 +280,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 4"
+        [class.active]="filter.bath == 4"
       >
         +4
       </button>
@@ -274,7 +293,7 @@
         position: relative;
         left: 39%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 2"
     >
       <!-- ROOMS-->
@@ -284,6 +303,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = null"
+          [class.active]="filter.room == null"
         >
           Studio
         </button>
@@ -291,6 +312,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 1"
+          [class.active]="filter.room == 1"
         >
           +1
         </button>
@@ -298,6 +321,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 2"
+          [class.active]="filter.room == 2"
         >
           +2
         </button>
@@ -305,6 +330,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 3"
+          [class.active]="filter.room == 3"
         >
           +3
         </button>
@@ -312,6 +339,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 4"
+          [class.active]="filter.room == 4"
         >
           +4
         </button>
