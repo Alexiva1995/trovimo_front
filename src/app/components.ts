@@ -86,7 +86,7 @@ const APP_COMPONENTS = [
   PlansFormComponent,
   TypesFormComponent,
   MapComponent,
-  HelpTooltipComponent
+  HelpTooltipComponent,
 ];
 
 export default APP_COMPONENTS;

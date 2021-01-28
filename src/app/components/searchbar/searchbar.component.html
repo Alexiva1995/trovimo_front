@@ -1,27 +1,52 @@
 <div class="hero">
   <div class="intro">
-    <h5 >The best way to find your place</h5>
+    <h5>The best way to find your place</h5>
     <h1>Where would you like to live?</h1>
     <div class="search">
       <div>
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': type === 1}" (click)="setType(1)">Buy</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: type === 1 }"
+              (click)="setType(1)"
+              >Buy</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': type === 2}" (click)="setType(2)">Rent</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: type === 2 }"
+              (click)="setType(2)"
+              >Rent</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': type === 3}" (click)="setType(3)">Shared</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: type === 3 }"
+              (click)="setType(3)"
+              >Shared</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': type === 4}" (click)="setType(4)">Projects</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: type === 4 }"
+              (click)="setType(4)"
+              >Projects</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{'active': type === 5}" (click)="setType(5)">Experts</a>
+            <a
+              class="nav-link"
+              [ngClass]="{ active: type === 5 }"
+              (click)="setType(5)"
+              >Experts</a
+            >
           </li>
         </ul>
-        <div style="display:flex;margin-bottom: 20px">
+        <div style="display: flex; margin-bottom: 20px">
           <div class="search-bar">
             <input
               type="text"
@@ -34,7 +59,7 @@
               <option value="Shared Office" selected>Shared Office</option>
               <option value="Co-working Place">Co-working Place</option>
             </select>
-            <select  *ngIf="type === 4">
+            <select *ngIf="type === 4">
               <option value="Residencial" selected>Residencial</option>
               <option value="Commercial">Commercial</option>
             </select>
@@ -63,20 +88,30 @@
           </div>
           <button
             class="btn btn-primary"
-            style="padding: 15px 20px;border-radius: 6px;width: fit-content;margin-left: 10px"
+            style="
+              padding: 15px 20px;
+              border-radius: 6px;
+              width: fit-content;
+              margin-left: 10px;
+            "
             type="button"
           >
             <i class="fas fa-search"></i>
           </button>
         </div>
-        <div class="filter" [ngClass]="{'active': showFilter}" *ngIf="type !== 5">
+        <div
+          class="filter"
+          [ngClass]="{ active: showFilter }"
+          *ngIf="type !== 5"
+        >
           <button
             class="btn btn-primary"
             style="border-radius: 6px"
             type="button"
             (click)="showFilter = !showFilter"
           >
-            <i *ngIf="!showFilter" class="fas fa-plus"></i> <i *ngIf="showFilter" class="fas fa-minus"></i> Filters
+            <i *ngIf="!showFilter" class="fas fa-plus"></i>
+            <i *ngIf="showFilter" class="fas fa-minus"></i> Filters
           </button>
         </div>
       </div>
@@ -84,17 +119,20 @@
       <div class="filter-content" *ngIf="showFilter">
         <div class="container">
           <div class="row">
-            <div class="col-lg-5" *ngIf="type === 1 || type === 2 || type === 4">
+            <div
+              class="col-lg-5"
+              *ngIf="type === 1 || type === 2 || type === 4"
+            >
               <h6>Type</h6>
-              <div style="display: flex;flex-wrap: wrap" >
-                <div *ngFor="let item of options ">
+              <div style="display: flex; flex-wrap: wrap">
+                <div *ngFor="let item of options">
                   <button
                     *ngIf="isEnable(item.enable)"
                     class="btn option oprincipal"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
-                    <img [src]="item.icon" alt="">{{item.label}}
+                    <img [src]="item.icon" alt="" />{{ item.label }}
                   </button>
                 </div>
               </div>
@@ -104,61 +142,80 @@
               <div>
                 <button
                   class="btn option"
-                  [ngClass]="{'active':activeFilter == 0}"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  [ngClass]="{ active: activeFilter == 0 }"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                   (click)="activeFilter = 0"
-
                 >
                   Price
-                  <img src="../../../assets/images/icons_filters/Icon%20metro-money.svg" alt="">
+                  <img
+                    src="../../../assets/images/icons_filters/Icon%20metro-money.svg"
+                    alt=""
+                  />
                 </button>
                 <button
                   class="btn option"
-                  [ngClass]="{'active':activeFilter == 1}"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  [ngClass]="{ active: activeFilter == 1 }"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                   (click)="activeFilter = 1"
                 >
                   Area
-                  <img src="../../../assets/images/icons_filters/Icon%20ionic-md-resize.svg" alt="">
+                  <img
+                    src="../../../assets/images/icons_filters/Icon%20ionic-md-resize.svg"
+                    alt=""
+                  />
                 </button>
                 <button
                   class="btn option"
-                  [ngClass]="{'active':activeFilter == 2}"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  [ngClass]="{ active: activeFilter == 2 }"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                   (click)="activeFilter = 2"
                 >
                   Rooms
-                  <img src="../../../assets/images/icons_filters/cama.svg" alt="">
+                  <img
+                    src="../../../assets/images/icons_filters/cama.svg"
+                    alt=""
+                  />
                 </button>
                 <button
                   class="btn option"
-                  [ngClass]="{'active':activeFilter == 3}"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  [ngClass]="{ active: activeFilter == 3 }"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                   (click)="activeFilter = 3"
                 >
                   Baths
-                  <img src="../../../assets/images/icons_filters/banera.svg" alt="">
+                  <img
+                    src="../../../assets/images/icons_filters/banera.svg"
+                    alt=""
+                  />
                 </button>
               </div>
 
               <div style="margin-top: 30px" *ngIf="activeFilter == 0">
-                <div style="display: flex;justify-content: space-between">
+                <div style="display: flex; justify-content: space-between">
                   <h6>Price range</h6>
-                  <h6>${{min}} - ${{max}}</h6>
+                  <h6>${{ min }} - ${{ max }}</h6>
                 </div>
-                <app-double-range [min]="min" [max]="max" [steps]="steps"></app-double-range>
+                <app-double-range
+                  [min]="min"
+                  [max]="max"
+                  [steps]="steps"
+                ></app-double-range>
               </div>
 
               <div style="margin-top: 30px" *ngIf="activeFilter == 1">
-                <div style="display: flex;justify-content: space-between">
+                <div style="display: flex; justify-content: space-between">
                   <h6>Area range</h6>
-                  <h6>{{min}}m2 - {{max}}m2</h6>
+                  <h6>{{ min }}m2 - {{ max }}m2</h6>
                 </div>
-                <app-double-range [min]="min" [max]="max" [steps]="steps"></app-double-range>
+                <app-double-range
+                  [min]="min"
+                  [max]="max"
+                  [steps]="steps"
+                ></app-double-range>
               </div>
 
               <div style="margin-top: 30px" *ngIf="activeFilter == 3">
@@ -166,35 +223,35 @@
                 <h6>Baths</h6>
                 <button
                   class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                 >
                   Any
                 </button>
                 <button
                   class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                 >
                   +1
                 </button>
                 <button
                   class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                 >
                   +2
                 </button>
                 <button
                   class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                 >
                   +3
                 </button>
                 <button
                   class="btn option"
-                  style="width: fit-content;border-radius: 8px;margin: 5px"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
                 >
                   +4
@@ -204,46 +261,44 @@
               <div style="margin-top: 30px" *ngIf="activeFilter == 2">
                 <!-- ROOMS-->
                 <h6>Rooms</h6>
-                <div >
+                <div>
                   <button
                     class="btn option"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
                     Studio
                   </button>
                   <button
                     class="btn option"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
                     +1
                   </button>
                   <button
                     class="btn option"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
                     +2
                   </button>
                   <button
                     class="btn option"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
                     +3
                   </button>
                   <button
                     class="btn option"
-                    style="width: fit-content;border-radius: 8px;margin: 5px"
+                    style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
                   >
                     +4
                   </button>
                 </div>
               </div>
-
-
             </div>
             <div class="col-lg-2">
               <button
@@ -257,7 +312,6 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
