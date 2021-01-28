@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth/auth.service';
+import { ExpertService } from '../../services/expert/expert.service';
 import { ProjectService } from '../../services/project/project.service';
 
 @Component({
@@ -11,13 +12,15 @@ import { ProjectService } from '../../services/project/project.service';
   styleUrls: ['./find-experts.component.scss'],
 })
 export class FindExpertsComponent implements OnInit {
-  @Input() area: string;
-  @Input() address: string;
+  area: string;
+  address: string;
   areas: any;
   loading: boolean;
   constructor(
     private authService: AuthService,
-    private projectService: ProjectService
+    private Expert: ExpertService,
+    private Project: ProjectService,
+    private router: Router
   ) {
     this.loading = true;
   }
@@ -26,19 +29,13 @@ export class FindExpertsComponent implements OnInit {
     this.AreasPopulares();
   }
 
-  BuscarCompany(address?, area?) {
-    this.projectService.getExpert(this.address, this.area).subscribe(
-      (data: any) => {
-        this.areas = data.message;
-      },
-      (errorServicio) => {
-        console.log('Ha Ocurrido un error inesperado.');
-      }
-    );
+  BuscarCompany() {
+    console.log("entro");
+    this.router.navigate(['/publish-list/5'], { queryParams: { address: this.address, category: this.area} });
   }
 
   AreasPopulares() {
-    this.projectService.getAreas().subscribe(
+    this.Expert.getAreas().subscribe(
       (data: any) => {
         this.areas = data.areas;
         this.loading = false;
@@ -49,6 +46,7 @@ export class FindExpertsComponent implements OnInit {
       }
     );
   }
+
   filterItemsOfType(type) {
     if (type == 1) {
       return this.areas.filter((areas) => areas.type == 'Services');

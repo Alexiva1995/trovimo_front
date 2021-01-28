@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
+import { ExpertService } from '../../services/expert/expert.service';
 import { OPTIONS } from 'src/app/models/typeOptions';
-
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
@@ -18,6 +18,14 @@ export class PublishListComponent implements OnInit {
   steps = 10;
   viewType = 0;
   projects: Project;
+  category: string = '';
+  address: string = '';
+  type_verification: any = '';
+  company: string = '';
+  services: any;
+  experts: any;
+  emergency: any = 0;
+  load: any;
   filter: any = [];
   price: any = {};
   area: any = {};
@@ -25,14 +33,37 @@ export class PublishListComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private Project: ProjectService,
+    private Expert: ExpertService
   ) {
     this.type = this.route.snapshot.paramMap.get('type');
     console.log(this.type);
+
+    this.route.queryParams.subscribe((params) => {
+      if (params['address']) {
+        this.address = params['address'];
+      }
+      if (params['category']) {
+        this.category = params['category'];
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.getProjects();
+    if (this.type == 5) {
+      this.getServices();
+      this.getExperts(
+        this.address,
+        this.category,
+        this.type_verification,
+        this.company,
+        this.emergency
+      );
+      this.getProjects();
+    } else {
+      this.getProjects();
+    }
   }
 
   getProjects() {
@@ -43,6 +74,17 @@ export class PublishListComponent implements OnInit {
       },
       (err) => {
         this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  getServices() {
+    this.Expert.getAreas().subscribe(
+      (data: any) => {
+        this.services = data.areas;
+      },
+      (errorServicio) => {
+        console.log('Ha Ocurrido un error inesperado.');
       }
     );
   }
@@ -61,5 +103,24 @@ export class PublishListComponent implements OnInit {
     this.price.min = min;
     this.price.max = max;
     console.log(this.price);
+  }
+
+  getExperts(address, category, type_verification, company, emergency) {
+    this.load = 1;
+    this.Expert.getExpert(
+      this.address,
+      this.category,
+      this.type_verification,
+      this.company,
+      this.emergency
+    ).subscribe(
+      (data: any) => {
+        this.experts = data.experts.data;
+        this.load = 0;
+      },
+      (errorServicio) => {
+        console.log('Ha Ocurrido un error inesperado.');
+      }
+    );
   }
 }
