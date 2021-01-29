@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-help-tooltip',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./help-tooltip.component.scss']
 })
 export class HelpTooltipComponent implements OnInit {
-
+  @Input() text = '';
   constructor() { }
 
   ngOnInit(): void {

@@ -26,7 +26,10 @@
             <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px; color: white !important;">Month</span>
             <div style="margin-left: 10px">
 
-              <app-help-tooltip *ngIf="type != 1 && type != 2 && type != 4" ></app-help-tooltip>
+              <app-help-tooltip
+                *ngIf="type != 1 && type != 2 && type != 4"
+                [text]="'If you have doubts where to list your property, please check the FAQ section.'"
+              ></app-help-tooltip>
             </div>
           </div>
         </div>
@@ -117,7 +120,8 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label style="display: flex; justify-content: space-between">Year built <app-help-tooltip></app-help-tooltip></label>
+        <label style="display: flex; justify-content: space-between">Year built
+          <app-help-tooltip [text]="'If you have doubts where to list your property, please check the FAQ section.'"></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
@@ -132,7 +136,8 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label style="display: flex; justify-content: space-between">Year remodeled <app-help-tooltip></app-help-tooltip></label>
+        <label style="display: flex; justify-content: space-between">Year remodeled
+          <app-help-tooltip [text]="'If you have doubts where to list your property, please check the FAQ section.'"></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
