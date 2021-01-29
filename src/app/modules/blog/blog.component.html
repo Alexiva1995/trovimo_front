@@ -16,6 +16,9 @@
         <div class="input-search">
           <div class="input-group">
             <input
+            (keyup.enter)="searchBlog( search.value )"
+            (keyup)="clearSearchBlog( search.value )"
+              #search
               class="form-control py-2 rounded-pill mr-1 pr-5"
               type="search"
               placeholder="Search themes"
@@ -41,7 +44,7 @@
             </picture>
 
             <div class="content">
-              <h6>{{ blog.title }}</h6>
+              <h6><a [routerLink]="[ '/blog', blog.id ]">{{ blog.title }}</a></h6>
               <p [innerHtml]="blog.content | safeHtml"></p>
               <div class="date">
                 <i class="far fa-calendar"></i>
@@ -51,17 +54,41 @@
           </div>
         </li>
       </ul>
+      <div *ngIf="loading" class="row">
+        <div class="col-12">
+          <h3 class="text-center p-5">Loading...</h3>
+        </div>
+      </div>
+      <div *ngIf="blogsData?.data.length === 0" class="row">
+        <div class="col-12">
+          <h3 class="text-center p-5">No results found for: {{ searchValue }}</h3>
+        </div>
+      </div>
     </div>
     <div class="col-lg-4">
       <div class="menu">
         <ul>
-          <li class="active">All Topics</li>
-          <li>Home improvement</li>
-          <li>Financing</li>
-          <li>Tips & Advice</li>
-          <li>Green Living</li>
-          <li>Decoration</li>
-          <li>Trends</li>
+          <li 
+          (click)="searchByCategory(0)" 
+          [ngClass]="{'active': currentCategory === 0}">All Topics</li>
+          <li
+          (click)="searchByCategory(5)" 
+          [ngClass]="{'active': currentCategory === 5}">Home improvement</li>
+          <li
+          (click)="searchByCategory(1)" 
+          [ngClass]="{'active': currentCategory === 1}">Financing</li>
+          <li
+          (click)="searchByCategory(6)" 
+          [ngClass]="{'active': currentCategory === 6}">Tips & Advice</li>
+          <li
+          (click)="searchByCategory(2)" 
+          [ngClass]="{'active': currentCategory === 2}">Green Living</li>
+          <li
+          (click)="searchByCategory(4)" 
+          [ngClass]="{'active': currentCategory === 4}">Decoration</li>
+          <li
+          (click)="searchByCategory(3)" 
+          [ngClass]="{'active': currentCategory === 3}">Trends</li>
         </ul>
       </div>
     </div>
