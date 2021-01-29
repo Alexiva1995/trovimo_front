@@ -10,10 +10,10 @@ import {
   FacebookLoginProvider,
   GoogleLoginProvider,
   SocialAuthService,
+  SocialUser,
 } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
-
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -21,8 +21,10 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class SignInComponent implements OnInit {
   form: FormGroup;
-  user: any;
-  loggedIn: any;
+  user: SocialUser;
+  //loggedIn: any;
+  loggedIn: boolean;
+
   submitted = false;
   constructor(
     private socialAuthService: SocialAuthService,
@@ -33,14 +35,22 @@ export class SignInComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.socialAuthService.initState.subscribe(
+      () => {},
+      console.error,
+      () => {
+        console.log('all providers are ready');
+      }
+    );
+    this.socialAuthService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = user != null;
+      console.log(this.user);
+    });
     this.form = this.fb.group({
       email: new FormControl('admin@gmail.com', [Validators.required]),
       password: new FormControl('123456789', [Validators.required]),
       rememberme: new FormControl(false),
-    });
-    this.socialAuthService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = user != null;
     });
   }
   loginWithFacebook(): void {
@@ -55,16 +65,17 @@ export class SignInComponent implements OnInit {
         };
         this.authService.alterLogin(data).subscribe(
           (response) => {
-            if (!response.user) {
-              this.toastr.error('User not found');
-            } else {
-              this.toastr.success('Welcome');
-              localStorage.setItem('access_token', response.access_token);
-              localStorage.setItem('user', JSON.stringify(response.user));
+            this.toastr.success('Welcome');
+            localStorage.setItem(
+              'access_token',
+              response.original.access_token
+            );
+            localStorage.setItem(
+              'user',
+              JSON.stringify(response.original.user)
+            );
 
-              window.location.reload();
-            }
-            this.form.enable();
+            window.location.reload();
           },
           (err) => {
             this.form.enable();
@@ -87,16 +98,17 @@ export class SignInComponent implements OnInit {
         this.form.disable();
         this.authService.alterLogin(data).subscribe(
           (response) => {
-            if (!response.user) {
-              this.toastr.error('User not found');
-            } else {
-              this.toastr.success('Welcome');
-              localStorage.setItem('access_token', response.access_token);
-              localStorage.setItem('user', JSON.stringify(response.user));
-              window.location.reload();
-            }
-            this.form.enable();
-            console.log(res);
+            this.toastr.success('Welcome');
+            localStorage.setItem(
+              'access_token',
+              response.original.access_token
+            );
+            localStorage.setItem(
+              'user',
+              JSON.stringify(response.original.user)
+            );
+
+            window.location.reload();
           },
           (err) => {
             this.form.enable();
@@ -131,7 +143,7 @@ export class SignInComponent implements OnInit {
       }
     );
   }
-  get getForm(): any{
+  get getForm(): any {
     return this.form.controls;
   }
 }

@@ -1,4 +1,4 @@
-<div class="filters">
+<div class="filters" *ngIf="type < 5">
   <div class="container-fluid">
     <div style="display: flex; align-items: center">
       <div style="margin: 0 auto">
@@ -23,18 +23,19 @@
             alt=""
           />
         </button>
-        <button
+        <select
           class="btn option"
           [ngClass]="{ active: openFilter == 1 }"
           style="width: fit-content; border-radius: 8px"
           type="button"
-          (click)="openFilter = 1"
           id="dropdownForm1"
           ngbDropdownToggle
         >
-          Residential
+          <option>Residential</option>
+          <option>Commercial</option>
+
           <img src="../../../assets/images/icons_filters/cama.svg" alt="" />
-        </button>
+        </select>
         <button
           class="btn option"
           [ngClass]="{ active: openFilter == 2 }"
@@ -77,9 +78,8 @@
           (click)="openFilter = 5"
         >
           Type
-          <i class="fas fa-sort-down"></i>
         </button>
-        <button
+        <!--     <button
           class="btn option"
           [ngClass]="{ active: openFilter == 6 }"
           style="width: fit-content; border-radius: 8px"
@@ -91,9 +91,9 @@
             src="../../../assets/images/icons_filters/Icon%20awesome-filter.svg"
             alt=""
           />
-        </button>
+        </button> -->
         <button
-          class="btn option icon-only"
+          class="btn option"
           style="
             width: fit-content;
             border-radius: 8px;
@@ -137,14 +137,19 @@
         left: 20%;
       "
       *ngIf="openFilter == 0"
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
     >
       <div style="display: flex; justify-content: space-between">
         <h6>Price range</h6>
-        <h6>${{ min }} - ${{ max }}</h6>
+        <h6>${{ price.min }} - ${{ price.max }}</h6>
       </div>
       <div>
-        <app-double-range [min]="0" [max]="100" [steps]="1"></app-double-range>
+        <app-double-range
+          [min]="min"
+          [max]="max"
+          [steps]="steps"
+          (setValue)="setPrice($event.min, $event.max)"
+        ></app-double-range>
       </div>
     </div>
 
@@ -156,17 +161,18 @@
         left: 20%;
         left: 57%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 4"
     >
       <div style="display: flex; justify-content: space-between">
         <h6>Area range</h6>
-        <h6>{{ min }}m2 - {{ max }}m2</h6>
+        <h6>{{ area.min }}m2 - {{ area.max }}m2</h6>
       </div>
       <app-double-range
         [min]="min"
         [max]="max"
         [steps]="steps"
+        (setValue)="setArea($event.min, $event.max)"
       ></app-double-range>
     </div>
 
@@ -177,7 +183,7 @@
         position: relative;
         left: 28%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 1"
     >
       <!-- BATHS-->
@@ -186,6 +192,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = null"
+        [class.active]="filter.bath == null"
       >
         Any
       </button>
@@ -226,7 +234,7 @@
         position: relative;
         left: 48%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 3"
     >
       <!-- BATHS-->
@@ -235,6 +243,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = null"
+        [class.active]="filter.bath == null"
       >
         Any
       </button>
@@ -242,6 +252,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 1"
+        [class.active]="filter.bath == 1"
       >
         +1
       </button>
@@ -249,6 +261,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 2"
+        [class.active]="filter.bath == 2"
       >
         +2
       </button>
@@ -256,6 +270,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 3"
+        [class.active]="filter.bath == 3"
       >
         +3
       </button>
@@ -263,6 +279,8 @@
         class="btn option"
         style="width: fit-content; border-radius: 8px; margin: 5px"
         type="button"
+        (click)="filter.bath = 4"
+        [class.active]="filter.bath == 4"
       >
         +4
       </button>
@@ -274,7 +292,7 @@
         position: relative;
         left: 39%;
       "
-      class="shadow-lg p-3 mb-5 bg-white"
+      class="shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 2"
     >
       <!-- ROOMS-->
@@ -284,6 +302,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = null"
+          [class.active]="filter.room == null"
         >
           Studio
         </button>
@@ -291,6 +311,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 1"
+          [class.active]="filter.room == 1"
         >
           +1
         </button>
@@ -298,6 +320,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 2"
+          [class.active]="filter.room == 2"
         >
           +2
         </button>
@@ -305,6 +329,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 3"
+          [class.active]="filter.room == 3"
         >
           +3
         </button>
@@ -312,15 +338,38 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
+          (click)="filter.room = 4"
+          [class.active]="filter.room == 4"
         >
           +4
         </button>
       </div>
     </div>
   </div>
+  <div
+    class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
+    *ngIf="openFilter == 5"
+  >
+    <div class="container">
+      <div class="col-lg-12">
+        <h6>Type</h6>
+        <div style="display: flex; flex-wrap: wrap">
+          <div *ngFor="let item of options" style="order: 5">
+            <button
+              class="btn option oprincipal"
+              style="width: fit-content; border-radius: 8px; margin: 5px"
+              type="button"
+            >
+              <img [src]="item.icon" alt="" />{{ item.label }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" *ngIf="type < 5">
   <div class="row">
     <div class="col-lg-6" *ngIf="viewType == 0">
       <div style="display: flex; justify-content: space-between">
@@ -330,9 +379,9 @@
         </div>
         <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (high to low)">Price (high to low)</option>
+          <option value="Area(low to high)">Area(low to high)</option>
+          <option value="Area (high to low)">Area (high to low)</option>
         </select>
       </div>
 
@@ -371,5 +420,160 @@
       </div>
     </div>
     <div class="col-lg-6" *ngIf="viewType == 0"></div>
+  </div>
+</div>
+
+<div
+  class="container-fluid"
+  style="background-color: #d8d8d8"
+  *ngIf="type == 5"
+>
+  <div class="row pt-3 pb-3">
+    <div
+      class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12"
+      style="padding-left: 10%"
+    >
+      <input
+        type="text"
+        placeholder="constructoras"
+        style="width: 80%; border-radius: 50px"
+        [(ngModel)]="company"
+        (change)="
+          getExperts(address, category, type_verification, company, emergency)
+        "
+      />
+    </div>
+    <div class="col-lg-5 col-md-5 col-sm-12 text-right">
+      <p>
+        Find Experts/ <b>{{ experts?.length }} Results for "Constructs"</b>
+      </p>
+    </div>
+    <div class="col-lg-1 col-sm-12"></div>
+  </div>
+</div>
+
+<div class="container-fluid pt-3 pb-3" *ngIf="type == 5">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <div class="row pt-2 pb-2">
+        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+          <input
+            type="text"
+            placeholder="Location"
+            class="form-control"
+            style="display: inline; height: 30px"
+            [(ngModel)]="address"
+            (change)="
+              getExperts(
+                address,
+                category,
+                type_verification,
+                company,
+                emergency
+              )
+            "
+          />
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+          <select
+            class="form-control"
+            style="display: inline; height: 30px"
+            [(ngModel)]="category"
+            (change)="
+              getExperts(
+                address,
+                category,
+                type_verification,
+                company,
+                emergency
+              )
+            "
+          >
+            <option value="" selected disabled>Category</option>
+            <option value="{{ service.id }}" *ngFor="let service of services">
+              {{ service.services }}
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+          <select
+            class="form-control"
+            style="display: inline; height: 30px"
+            [(ngModel)]="type_verification"
+            (change)="
+              getExperts(
+                address,
+                category,
+                type_verification,
+                company,
+                emergency
+              )
+            "
+          >
+            <option value="" selected disabled>Verification</option>
+            <option value="">All</option>
+            <option value="2">Only companies</option>
+            <option value="1">Only Professionals</option>
+            <option value="3">Companies verified</option>
+            <option value="4">User Verified</option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6 text-left">
+          <input
+            type="checkbox"
+            value="1"
+            style="display: inline"
+            [(ngModel)]="emergency"
+            (change)="
+              getExperts(
+                address,
+                category,
+                type_verification,
+                company,
+                emergency
+              )
+            "
+          />
+          24/7 Emergency moments
+        </div>
+        <div class="col-lg-1 col-md-6 col-sm-6 text-left"></div>
+        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+          <select class="form-control" style="display: inline; height: 30px">
+            <option value="">Most recent</option>
+            <option value="">Review - Low to high</option>
+            <option value="">Review - High to low</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="type == 5 && load != 1">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="row">
+        <div
+          class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12"
+          *ngFor="let item of experts"
+        >
+          <app-publish-card
+            [type]="type"
+            [data]="item"
+            *ngIf="item"
+          ></app-publish-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" *ngIf="type == 5 && load == 1">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
   </div>
 </div>
