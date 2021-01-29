@@ -393,7 +393,11 @@
             *ngIf="item"
           ></app-publish-card>
         </div>
+
       </div>
+    </div>
+    <div class="col-6">
+      <app-map [lng]="-73.129056" [lat]="3.06508799999999"></app-map>
     </div>
     <div class="col-lg-4" *ngIf="viewType == 1">
       <div style="display: flex; justify-content: space-between">
@@ -565,6 +569,9 @@
             *ngIf="item"
           ></app-publish-card>
         </div>
+      </div>
+      <div class="col-lg-6">
+
       </div>
     </div>
   </div>
