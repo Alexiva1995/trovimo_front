@@ -82,7 +82,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '63126014045-cov6re06h38audhm3svsuv3d8vuu1p68.apps.googleusercontent.com'
+              '554617053953-j8aeab5hksu9c63f8mqqa7i5dlh2dltv.apps.googleusercontent.com'
             ),
           },
           {
