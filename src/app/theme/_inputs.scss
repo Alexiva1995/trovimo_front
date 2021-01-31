@@ -165,3 +165,19 @@ padding-left: 0rem !important;
 .form-check-inline {
   margin-right: 0rem !important;
 }
+
+.autocomplete-container .input-container input {
+  font-size: 14px;
+  box-sizing: border-box;
+  border: none;
+  box-shadow: none !important;
+  outline: 0;
+  background-color: #fff;
+  color: rgba(0,0,0,.87);
+  width: 100%;
+  padding: 0 15px;
+  line-height: 40px;
+  height: 45px !important;
+  border: 2px solid $primary !important;
+  border-radius: .3em !important;
+}

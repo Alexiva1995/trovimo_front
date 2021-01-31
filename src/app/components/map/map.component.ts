@@ -12,7 +12,7 @@ export class MapComponent implements OnInit {
   constructor(private mapService: MapService) { }
 
   ngOnInit(): void {
-    this.mapService.buildMap(0, this.lng, this.lat);
+    this.mapService.buildMap(7, this.lng, this.lat);
   }
 
 }

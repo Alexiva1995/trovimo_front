@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import {AuthService} from '../../services/auth/auth.service';
 import {ProjectService} from '../../services/project/project.service';
 import {DetailInfo} from '../../models/detail-info';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-new-publish',
@@ -22,7 +23,8 @@ export class NewPublishComponent implements OnInit {
   videosReader = [];
   constructor(
     private authService: AuthService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +65,37 @@ export class NewPublishComponent implements OnInit {
       (this.page === 2 && this.images.length <= 0);
   }
   async onSave() {
+    let typeName = '';
+    let videoTypeName = '';
+    let imageTypeName = '';
+    let detailTypeName = '';
+    let typeId = '';
+    switch (this.mainInfo.category_id) {
+      case 3: {
+        typeName = 'new-shared-space';
+        videoTypeName = 'add-video-shared-space';
+        imageTypeName = 'add-photo-shared-space';
+        detailTypeName = 'optional-shared-space';
+        typeId = 'shared_space_id';
+        break;
+      }
+      case 4: {
+        typeName = 'new-project';
+        videoTypeName = 'add-video-project';
+        imageTypeName = 'add-photo-project';
+        detailTypeName = 'optional-project';
+        typeId = 'project_id';
+        break;
+      }
+      default: {
+        typeName = 'new-product';
+        videoTypeName = 'add-video-product';
+        imageTypeName = 'add-photo-product';
+        detailTypeName = 'optional-product';
+        typeId = 'product_id';
+        break;
+      }
+    }
     if (!this.authService.isLogged()) {
       Swal.fire({
         icon: 'error',
@@ -79,7 +112,7 @@ export class NewPublishComponent implements OnInit {
         Swal.update({
           text: 'Saving data project'
         });
-        this.projectService.createProject(this.mainInfo, 'new-product')
+        this.projectService.createProject(this.mainInfo, typeName)
           .subscribe( async (response) => {
             const id = response.message.id;
             Swal.update({
@@ -88,8 +121,8 @@ export class NewPublishComponent implements OnInit {
             for await (const video of this.videos) {
               const formData = new FormData();
               formData.append('video', video);
-              formData.append('product_id', id);
-              this.projectService.uploadVideo(formData, 'add-video-product').subscribe(responseVideo => {
+              formData.append(typeId, id);
+              this.projectService.uploadVideo(formData, videoTypeName ).subscribe(responseVideo => {
                 console.log(responseVideo);
               }, err => {
                 Swal.fire({
@@ -101,8 +134,8 @@ export class NewPublishComponent implements OnInit {
             for await (const image of this.images) {
               const formData = new FormData();
               formData.append('photo', image);
-              formData.append('product_id', id);
-              this.projectService.uploadImage(formData, 'add-photo-product').subscribe(responseImage => {
+              formData.append(typeId, id);
+              this.projectService.uploadImage(formData, imageTypeName).subscribe(responseImage => {
                 console.log(responseImage);
               }, err => {
                 Swal.fire({
@@ -114,12 +147,17 @@ export class NewPublishComponent implements OnInit {
             Swal.update({
               text: 'Saving detail information'
             });
-            this.detail.product_id = id;
-            this.projectService.saveDetailInfo(this.detail, 'optional-product').subscribe(responseDetail=> {
+            this.detail[typeId] = id;
+            this.projectService.saveDetailInfo(this.detail, detailTypeName).subscribe(responseDetail=> {
             });
             Swal.fire({
               title: 'Your project has been created successfully',
               icon: 'success'
+            }).then((result) => {
+              /* Read more about isConfirmed, isDenied below */
+              if (result.isConfirmed) {
+                this.router.navigate( ['publish-detail']);
+              }
             });
         }, err => {
             Swal.fire({

@@ -50,7 +50,7 @@ const routes: Routes = [
     component: FindExpertsComponent,
   },
   {
-    path: 'publish-list/:type',
+    path: 'publish-list/:type/:option',
     component: PublishListComponent,
   },
   {

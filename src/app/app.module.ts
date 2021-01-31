@@ -24,6 +24,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
@@ -48,6 +49,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     ProfessionalGroupComponent,
     ProjectCardComponent,
     SafeHtmlPipe,
+
   ],
   imports: [
     NGX_MODULES,
@@ -62,6 +64,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     IvyCarouselModule,
     ReactiveFormsModule,
     NgxSliderModule,
+    AutocompleteLibModule,
     SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
       loader: {

@@ -22,7 +22,8 @@ export class MaininfoComponent implements OnInit {
   years = [];
   videoUrl: string;
   coordinates = '';
-  showCoordinates = false
+  keyword = 'place_name';
+  data = [];
   constructor(
     private sanitizer: DomSanitizer,
     private mapService: MapService
@@ -121,7 +122,7 @@ export class MaininfoComponent implements OnInit {
         break;
       }
       case 'Switzerland': {
-        this.mapService.changeCenterMap('17.6754094331351', '64.9648751621697');
+        this.mapService.changeCenterMap('8.23439191387853', '46.8024955829499');
         this.mainInfo.city = '';
         this.mainInfo.postal_code = '';
         break;
@@ -134,5 +135,22 @@ export class MaininfoComponent implements OnInit {
   }
   addProperty(): void {
     this.mainInfo.typesp.push(new TypeProperty());
+  }
+  onChangeSearch(searchText): void {
+    this.mapService.getPointBySearch(searchText).subscribe(
+      response => {
+        console.log(response);
+        this.mainInfo.city = searchText;
+        this.data = response.features;
+      }
+    );
+  }
+  selectEvent(event): void {
+    console.log(event);
+    this.mainInfo.lon = event.center[0];
+    this.mainInfo.lat = event.center[1];
+    console.log(this.coordinates);
+    this.mainInfo.city = event.place_name;
+    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
   }
 }
