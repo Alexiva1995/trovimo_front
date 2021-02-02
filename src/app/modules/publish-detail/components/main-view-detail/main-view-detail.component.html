@@ -5,19 +5,23 @@
       <div class="header-box">
         <div class="container-box">
             <div class="container-buttons">
-                <button class="btn-top-custom">
+                <button class="btn-top-custom"
+                (click)="selection(0)">
                 <i class="fas fa-camera"></i>
                 Photos
               </button>
-                <button class="btn-top-custom">
+                <button class="btn-top-custom"
+                (click)="selection(1)">
                 <i class="fas fa-video"></i>
                 Videos
               </button>
-                <button class="btn-top-custom">
+                <button class="btn-top-custom"
+                (click)="selection(2)">
                 <i class="fas fa-map"></i>
                 Map
               </button>   
-              <button class="btn-top-custom">
+              <button class="btn-top-custom"
+              (click)="goto(products.tour)">
                 <i class="fas fa-print"></i>
                 Tour 360
               </button>
@@ -26,14 +30,17 @@
             
             <div class="container-shared">
                 <button style="border: none;"
+                (click)="favorite()"
                 class="rounded-circle">
                 <i class="far fa-heart"></i>
               </button>
                 <button  style="border: none;"
+                (click)="shared()"
                 class="rounded-circle">
                 <i class="fas fa-share-alt"></i>
               </button>
                 <button  style="border: none;"
+                (click)="print()"
                 class="rounded-circle">
                 <i class="fas fa-print"></i>
               </button>
@@ -42,38 +49,51 @@
       </div>
     
         <!-- body -->
-      <carousel style="height:600px; z-index: 1;" [cellsToShow]="1" >
-          <img src="/assets/images/login-splash.png" alt="svg" />
-          <img src="/assets/images/login-splash.png" alt="svg" />
-          <img src="/assets/images/login-splash.png" alt="svg" />
-          <img src="/assets/images/login-splash.png" alt="svg" />
-      </carousel>
+        <ng-container *ngIf="image">
+          <carousel style="height:600px; z-index: 1;" [cellsToShow]="1" >
+              <div class="carousel-cell" *ngFor="let item of photos">
+                <img style="object-fit: cover;" src="http://trovimo.com/api/uploads/products/images/{{item}}" alt="svg" />
+              </div>
+          </carousel>
+        </ng-container>
+        <ng-container *ngIf="video">
+          <div style="height: 600px;">
+            <iframe width="100%" height="600" [src]="videoURL" frameborder="0" allowfullscreen></iframe>
+          </div>
+
+        </ng-container>
+        <ng-container *ngIf="map">
+           <app-map [lng]="products.lon" [lat]="products.lat"> </app-map>
+        </ng-container>
+
+              
     
       <!-- footer -->
       <div class="container-footer-box">
         <!-- 1 pagina vista inmuebles detalle (BUY / RENT)-->
         <div style="display: flex;">
           <div class="container-price">
-              <p style="display: inline; margin-right: 2rem; margin-left: 2rem; font-weight: bold;">$500.000</p>
+              <p style="display: inline; margin-right: 2rem; margin-left: 2rem; font-weight: bold;">
+                ${{products.price}}</p>
           </div>
           <div class="container-pieces">
             <p style="display: inline;"> 
               <img src="../../../../../assets/images/publish/cama.svg" alt="">
-            3 Pieces</p>
+              {{products.rooms}}</p>
           </div>
         </div>
         
         <div class="container-statistics">
-          <p style="display: inline;">150m2</p>
+          <p style="display: inline;">{{products.area}}m2</p>
           <p style="display: inline;"> 
             <img src="../../../../../assets/images/publish/cama.svg" alt="">
-          4</p>
+            {{products.n_pieces}}</p>
           <p style="display: inline;"> 
             <img src="../../../../../assets/images/publish/banera.svg" alt="">
-          2</p>
+            {{products.bath}}</p>
           <p style="display: inline;"> 
             <img src="../../../../../assets/images/publish/Icon awesome-car-alt.svg" alt="">
-          1</p>
+            {{products.parking_spots}}</p>
         </div>
 
 

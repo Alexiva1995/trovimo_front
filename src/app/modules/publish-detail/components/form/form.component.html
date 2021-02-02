@@ -8,13 +8,14 @@
     </button>
 
     <!-- Formulario -->
-    <form  >
+    <form  [formGroup]="formGroup">
       <div class="form-group">
         <label for="exampleInputEmail1">Your full name</label>
         <input
           type="text"
           class="form-control"
           placeholder="Enter name"
+          formControlName="name"
         />
       </div>
       <div class="form-group">
@@ -22,13 +23,15 @@
         <input
           type="email"
           class="form-control"
+          formControlName="email"
           placeholder="Enter email"
         />
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Phone Number (optional)</label>
         <input
-          type="email"
+          type="number"
+          formControlName="phone"
           class="form-control"
           placeholder="Enter number"
         />
@@ -40,6 +43,7 @@
         cols="5"
         required
         rows="5"
+        formControlName="message"
       ></textarea>
       </div>
 
@@ -47,6 +51,8 @@
         style="margin-top: 20px; border-radius: 30px"
         type="submit"
         class="btn btn-primary mb-4"
+        [disabled]="formGroup.status == 'INVALID'"
+        (click)="sendform()"
       >
          Send
       </button>
@@ -62,10 +68,18 @@
           <div style="width: 50%;">
               <h4 style="color: white; text-align: center; font-size: 16px;">Bemsa Propiedad Raíz</h4>
               <div class="container-sub-box">
-                  <img src="https://via.placeholder.com/40x40" class="rounded-circle">
-                  <img src="https://via.placeholder.com/40x40" class="rounded-circle">
-                  <img src="https://via.placeholder.com/40x40" class="rounded-circle">
-                  <img src="https://via.placeholder.com/40x40" class="rounded-circle">
+                <span class="box-icon">
+                  <img style="width:21px; margin: 1px;"   src="../../../../../assets/images/publish/Icon feather-message-square.svg" alt="">
+                </span>
+                <span class="box-icon">
+                  <img style="width:21px; margin: 1px;"   src="../../../../../assets/images/publish/Icon feather-phone-call.svg" alt="">
+                </span>
+                <span class="box-icon">
+                  <img style="width:21px; margin: 1px;"   src="../../../../../assets/images/publish/global.svg" alt="">
+                </span>
+                <span class="box-icon2">
+                  <img style="width:21px; margin: 1px;"   src="../../../../../assets/images/publish/Icon feather-check-circle.svg" alt="">
+                </span>
               </div>
           </div>
       </div>

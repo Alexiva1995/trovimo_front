@@ -1,3 +1,7 @@
+.container-fluid {
+  padding-left: 0px !important;
+}
+
 .container-box {
   display: flex;
   justify-content: space-between;
@@ -24,6 +28,7 @@
   padding-top: 6px;
   padding-bottom: 6px;
   border: none;
+  outline: none;
 }
 
 .btn-top-custom:hover {
