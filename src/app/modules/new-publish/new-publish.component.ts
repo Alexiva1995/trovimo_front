@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {MainInfo} from '../../models/main-info';
+import { MainInfo } from '../../models/main-info';
 import Swal from 'sweetalert2';
-import {AuthService} from '../../services/auth/auth.service';
-import {ProjectService} from '../../services/project/project.service';
-import {DetailInfo} from '../../models/detail-info';
-import {Router} from '@angular/router';
+import { AuthService } from '../../services/auth/auth.service';
+import { ProjectService } from '../../services/project/project.service';
+import { DetailInfo } from '../../models/detail-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-publish',
   templateUrl: './new-publish.component.html',
-  styleUrls: ['./new-publish.component.scss']
+  styleUrls: ['./new-publish.component.scss'],
 })
 export class NewPublishComponent implements OnInit {
   page = 1;
@@ -25,16 +25,14 @@ export class NewPublishComponent implements OnInit {
     private authService: AuthService,
     private projectService: ProjectService,
     private router: Router
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setPage(i: number): void {
     this.page = i;
     if (i === 2 && !this.mainInfo) {
       this.mainInfo = new MainInfo(this.type, this.optionType);
-
     }
     if (i === 3 && !this.detail) {
       this.detail = new DetailInfo();
@@ -42,9 +40,12 @@ export class NewPublishComponent implements OnInit {
   }
   setNamePage(): string {
     switch (this.page) {
-      case 1: return 'Publish';
-      case 2: return 'Main info';
-      case 3: return 'Details';
+      case 1:
+        return 'Publish';
+      case 2:
+        return 'Main info';
+      case 3:
+        return 'Details';
       default:
         return 'publish';
     }
@@ -61,8 +62,10 @@ export class NewPublishComponent implements OnInit {
     }
   }
   disableBtn(): boolean {
-    return (this.page === 1 && this.optionType === 0) ||
-      (this.page === 2 && this.images.length <= 0);
+    return (
+      (this.page === 1 && this.optionType === 0) ||
+      (this.page === 2 && this.images.length <= 0)
+    );
   }
   async onSave() {
     let typeName = '';
@@ -102,6 +105,7 @@ export class NewPublishComponent implements OnInit {
         title: 'Authentication required',
         text: 'You need log in to create a project',
       });
+      this.router.navigateByUrl('/auth/sign-in');
       return;
     }
     Swal.fire({
@@ -110,62 +114,75 @@ export class NewPublishComponent implements OnInit {
       didOpen: () => {
         Swal.showLoading();
         Swal.update({
-          text: 'Saving data project'
+          text: 'Saving data project',
         });
-        this.projectService.createProject(this.mainInfo, typeName)
-          .subscribe( async (response) => {
+        this.projectService.createProject(this.mainInfo, typeName).subscribe(
+          async (response) => {
             const id = response.message.id;
             Swal.update({
-              text: 'Uploading multimedia files'
+              text: 'Uploading multimedia files',
             });
             for await (const video of this.videos) {
               const formData = new FormData();
               formData.append('video', video);
               formData.append(typeId, id);
-              this.projectService.uploadVideo(formData, videoTypeName ).subscribe(responseVideo => {
-                console.log(responseVideo);
-              }, err => {
-                Swal.fire({
-                  title: 'An error ocurred',
-                  icon: 'error'
-                });
-              });
+              this.projectService
+                .uploadVideo(formData, videoTypeName)
+                .subscribe(
+                  (responseVideo) => {
+                    console.log(responseVideo);
+                  },
+                  (err) => {
+                    Swal.fire({
+                      title: 'An error ocurred',
+                      icon: 'error',
+                    });
+                  }
+                );
             }
             for await (const image of this.images) {
               const formData = new FormData();
               formData.append('photo', image);
               formData.append(typeId, id);
-              this.projectService.uploadImage(formData, imageTypeName).subscribe(responseImage => {
-                console.log(responseImage);
-              }, err => {
-                Swal.fire({
-                  title: 'An error ocurred',
-                  icon: 'error'
-                });
-              });
+              this.projectService
+                .uploadImage(formData, imageTypeName)
+                .subscribe(
+                  (responseImage) => {
+                    console.log(responseImage);
+                  },
+                  (err) => {
+                    Swal.fire({
+                      title: 'An error ocurred',
+                      icon: 'error',
+                    });
+                  }
+                );
             }
             Swal.update({
-              text: 'Saving detail information'
+              text: 'Saving detail information',
             });
             this.detail[typeId] = id;
-            this.projectService.saveDetailInfo(this.detail, detailTypeName).subscribe(responseDetail=> {
-            });
+            this.projectService
+              .saveDetailInfo(this.detail, detailTypeName)
+              .subscribe((responseDetail) => {});
             Swal.fire({
               title: 'Your project has been created successfully',
-              icon: 'success'
+              icon: 'success',
             }).then((result) => {
               /* Read more about isConfirmed, isDenied below */
               if (result.isConfirmed) {
-                this.router.navigate( ['publish-detail']);
+                this.router.navigate(['publish-detail']);
               }
             });
-        }, err => {
+          },
+          (err) => {
             Swal.fire({
               title: 'An error ocurred',
-              icon: 'error'
+              icon: 'error',
             });
-          });
-      }
+          }
+        );
+      },
     });
   }
 }

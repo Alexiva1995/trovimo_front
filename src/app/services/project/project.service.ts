@@ -31,6 +31,7 @@ export class ProjectService {
       headers,
     });
   }
+
   createProject(data, typeName): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -134,6 +135,7 @@ export class ProjectService {
       }
     );
   }
+
   searchProducts(filter, reqOpts: any = []) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,

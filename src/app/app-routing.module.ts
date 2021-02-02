@@ -36,10 +36,9 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
-      {path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] },
-      {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] }
-    ]
-
+      { path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] },
+      { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
+    ],
   },
   {
     path: 'account-profile',
@@ -91,7 +90,7 @@ const routes: Routes = [
     path: 'blog/:id',
     component: BlogDetailComponent,
   },
-  {path: '**', redirectTo: ''}
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
