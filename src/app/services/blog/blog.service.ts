@@ -21,8 +21,17 @@ export class BlogService {
   getBlogById(id: any){
 
     return this.http.get( this.api + '/blogs/' + id );
-    
+
   }
 
+  searchBlog( value: any ){
+
+    return this.http.get( this.api + `/blogs?title=${ value }&content=${ value }`);
+
+  }
+
+  searchByCategory( value ){
+    return this.http.get( this.api   + `/blogs/?category_id=${ value }`);
+  }
 
 }

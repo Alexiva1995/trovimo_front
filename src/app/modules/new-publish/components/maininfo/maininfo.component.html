@@ -26,7 +26,10 @@
             <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px; color: white !important;">Month</span>
             <div style="margin-left: 10px">
 
-              <app-help-tooltip *ngIf="type != 1 && type != 2 && type != 4" ></app-help-tooltip>
+              <app-help-tooltip
+                *ngIf="type != 1 && type != 2 && type != 4"
+                [text]="'If you have doubts where to list your property, please check the FAQ section.'"
+              ></app-help-tooltip>
             </div>
           </div>
         </div>
@@ -117,7 +120,8 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label style="display: flex; justify-content: space-between">Year built <app-help-tooltip></app-help-tooltip></label>
+        <label style="display: flex; justify-content: space-between">Year built
+          <app-help-tooltip [text]="'If you have doubts where to list your property, please check the FAQ section.'"></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
@@ -132,7 +136,8 @@
     <div class="col-12 col-sm-6 col-lg-4">
 
       <div class="form-group">
-        <label style="display: flex; justify-content: space-between">Year remodeled <app-help-tooltip></app-help-tooltip></label>
+        <label style="display: flex; justify-content: space-between">Year remodeled
+          <app-help-tooltip [text]="'If you have doubts where to list your property, please check the FAQ section.'"></app-help-tooltip></label>
         <select
           class="form-control-lg form-select"
           style="width: 100%"
@@ -322,14 +327,30 @@
     <div class="col-12 col-lg-4">
       <div class="form-group">
         <label class="required">City</label>
-        <input
+<!--        <input
           [(ngModel)]="mainInfo.city"
           (ngModelChange)="onChange()"
           aria-describedby="emailHelp"
           class="form-control form-control-lg"
           required
           type="text"
-        />
+        />-->
+        <ng-autocomplete
+          [data]="data"
+          [searchKeyword]="keyword"
+          (selected)='selectEvent($event)'
+          (inputChanged)='onChangeSearch($event)'
+          [itemTemplate]="itemTemplate"
+          [notFoundTemplate]="notFoundTemplate">
+        </ng-autocomplete>
+
+        <ng-template #itemTemplate let-item>
+          <a [innerHTML]="item.place_name"></a>
+        </ng-template>
+
+        <ng-template #notFoundTemplate let-notFound>
+          <div [innerHTML]="notFound"></div>
+        </ng-template>
       </div>
     </div>
     <div class="col-12 col-lg-4">
@@ -352,21 +373,12 @@
   <div class="map">
     <!--mapa-->
     <app-map [lng]="mainInfo.lon" [lat]="mainInfo.lat"></app-map>
-    <input [(ngModel)]="coordinates"
-           (ngModelChange)="setCoordinates()"
-           id="ocultInfo" style="font-size: 8px;color: white;border: none"/>
-
     <div style="display: flex; justify-content: flex-end">
-
-      <button class="btn btn-outline-primary" style="width: 10rem;margin: auto;margin-right: 0;" (click)="showCoordinates = !showCoordinates">Coordinates</button>
+      <input [(ngModel)]="coordinates"
+             (ngModelChange)="setCoordinates()"
+             class="form-control-lg"
+             id="ocultInfo"/>
     </div>
-    <div style="">
-      <div
-        *ngIf="showCoordinates"
-        style="width: 30rem;margin: auto;margin-right: 0;"
-      >{{coordinates}}<div>
-    </div>
-
   </div>
 </div>
 
@@ -396,7 +408,7 @@
               <span>Add photos</span>
             </div>
           <div *ngFor="let image of imagesReader; let i = index" style="margin: 10px">
-              <img style="width: 165px;height: 165px" [src]="image" alt="test">
+              <img style="width: 165px" [src]="image" alt="test">
             <div class="image-actions">
               <div class="delete" (click)="removeImage(i)"><i class="far fa-trash-alt"></i></div>
             </div>
@@ -424,10 +436,10 @@
           </div>
           <div *ngFor="let video of videosReader; let i = index" style="margin: 10px;">
             <div *ngIf="!isVideoUrl(i)" style="z-index: 0">
-              <video style="width: 165px;height: 165px;background-color: black" [src]="video" controls></video>
+              <video style="width: 165px;background-color: black" [src]="video" controls></video>
             </div>
             <div *ngIf="isVideoUrl(i)" style="z-index: 0">
-              <iframe width="165" height="165" [src]="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+              <iframe width="165" [src]="video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
             </div>
             <div class="image-actions">
               <div class="delete" (click)="removeVideo(i)"><i class="far fa-trash-alt"></i></div>

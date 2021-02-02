@@ -31,6 +31,7 @@
     "@popperjs/core": "^2.6.0",
     "@sweetalert2/ngx-sweetalert2": "^9.0.0",
     "@types/geojson": "^7946.0.7",
+    "angular-ng-autocomplete": "^2.0.5",
     "angular-responsive-carousel": "^2.0.1",
     "angularx-social-login": "^3.5.2",
     "bootstrap": "^4.5.3",

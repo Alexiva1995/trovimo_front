@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import * as mapBox from 'mapbox-gl';
-import { environment } from '../../../environments/environment';
-import {MapMouseEvent} from 'mapbox-gl';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
+import * as mapBox from 'mapbox-gl';
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +35,6 @@ export class MapService {
       this.marker.setLngLat([e.lngLat.lng, e.lngLat.lat]);
       /* Agrega el valor al input */
       document.getElementById('ocultInfo')["value"] =  e.lngLat.lng + ',' + e.lngLat.lat;
-      document.getElementById('coordinates')["value"] =  lng + ',' + lat;
     });
   }
 
@@ -53,9 +51,12 @@ export class MapService {
       essential: false
     });
     document.getElementById('ocultInfo')["value"] =  lng + ',' + lat;
-    document.getElementById('coordinates')["value"] =  lng + ',' + lat;
   }
-  getPointByCountry(): void {
-
+  getPointBySearch(searchText): Observable<any> {
+    const params = new HttpParams().set('access_token', environment.mapbox.geocodingAccessToken)
+    .set( 'cachebuster', '1612102231988')
+    .set('autocomplete', 'true');
+    console.log(params);
+    return this.http.get(environment.mapbox.geocodingUrl + searchText + '.json', {params});
   }
 }

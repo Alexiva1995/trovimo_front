@@ -13,6 +13,7 @@ export class FindPhotosComponent implements OnInit {
 
   @ViewChild('grid', { static: true }) grid: ElementRef;
 
+  render = true;
   show = true;
   result = null;
   loading = false;
@@ -67,6 +68,8 @@ export class FindPhotosComponent implements OnInit {
     Array.from(this.grid.nativeElement.children).forEach((child: any, i) => {
       this.resizeGridItem(child);
     })
+
+    console.log('aqui')
 
   }
 

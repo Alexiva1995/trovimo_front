@@ -12,12 +12,12 @@ export class AcountProfileComponent implements OnInit {
       router: 'account-profile',
     },
     {
-      name: 'My activity',
-      router: 'account-profile/my-activity',
-    },
-    {
       name: 'My listing',
       router: 'account-profile/my-listing',
+    },
+    {
+      name: 'My activity',
+      router: 'account-profile/my-activity',
     },
     {
       name: 'Photos',

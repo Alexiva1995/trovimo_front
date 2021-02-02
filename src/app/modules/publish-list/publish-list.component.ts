@@ -11,7 +11,7 @@ import { OPTIONS } from 'src/app/models/typeOptions';
   styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
-  type: any;
+  type: number;
   openFilter = -1;
   min = 10;
   max = 10000000;
@@ -34,10 +34,12 @@ export class PublishListComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ProjectService,
     private toastr: ToastrService,
-    private Project: ProjectService,
     private Expert: ExpertService
   ) {
-    this.type = this.route.snapshot.paramMap.get('type');
+    this.type = parseFloat(this.route.snapshot.paramMap.get('type'));
+    this.filter.option = parseFloat(this.route.snapshot.paramMap.get('option'));
+
+    this.filter.type = this.type;
     console.log(this.type);
 
     this.route.queryParams.subscribe((params) => {
@@ -51,18 +53,50 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.type == 5) {
-      this.getServices();
-      this.getExperts(
-        this.address,
-        this.category,
-        this.type_verification,
-        this.company,
-        this.emergency
-      );
-      this.getProjects();
-    } else {
-      this.getProjects();
+    this.getData();
+  }
+
+  getData() {
+    console.log(this.type);
+
+    switch (this.type) {
+      case 1: {
+        this.getServices();
+        this.getProducts();
+        break;
+      }
+      case 2: {
+        this.getServices();
+        this.getProducts();
+        break;
+      }
+      case 3: {
+        this.getServices();
+        this.getSharedSpace();
+        break;
+      }
+      case 4: {
+        this.getServices();
+        this.getProjects();
+        break;
+      }
+      case 5: {
+        this.getServices();
+        this.getExperts(
+          this.address,
+          this.category,
+          this.type_verification,
+          this.company,
+          this.emergency
+        );
+        this.getProjects();
+        break;
+      }
+      default: {
+        this.getServices();
+        this.getProducts();
+        break;
+      }
     }
   }
 
@@ -119,6 +153,28 @@ export class PublishListComponent implements OnInit {
         this.load = 0;
       },
       (errorServicio) => {
+        console.log('Ha Ocurrido un error inesperado.');
+      }
+    );
+  }
+
+  getSharedSpace() {
+    this.service.getSharedSpace(this.filter).subscribe(
+      (res: any) => {
+        this.projects = res.shared_spaces;
+      },
+      (err) => {
+        console.log('Ha Ocurrido un error inesperado.');
+      }
+    );
+  }
+
+  getProducts() {
+    this.service.searchProducts(this.filter).subscribe(
+      (res: any) => {
+        this.projects = res.shared_spaces;
+      },
+      (err) => {
         console.log('Ha Ocurrido un error inesperado.');
       }
     );

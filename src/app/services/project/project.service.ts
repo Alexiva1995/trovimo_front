@@ -50,7 +50,7 @@ export class ProjectService {
     });
   }
 
-  showProjects(params?: any, reqOpts?: any): Observable<any> {
+  showProjects(params?: any, reqOpts: any = []): Observable<any> {
     reqOpts = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -71,7 +71,7 @@ export class ProjectService {
     );
   }
 
-  searchProject(filter?, reqOpts?: any): Observable<any> {
+  searchProject(filter?, reqOpts: any = []): Observable<any> {
     reqOpts = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -112,5 +112,48 @@ export class ProjectService {
     return this.http.post(this.api + '/auth/services/search-expert', formData, {
       headers,
     });
+  }
+
+  getSharedSpace(filter, reqOpts: any = []) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    reqOpts.params = new HttpParams();
+    for (const k in filter) {
+      if (filter[k] !== undefined) {
+        formData.append(k, filter[k]);
+      }
+    }
+    return this.http.post(
+      this.api + '/auth/services/search-shared-space',
+      formData,
+      {
+        headers,
+      }
+    );
+  }
+  searchProducts(filter, reqOpts: any = []) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    if (filter) {
+      reqOpts.params = new HttpParams();
+      for (const k in filter) {
+        if (filter[k] !== undefined) {
+          formData.append(k, filter[k]);
+        }
+      }
+    }
+    return this.http.post(
+      this.api + '/auth/services/search-product',
+      formData,
+      {
+        headers,
+      }
+    );
   }
 }
