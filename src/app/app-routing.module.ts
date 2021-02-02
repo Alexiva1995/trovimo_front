@@ -75,7 +75,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'publish-detail',
+    path: 'publish-detail/:type/:id',
     component: PublishDetailComponent,
   },
 
