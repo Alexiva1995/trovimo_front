@@ -61,9 +61,16 @@ export class PublishListComponent implements OnInit {
         this.emergency
       );
       this.getProjects();
-    } else {
-      this.getProjects();
     }
+      if(this.type == 1){
+        this.getProduct();
+      }
+      if(this.type == 3){
+        this.getShared_spaces();
+      }
+      if(this.type == 4){
+        this.getProject();
+      }
   }
 
   getProjects() {
@@ -78,6 +85,45 @@ export class PublishListComponent implements OnInit {
     );
   }
 
+  getProduct() {
+    console.log("entro");
+    this.service.getProduct().subscribe(
+      (data : any) => {
+        this.projects = data.products;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  getShared_spaces() {
+    console.log("entro");
+    this.service.getShared().subscribe(
+      (data : any) => {
+        this.projects = data.shared_spaces;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+  getProject() {
+    console.log("entro");
+    this.service.getProject().subscribe(
+      (data : any) => {
+        this.projects = data.project;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  
   getServices() {
     this.Expert.getAreas().subscribe(
       (data: any) => {

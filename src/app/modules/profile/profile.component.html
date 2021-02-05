@@ -1,28 +1,161 @@
 <div class="slider">
-  <img src="../../../assets/images/profile/slider.png" alt="slider" />
+    <img src="../../../assets/images/profile/slider.png" alt="slider" />
 </div>
 <div class="menu">
-  <div class="container">
-    <div class="logo"></div>
-    <div class="content">
-      <ul>
-        <li class="active">About us</li>
-        <li>Projects</li>
-        <li>Reviews</li>
-        <li>
-          <div class="tittle">
-            <h6>Arquitectura y Concreto</h6>
-            <span>5.0</span>
-          </div>
-        </li>
-        <li>Publications</li>
-        <li class="actions">
-          <div class="item"><i class="far fa-heart"></i></div>
-          <div class="item"><i class="far fa-comment-alt"></i></div>
-          <div class="item"><i class="fas fa-globe"></i></div>
-        </li>
-      </ul>
+    <div class="container">
+        <div class="content  d-none d-md-block">
+            <div class="row" style="width: 100%;">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sd-4 text-center mt-3">
+                    <ul>
+                        <a href="{{url}}#about" [(ngModel)]="option" (click)="option = 1">
+                            <li [ngClass]="{'active':option == 1}">About us</li>
+                        </a>
+                        <a href="{{url}}#projects" [(ngModel)]="option" (click)="option = 2">
+                            <li [ngClass]="{'active':option == 2}">Projects</li>
+                        </a>
+                        <a href="{{url}}#reviews" [(ngModel)]="option" (click)="option = 3">
+                            <li [ngClass]="{'active':option == 3}">Reviews</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sd-4 text-center">
+                    <ul>
+                        <li>
+                            <div class="tittle text-center">
+                                <div>
+                                    <div class="logo text-center" style="margin-top: -90px;"><img class="avatar" *ngIf="load==0" src="https://trovimo.com/api/uploads/experts_profile/images_profile/{{expert.picture_profile}}" alt=""></div>
+                                </div>
+                                <div>
+                                    <h6>{{expert.company_name}}</h6>
+                                    {{rating_total}}
+                                    <i class="fas fa-star" [ngClass]="{'text-warning':rating_total >= 1}"></i>
+                                    <i class="fas fa-star" [ngClass]="{'text-warning':rating_total >= 2}"></i>
+                                    <i class="fas fa-star" [ngClass]="{'text-warning':rating_total >= 3}"></i>
+                                    <i class="fas fa-star" [ngClass]="{'text-warning':rating_total >= 4}"></i>
+                                    <i class="fas fa-star" [ngClass]="{'text-warning':rating_total >= 5}"></i>
+                                </div>
+
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sd-4 text-center">
+                    <ul>
+                        <li class="actions" *ngIf="load==0">
+                            <div class="item" [ngClass]="{'oculto':!user}" (click)="favorite()"><i class="far fa-heart" [ngClass]="{'text-danger':expert.favorite}"></i></div>
+                            <div class="item" [ngClass]="{'oculto':!user}" data-toggle="modal" data-target="#myModal"><i class="far fa-comment-alt"></i></div>
+                            <div class="item"> <a href="{{expert.url}}"><i class="fas fa-globe text-white"></i></a></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="content  d-block d-md-none">
+            <div class="col-12 text-center">
+                <li>
+                    <div class="tittle text-center">
+                        <div>
+                            <div class="logo text-center" style="margin-top: -90px;"><img class="avatar" *ngIf="load==0" src="https://trovimo.com/api/uploads/experts_profile/images_profile/{{expert.picture_profile}}" alt=""></div>
+                        </div>
+                        <div>
+                            <h6 class="text-white"> {{expert.company_name}}</h6>
+                            <p class="text-white">{{rating_total}}</p>
+                            <i class="fas fa-star text-white" [ngClass]="{'text-warning':rating_total >= 1}"></i>
+                            <i class="fas fa-star text-white" [ngClass]="{'text-warning':rating_total >= 2}"></i>
+                            <i class="fas fa-star text-white" [ngClass]="{'text-warning':rating_total >= 3}"></i>
+                            <i class="fas fa-star text-white" [ngClass]="{'text-warning':rating_total >= 4}"></i>
+                            <i class="fas fa-star text-white" [ngClass]="{'text-warning':rating_total >= 5}"></i>
+                        </div>
+
+                    </div>
+                </li>
+            </div>
+
+            <div class="col-12 text-center text-white">
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <a class="text-white" href="{{url}}#about">
+                        About us
+                        </a>
+                    </div>
+                    <div class="col-4 text-center">
+                        <a class="text-white" href="{{url}}#projects">
+                            Projects
+                        </a>
+                    </div>
+                    <div class="col-4 text-center">
+                        <a class="text-white" href="{{url}}#reviews">
+                            Reviews
+                        </a>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-12 text-center">
+                <div class="row">
+                    <div class="col-4 text-center pt-2"><i [ngClass]="{'oculto':!user}" (click)="favorite()" class="far fa-heart text-white" [ngClass]="{'text-danger':expert.favorite}"> </i></div>
+                    <div class="col-4 text-center pt-2"><i [ngClass]="{'oculto':!user}" data-toggle="modal" data-target="#myModal" class="far fa-comment-alt text-white"> </i></div>
+                    <div class="col-4 text-center pt-2"><a href="{{expert.url}}"><i class="fas fa-globe text-white"> </i></a></div>
+                </div>
+
+            </div>
+        </div>
     </div>
-  </div>
 </div>
-<app-profile-about></app-profile-about>
+<!--    -->
+<app-profile-about *ngIf="load==0" [expert]="expert" id="about" name="about"></app-profile-about>
+<div class="container-fluid" *ngIf="load==1">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" *ngIf="load==0">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="border-bottom: 0px solid white; padding-left: 30px; padding-bottom: 5px !important;">
+                <h6 class="modal-title">Contact to {{expert.company_name}}</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="padding-top: 0 !important;">
+
+                <div class="pl-3 pb-3" style="color: #073558;">
+                    Please complete the fields below.
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Name*</label>
+                        <input class="form-control" type="text" required placeholder="Name" [(ngModel)]="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Email*</label>
+                        <input class="form-control" type="text" required placeholder="Email" [(ngModel)]="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Phone</label>
+                        <input class="form-control" type="number" required placeholder="Phone" [(ngModel)]="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Message*</label>
+                        <textarea class="form-control" cols="5" rows="5" placeholder="Message" required [(ngModel)]="message"></textarea>
+                    </div>
+                    <div class="text-left">
+                        <button class="btn-primary " style="width: 30%" [disabled]="!name || !email || !message" (click)="contact()">Send</button>
+                    </div>
+                    <div class="text-success text-center" *ngIf="msj">
+                        <i class="fas fa-check">Your message has been sent successfully</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

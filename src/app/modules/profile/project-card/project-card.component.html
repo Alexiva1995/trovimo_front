@@ -1,33 +1,26 @@
 <div class="publish-card">
-  <div>
-    <div class="counter" style="z-index: 10100">
-      <span>1/1</span>
-      <img
-        src="../../../assets/images/publish/Icon%20material-photo.svg"
-        alt="bed"
-      />
+    <div>
+        <div class="counter" style="z-index: 10100">
+            <span>1/{{data.photos.length}}</span>
+            <img src="../../../assets/images/publish/Icon%20material-photo.svg" alt="bed" />
+        </div>
+        <carousel [cellsToShow]="1" [loop]="true" [height]="120">
+            <div class="carousel-cell" *ngFor="let item of data.photos; let i = index">
+                <img src="https://trovimo.com/api/uploads/experts_profile/my_projects/{{data.photos[i][0]}}" alt="" />
+            </div>
+        </carousel>
     </div>
-    <carousel [cellsToShow]="1" [loop]="true" [height]="120">
-      <div
-        class="carousel-cell"
-      >
-        <img src="/assets/images/publish/publish.png" alt="" />
-      </div>
-    </carousel>
-  </div>
-  <div class="content">
-    <div
-      style="
+    <div class="content">
+        <div style="
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin: 8px 0;
-      "
-    >
-      <div>
-        <h6><i class="fas fa-map-marker-alt"></i> Medellín, Colombia</h6>
-        <p>Pools in Project Hacienda Niquia</p>
-      </div>
+      ">
+            <div>
+                <h6><i class="fas fa-map-marker-alt"></i> {{data.country}}, {{data.city}}</h6>
+                <p>{{data.description}}</p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
