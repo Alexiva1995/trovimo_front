@@ -34,10 +34,12 @@ export class MainViewDetailComponent implements OnInit {
     this.type = this.route.snapshot.paramMap.get('type');
     this.id = this.route.snapshot.paramMap.get('id');
     this.getData(this.type, this.id)
+    console.log(this.type)
     if(this.type == "product_id"){
       this.selectionProject(0)
     }
     if(this.type == "shared_space_id"){
+
       this.selectionProject(1)
     }
     if(this.type == "project_id"){
@@ -66,15 +68,40 @@ export class MainViewDetailComponent implements OnInit {
   async getData(type,param){
     const data = new Object()
     data[`${type}`] = param
+    if(this.type == "product_id"){
+      this.products =  await this.DetailsService.Show(data, 'show-product').toPromise()
     
-    this.products =  await this.DetailsService.Show(data, 'show-product').toPromise()
+      this.products = this.products.products[0]
+      this.photos = JSON.parse(this.products.photos)
+      console.log(this.products)
+      const video = JSON.parse(this.products.videos)[0]
+      this.videoURL = this.domsegunridad.bypassSecurityTrustResourceUrl(video);
+      console.log(this.videoURL)
+    }
+
+    if(this.type == "shared_space_id"){
+      this.products =  await this.DetailsService.Show(data, 'show-shared-space').toPromise()
+      this.products = this.products.shared_spaces[0]
+      this.photos = JSON.parse(this.products.photos)
+      console.log(this.products)
+      const video = JSON.parse(this.products.videos)[0]
+      this.videoURL = this.domsegunridad.bypassSecurityTrustResourceUrl(video);
+      console.log(this.videoURL)
+    }
+
+
+    if(this.type == "project_id"){
+      this.products =  await this.DetailsService.Show(data, 'show-project').toPromise()
+      this.products = this.products.products[0]
+      this.photos = JSON.parse(this.products.photos)
+      console.log(this.products)
+      const video = JSON.parse(this.products.videos)[0]
+      this.videoURL = this.domsegunridad.bypassSecurityTrustResourceUrl(video);
+      console.log(this.videoURL)
+    }
+
+
     
-    this.products = this.products.products[0]
-    this.photos = JSON.parse(this.products.photos)
-    console.log(this.products)
-    const video = JSON.parse(this.products.videos)[0]
-    this.videoURL = this.domsegunridad.bypassSecurityTrustResourceUrl(video);
-    console.log(this.videoURL)
   }
 
   print(){
