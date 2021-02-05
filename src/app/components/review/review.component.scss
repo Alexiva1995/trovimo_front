@@ -1,21 +1,21 @@
 @import "../../theme/vars";
-
 .review {
-  margin:10px 0;
+    margin: 10px 0;
 }
 
 p {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 .score {
-  font-weight: bold;
-  color: $primary;
-  i {
-    color:#FFD606;
-  }
+    font-weight: bold;
+    color: $primary;
+    i {
+        color: #FFD606;
+    }
 }
+
 .date {
-  font-weight: bold;
-  color: $primary;
+    font-weight: bold;
+    color: $primary;
 }

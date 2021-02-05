@@ -54,7 +54,7 @@ const routes: Routes = [
     component: PublishListComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     component: ProfileComponent,
   },
   {

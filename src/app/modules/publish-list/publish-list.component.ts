@@ -53,51 +53,26 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData();
-  }
-
-  getData() {
-    console.log(this.type);
-
-    switch (this.type) {
-      case 1: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
-      case 2: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
-      case 3: {
-        this.getServices();
-        this.getSharedSpace();
-        break;
-      }
-      case 4: {
-        this.getServices();
-        this.getProjects();
-        break;
-      }
-      case 5: {
-        this.getServices();
-        this.getExperts(
-          this.address,
-          this.category,
-          this.type_verification,
-          this.company,
-          this.emergency
-        );
-        this.getProjects();
-        break;
-      }
-      default: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
+    if (this.type == 5) {
+      this.getServices();
+      this.getExperts(
+        this.address,
+        this.category,
+        this.type_verification,
+        this.company,
+        this.emergency
+      );
+      this.getProjects();
     }
+      if(this.type == 1){
+        this.getProduct();
+      }
+      if(this.type == 3){
+        this.getShared_spaces();
+      }
+      if(this.type == 4){
+        this.getProject();
+      }
   }
 
   getProjects() {
@@ -112,6 +87,45 @@ export class PublishListComponent implements OnInit {
     );
   }
 
+  getProduct() {
+    console.log("entro");
+    this.service.getProduct().subscribe(
+      (data : any) => {
+        this.projects = data.products;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  getShared_spaces() {
+    console.log("entro");
+    this.service.getShared().subscribe(
+      (data : any) => {
+        this.projects = data.shared_spaces;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+  getProject() {
+    console.log("entro");
+    this.service.getProject().subscribe(
+      (data : any) => {
+        this.projects = data.project;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  
   getServices() {
     this.Expert.getAreas().subscribe(
       (data: any) => {

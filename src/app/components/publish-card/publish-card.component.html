@@ -1,236 +1,139 @@
 <div class="publish-card">
-  <div *ngIf="type < 5">
-    <div style="z-index: 10100" class="hearts" *ngIf="type < 5">
-      <i class="far fa-heart"></i>
-    </div>
-    <div class="counter" style="z-index: 10100">
-      <span>1/{{ data.photos?.length }}</span>
-      <img
-        src="../../../assets/images/publish/Icon%20material-photo.svg"
-        alt="bed"
-      />
-    </div>
-    <carousel [cellsToShow]="1" [loop]="true" [height]="220" class="carousel">
-      <div
-        class="carousel-cell"
-        *ngFor="let item of data.photos; let i = index"
-      >
-        <img
-          style="height: 117%"
-          [src]="baseUrl + '/' + data.photos[i]"
-          onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'"
-          alt=""
-        />
+  <div *ngIf="type<5">
+      <div style="z-index: 10100" class="hearts" *ngIf="type < 5">
+          <i class="far fa-heart"></i>
       </div>
-    </carousel>
+      <div class="counter" style="z-index: 10100">
+          <span>1/{{ data.photos?.length }}</span>
+          <img *ngIf="type==1" style="height: 117%" src="https://trovimo.com/api/uploads/products/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+          <img *ngIf="type==3" style="height: 117%" src="https://trovimo.com/api/uploads/shared_spaces/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+          <img *ngIf="type==4" style="height: 117%" src="https://trovimo.com/api/uploads/projects/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+      </div>
+      <carousel [cellsToShow]="1" [loop]="true" [height]="220">
+          <div class="carousel-cell" *ngFor="let item of data.photos; let i = index">
+              <img *ngIf="type==1" style="height: 117%" src="https://trovimo.com/api/uploads/products/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+              <img *ngIf="type==3" style="height: 117%" src="https://trovimo.com/api/uploads/shared_spaces/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+              <img *ngIf="type==4" style="height: 117%" src="https://trovimo.com/api/uploads/projects/images/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+          </div>
+      </carousel>
   </div>
-  <div *ngIf="type == 5">
-    <div style="z-index: 10100" class="hearts" *ngIf="type < 5">
-      <i class="far fa-heart"></i>
-    </div>
-    <div
-      class="counter"
-      style="
-        z-index: 10100;
-        background-color: #17a607;
-        right: 15px;
-        border-top-right-radius: 0px;
-        border-bottom-left-radius: 8px;
-      "
-      *ngIf="data.verified == 1"
-    >
-      <i class="far fa-check-circle"></i> Company verified
-      <!--<span>1/{{ data.photos?.length }}</span>
-            <img src="../../../assets/images/publish/Icon%20material-photo.svg" alt="bed" />-->
-    </div>
-    <carousel [cellsToShow]="1" [loop]="true" [height]="220">
-      <div
-        class="carousel-cell"
-        *ngFor="let item of data.photos; let i = index"
-      >
-        <img
-          style="height: 117%"
-          src="https://trovimo.com/api/uploads/experts_profile/cover_pictures/{{
-            data.photos[i]
-          }}"
-          onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'"
-          alt=""
-        />
+  <div *ngIf="type==5">
+      <div style="z-index: 10100" class="hearts" *ngIf="type < 5">
+          <i class="far fa-heart"></i>
       </div>
-    </carousel>
+      <div class="counter" style="z-index: 10100; 
+      background-color: #17A607; right:15px; 
+      border-top-right-radius: 0px; border-bottom-left-radius: 8px;" *ngIf="data.verified == 1">
+          <i class="far fa-check-circle"></i> Company verified
+          <!--<span>1/{{ data.photos?.length }}</span>
+          <img src="../../../assets/images/publish/Icon%20material-photo.svg" alt="bed" />-->
+      </div>
+      <carousel [cellsToShow]="1" [loop]="true" [height]="220">
+          <div class="carousel-cell" *ngFor="let item of data.photos; let i = index">
+              <img style="height: 117%" src="https://trovimo.com/api/uploads/experts_profile/cover_pictures/{{data.photos[i]}}" onerror="this.src='https://dummyimage.com/550x550&text=trovimo.com'" alt="" />
+          </div>
+      </carousel>
   </div>
   <div class="content">
-    <div
-      style="
+      <div style="
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         margin: 8px 0;
-      "
-    >
-      <div>
-        <h6 *ngIf="type == 0">{{ data.price | currency }}</h6>
-        <h6 *ngIf="type == 1">{{ data.price | currency }} / Month</h6>
-        <h6 *ngIf="type == 2">
-          From {{ data.price | currency }} / Month / Person
-        </h6>
-        <h6 *ngIf="type == 3">From {{ data.price | currency }}</h6>
-        <div class="row" *ngIf="type == 5">
-          <div class="text-center pl-3 pr-2">
-            <img
-              style="width: 50px; margin-top: -10px"
-              src="https://trovimo.com/api/uploads/experts_profile/images_profile/{{
-                data.picture_profile
-              }}"
-              alt=""
-            />
-          </div>
+      ">
           <div>
-            <h6>{{ data.company_name }}</h6>
+              <h6 *ngIf="type == 0">{{ data.price | currency }}</h6>
+              <h6 *ngIf="type == 1">{{ data.price | currency }} / Month</h6>
+              <h6 *ngIf="type == 2">
+                  From {{ data.price | currency }} / Month / Person
+              </h6>
+              <h6 *ngIf="type == 3">From {{ data.price | currency }}</h6>
+              <div class="row" *ngIf="type == 5">
+                  <div class="text-center pl-3 pr-2"><img class="avatar" style=" margin-top: -10px;" src="https://trovimo.com/api/uploads/experts_profile/images_profile/{{data.picture_profile}}" alt=""></div>
+                  <div>
+                      <h6>
+                          <a href="{{url}}{{data.id}}" class="text-white">{{data.company_name}}</a> </h6>
+                  </div>
+              </div>
+              <div class="row ml-4 " *ngIf="type==5 ">
+                  <p> {{data.about_us}}</p>
+              </div>
           </div>
-        </div>
-        <div class="row ml-4" *ngIf="type == 5">
-          <p>{{ data.about_us }}</p>
-        </div>
+          <img *ngIf="type==0 || type==3 " style="width: 14% " [src]="baseUrl + data.photos[0] " onerror="this.src='https://dummyimage.com/200x300&text=dummyimage.com+rocks!' " alt=" " />
+          <div *ngIf="type==1 ">
+              <p style="text-align: end ">Avaliable Date</p>
+              <p style="text-align: end; font-weight: bold ">
+                  {{ data.created_at | date: "shortDate " }}
+              </p>
+          </div>
+          <div *ngIf="type==2 " style="text-align: end ">
+              <p>5.2 <i style="color: #ffe21b " class="fas fa-star "></i></p>
+              <img *ngIf="type==2 " style="width: 70%; margin-top: 10px " src="../../../assets/images/logo.svg " alt=" " />
+          </div>
+          <div *ngIf="type==5 " style="text-align: end ">
+              <p>5.2 <i style="color:#FFE21B " class="fas fa-star "></i></p>
+          </div>
       </div>
-      <img
-        *ngIf="type == 0 || type == 3"
-        style="width: 14%"
-        [src]="baseUrl + data.photos[0]"
-        onerror="this.src='https://dummyimage.com/200x300&text=dummyimage.com+rocks!'"
-        alt=""
-      />
-      <div *ngIf="type == 1">
-        <p style="text-align: end">Avaliable Date</p>
-        <p style="text-align: end; font-weight: bold">
-          {{ data.created_at | date: "shortDate" }}
-        </p>
+      <div *ngIf="type==0 " style="display: flex; justify-content: space-between; align-items: center ">
+          <div class="icons-details ">
+              <div>
+                  <img src="../../../assets/images/publish/cama.svg " alt="bed " />
+                  <span>{{ data.rooms }}</span>
+              </div>
+              <div>
+                  <img src="../../../assets/images/publish/banera.svg " alt="banera " />
+                  <span>{{ data.bath }}</span>
+              </div>
+              <div>
+                  <img src="../../../assets/images/publish/Icon%20awesome-car-alt.svg " alt="cama " />
+                  <span>{{ data.parking_spots }}</span>
+              </div>
+          </div>
+          <div *ngIf="type==0 " style="font-size: 12px " class="mt2 ">
+              {{ data.area }}m2
+          </div>
       </div>
-      <div *ngIf="type == 2" style="text-align: end">
-        <p>5.2 <i style="color: #ffe21b" class="fas fa-star"></i></p>
-        <img
-          *ngIf="type == 2"
-          style="width: 70%; margin-top: 10px"
-          src="../../../assets/images/logo.svg"
-          alt=""
-        />
+      <div *ngIf="type==1 " style="display: flex; justify-content: space-between; align-items: center ">
+          <div *ngIf="type==1 " style="display: flex; align-items: center ">
+              <div style=" width: 10px; height: 10px; background-color: #135aa0; border-radius: 20px; margin-right: 5px; "></div>
+              <p>Room to Rent</p>
+          </div>
+          <div *ngIf="type==1 " style="font-size: 12px " class="verified ">
+              <i class="far fa-check-circle "></i> User verified
+          </div>
       </div>
-      <div *ngIf="type == 5" style="text-align: end">
-        <p>5.2 <i style="color: #ffe21b" class="fas fa-star"></i></p>
+      <div *ngIf="type==2 " style="display: flex; justify-content: space-between; align-items: center ">
+          <div *ngIf="type==2 " style="display: flex; align-items: center ">
+              <div style=" width: 10px; height: 10px; background-color: #135aa0; border-radius: 20px; margin-right: 5px; "></div>
+              <p>Coworking Placet</p>
+          </div>
       </div>
-    </div>
-    <div
-      *ngIf="type == 0"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div class="icons-details">
-        <div>
-          <img src="../../../assets/images/publish/cama.svg" alt="bed" />
-          <span>{{ data.rooms }}</span>
-        </div>
-        <div>
-          <img src="../../../assets/images/publish/banera.svg" alt="banera" />
-          <span>{{ data.bath }}</span>
-        </div>
-        <div>
-          <img
-            src="../../../assets/images/publish/Icon%20awesome-car-alt.svg"
-            alt="cama"
-          />
-          <span>{{ data.parking_spots }}</span>
-        </div>
+      <div *ngIf="type==3 " style="display: flex; justify-content: space-between; align-items: center ">
+          <div class="icons-details ">
+              <p>
+                  From: <b>{{ data.area }}m2</b>
+              </p>
+              <div>
+                  <img src="../../../assets/images/publish/cama.svg " alt="bed " />
+                  <span>{{ data.rooms }}</span>
+              </div>
+              <div>
+                  <img src="../../../assets/images/publish/banera.svg " alt="banera " />
+                  <span>{{ data.bath }}</span>
+              </div>
+          </div>
+          <div *ngIf="type==0 " style="font-size: 12px " class="mt2 ">
+              {{ data.area }}m2
+          </div>
       </div>
-      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">
-        {{ data.area }}m2
+      <div *ngIf="type==5 " style="display: flex; justify-content: space-between; align-items: center ">
+          <div *ngIf="type==5 " style="display: flex; align-items: center ">
+              <i class="fas fa-map-marker-alt mr-2 "> </i> {{ data.address }} {{ data.city }}
+          </div>
+          <div *ngIf="type==5 " style="font-size: 12px ">
+              <a class="btn " style="background-color: #135aa0; border-radius: 50%; margin-right: 5px; "><i class="far fa-comment-alt text-white "></i></a>
+              <a href="{{data.url}} " class="btn " style="background-color: #135aa0; border-radius: 50%; margin-right: 5px; "><i class="fas fa-globe text-white "></i></a>
+          </div>
       </div>
-    </div>
-    <div
-      *ngIf="type == 1"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div *ngIf="type == 1" style="display: flex; align-items: center">
-        <div
-          style="
-            width: 10px;
-            height: 10px;
-            background-color: #135aa0;
-            border-radius: 20px;
-            margin-right: 5px;
-          "
-        ></div>
-        <p>Room to Rent</p>
-      </div>
-      <div *ngIf="type == 1" style="font-size: 12px" class="verified">
-        <i class="far fa-check-circle"></i> User verified
-      </div>
-    </div>
-    <div
-      *ngIf="type == 2"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div *ngIf="type == 2" style="display: flex; align-items: center">
-        <div
-          style="
-            width: 10px;
-            height: 10px;
-            background-color: #135aa0;
-            border-radius: 20px;
-            margin-right: 5px;
-          "
-        ></div>
-        <p>Coworking Placet</p>
-      </div>
-    </div>
-    <div
-      *ngIf="type == 3"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div class="icons-details">
-        <p>
-          From: <b>{{ data.area }}m2</b>
-        </p>
-        <div>
-          <img src="../../../assets/images/publish/cama.svg" alt="bed" />
-          <span>{{ data.rooms }}</span>
-        </div>
-        <div>
-          <img src="../../../assets/images/publish/banera.svg" alt="banera" />
-          <span>{{ data.bath }}</span>
-        </div>
-      </div>
-      <div *ngIf="type == 0" style="font-size: 12px" class="mt2">
-        {{ data.area }}m2
-      </div>
-    </div>
-    <div
-      *ngIf="type == 5"
-      style="display: flex; justify-content: space-between; align-items: center"
-    >
-      <div *ngIf="type == 5" style="display: flex; align-items: center">
-        <i class="fas fa-map-marker-alt mr-2"> </i> {{ data.address }}
-        {{ data.city }}
-      </div>
-      <div *ngIf="type == 5" style="font-size: 12px">
-        <a
-          class="btn"
-          style="
-            background-color: #135aa0;
-            border-radius: 50%;
-            margin-right: 5px;
-          "
-          ><i class="far fa-comment-alt text-white"></i
-        ></a>
-        <a
-          href="{{ data.url }}"
-          class="btn"
-          style="
-            background-color: #135aa0;
-            border-radius: 50%;
-            margin-right: 5px;
-          "
-          ><i class="fas fa-globe text-white"></i
-        ></a>
-      </div>
-    </div>
   </div>
 </div>

@@ -11,7 +11,10 @@ export class PublishCardComponent implements OnInit {
   @Input() type;
   @Input() data;
   baseUrl: string = environment.api;
-  constructor() {}
+  url:any;
+  constructor() {
+    this.url= "profile/";
+  }
 
   ngOnInit(): void {
     console.log(this.data);

@@ -1,85 +1,97 @@
 @import "../../theme/vars";
-
 .publish-card {
-  .counter {
-    background-color: $primary;
-    color: white !important;
-    position: absolute;
-    top: 197px;
-    right: 26px;
-    padding: 0px 8px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    img {
-      width: 10px;
-    }
-    span {
-      font-size: 10px;
-      margin-right: 5px;
-      color: white !important;
-    }
-  }
-  .content {
-    h6 {
-      color: white;
-      margin-bottom: 0;
-      color: white !important;
-    }
-    p {
-      margin-bottom: 0;
-      font-size: 12px;
-      color: white !important;
-    }
-    .icons-details {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      p {
-        margin-right: 20px;
+    .counter {
+        background-color: $primary;
         color: white !important;
-      }
-      img {
-        width: 12px;
-      }
-      span {
-        margin-left: 5px;
-        font-size: 12px;
-        margin-right: 25px;
-        color: white !important;
-      }
+        position: absolute;
+        top: 197px;
+        right: 26px;
+        padding: 0px 8px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        img {
+            width: 10px;
+        }
+        span {
+            font-size: 10px;
+            margin-right: 5px;
+            color: white !important;
+        }
     }
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    background-color: $primary;
-    padding: 10px 15px;
-    color: white !important;
-  }
+    .content {
+        h6 {
+            color: white;
+            margin-bottom: 0;
+            color: white !important;
+        }
+        p {
+            margin-bottom: 0;
+            font-size: 12px;
+            color: white !important;
+        }
+        .icons-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            p {
+                margin-right: 20px;
+                color: white !important;
+            }
+            img {
+                width: 12px;
+            }
+            span {
+                margin-left: 5px;
+                font-size: 12px;
+                margin-right: 25px;
+                color: white !important;
+            }
+        }
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        background-color: $primary;
+        padding: 10px 15px;
+        color: white !important;
+    }
 }
 
 .mt2 {
-  background-color: #135aa0;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  padding: 0 10px;
-  margin-right: -15px;
+    background-color: #135AA0;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    padding: 0 10px;
+    margin-right: -15px;
 }
+
 .verified {
-  background-color: #17a607;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  padding: 0 10px;
-  margin-right: -15px;
+    background-color: #17A607;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    padding: 0 10px;
+    margin-right: -15px;
 }
+
 .hearts {
-  position: absolute;
-  background-color: white;
-  color: #073558;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  right: 30px;
-  top: 10px;
+    position: absolute;
+    background-color: white;
+    color: #073558;
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 30px;
+    top: 10px;
+}
+
+.avatar {
+    /* cambia estos dos valores para definir el tamaño de tu círculo */
+    height: 50px;
+    width: 50px;
+    /* los siguientes valores son independientes del tamaño del círculo */
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
 }

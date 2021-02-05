@@ -93,6 +93,28 @@ export class ProjectService {
     );
   }
 
+  getProduct(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    return this.http.post(this.api + '/auth/services/search-product', null,{ headers});
+  }
+  getShared(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    return this.http.post(this.api + '/auth/services/search-shared-space', null,{ headers});
+  }
+  getProject(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    return this.http.post(this.api + '/auth/services/search-project', null,{ headers});
+  }
+
   getAreas(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
