@@ -13,13 +13,10 @@ import { OPTIONS } from 'src/app/models/typeOptions';
 export class PublishListComponent implements OnInit {
   type: any;
   openFilter = -1;
-  min = 10;
-  max = 10000000;
   steps = 10;
   viewType = 0;
   projects: Project;
   category: string = '';
-  address: string = '';
   type_verification: any = '';
   company: string = '';
   services: any;
@@ -30,6 +27,16 @@ export class PublishListComponent implements OnInit {
   price: any = {};
   area: any = {};
   options = OPTIONS;
+  user:any;
+  //variables filtros
+  min = 0;
+  max = 10000000;
+  address: string = '';
+  rooms: any = 0;
+  baths: any = 0;
+  areamin = 0;
+  areamax = 100000;
+
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
@@ -48,6 +55,7 @@ export class PublishListComponent implements OnInit {
         this.category = params['category'];
       }
     });
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {
@@ -60,10 +68,20 @@ export class PublishListComponent implements OnInit {
         this.company,
         this.emergency
       );
-      this.getProjects();
     }
       if(this.type == 1){
-        this.getProduct();
+        if(this.user){
+          this.searchProduct(1, this.user.id);
+        }else{
+          this.searchProduct(1, null);
+        }
+      }
+      if(this.type == 2){
+        if(this.user){
+          this.searchProduct(2, this.user.id);
+        }else{
+          this.searchProduct(2, null);
+        }
       }
       if(this.type == 3){
         this.getShared_spaces();
@@ -73,37 +91,26 @@ export class PublishListComponent implements OnInit {
       }
   }
 
-  getProjects() {
-    this.service.searchProject(this.filter).subscribe(
-      (res) => {
-        this.projects = res.project;
-        console.log(this.projects);
-      },
-      (err) => {
-        this.toastr.error('Error al realizar al consulta.');
-      }
-    );
-  }
-
-  getProduct() {
-    console.log("entro");
-    this.service.getProduct().subscribe(
+  searchProduct(type, user_id) {
+    this.load = 1;
+    this.service.searchProduct(type, user_id, this.address, this.min, this.max, this.rooms, this.baths, this.areamin, this.areamax).subscribe(
       (data : any) => {
         this.projects = data.products;
-        console.log(data);
+        this.load = 0;
       },
       (err) => {
         this.toastr.error('Error al realizar al consulta.');
       }
     );
   }
-
   getShared_spaces() {
+    this.load = 1;
     console.log("entro");
     this.service.getShared().subscribe(
       (data : any) => {
         this.projects = data.shared_spaces;
         console.log(data);
+        this.load = 0;
       },
       (err) => {
         this.toastr.error('Error al realizar al consulta.');
@@ -111,19 +118,19 @@ export class PublishListComponent implements OnInit {
     );
   }
   getProject() {
+    this.load = 1;
     console.log("entro");
     this.service.getProject().subscribe(
       (data : any) => {
         this.projects = data.project;
         console.log(data);
+        this.load = 0;
       },
       (err) => {
         this.toastr.error('Error al realizar al consulta.');
       }
     );
   }
-
-  
   getServices() {
     this.Expert.getAreas().subscribe(
       (data: any) => {
@@ -134,23 +141,19 @@ export class PublishListComponent implements OnInit {
       }
     );
   }
-
   show(evt) {
     console.log(evt);
   }
-
   setArea(min, max) {
     this.area.min = min;
     this.area.max = max;
     console.log(this.area);
   }
-
   setPrice(min, max) {
     this.price.min = min;
     this.price.max = max;
     console.log(this.price);
   }
-
   getExperts(address, category, type_verification, company, emergency) {
     this.load = 1;
     this.Expert.getExpert(
@@ -169,4 +172,5 @@ export class PublishListComponent implements OnInit {
       }
     );
   }
+
 }
