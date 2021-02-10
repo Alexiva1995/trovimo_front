@@ -24,7 +24,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
-import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
@@ -32,6 +31,11 @@ import { ProfessionalGroupComponent } from './modules/new-publish/components/det
 import { ProjectCardComponent } from './modules/profile/project-card/project-card.component';
 
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+
+import { AgmCoreModule } from '@agm/core';
+//import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+
+
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -49,7 +53,6 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     ProfessionalGroupComponent,
     ProjectCardComponent,
     SafeHtmlPipe,
-
   ],
   imports: [
     NGX_MODULES,
@@ -64,7 +67,6 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     IvyCarouselModule,
     ReactiveFormsModule,
     NgxSliderModule,
-    AutocompleteLibModule,
     SweetAlert2Module.forRoot(),
     TranslateModule.forRoot({
       loader: {
@@ -75,6 +77,11 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBdsfrCn5LZZYIw9dyPGVXPFTFbKmaKUOI', //'AIzaSyDXJWjchrU7uMEk_PvKG4b9hmI3p3rEaYU',
+      libraries: ['places']    
+   }),
+   
   ],
   providers: [
     {
@@ -85,7 +92,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '554617053953-j8aeab5hksu9c63f8mqqa7i5dlh2dltv.apps.googleusercontent.com'
+              '63126014045-cov6re06h38audhm3svsuv3d8vuu1p68.apps.googleusercontent.com'
             ),
           },
           {

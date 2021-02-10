@@ -9,10 +9,14 @@ import {MapService} from '../../services/map/map.service';
 export class MapComponent implements OnInit {
   @Input() lng;
   @Input() lat;
-  constructor(private mapService: MapService) { }
+
+  zoom = 6;
+  constructor() { }
+
+  
 
   ngOnInit(): void {
-    this.mapService.buildMap(7, this.lng, this.lat);
+   
   }
 
 }

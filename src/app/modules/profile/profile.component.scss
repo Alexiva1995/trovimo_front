@@ -1,65 +1,79 @@
 @import "../../theme/vars";
 .menu {
-  background-color: $primary;
-  padding: 20px 0;
-  .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ul {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      li {
-        list-style: none;
+    background-color: $primary;
+    padding: 2px 0;
+    .content {
         display: flex;
-        float: left;
-        padding: 8px 15px;
-        font-size: 12px;
-        cursor: pointer;
-        color: white;
-        margin: 0px 12px;
-        &.active {
-          background-color: #135aa0;
-          border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            li {
+                list-style: none;
+                display: flex;
+                float: left;
+                padding: 8px 15px;
+                font-size: 12px;
+                cursor: pointer;
+                color: white;
+                margin: 0px 12px;
+                &.active {
+                    background-color: #135aa0;
+                    border-radius: 8px;
+                }
+                .tittle {
+                    width: 225px;
+                    h6 {
+                        color: white;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+                    span {
+                        font-weight: bold;
+                    }
+                }
+            }
         }
-        .tittle {
-          width: 225px;
-          h6 {
-            color:white;
-            font-weight: bold;
-            text-align: center;
-          }
-          span {
-            font-weight: bold;
-          }
-        }
-        
-      }
     }
-  }
 }
 
 .slider {
-  min-height: 250px;
-  img {
-    width: 100%;
-  }
+    img {
+        width: 100%;
+    }
 }
 
 .actions {
-  display: flex;
-  padding:8px 0px;
-  .item {
-    margin: 0px 5px;
-    background-color: $primary-accent;
-    font-size: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 30px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    padding: 8px 0px;
+    .item {
+        margin: 0px 5px;
+        background-color: $primary-accent;
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.avatar {
+    /* cambia estos dos valores para definir el tamaño de tu círculo */
+    height: 100px;
+    width: 100px;
+    /* los siguientes valores son independientes del tamaño del círculo */
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    background-size: 100% auto;
+    border: solid #135aa0 5px;
+}
+
+.oculto {
+    visibility: hidden;
 }

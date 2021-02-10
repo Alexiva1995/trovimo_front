@@ -1,4 +1,4 @@
-<div *ngIf="!result" class="find-photos">
+<div class="find-photos">
   <div class="find-photos__container">
     <h1 class="find-photos__title">Find inspiration for your place in our photo section</h1>
     <div class="find-photos__searchBox">
@@ -26,20 +26,16 @@
   </div>
 </div>
 
-<div class="not-found" *ngIf="result?.data?.length === 0">
+<div class="not-found" *ngIf="result?.length === 0">
     No results found for: {{ searchValues.title }}
 </div>
 
-<div *ngIf="result?.data?.length > 0" class="container-fluid form-customsearch">
+<div *ngIf="result?.length > 0" class="container-fluid form-customsearch">
     <div class="row justify-content-custom">
         <div class="col-12 col-md-5">
             <div class="input-search">
                 <div class="input-group">
-                    <input 
-                    (keyup.enter)="getFindPhotos(search.value)"
-                    #search
-                    name="searchValue"
-                    class="form-control py-2 rounded-pill mr-1 pr-5 border-primary" type="search" [value]="searchValues.title">
+                    <input class="form-control py-2 rounded-pill mr-1 pr-5 border-primary" type="search" value="search">
                     <span class="input-group-append">
                         <button class="btn rounded-pill border-0 ml-n5" type="button">
                               <i class="fa fa-search"></i>
@@ -50,13 +46,13 @@
         </div>
         <div class="col-12 col-md-5">
             <p class="search-result text-center mt-2">
-                Find photos / {{ result?.data?.length }} Results for "{{ searchValues.title }}"
+                Find photos / {{ result.length }} Results for "{{ searchValues.title }}"
             </p>
         </div>
     </div>
 </div>
 
-<div *ngIf="result?.data?.length > 0" class="container mt-4">
+<div *ngIf="result?.length > 0" class="container mt-4">
     <div class="row justify-content-between">
         <div class="col-12 col-lg-6">
             <div class="row">
@@ -101,26 +97,17 @@
     </div>
 </div>
 
-<div  *ngIf="result?.data?.length > 0" class="grid-element container mt-5 ">
+<div  *ngIf="result?.length > 0" class="grid-element container mt-5 ">
     <div class="grid-container" #grid>
-
-        <div 
-        *ngFor="let photo of result.data;"
-        class="grid-item">
+        <div class="grid-item">
             <div class="content">
-                <img [src]="photo.pictures" [alt]="photo.title">
-                <div class="overlay">
-                    <div class="overlay-meta">
-                        <h2>{{ photo.title }}</h2>
-                        <span>{{photo.autor.username}}</span>   
-                    </div>
-                </div>
+                <img src="https://via.placeholder.com/700x320" alt="example img">
             </div>
         </div>
     </div>
 </div>
 
-<div  *ngIf="result?.data?.length > 20" class="col-12 text-center mt-4">
+<div  *ngIf="result?.length > 20" class="col-12 text-center mt-4">
     <button  class="btn btn-primary btn-load">
         Load more images
     </button>

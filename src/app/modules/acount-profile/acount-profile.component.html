@@ -11,27 +11,11 @@
       </ng-container>
     </ul>
   </div>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 col-lg-6" *ngIf="selectedPage === menu[0].router">
-        <app-main-info></app-main-info>
-      </div>
-      <div class="col-12" *ngIf="selectedPage === menu[1].router">
-        <app-my-listings></app-my-listings>
-      </div>
-      <div class="col-12" *ngIf="selectedPage === menu[2].router">
-        <app-my-activity></app-my-activity>
-      </div>
-      <div class="col-12" *ngIf="selectedPage === menu[3].router">
-        <app-photos></app-photos>
-      </div>
-      <div class="col-12" *ngIf="selectedPage === menu[7].router">
-        <app-setting></app-setting>
-      </div>
-
-
-
-    </div>
-
+  <div class="container">
+    <app-main-info *ngIf="selectedPage === menu[0].router"></app-main-info>
+    <app-my-activity *ngIf="selectedPage === menu[1].router"></app-my-activity>
+    <app-photos *ngIf="selectedPage === menu[2].router"></app-photos>
+    <app-my-listings *ngIf="selectedPage === menu[3].router"></app-my-listings>
+    <app-setting *ngIf="selectedPage === menu[4].router"></app-setting>
   </div>
 </div>
