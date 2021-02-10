@@ -2,64 +2,82 @@
   <div style="display: flex;justify-content: space-between">
     <h5 >My account</h5>
     <div style="display: flex">
-      <button class="btn btn-primary" style="width: 50%;font-size: 12px;margin: 0 5px">Change to a company account</button>
+      <button class="btn btn-primary" style="width: 50%;font-size: 12px;margin: 0 5px">Change to a company <br> account</button>
       <button class="btn btn-primary" style="width: 50%;font-size: 12px;margin: 0 5px">Change to an account of professional</button>
       <app-help-tooltip [text]="'If you have doubts where to list your property, please check the FAQ section.'"></app-help-tooltip>
     </div>
   </div>
 
+<!-- 1 form -->
+<!--
   <form (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label>Username</label>
-      <input
-        type="text"
-        class="form-control form-control-lg"
-      />
-    </div>
-    <div class="form-group">
-      <label>Name and surname</label>
-      <input
-        type="text"
-        class="form-control form-control-lg"
-      />
-      <div class="custom-control custom-checkbox">
-        <input
-          class="custom-control-input"
-          type="checkbox"
-          id="show_price"
-        >
-        <label class="custom-control-label" for="show_price">
-          Don´t show my name
-        </label>
+      <div style="display: flex; justify-content: space-between;">
+        <div style="margin-right: 1rem;">
+          <img src="https://via.placeholder.com/95x95" class="rounded-circle mt-2">
+        </div>
+        <div style="flex: 1;">
+          <label>Username</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+          />
+        </div>
       </div>
+    </div>
+
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-8">
+          <label>Name and surname</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+          />
+        </div>
+        <div  style="  padding: 0;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        align-items: center;"  class="col-3">
+          <div class="custom-control custom-checkbox">
+            <input
+              class="custom-control-input"
+              type="checkbox"
+              id="show_price"
+            >
+            <label style="padding: 0; margin: 0; padding-top: 4px;"    class="custom-control-label" for="show_price">
+              Don´t show my name
+            </label>
+          </div>
+        </div>
+      </div>
+
+
     </div>
     <label>Phones</label>
     <div class="form-group input-group" style="margin-bottom: 20px">
-      <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        style="width: auto"
-      >
-        +57
-      </button>
-      <ul class="dropdown-menu">
-        <li>+57</li>
-        <li>+58</li>
-        <li>+59</li>
-      </ul>
-      <input
-        type="tel"
-        class="form-control form-control-lg"
-        style="border-top-right-radius: 8px;border-bottom-right-radius: 8px"
-      />
+
+      <div class="input-group mb-3" style="width: 90%;">
+        <div class="input-group-prepend">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+57</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">+58</a>
+            <a class="dropdown-item" href="#">+59</a>
+            <a class="dropdown-item" href="#">+108</a>
+          </div>
+        </div>
+        <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button">
+      </div>
+
       <button
         style="
           width: 50px;
           font-size: 30px;
           margin-left: 15px;
           display: flex;
+          height: 48px;
           align-items: center;
           justify-content: center;
           padding: 0;"
@@ -203,6 +221,263 @@
     </table>
   </div>
   <div style="display: flex;justify-content: flex-end">
-    <button class="btn btn-primary" style="border-radius: 20px;width: 10rem;background-color: #135AA0 !important;n">Save</button>
+    <button class="btn btn-primary" style="border-radius: 20px;width: 10rem;background-color: #135AA0 !important;">Save</button>
   </div>
 </div>
+
+-->
+
+
+<!-- form 2 -->
+
+<!-- 
+
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+        <label>Company name</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+        />
+  </div>
+
+  <div class="form-group">
+    <label>Email account</label>
+    <input
+      type="text"
+      class="form-control form-control-lg"
+    />
+</div>
+
+<div class="form-group">
+  <label>ID Company </label>
+  <input
+    type="text"
+    class="form-control form-control-lg"
+  />
+</div>
+
+<div class="form-group">
+  <label>Adress </label>
+  <div>
+    <input
+    style="    width: 90%;display: inline;"
+      type="text"
+      class="form-control form-control-lg"
+    />
+    <button
+    style="
+      width: 50px;
+      font-size: 30px;
+      margin-left: 15px;
+      display: inline;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;"
+    class="btn btn-primary"
+    type="button"
+    id="button-addon2"
+  >
+    +
+    </button>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Select the city of your work </label>
+  <div>
+    <input
+    style="    width: 90%;display: inline;"
+      type="text"
+      class="form-control form-control-lg"
+    />
+    <button
+    style="
+      width: 50px;
+      font-size: 30px;
+      margin-left: 15px;
+      display: inline;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 0;"
+    class="btn btn-primary"
+    type="button"
+    id="button-addon2"
+  >
+    +
+    </button>
+  </div>
+</div>
+
+  <label>Phones</label>
+  <div class="form-group input-group" style="margin-bottom: 20px">
+
+    <div class="input-group mb-3" style="width: 90%;">
+      <div class="input-group-prepend">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+57</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">+58</a>
+          <a class="dropdown-item" href="#">+59</a>
+          <a class="dropdown-item" href="#">+108</a>
+        </div>
+      </div>
+      <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button">
+    </div>
+
+    <button
+      style="
+        width: 50px;
+        font-size: 30px;
+        margin-left: 15px;
+        display: flex;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;"
+      class="btn btn-primary"
+      type="button"
+      id="button-addon2"
+    >
+      +
+    </button>
+  </div>
+
+  <div class="form-group">
+    <label>Authorized email to plublish </label>
+    <div>
+      <input
+      style="    width: 90%;display: inline;"
+        type="text"
+        class="form-control form-control-lg"
+      />
+      <button
+      style="
+        width: 50px;
+        font-size: 30px;
+        margin-left: 15px;
+        display: inline;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;"
+      class="btn btn-primary"
+      type="button"
+      id="button-addon2"
+    >
+      +
+      </button>
+    </div>
+  </div>
+
+</form>
+
+<div style="display: flex;justify-content: flex-end">
+  <button class="btn btn-primary" style="border-radius: 20px;width: 10rem;background-color: #135AA0 !important;">Save</button>
+</div>
+</div>
+
+
+-->
+
+
+<!-- form 3 -->
+
+
+
+<form (ngSubmit)="onSubmit()">
+  <div class="form-group">
+        <label>User name</label>
+        <input
+          type="text"
+          class="form-control form-control-lg"
+        />
+  </div>
+
+  <div class="form-group">
+    <label>Name and  username</label>
+    <input
+      type="text"
+      class="form-control form-control-lg"
+    />
+</div>
+
+<div class="form-group">
+  <label>Email account </label>
+  <input
+    type="text"
+    class="form-control form-control-lg"
+  />
+</div>
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-4">
+      <label>Country </label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+      />
+    </div>
+    <div class="col-4">
+      <label>City </label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+      />
+    </div>
+    <div class="col-4">
+      <label>Postal code </label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+      />
+    </div>
+  </div>
+</div>
+
+
+  <label>Phones</label>
+  <div class="form-group input-group" style="margin-bottom: 20px">
+
+    <div class="input-group mb-3" style="width: 90%;">
+      <div class="input-group-prepend">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">+57</button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#">+58</a>
+          <a class="dropdown-item" href="#">+59</a>
+          <a class="dropdown-item" href="#">+108</a>
+        </div>
+      </div>
+      <input type="text" class="form-control form-control-lg" aria-label="Text input with dropdown button">
+    </div>
+
+    <button
+      style="
+        width: 50px;
+        font-size: 30px;
+        margin-left: 15px;
+        display: flex;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;"
+      class="btn btn-primary"
+      type="button"
+      id="button-addon2"
+    >
+      +
+    </button>
+  </div>
+
+
+
+</form>
+
+<div style="display: flex;justify-content: flex-end">
+  <button class="btn btn-primary" style="border-radius: 20px;width: 10rem;background-color: #135AA0 !important;">Save</button>
+</div>
+</div>
+
+
