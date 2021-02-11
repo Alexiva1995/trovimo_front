@@ -10,7 +10,7 @@ export class MapComponent implements OnInit {
   @Input() lng;
   @Input() lat;
 
-  zoom = 6;
+  zoom = 9;
   constructor() { }
 
   

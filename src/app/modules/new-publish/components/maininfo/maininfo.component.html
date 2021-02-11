@@ -325,8 +325,10 @@
       <div class="form-group">
         <label class="required">City</label>
         <input
-          [(ngModel)]="mainInfo.city"
-          (ngModelChange)="onChange()"
+          ngx-google-places-autocomplete 
+          [options]= 'options'
+          (onAddressChange)="AddressChange($event)"
+
           aria-describedby="emailHelp"
           class="form-control form-control-lg"
           required
@@ -348,7 +350,7 @@
       </div>
     </div>
   </div>
-  
+ 
   <div class="map">
     <!--mapa-->
     <app-map [lng]="latitude" [lat]="longitude"></app-map>

@@ -40,6 +40,7 @@
     "js-marker-clusterer": "^1.0.0",
     "mapbox-gl": "^2.0.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.13.0",

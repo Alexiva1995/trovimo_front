@@ -419,7 +419,10 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6" *ngIf="viewType == 0"></div>
+    
+    <div class="col-lg-6" *ngIf="viewType == 0">
+      <app-map [lng]="0.2" [lat]="0.1"></app-map>
+    </div>
   </div>
 </div>
 

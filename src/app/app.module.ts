@@ -33,7 +33,7 @@ import { ProjectCardComponent } from './modules/profile/project-card/project-car
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 import { AgmCoreModule } from '@agm/core';
-//import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 
 
 
@@ -81,6 +81,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
       apiKey: 'AIzaSyBdsfrCn5LZZYIw9dyPGVXPFTFbKmaKUOI', //'AIzaSyDXJWjchrU7uMEk_PvKG4b9hmI3p3rEaYU',
       libraries: ['places']    
    }),
+   GooglePlaceModule
    
   ],
   providers: [

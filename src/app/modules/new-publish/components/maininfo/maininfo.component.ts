@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {MainInfo} from '../../../../models/main-info';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MapService} from '../../../../services/map/map.service';
-import {Plans} from '../../../../models/plans';
-import {TypeProperty} from '../../../../models/type-property';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MainInfo } from '../../../../models/main-info';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MapService } from '../../../../services/map/map.service';
+import { Plans } from '../../../../models/plans';
+import { TypeProperty } from '../../../../models/type-property';
 
 @Component({
   selector: 'app-maininfo',
@@ -28,10 +28,27 @@ export class MaininfoComponent implements OnInit {
   longitude: number;
   zoom: number;
 
+
+  title = 'rou';
+  //Local Variable defined 
+  formattedaddress = " ";
+  options = {
+    componentRestrictions: {
+      country: ["CH", "CO"]
+    }
+  }
   constructor(
     private sanitizer: DomSanitizer,
     private mapService: MapService,
   ) {
+  }
+
+
+  public AddressChange(address: any) {
+    //setting address from API to local variable 
+    this.latitude = address.geometry.location.lng();
+    this.longitude = address.geometry.location.lat();
+    this.mainInfo.city = address.formatted_address;
   }
 
   ngOnInit(): void {
@@ -88,7 +105,7 @@ export class MaininfoComponent implements OnInit {
       return;
     }
     this.videos.push(this.videoUrl);
-    this.videosReader.push( this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl));
+    this.videosReader.push(this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl));
     this.videoUrl = '';
   }
   isVideoUrl(index): boolean {
@@ -117,18 +134,16 @@ export class MaininfoComponent implements OnInit {
     this.mainInfo.lon = coordinates[0];
     this.mainInfo.lat = coordinates[1];
     console.log(this.coordinates);
-    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
+    this.mapService.changeCenterMap(this.mainInfo.lon, this.mainInfo.lat);
   }
   changeCountry(): void {
     switch (this.mainInfo.country) {
       case 'Colombia': {
-        this.mapService.changeCenterMap('-73.129056', '3.06508799999999');
         this.mainInfo.city = '';
         this.mainInfo.postal_code = '';
         break;
       }
       case 'Switzerland': {
-        this.mapService.changeCenterMap('17.6754094331351', '64.9648751621697');
         this.mainInfo.city = '';
         this.mainInfo.postal_code = '';
         break;
