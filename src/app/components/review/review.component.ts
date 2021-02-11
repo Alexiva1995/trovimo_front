@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-review',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./review.component.scss']
 })
 export class ReviewComponent implements OnInit {
+  @Input() data : any;
+ 
 
   constructor() { }
 

@@ -130,35 +130,3 @@ input[type=search]{
   margin: 1rem;
   border-radius: 6px;
 }
-
-.content{
-  position: relative;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.overlay-meta{
-  padding: .8rem;
-  & * { color: #eee; }
-}
-
-.overlay{
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  align-items: flex-end;
-  h2{
-    font-size: 1.3rem;
-  }
-  background: rgb(2,0,36);
-  background: linear-gradient(180deg, rgba(2,0,36,0) 0%, rgba(9,9,121,0.22872899159663862) 35%, rgba(7,53,88,1) 100%);
-  opacity: 0;
-  transition:opacity 0.8s;
-  &:hover{
-    opacity:100%;
-    transition:opacity 0.5s;
-  }
-}

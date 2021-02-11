@@ -1,42 +1,8 @@
-@import "/src/app/theme";
-
 h6 {
   font-weight: bold;
 }
 
-.form-control {
-  border: 2px solid $primary !important;
+.info {
+  padding-left: 30px;
+  padding-right: 30px;
 }
-
-.user-rrss {
-  tr {
-    .brand {
-      display: flex;
-      align-items: center;
-      text-transform: capitalize;
-      color: $primary;
-      img {
-        width: 30px;
-        margin-right: 20px;
-      }
-    }
-    .link {
-      div {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        button.btn {
-          border-radius: 20px;
-          width: 8rem;
-        }
-        input {
-          width: 15rem;margin-right: 20px; border-radius: 20px
-        }
-        i {
-          color: $primary;
-        }
-      }
-    }
-  }
-}
-
