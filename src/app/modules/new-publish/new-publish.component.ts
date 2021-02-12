@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import {AuthService} from '../../services/auth/auth.service';
 import {ProjectService} from '../../services/project/project.service';
 import {DetailInfo} from '../../models/detail-info';
+//import { SharedModel } from 'src/app/models/shared.model';
 
 @Component({
   selector: 'app-new-publish',
@@ -15,11 +16,17 @@ export class NewPublishComponent implements OnInit {
   type = 1;
   optionType = 0;
   mainInfo: MainInfo;
+  //sharedInfo: SharedModel;
   detail: DetailInfo;
   images = [];
   imagesReader = [];
   videos = [];
   videosReader = [];
+  optionId = '';
+  optionVideoType = '';
+  optionPhotoType = '';
+  optionalType = '';
+  photoType = '';
   constructor(
     private authService: AuthService,
     private projectService: ProjectService
@@ -79,8 +86,45 @@ export class NewPublishComponent implements OnInit {
         Swal.update({
           text: 'Saving data project'
         });
-        this.projectService.createProject(this.mainInfo, 'new-product')
+        
+        switch (this.mainInfo.option_id) {
+          case 1:
+            this.optionId = 'new-product';
+            this.optionVideoType = 'add-video-product';
+            this.optionPhotoType = 'add-photo-product';
+            this.optionalType = 'optional-product';
+            this.photoType = 'product_id';
+            break;
+          case 2:
+            this.optionId = 'new-product';
+            this.optionVideoType = 'add-video-product';
+            this.optionPhotoType = 'add-photo-product';
+            this.optionalType = 'optional-product'
+            this.photoType = 'product_id';
+            break;
+          case 3:
+            this.optionId = 'new-shared-space';
+            this.optionVideoType = 'add-video-shared-space';
+            this.optionPhotoType = 'add-photo-shared-space';
+            this.optionalType = 'optional-shared-space';
+            console.log(this.mainInfo);
+            this.setSharedSpace();
+            console.log('final ', this.mainInfo)
+
+            break;
+          case 4:
+            this.optionId = 'new-project';
+            this.optionVideoType = 'add-video-project';
+            this.optionPhotoType = 'add-photo-project';
+            this.optionalType = 'optional-project';
+            this.photoType = 'project_id';
+          default:
+            break;
+        }
+        
+        this.projectService.createProject(this.mainInfo, this.optionId)
           .subscribe( async (response) => {
+            console.log(response); 
             const id = response.message.id;
             Swal.update({
               text: 'Uploading multimedia files'
@@ -88,8 +132,8 @@ export class NewPublishComponent implements OnInit {
             for await (const video of this.videos) {
               const formData = new FormData();
               formData.append('video', video);
-              formData.append('product_id', id);
-              this.projectService.uploadVideo(formData, 'add-video-product').subscribe(responseVideo => {
+              formData.append(this.photoType, id);
+              this.projectService.uploadVideo(formData, this.optionVideoType).subscribe(responseVideo => {
                 console.log(responseVideo);
               }, err => {
                 Swal.fire({
@@ -101,8 +145,8 @@ export class NewPublishComponent implements OnInit {
             for await (const image of this.images) {
               const formData = new FormData();
               formData.append('photo', image);
-              formData.append('product_id', id);
-              this.projectService.uploadImage(formData, 'add-photo-product').subscribe(responseImage => {
+              formData.append(this.photoType, id);
+              this.projectService.uploadImage(formData, this.optionPhotoType).subscribe(responseImage => {
                 console.log(responseImage);
               }, err => {
                 Swal.fire({
@@ -115,13 +159,14 @@ export class NewPublishComponent implements OnInit {
               text: 'Saving detail information'
             });
             this.detail.product_id = id;
-            this.projectService.saveDetailInfo(this.detail, 'optional-product').subscribe(responseDetail=> {
+            this.projectService.saveDetailInfo(this.detail, this.optionalType).subscribe(responseDetail=> {
             });
             Swal.fire({
               title: 'Your project has been created successfully',
               icon: 'success'
             });
         }, err => {
+          console.log(err);
             Swal.fire({
               title: 'An error ocurred',
               icon: 'error'
@@ -129,5 +174,14 @@ export class NewPublishComponent implements OnInit {
           });
       }
     });
+  }
+
+  setSharedSpace(): void{
+    delete this.mainInfo.peths;
+    delete this.mainInfo.furnished;
+    delete this.mainInfo.typesp;
+    delete this.mainInfo.bathroom;
+    delete this.mainInfo.show_available_date;
+    delete this.mainInfo.available_date;
   }
 }

@@ -39,7 +39,6 @@ export class MaininfoComponent implements OnInit {
   }
   constructor(
     private sanitizer: DomSanitizer,
-    private mapService: MapService,
   ) {
   }
 
@@ -49,6 +48,9 @@ export class MaininfoComponent implements OnInit {
     this.latitude = address.geometry.location.lng();
     this.longitude = address.geometry.location.lat();
     this.mainInfo.city = address.formatted_address;
+    this.mainInfo.lat = this.latitude;
+    this.mainInfo.lon = this.longitude;
+
   }
 
   ngOnInit(): void {
@@ -128,13 +130,6 @@ export class MaininfoComponent implements OnInit {
       imagesReader: this.imagesReader,
       videosReader: this.videosReader
     });
-  }
-  setCoordinates(): void {
-    const coordinates = this.coordinates.split(',');
-    this.mainInfo.lon = coordinates[0];
-    this.mainInfo.lat = coordinates[1];
-    console.log(this.coordinates);
-    this.mapService.changeCenterMap(this.mainInfo.lon, this.mainInfo.lat);
   }
   changeCountry(): void {
     switch (this.mainInfo.country) {

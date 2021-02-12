@@ -40,6 +40,8 @@ export class ProjectService {
       headers,
     });
   }
+
+  
   saveDetailInfo(data, typeName): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
