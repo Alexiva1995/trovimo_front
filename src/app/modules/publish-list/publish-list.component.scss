@@ -1,9 +1,10 @@
 @import "../../theme/vars";
 .filters {
   border-bottom: 1px solid #11355824;
-  padding-top: 30px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   margin-bottom: 30px;
+  transition:all ease .3s;
   input {
     width: 10rem;
     border: 1px solid $primary;
@@ -21,8 +22,8 @@
       background-color: $primary;
       color: white;
       img {
-        filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
-          brightness(103%) contrast(103%);
+        // filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg)
+        //   brightness(103%) contrast(103%);
       }
     }
     &:hover {
@@ -85,4 +86,17 @@
   button {
     font-size: 12px;
   }
+}
+
+
+input[type=radio] + *::before {
+  width: 15px !important;
+  height: 15px !important;
+  margin: 2px;
+}
+
+input[type=checkbox] + *::before {
+  width: 15px !important;
+  height: 15px !important;
+  margin-right: 2px !important;
 }

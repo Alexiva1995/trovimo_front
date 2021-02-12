@@ -193,4 +193,10 @@ export class PublishListComponent implements OnInit {
       }
     );
   }
+
+  closemodal(){
+    console.log("fuera de caja")
+  }
+
+
 }
