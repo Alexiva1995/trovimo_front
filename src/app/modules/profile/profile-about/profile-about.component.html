@@ -1,89 +1,74 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 col-lg-4">
-      <div class="card" style="margin-top: 20px">
-        <div class="container">
-          <h6>Contact Info</h6>
-          <div class="info">
-            <i class="fas fa-envelope"></i>
-            <span>contact@arquitecturayconcreto.com</span>
-          </div>
-          <div class="info">
-            <i class="fas fa-phone"></i> <span>+33 123 456 789</span>
-          </div>
-          <div class="info">
-            <i class="fas fa-map-marker-alt"></i>
-            <span>8098 Center Street Easley, SC 29640</span>
-          </div>
-          <div class="icons">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-linkedin-in"></i>
-          </div>
-          <button style="margin-top: 30px" class="btn btn-primary">
+<div class="container" *ngIf="load == 0">
+    <div class="row">
+        <div class="col-12 col-lg-4">
+            <div class="card" style="margin-top: 20px">
+                <div class="container">
+                    <h6>Contact Info</h6>
+                    <div class="info">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{expert.emails}}</span>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-phone"></i> <span *ngFor="let p of phones" [value]="p.key">{{p}} </span>
+                    </div>
+                    <div class="info">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>{{expert.address}}</span>
+                    </div>
+                    <div class="icons">
+                        <a href="{{expert.facebook}}"><i class="fab fa-facebook-f"></i></a>
+                        <a href="{{expert.instagram}}"><i class="fab fa-instagram"></i></a>
+                        <a href="{{expert.linkedin}}"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                    <button style="margin-top: 30px" class="btn btn-primary">
             <i class="fas fa-share"></i> Share
           </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 col-lg-8">
-      <div class="card" style="margin-top: 20px">
-        <div class="container">
-          <h6>About Us</h6>
-          <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
-            dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-            tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-            voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum
-            dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing
-            elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore
-            magna
-          </p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top: 20px">
-        <div class="container">
-          <h6>27 Projects for Arquitectura y Concreto</h6>
-          <div class="container">
-            <div class="row">
-              <div class="col-6 col-lg-4" style="margin-top: 10px; margin-bottom: 10px">
-                <app-project-card></app-project-card>
-              </div>
-              <div class="col-6 col-lg-4"  style="margin-top: 10px; margin-bottom: 10px">
-                <app-project-card></app-project-card>
-              </div>
+                </div>
             </div>
-            <div style="display: flex" class="justify-content-center">
-              <button class="btn btn-primary more">Load Next 12 Projects</button>
+        </div>
+        <div class="col-12 col-lg-8">
+            <div class="card" style="margin-top: 20px">
+                <div class="container">
+                    <h6>About Us</h6>
+                    <p>
+                        {{expert.about_us}}
+                    </p>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="card" style="margin-top: 20px">
-        <div class="container">
-          <h6>18 Reviews for Arquitectura y Concreto</h6>
-          <app-review></app-review>
-        </div>
-      </div>
+            <div class="card" style="margin-top: 20px" name="projects" id="projects">
+                <div class="container">
+                    <h6>{{expert.my_project.length}} Projects for {{expert.company_name}}</h6>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6 col-lg-4" style="margin-top: 10px; margin-bottom: 10px" *ngFor="let item of expert.my_project">
+                                <app-project-card [data]="item" *ngIf="item">
+                                </app-project-card>
+                            </div>
+                        </div>
+                        <div style="display: flex" class="justify-content-center" *ngIf="expert.my_project.length > 12">
+                            <button class="btn btn-primary more">Load Next 12 Projects</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-      <div class="card" style="margin-top: 20px">
-        <div class="container">
-          <h6>Rate and write a review for Arquitectura y Concreto</h6>
-          <app-review-form></app-review-form>
-        </div>
-      </div>
+            <div class="card" style="margin-top: 20px" name="reviews" id="reviews">
+                <div class="container">
+                    <h6>{{expert.rating.length}} Reviews for {{expert.company_name}}</h6>
+                    <div class="container" *ngFor="let item of expert.rating">
+                        <app-review [data]="item" *ngIf="item" class="mr-3 ml-3"></app-review>
+                    </div>
 
+                </div>
+            </div>
+
+            <div class="card" style="margin-top: 20px" *ngIf="user">
+                <div class="container">
+                    <h6>Rate and write a review for Arquitectura y Concreto</h6>
+                    <app-review-form [expert_id]="expert.id" (refresh)="refresh($event)"></app-review-form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

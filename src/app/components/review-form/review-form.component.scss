@@ -1,0 +1,65 @@
+input[type=radio]+*::before {
+    content: "";
+    display: none !important;
+    vertical-align: bottom;
+    width: 1.5rem;
+    height: 1.5em;
+    margin-right: 0rem;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #073558;
+}
+
+input[type=radio]+* {
+    display: inline-block;
+    padding: 0rem 0rem !important;
+}
+
+label:hover {
+    color: orange !important;
+}
+
+label:hover~label {
+    color: orange !important;
+}
+
+input[type="radio"]:checked~label {
+    color: orange !important;
+}
+
+#form {
+    width: 250px !important;
+    margin: 0 auto !important;
+    height: 50px !important;
+}
+
+#form p {
+    text-align: center !important;
+}
+
+#form label {
+    font-size: 20px !important;
+}
+
+input[type="radio"] {
+    display: none !important;
+}
+
+label {
+    color: grey !important;
+}
+
+.clasificacion {
+    direction: rtl !important;
+    unicode-bidi: bidi-override !important;
+}
+
+label:hover,
+label:hover~label {
+    color: orange !important;
+}
+
+input[type="radio"]:checked~label {
+    color: orange !important;
+}

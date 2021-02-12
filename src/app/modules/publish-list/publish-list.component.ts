@@ -11,7 +11,7 @@ import { OPTIONS } from 'src/app/models/typeOptions';
   styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
-  type: number;
+  type: any;
   openFilter = -1;
   min = 10;
   max = 10000000;
@@ -34,12 +34,10 @@ export class PublishListComponent implements OnInit {
     private route: ActivatedRoute,
     private service: ProjectService,
     private toastr: ToastrService,
+    private Project: ProjectService,
     private Expert: ExpertService
   ) {
-    this.type = parseFloat(this.route.snapshot.paramMap.get('type'));
-    this.filter.option = parseFloat(this.route.snapshot.paramMap.get('option'));
-
-    this.filter.type = this.type;
+    this.type = this.route.snapshot.paramMap.get('type');
     console.log(this.type);
 
     this.route.queryParams.subscribe((params) => {
@@ -53,51 +51,26 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData();
-  }
-
-  getData() {
-    console.log(this.type);
-
-    switch (this.type) {
-      case 1: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
-      case 2: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
-      case 3: {
-        this.getServices();
-        this.getSharedSpace();
-        break;
-      }
-      case 4: {
-        this.getServices();
-        this.getProjects();
-        break;
-      }
-      case 5: {
-        this.getServices();
-        this.getExperts(
-          this.address,
-          this.category,
-          this.type_verification,
-          this.company,
-          this.emergency
-        );
-        this.getProjects();
-        break;
-      }
-      default: {
-        this.getServices();
-        this.getProducts();
-        break;
-      }
+    if (this.type == 5) {
+      this.getServices();
+      this.getExperts(
+        this.address,
+        this.category,
+        this.type_verification,
+        this.company,
+        this.emergency
+      );
+      this.getProjects();
     }
+      if(this.type == 1){
+        this.getProduct();
+      }
+      if(this.type == 3){
+        this.getShared_spaces();
+      }
+      if(this.type == 4){
+        this.getProject();
+      }
   }
 
   getProjects() {
@@ -112,6 +85,45 @@ export class PublishListComponent implements OnInit {
     );
   }
 
+  getProduct() {
+    console.log("entro");
+    this.service.getProduct().subscribe(
+      (data : any) => {
+        this.projects = data.products;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  getShared_spaces() {
+    console.log("entro");
+    this.service.getShared().subscribe(
+      (data : any) => {
+        this.projects = data.shared_spaces;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+  getProject() {
+    console.log("entro");
+    this.service.getProject().subscribe(
+      (data : any) => {
+        this.projects = data.project;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  
   getServices() {
     this.Expert.getAreas().subscribe(
       (data: any) => {
@@ -153,28 +165,6 @@ export class PublishListComponent implements OnInit {
         this.load = 0;
       },
       (errorServicio) => {
-        console.log('Ha Ocurrido un error inesperado.');
-      }
-    );
-  }
-
-  getSharedSpace() {
-    this.service.getSharedSpace(this.filter).subscribe(
-      (res: any) => {
-        this.projects = res.shared_spaces;
-      },
-      (err) => {
-        console.log('Ha Ocurrido un error inesperado.');
-      }
-    );
-  }
-
-  getProducts() {
-    this.service.searchProducts(this.filter).subscribe(
-      (res: any) => {
-        this.projects = res.shared_spaces;
-      },
-      (err) => {
         console.log('Ha Ocurrido un error inesperado.');
       }
     );

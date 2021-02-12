@@ -40,4 +40,60 @@ export class ExpertService {
       headers,
     });
   }
+
+  getExpertProfile(id, user_id): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('expert_profile_id', id);
+    formData.append('user_id', user_id);
+    return this.http.post(this.api + '/auth/services/show-expert', formData, {
+      headers,
+    });
+  }
+
+  AddRating(expert_id, observation, rating): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('expert_profile_id', expert_id);
+    formData.append('observation', observation);
+    formData.append('rating', rating);
+    return this.http.post(this.api + '/auth/services/user/rating', formData, {
+      headers,
+    });
+  }
+
+  Favorite(expert_id): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('expert_profile_id', expert_id);
+    return this.http.post(this.api + '/auth/services/favorite', formData, {
+      headers,
+    });
+  }
+
+  Message(expert_id, name, email, phone, message): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('expert_profile_id', expert_id);
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('message', message);
+    return this.http.post(this.api + '/auth/services/contact', formData, {
+      headers,
+    });
+  }
+
 }

@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {MainInfo} from '../../../../models/main-info';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MapService} from '../../../../services/map/map.service';
-import {Plans} from '../../../../models/plans';
-import {TypeProperty} from '../../../../models/type-property';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { MainInfo } from '../../../../models/main-info';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MapService } from '../../../../services/map/map.service';
+import { Plans } from '../../../../models/plans';
+import { TypeProperty } from '../../../../models/type-property';
 
 @Component({
   selector: 'app-maininfo',
@@ -22,18 +22,43 @@ export class MaininfoComponent implements OnInit {
   years = [];
   videoUrl: string;
   coordinates = '';
-  keyword = 'place_name';
-  data = [];
+  showCoordinates = false
+
+  latitude: number;
+  longitude: number;
+  zoom: number;
+
+
+  title = 'rou';
+  //Local Variable defined 
+  formattedaddress = " ";
+  options = {
+    componentRestrictions: {
+      country: ["CH", "CO"]
+    }
+  }
   constructor(
     private sanitizer: DomSanitizer,
-    private mapService: MapService
   ) {
+  }
+
+
+  public AddressChange(address: any) {
+    //setting address from API to local variable 
+    this.latitude = address.geometry.location.lng();
+    this.longitude = address.geometry.location.lat();
+    this.mainInfo.city = address.formatted_address;
+    this.mainInfo.lat = this.latitude;
+    this.mainInfo.lon = this.longitude;
+
   }
 
   ngOnInit(): void {
     this.getYearBuilt();
     this.coordinates = this.mainInfo.lon + ',' + this.mainInfo.lat;
+
   }
+
   getYearBuilt(): any {
     const actualYear = new Date().getFullYear();
     for (let i = 0; i < 100; i++) {
@@ -82,7 +107,7 @@ export class MaininfoComponent implements OnInit {
       return;
     }
     this.videos.push(this.videoUrl);
-    this.videosReader.push( this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl));
+    this.videosReader.push(this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl));
     this.videoUrl = '';
   }
   isVideoUrl(index): boolean {
@@ -106,23 +131,14 @@ export class MaininfoComponent implements OnInit {
       videosReader: this.videosReader
     });
   }
-  setCoordinates(): void {
-    const coordinates = this.coordinates.split(',');
-    this.mainInfo.lon = coordinates[0];
-    this.mainInfo.lat = coordinates[1];
-    console.log(this.coordinates);
-    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
-  }
   changeCountry(): void {
     switch (this.mainInfo.country) {
       case 'Colombia': {
-        this.mapService.changeCenterMap('-73.129056', '3.06508799999999');
         this.mainInfo.city = '';
         this.mainInfo.postal_code = '';
         break;
       }
       case 'Switzerland': {
-        this.mapService.changeCenterMap('8.23439191387853', '46.8024955829499');
         this.mainInfo.city = '';
         this.mainInfo.postal_code = '';
         break;
@@ -136,21 +152,8 @@ export class MaininfoComponent implements OnInit {
   addProperty(): void {
     this.mainInfo.typesp.push(new TypeProperty());
   }
-  onChangeSearch(searchText): void {
-    this.mapService.getPointBySearch(searchText).subscribe(
-      response => {
-        console.log(response);
-        this.mainInfo.city = searchText;
-        this.data = response.features;
-      }
-    );
-  }
-  selectEvent(event): void {
-    console.log(event);
-    this.mainInfo.lon = event.center[0];
-    this.mainInfo.lat = event.center[1];
-    console.log(this.coordinates);
-    this.mainInfo.city = event.place_name;
-    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
-  }
+
+
+
+
 }

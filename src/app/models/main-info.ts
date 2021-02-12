@@ -15,8 +15,8 @@ export class MainInfo {
   country = 'Colombia';                // required
   city = '';                   // required
   postal_code = '';
-  lat = '3.06508799999999';                    // required
-  lon = '-73.129056';                    // required
+  lat: number;                    // required
+  lon: number;                    // required
   tour = '';
   name = '';
   email = '';

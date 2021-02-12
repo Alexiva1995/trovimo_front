@@ -12,16 +12,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MainInfoComponent implements OnInit {
   user: User_;
   form: FormGroup;
-  facebook: string;
-  facebookShow = false;
-  instagram: string;
-  instagramShow = false;
-  linkedin: string;
-  linkedinShow = false;
-  twitter: string;
-  twitterShow = false;
-  youtube: string;
-  youtubeShow = false;
   constructor(
     private service: UserService,
     private toastr: ToastrService,
@@ -55,6 +45,7 @@ export class MainInfoComponent implements OnInit {
       country: [this.user.country || '', Validators.required],
       city: [this.user.city || '', Validators.required],
       postal_code: [this.user.postal_code || '', Validators.required],
+      city_work: [[]],
     });
   }
 
