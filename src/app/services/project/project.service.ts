@@ -93,6 +93,49 @@ export class ProjectService {
     );
   }
 
+  searchProduct(type, user_id, address, min, max, rooms, baths, areamin, areamax): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    formData.append('type', type);
+    formData.append('user_id', user_id);
+    formData.append('address', address);
+    formData.append('pricemin', min);
+    formData.append('pricemax', max);
+    formData.append('rooms', rooms);
+    formData.append('baths', baths);
+    formData.append('areamin', areamin);
+    formData.append('areamax', areamax);
+     return this.http.post(this.api + '/auth/services/search-product', formData, {
+      headers,
+    });
+  }
+  favorite(id, type): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+    const formData = new FormData();
+    if(type==1){
+      formData.append('product_id', id);
+    }
+    if(type==2){ 
+        formData.append('product_id', id);
+    } 
+    if(type==3){ 
+        formData.append('shared_space_id', id); 
+    } 
+    if(type==4){ 
+        formData.append('project_id', id);
+     }
+    return this.http.post(this.api + '/auth/services/favorite', formData, {
+      headers,
+    });
+  }
+
+
   getProduct(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -114,7 +157,6 @@ export class ProjectService {
     });
     return this.http.post(this.api + '/auth/services/search-project', null,{ headers});
   }
-
   getAreas(): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -122,7 +164,6 @@ export class ProjectService {
     });
     return this.http.post(this.api + '/auth/show-areas', null, { headers });
   }
-
   getExpert(address, area): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
