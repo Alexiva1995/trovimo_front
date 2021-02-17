@@ -1,0 +1,86 @@
+
+
+  <div class="info">
+    <div class="title">
+      <h6>My account</h6>
+      <div class="change">
+        <div class="item-change btn-primary ">
+          Change to a company account
+        </div>
+      </div>
+    </div>
+  
+  
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="profile">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" formControlName="username"
+            [ngClass]="{ 'is-invalid': form.get('username').hasError('required') }" class="form-control" />
+        </div>
+      </div>
+  
+      <div class="form-group">
+        <label>Name and surname</label>
+        <div class="checkbox-form">
+          <input id='name' type="text" formControlName="name"
+            [ngClass]="{ 'is-invalid': form.get('name').hasError('required') }" class="form-control" />
+        </div>
+  
+  
+      </div>
+      <div class="content-form">
+        <div class="row">
+          <div class="form-group col-4">
+            <label>Country</label>
+            <select class="form-control form-select" formControlName="country"
+              [ngClass]="{ 'is-invalid': form.get('country').hasError('required') }">
+              <option selected>Colombia</option>
+              <option value="1">Colombia</option>
+              <option value="2">Colombia</option>
+              <option value="3">Colombia</option>
+            </select>
+          </div>
+          <div class="form-group col-4">
+            <label>City</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group col-4">
+            <label>Postal code - state</label>
+            <input type="text" class="form-control" formControlName="postal_code" [ngClass]="{
+              'is-invalid': form.get('postal_code').hasError('required')
+            }" />
+          </div>
+        </div>
+        <span>Select the city of your work (You can select more than one) </span>
+        <div class="input-group" style="margin-bottom: 20px">
+          <input type="text" placeholder="Insert Address" class="form-control" formControlName="city"
+            [ngClass]="{ 'is-invalid': form.get('city').hasError('required') }" />
+          <button style="width: auto" class="btn btn-primary" type="button" id="button-addon2">
+            +
+          </button>
+        </div>
+        <label>Phones</label>
+        <div class="input-group" style="margin-bottom: 10px">
+          <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+            style="width: auto">
+            +57
+          </button>
+          <ul class="dropdown-menu">
+            <li>+57</li>
+            <li>+58</li>
+            <li>+59</li>
+          </ul>
+          <input type="tel" class="form-control" formControlName="phone"
+            [ngClass]="{ 'is-invalid': form.get('phone').hasError('required') }" />
+          <button style="width: auto" class="btn btn-primary" type="button" id="button-addon2">
+            +
+          </button>
+        </div>
+        <div class="tag">
+          +571515811121<span><i class="fas fa-times-circle"></i></span>
+        </div>
+      </div>
+    </form>
+  </div> 
+  

@@ -1,105 +1,139 @@
-<div class="info">
-  <h6>My account</h6>
+
+
+  <div class="info">
+  <div class="title">
+    <h6>My account</h6>
+    <div class="change">
+      <div class="item-change btn-primary ">
+        Change to a company account
+      </div>
+      <div class="item-change btn-primary ">
+        Change to an account of professional
+      </div>
+    </div>
+  </div>
+
 
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div class="form-group">
-      <label>Username</label>
-      <input
-        type="text"
-        formControlName="username"
-        [ngClass]="{ 'is-invalid': form.get('username').hasError('required') }"
-        class="form-control"
-      />
+    <div class="profile">
+      <div class="photo">
+        <img width="140" src="assets/images/profile/profile.png" alt="">
+        <div class="icon">
+          <i class="fa fa-camera"></i>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" formControlName="username"
+          [ngClass]="{ 'is-invalid': form.get('username').hasError('required') }" class="form-control" />
+      </div>
     </div>
+
     <div class="form-group">
       <label>Name and surname</label>
-      <input
-        type="text"
-        formControlName="name"
-        [ngClass]="{ 'is-invalid': form.get('name').hasError('required') }"
-        class="form-control"
-      />
-    </div>
-    <label>Phones</label>
-    <div class="input-group" style="margin-bottom: 20px">
-      <button
-        class="btn btn-primary dropdown-toggle"
-        type="button"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-        style="width: auto"
-      >
-        +57
-      </button>
-      <ul class="dropdown-menu">
-        <li>+57</li>
-        <li>+58</li>
-        <li>+59</li>
-      </ul>
-      <input
-        type="tel"
-        class="form-control"
-        formControlName="phone"
-        [ngClass]="{ 'is-invalid': form.get('phone').hasError('required') }"
-      />
-      <button
-        style="width: auto"
-        class="btn btn-primary"
-        type="button"
-        id="button-addon2"
-      >
-        +
-      </button>
-    </div>
-    <div class="row">
-      <div class="form-group col-4">
-        <label>Country</label>
-        <select
-          class="form-control form-select"
-          formControlName="country"
-          [ngClass]="{ 'is-invalid': form.get('country').hasError('required') }"
-        >
-          <option selected>Colombia</option>
-          <option value="1">Colombia</option>
-          <option value="2">Colombia</option>
-          <option value="3">Colombia</option>
-        </select>
+      <div class="checkbox-form">
+        <input id='name' type="text" formControlName="name"
+          [ngClass]="{ 'is-invalid': form.get('name').hasError('required') }" class="form-control" />
+        <span style="padding: 0px 10px;"> <input type="checkbox"> Don´t show my name</span>
       </div>
-      <div class="form-group col-4">
-        <label>City</label>
-        <input type="text" class="form-control" />
+
+
+    </div>
+    <div class="content-form">
+      <label>Phones</label>
+      <div class="input-group" style="margin-bottom: 10px">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+          style="width: auto">
+          +57
+        </button>
+        <ul class="dropdown-menu">
+          <li>+57</li>
+          <li>+58</li>
+          <li>+59</li>
+        </ul>
+        <input type="tel" class="form-control" formControlName="phone"
+          [ngClass]="{ 'is-invalid': form.get('phone').hasError('required') }" />
+        <button style="width: auto" class="btn btn-primary" type="button" id="button-addon2">
+          +
+        </button>
       </div>
-      <div class="form-group col-4">
-        <label>Postal code - state</label>
-        <input
-          type="text"
-          class="form-control"
-          formControlName="postal_code"
-          [ngClass]="{
+      <div class="tag">
+        +571515811121<span><i class="fas fa-times-circle"></i></span>
+      </div>
+      <div class="row">
+        <div class="form-group col-4">
+          <label>Country</label>
+          <select class="form-control form-select" formControlName="country"
+            [ngClass]="{ 'is-invalid': form.get('country').hasError('required') }">
+            <option selected>Colombia</option>
+            <option value="1">Colombia</option>
+            <option value="2">Colombia</option>
+            <option value="3">Colombia</option>
+          </select>
+        </div>
+        <div class="form-group col-4">
+          <label>City</label>
+          <input type="text" class="form-control" />
+        </div>
+        <div class="form-group col-4">
+          <label>Postal code - state</label>
+          <input type="text" class="form-control" formControlName="postal_code" [ngClass]="{
             'is-invalid': form.get('postal_code').hasError('required')
-          }"
-        />
+          }" />
+        </div>
       </div>
-    </div>
-    <span>Select the city of your work (You can select more than one) </span>
-    <div class="input-group" style="margin-bottom: 20px">
-      <input
-        type="text"
-        placeholder="Insert Address"
-        class="form-control"
-        formControlName="city"
-        [ngClass]="{ 'is-invalid': form.get('city').hasError('required') }"
-      />
-      <button
-        style="width: auto"
-        class="btn btn-primary"
-        type="button"
-        id="button-addon2"
-      >
-        +
-      </button>
+      <span>Select the city of your work (You can select more than one) </span>
+      <div class="input-group" style="margin-bottom: 20px">
+        <input type="text" placeholder="Insert Address" class="form-control" formControlName="city"
+          [ngClass]="{ 'is-invalid': form.get('city').hasError('required') }" />
+        <button style="width: auto" class="btn btn-primary" type="button" id="button-addon2">
+          +
+        </button>
+      </div>
     </div>
   </form>
-
-  <h6>Social Networks</h6>
+  <div class="social-networks">
+    <h6>Social Networks</h6>
+    <div class="item-social">
+      <div class="text-social">
+        <i class="fab fa-linkedin"></i>
+        <p>Linkedin</p>
+      </div>
+      <button class="btn btn-primary">Link</button>
+    </div>
+    <hr>
+    <div class="item-social">
+      <div class="text-social">
+        <i class="fab fa-facebook-square"></i>
+        <p>Facebook</p>
+      </div>
+      <button class="btn btn-primary">Link</button>
+    </div>
+    <hr>
+    <div class="item-social">
+      <div class="text-social">
+        <i class="fab fa-youtube"></i>
+        <p>Youtube</p>
+      </div>
+      <button class="btn btn-primary">Link</button>
+    </div>
+    <hr>
+    <div class="item-social">
+      <div class="text-social">
+        <i class="fab fa-twitter"></i>
+        <p>Twitter</p>
+      </div>
+      <button class="btn btn-primary">Link</button>
+    </div>
+    <hr>
+    <div class="item-social">
+      <div class="text-social">
+        <div class="instagram">
+        <i class="fab fa-instagram"></i>
+      </div>
+      <p>Instagram</p>
+    </div>
+    <button class="btn btn-primary">Link</button>
+  </div>
 </div>
+</div> 

@@ -41,6 +41,8 @@ import { TypesFormComponent } from './modules/new-publish/components/maininfo/co
 import { MapComponent } from './components/map/map.component';
 
 import { HelpTooltipComponent } from './components/help-tooltip/help-tooltip.component';
+import { AccountCompanyComponent } from './modules/acount-profile/components/account-company/account-company.component';
+import { AccountProfessionalComponent } from './modules/acount-profile/components/account-professional/account-professional.component';
 const APP_COMPONENTS = [
   HeaderComponent,
   MenuHeaderComponent,
@@ -82,7 +84,9 @@ const APP_COMPONENTS = [
   PlansFormComponent,
   TypesFormComponent,
   MapComponent,
-  HelpTooltipComponent
+  HelpTooltipComponent,
+  AccountCompanyComponent,
+  AccountProfessionalComponent
 ];
 
 export default APP_COMPONENTS;

@@ -3,6 +3,108 @@ h6 {
 }
 
 .info {
+  // max-width: 800px;
   padding-left: 30px;
   padding-right: 30px;
+}
+.title{
+  display: flex;
+  justify-content: space-between;
+}
+.change{
+  display: flex;
+  justify-content: flex-end;
+
+}
+.item-change{
+  margin: 1%;
+  cursor: pointer;
+  width: 40%;
+  text-align: center;
+}
+.profile{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.profile .form-group{
+  width: 100%;
+}
+.icon{
+  margin-top: -36px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+
+}
+.icon i{
+  box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.75);
+  padding: 10px;
+  border-radius: 50%;
+  background: white;
+  color: #135AA0;
+  cursor: pointer;
+}
+.checkbox-form{
+  display: flex;
+  align-items: center;
+}
+#name, .content-form, .profile, .title, .social-networks{
+  max-width: 800px;
+}
+input{
+  margin: 0 10px 0px 0px;
+}
+.item-social{
+  display: flex;
+  justify-content: space-between;
+}
+.item-social button{
+  width: 100px;
+  border-radius: 20px;
+}
+.text-social{
+  display: flex;
+  align-items: center;
+}
+.fab{
+  font-size: 3rem;
+  margin-right: 20px;
+}
+.fa-linkedin{
+  color:#135AA0
+}
+.fa-facebook-square{
+  color:#395693;
+}
+.fa-youtube{
+  color:#ff0000;
+}
+.fa-twitter{
+  color:#1da1f2;
+}
+
+.instagram {
+  display: inline-block;
+  text-align: center;
+  border-radius: 10px;
+  color: #fff;
+  margin-right: 20px;
+  vertical-align: middle;
+  background: #d6249f;
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+  box-shadow: 0px 3px 10px rgba(0,0,0,.25);
+}
+.fa-instagram{
+  margin-right: 0;
+}
+
+.tag{
+  width: max-content;
+  padding: 0 20px;
+  margin-bottom: 12px;
+   text-align: center;
+   background: #D8D8D8;
+   border-radius: 20px;
+   color:#073558;
 }
