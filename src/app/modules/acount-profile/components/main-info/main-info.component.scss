@@ -49,7 +49,7 @@ h6 {
   display: flex;
   align-items: center;
 }
-#name, .content-form, .profile, .title, .social-networks{
+#name, .content-form, .profile, .title, .social-networks,.btn-save{
   max-width: 800px;
 }
 input{
@@ -107,4 +107,16 @@ input{
    background: #D8D8D8;
    border-radius: 20px;
    color:#073558;
+}
+.btn-save{
+  margin-top: 36px;
+  display: flex;
+  justify-content: flex-end;
+
+}
+.btn-save button{
+  background: #135AA0;
+  color: white;
+  border-radius: 20px;
+  padding: 5px 50px;
 }
