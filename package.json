@@ -37,6 +37,7 @@
     "bootstrap": "^4.5.3",
     "jquery": "^3.5.1",
     "mapbox-gl": "^2.0.1",
+    "ng-click-outside": "^7.0.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-toastr": "^13.2.0",
     "rxjs": "~6.6.0",

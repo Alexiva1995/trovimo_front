@@ -100,3 +100,7 @@ input[type=checkbox] + *::before {
   height: 15px !important;
   margin-right: 2px !important;
 }
+
+::ng-deep.swal2-container {
+  z-index: 1000000;
+}

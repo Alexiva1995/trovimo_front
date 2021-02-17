@@ -5,6 +5,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
 import { ExpertService } from '../../services/expert/expert.service';
 import { OPTIONS } from 'src/app/models/typeOptions';
+import { ClickOutsideModule } from 'ng-click-outside';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
@@ -16,7 +19,7 @@ export class PublishListComponent implements OnInit {
   steps = 10;
   viewType = 0;
   projects: Project;
-  category: string = '';
+  // category: string = '';
   type_verification: any = '';
   company: string = '';
   services: any;
@@ -28,14 +31,28 @@ export class PublishListComponent implements OnInit {
   area: any = {};
   options = OPTIONS;
   user:any;
+  contador:number = 1
   //variables filtros
+  location:any;
   min = 0;
   max = 10000000;
   address: string = '';
-  rooms: any = 0;
-  baths: any = 0;
+  rooms: any = "";
+  baths: any = "";
   areamin = 0;
   areamax = 100000;
+  filtertype = 0;
+  furnished:any="";
+  //1 o 0
+  category:any = "";
+  condition:any = "";
+  pieces:any = "";
+  parking:any = "";
+  operation:any = "";
+  order:any = "R_A";
+  tour:any = "";
+  yearmin:any = "";
+  yearmax:any = "";
 
   constructor(
     private route: ActivatedRoute,
@@ -94,15 +111,26 @@ export class PublishListComponent implements OnInit {
   }
 
   searchProduct(type, user_id) {
+    Swal.fire({
+      background: 'transparent',
+    })
+
+    Swal.showLoading();
     this.load = 1;
-    this.service.searchProduct(type, user_id, this.address, this.min, this.max, this.rooms, this.baths, this.areamin, this.areamax).subscribe(
-      (data : any) => {
-        this.projects = data.products;
-        this.load = 0;
-      },
-      (err) => {
-        this.toastr.error('Error al realizar al consulta.');
-      }
+    console.log("ejecutar buscar",this.areamin , this.areamax)
+    this.service.searchProduct(type, user_id, this.address, this.min, this.max, this.rooms, this.baths, this.areamin, this.areamax,
+      this.furnished,this.category,this.condition,this.pieces,this.parking,this.operation,this.order,
+      this.tour,this.yearmin,this.yearmax).subscribe(
+    (data : any) => {
+     console.log(data)
+    Swal.close()
+     this.projects = data.products;
+   this.load = 0;
+    },
+   (err) => {
+     Swal.close()
+    this.toastr.error('Error al realizar al consulta.');
+    }
     );
   }
   getShared_spaces() {
@@ -197,9 +225,24 @@ export class PublishListComponent implements OnInit {
     );
   }
 
-  closemodal(){
-    console.log("fuera de caja")
+  closemodal(e: Event , c?:string){
+    if(this.contador > 1 ){
+        if(c == 'call'){
+          // se ejecuta cuando se cierra los filtros con max / min
+          this.searchProduct(this.type , this.user)
+        }
+      console.log("cerrar")
+      this.openFilter = -2;
+      this.contador = 1
+    }else{
+      const {type} = e
+        if(type == 'click'){
+          this.contador++
+        }
+    }
+  
   }
+
 
 
 }

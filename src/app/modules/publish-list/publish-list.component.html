@@ -10,6 +10,8 @@
             placeholder="Location"
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
+            [(ngModel)]="address"
+            (blur)="searchProduct(type, user_id)"
           />
           <button
             class="btn option"
@@ -17,6 +19,7 @@
             style="width: fit-content; border-radius: 8px"
             type="button"
             (click)="openFilter = 0"
+           
           >
             Price
             <img
@@ -139,6 +142,7 @@
           left: 20%;
         "
         *ngIf="openFilter == 0"
+        (clickOutside)="closemodal($event , 'call')"
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
       >
         <div style="display: flex; justify-content: space-between">
@@ -166,14 +170,15 @@
         "
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
         *ngIf="openFilter == 4"
+        (clickOutside)="closemodal($event , 'call')"
       >
         <div style="display: flex; justify-content: space-between">
           <h6>Area range</h6>
           <h6>{{ area.min }}m2 - {{ area.max }}m2</h6>
         </div>
         <app-double-range
-          [min]="min"
-          [max]="max"
+          [min]="areamin"
+          [max]="areamax"
           [steps]="steps"
           (setValue)="setArea($event.min, $event.max)"
         ></app-double-range>
@@ -189,6 +194,7 @@
         "
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
         *ngIf="openFilter == 1"
+
       >
         <!-- BATHS-->
         <h6>Residential</h6>
@@ -241,6 +247,7 @@
         "
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
         *ngIf="openFilter == 3"
+        (clickOutside)="closemodal($event)"
       >
         <!-- BATHS-->
         <h6>Baths</h6>
@@ -257,7 +264,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="filter.bath = 1"
+          (click)="searchProduct(baths = 1)"
           [class.active]="filter.bath == 1"
         >
           +1
@@ -266,7 +273,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="filter.bath = 2"
+          (click)="searchProduct(baths = 2)"
           [class.active]="filter.bath == 2"
         >
           +2
@@ -275,7 +282,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="filter.bath = 3"
+          (click)="searchProduct(baths = 3)"
           [class.active]="filter.bath == 3"
         >
           +3
@@ -284,7 +291,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="filter.bath = 4"
+          (click)="searchProduct(baths = 4)"
           [class.active]="filter.bath == 4"
         >
           +4
@@ -300,6 +307,7 @@
         "
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
         *ngIf="openFilter == 2"
+        (clickOutside)="closemodal($event)"
       >
         <!-- ROOMS-->
         <h6>Rooms</h6>
@@ -317,7 +325,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="filter.room = 1"
+            (click)="searchProduct(rooms = 1)"
             [class.active]="filter.room == 1"
           >
             +1
@@ -326,7 +334,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="filter.room = 2"
+            (click)="searchProduct(rooms = 2)"
             [class.active]="filter.room == 2"
           >
             +2
@@ -335,7 +343,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="filter.room = 3"
+            (click)="searchProduct(rooms = 3)"
             [class.active]="filter.room == 3"
           >
             +3
@@ -344,7 +352,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="filter.room = 4"
+            (click)="searchProduct(rooms = 4)"
             [class.active]="filter.room == 4"
           >
             +4
@@ -356,6 +364,7 @@
       class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 5"
       style="position: absolute;"
+      (clickOutside)="closemodal($event)"
     >
       <div class="container">
         <div class="col-lg-12">
@@ -364,10 +373,10 @@
             <div *ngFor="let item of options; let i = index" style="order: 5">
               <button
                 class="btn option oprincipal"
-                (click)="filter.option = i"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
                 [ngClass]="{ active: filter.option == i }"
+                (click)="searchProduct(filtertype = item.label)"
               >
                 <img [src]="item.icon" alt="" />{{ item.label }}
               </button>
@@ -382,6 +391,7 @@
     class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
     *ngIf="openFilter == 6"
     style="position: absolute;width: 430px;"
+    (clickOutside)="closemodal($event)"
   >
     <div class="container">
       <div class="row">
@@ -701,7 +711,7 @@
 
 
 
-  
+
     <div class="container-fluid" *ngIf="type < 5">
     <div class="row">
       <div class="col-lg-6" *ngIf="viewType == 0">

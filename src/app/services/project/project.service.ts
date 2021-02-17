@@ -93,7 +93,8 @@ export class ProjectService {
     );
   }
 
-  searchProduct(type, user_id, address, min, max, rooms, baths, areamin, areamax): Observable<any> {
+  searchProduct(type, user_id, address, min, max, rooms, baths, areamin, areamax,furnished,category,
+    condition,pieces,parking,operation,order,tour,yearmin,yearmax): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       Accept: 'application/json',
@@ -104,10 +105,20 @@ export class ProjectService {
     formData.append('address', address);
     formData.append('pricemin', min);
     formData.append('pricemax', max);
-    formData.append('rooms', rooms);
-    formData.append('baths', baths);
+    formData.append('room', rooms);
+    formData.append('bath', baths);
     formData.append('areamin', areamin);
     formData.append('areamax', areamax);
+    formData.append('furnished', furnished);
+    formData.append('category', category);
+   formData.append('condition', condition);
+    formData.append('pieces', pieces);
+    formData.append('parking', parking);
+    formData.append('operation', operation);
+    formData.append('order', order);
+    formData.append('tour', tour);
+    formData.append('yearmin', yearmin);
+    formData.append('yearmax', yearmax);
      return this.http.post(this.api + '/auth/services/search-product', formData, {
       headers,
     });

@@ -33,6 +33,9 @@ import { ProfessionalGroupComponent } from './modules/new-publish/components/det
 import { ProjectCardComponent } from './modules/profile/project-card/project-card.component';
 
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
+//plugin
+import { ClickOutsideModule } from 'ng-click-outside';
+
 
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
@@ -55,6 +58,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
   imports: [
     NGX_MODULES,
     BOOSTRAP,
+    ClickOutsideModule,
     CommonModule,
     RouterModule,
     BrowserModule,
