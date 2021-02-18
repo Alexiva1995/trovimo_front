@@ -142,7 +142,7 @@
           left: 20%;
         "
         *ngIf="openFilter == 0"
-        (clickOutside)="closemodal($event , 'call')"
+        (clickOutside)="closemodalprice($event , 'call')"
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
       >
         <div style="display: flex; justify-content: space-between">
@@ -170,7 +170,7 @@
         "
         class="shadow-lg p-3 mb-5 bg-white opacity-20"
         *ngIf="openFilter == 4"
-        (clickOutside)="closemodal($event , 'call')"
+        (clickOutside)="closemodalarea($event , 'call')"
       >
         <div style="display: flex; justify-content: space-between">
           <h6>Area range</h6>
@@ -255,8 +255,8 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="filter.bath = null"
-          [class.active]="filter.bath == null"
+          (click)="rooms = 1; baths=1 ; searchProduct(type, user_id)"
+          [class.active]="filter.bath == 1"
         >
           Any
         </button>
@@ -264,7 +264,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="searchProduct(baths = 1)"
+          (click)="baths=1 ; searchProduct(type, user_id)"
           [class.active]="filter.bath == 1"
         >
           +1
@@ -273,7 +273,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="searchProduct(baths = 2)"
+          (click)="baths=2; searchProduct(type, user_id)"
           [class.active]="filter.bath == 2"
         >
           +2
@@ -282,7 +282,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="searchProduct(baths = 3)"
+          (click)="baths=3 ; searchProduct(type, user_id)"
           [class.active]="filter.bath == 3"
         >
           +3
@@ -291,7 +291,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="searchProduct(baths = 4)"
+          (click)="baths=4 ; searchProduct(type, user_id)"
           [class.active]="filter.bath == 4"
         >
           +4
@@ -316,8 +316,8 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="filter.room = null"
-            [class.active]="filter.room == null"
+            (click)="rooms = 1; baths=1 ; searchProduct(type, user_id)"
+            [class.active]="filter.room == 1"
           >
             Studio
           </button>
@@ -325,7 +325,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="searchProduct(rooms = 1)"
+            (click)="rooms = 1; searchProduct(type, user_id)"
             [class.active]="filter.room == 1"
           >
             +1
@@ -334,7 +334,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="searchProduct(rooms = 2)"
+            (click)="rooms = 2; searchProduct(type, user_id)"
             [class.active]="filter.room == 2"
           >
             +2
@@ -343,7 +343,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="searchProduct(rooms = 3)"
+            (click)="rooms = 3; searchProduct(type, user_id)"
             [class.active]="filter.room == 3"
           >
             +3
@@ -352,7 +352,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
-            (click)="searchProduct(rooms = 4)"
+            (click)="rooms = 4; searchProduct(type, user_id)"
             [class.active]="filter.room == 4"
           >
             +4
@@ -391,7 +391,7 @@
     class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
     *ngIf="openFilter == 6"
     style="position: absolute;width: 430px;"
-    (clickOutside)="closemodal($event)"
+    (clickOutside)="closemodalfilter($event)"
   >
     <div class="container">
       <div class="row">
@@ -402,17 +402,17 @@
 
   
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <input  [(ngModel)]="operation"  class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
               <label class="form-check-label" for="inlineRadio1" 
               style="padding: 0; margin:0; font-size: 12px;">Buy</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
               <label class="form-check-label" for="inlineRadio2" style="padding: 0; margin:0;
               font-size: 12px;">Rent</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2">
               <label class="form-check-label" for="inlineRadio3" 
               style="padding: 0; margin:0; font-size: 12px;">Sold</label>
             </div>
@@ -444,17 +444,17 @@
 
   
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio6" value="option6">
+                <input [(ngModel)]="furnished" class="form-check-input" type="radio" name="inlineRadioOptions6" id="inlineRadio6" value="0">
                 <label class="form-check-label" for="inlineRadio6" 
                 style="padding: 0; margin:0; font-size: 12px;">Full</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio7" value="option7">
+                <input  [(ngModel)]="furnished" class="form-check-input" type="radio" name="inlineRadioOptions7" id="inlineRadio7" value="1">
                 <label class="form-check-label" for="inlineRadio7" style="padding: 0; margin:0;
                 font-size: 12px;">Partiaily</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio8" value="option8">
+                <input  [(ngModel)]="furnished" class="form-check-input" type="radio" name="inlineRadioOptions8" id="inlineRadio8" value="2">
                 <label class="form-check-label" for="inlineRadio8" 
                 style="padding: 0; margin:0; font-size: 12px;">No</label>
               </div>
@@ -467,12 +467,12 @@
 
   
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio11" value="option11">
+                <input  [(ngModel)]="condition" class="form-check-input" type="radio" name="inlineRadioOptions11" id="inlineRadio11" value="0">
                 <label class="form-check-label" for="inlineRadio11" 
                 style="padding: 0; margin:0; font-size: 12px;">New</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio9" value="option9">
+                <input  [(ngModel)]="condition" class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio9" value="1">
                 <label class="form-check-label" for="inlineRadio9" style="padding: 0; margin:0;
                 font-size: 12px; margin-left: 1rem;">Used</label>
               </div>
@@ -526,6 +526,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="parking = 1;"
                 >
                   1
               </button>
@@ -533,6 +534,7 @@
                 class="btn option"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
+                (click)="parking = 2;"
               >
                 2
               </button>
@@ -540,6 +542,7 @@
                 class="btn option"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
+                (click)="parking = 3;"
               >
                 3
               </button>
@@ -547,6 +550,7 @@
                 class="btn option"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
+                (click)="parking = 4;"
               >
                 +4
               </button>
@@ -616,6 +620,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="pieces = 1;"
                 >
                   +1
               </button>
@@ -624,6 +629,7 @@
                 class="btn option"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
+                (click)="pieces = 1.5;"
               >
                 +1.5
               </button>
@@ -632,6 +638,7 @@
                 class="btn option"
                 style="width: fit-content; border-radius: 8px; margin: 5px"
                 type="button"
+                (click)="pieces = 2;"
               >
                 +2
               </button>
@@ -642,6 +649,7 @@
               class="btn option"
               style="width: fit-content; border-radius: 8px; margin: 5px"
               type="button"
+              (click)="pieces = 2.5;"
             >
               +2.5
               </button>
@@ -649,6 +657,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
+            (click)="pieces = 3;"
           >
             +3
             </button>
@@ -656,6 +665,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
+            (click)="pieces = 3.5;"
           >
             +3.5
             </button>
@@ -667,6 +677,7 @@
               class="btn option"
               style="width: fit-content; border-radius: 8px; margin: 5px"
               type="button"
+              (click)="pieces = 4;"
             >
               +4
               </button>
@@ -674,6 +685,7 @@
               class="btn option"
               style="width: fit-content; border-radius: 8px; margin: 5px"
               type="button"
+              (click)="pieces = 4.5;"
             >
               +4.5
               </button>
@@ -681,6 +693,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
+            (click)="pieces = 5;"
           >
             +5
             </button>
@@ -693,6 +706,7 @@
             class="btn option"
             style="width: fit-content; border-radius: 8px; margin: 5px"
             type="button"
+            (click)="pieces = 5.5;"
           >
             +5.5
             </button>     
@@ -720,11 +734,15 @@
             <h6>Apartments in rent</h6>
             <p>{{ projects?.length }} Results</p>
           </div>
-          <select style="width: 30%" class="form-control" name="" id="">
-            <option value="Price (low to high)">Price (low to high)</option>
-            <option value="Price (high to low)">Price (high to low)</option>
-            <option value="Area(low to high)">Area(low to high)</option>
-            <option value="Area (high to low)">Area (high to low)</option>
+          <select [(ngModel)]="order" 
+          style="width: 30%"
+           class="form-control"
+          (change)="searchProduct(type, user_id)">
+            <option disabled value="R_A">Select one</option>
+            <option value="P_min">Price (low to high)</option>
+            <option value="P_max">Price (high to low)</option>
+            <option value="A_min">Area(low to high)</option>
+            <option value="A_max">Area (high to low)</option>
           </select>
         </div>
   
@@ -744,7 +762,7 @@
             <h6>Apartments in rent</h6>
             <p>{{ projects?.length }} Results</p>
           </div>
-          <select style="width: 30%" class="form-control" name="" id="">
+          <select        style="width: 30%" class="form-control" name="" id="">
             <option value="Price (low to high)">Price (low to high)</option>
             <option value="Price (low to high)">Price (low to high)</option>
             <option value="Price (low to high)">Price (low to high)</option>

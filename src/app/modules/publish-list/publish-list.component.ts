@@ -43,7 +43,6 @@ export class PublishListComponent implements OnInit {
   areamax = 100000;
   filtertype = 0;
   furnished:any="";
-  //1 o 0
   category:any = "";
   condition:any = "";
   pieces:any = "";
@@ -242,7 +241,44 @@ export class PublishListComponent implements OnInit {
     }
   
   }
+  closemodalprice(e: Event , c?:string){
+    if(this.contador > 1 ){
+        if(c == 'call'){
+          // se ejecuta cuando se cierra los filtros con max / min
+          this.searchProduct(this.min , this.max)
+        }
+      console.log("cerrar")
+      this.openFilter = -2;
+      this.contador = 1
+    }else{
+      const {type} = e
+        if(type == 'click'){
+          this.contador++
+        }
+    }
+  
+  }
 
+  closemodalarea(e: Event , c?:string){
+    if(this.contador > 1 ){
+        if(c == 'call'){
+          // se ejecuta cuando se cierra los filtros con max / min
+          this.searchProduct(this.areamin , this.areamax)
+        }
+      console.log("cerrar")
+      this.openFilter = -2;
+      this.contador = 1
+    }else{
+      const {type} = e
+        if(type == 'click'){
+          this.contador++
+        }
+    }
+  
+  }
 
+  closemodalfilter(e){
+    console.log(this.order)
+  }
 
 }
