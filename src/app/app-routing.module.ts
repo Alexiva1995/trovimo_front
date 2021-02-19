@@ -24,6 +24,7 @@ import { SettingComponent } from './modules/acount-profile/components/setting/se
 import { PhotosComponent } from './modules/acount-profile/components/photos/photos.component';
 import { MyActivityComponent } from './modules/acount-profile/components/my-activity/my-activity.component';
 import { MyListingsComponent } from './modules/acount-profile/components/my-listings/my-listings.component';
+import { CommingSoonComponent } from './modules/comming-soon/comming-soon.component';
 
 const routes: Routes = [
   { path: 'pages', component: PagesComponent },
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: 'blog-detail',
     component: BlogDetailComponent,
+  },
+  {
+    path: 'comming-soon',
+    component: CommingSoonComponent,
   },
   {path: '**', redirectTo: ''}
 ];

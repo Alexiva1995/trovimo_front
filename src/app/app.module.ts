@@ -27,6 +27,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import APP_COMPONENTS from './components';
 import { RouterModule } from '@angular/router';
+import { CommingSoonComponent } from './modules/comming-soon/comming-soon.component';
 
 
 // AoT requires an exported function for factories
@@ -46,6 +47,7 @@ const BOOSTRAP = [
   declarations: [
     AppComponent,
     APP_COMPONENTS,
+    CommingSoonComponent,
 
   ],
   imports: [
