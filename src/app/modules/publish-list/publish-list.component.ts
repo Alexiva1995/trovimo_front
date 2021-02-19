@@ -43,7 +43,10 @@ export class PublishListComponent implements OnInit {
   areamax = 100000;
   filtertype = 0;
   furnished:any="";
+  // category se convierte en un arreglo. 
   category:any = "";
+  // category: number[] = [1,5];
+  categorytemp:any = new Set()
   condition:any = "";
   pieces:any = "";
   parking:any = "";
@@ -278,7 +281,27 @@ export class PublishListComponent implements OnInit {
   }
 
   closemodalfilter(e){
-    console.log(this.order)
+    console.log(e)
+    this.categorytemp.add(e)
+    console.log(this.categorytemp)
+    this.category = [...this.categorytemp]
+    console.log("arreglo",this.category)
+  }
+
+  closemodaltype(e: Event , c?:string){
+
+    if(this.contador > 1 ){
+    this.searchProduct(this.type , this.user)
+    console.log("cerrar")
+    this.openFilter = -2;
+    this.contador = 1
+  }else{
+    const {type} = e
+      if(type == 'click'){
+        this.contador++
+      }
+  }
+
   }
 
 }

@@ -99,6 +99,9 @@ export class ProjectService {
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       Accept: 'application/json',
     });
+
+    console.log(category)
+
     const formData = new FormData();
     formData.append('type', type);
     formData.append('user_id', user_id);
@@ -110,7 +113,9 @@ export class ProjectService {
     formData.append('areamin', areamin);
     formData.append('areamax', areamax);
     formData.append('furnished', furnished);
-    formData.append('category', category);
+    for (var i = 0; i < category.length; i++) {
+      formData.append('category[]', category[i]);
+  }
    formData.append('condition', condition);
     formData.append('pieces', pieces);
     formData.append('parking', parking);
@@ -119,6 +124,7 @@ export class ProjectService {
     formData.append('tour', tour);
     formData.append('yearmin', yearmin);
     formData.append('yearmax', yearmax);
+
      return this.http.post(this.api + '/auth/services/search-product', formData, {
       headers,
     });

@@ -364,22 +364,25 @@
       class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
       *ngIf="openFilter == 5"
       style="position: absolute;"
-      (clickOutside)="closemodal($event)"
+      (clickOutside)="closemodaltype($event)"
     >
       <div class="container">
         <div class="col-lg-12">
           <h6>Type</h6>
           <div style="display: flex; flex-wrap: wrap">
             <div *ngFor="let item of options; let i = index" style="order: 5">
-              <button
-                class="btn option oprincipal"
-                style="width: fit-content; border-radius: 8px; margin: 5px"
-                type="button"
-                [ngClass]="{ active: filter.option == i }"
-                (click)="searchProduct(filtertype = item.label)"
-              >
-                <img [src]="item.icon" alt="" />{{ item.label }}
-              </button>
+              <ng-container *ngIf="item.id_sell">
+                <button
+                  class="btn option oprincipal"
+                  style="width: fit-content; border-radius: 8px; margin: 5px"
+                  type="button"
+                  [ngClass]="{ active: filter.option == i }"
+                  (click)="closemodalfilter(item.id_sell)"
+                >
+                  <img [src]="item.icon" alt="" />{{ item.label }}
+                </button>
+              </ng-container>
+
             </div>
           </div>
         </div>
