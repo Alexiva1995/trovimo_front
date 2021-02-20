@@ -39,6 +39,7 @@
     "jquery": "^3.5.1",
     "js-marker-clusterer": "^1.0.0",
     "mapbox-gl": "^2.0.1",
+    "ng-click-outside": "^7.0.1",
     "ngx-bootstrap": "^6.2.0",
     "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-toastr": "^13.2.0",

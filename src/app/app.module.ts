@@ -34,7 +34,7 @@ import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
 import { AgmCoreModule } from '@agm/core';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
-
+import { ClickOutsideModule } from 'ng-click-outside';
 
 
 // AoT requires an exported function for factories
@@ -60,6 +60,7 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     CommonModule,
     RouterModule,
     BrowserModule,
+    ClickOutsideModule,
     AppRoutingModule,
     HttpClientModule,
     SocialLoginModule,
