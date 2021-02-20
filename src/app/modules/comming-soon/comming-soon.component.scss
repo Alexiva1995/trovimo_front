@@ -1,0 +1,42 @@
+.logo {
+  padding: 30px;
+}
+.row {
+  height: 100vh;
+}
+
+.bg {
+  background: url("../../../assets/images/coming_soon.png");
+  background-size: cover;
+  // background-position: center;
+}
+
+.text {
+  padding-left: 30px;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text p {
+  font: normal normal bold 25px/34px "Nunito-Bold";
+}
+.text h1 {
+  font: normal normal 900 80px/109px "Nunito-Bold";
+}
+.text span {
+  font-family: "Nunito-Light";
+  width: 300px;
+}
+/* MEDIA QUERIES */
+@media (max-width: 770px) {
+  .col-xs-12 {
+    text-align: center;
+  }
+  .bg {
+    display: none;
+  }
+  .text span {
+    width: auto;
+  }
+}

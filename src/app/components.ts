@@ -43,6 +43,7 @@ import { TypesFormComponent } from './modules/new-publish/components/maininfo/co
 import { MapComponent } from './components/map/map.component';
 
 import { HelpTooltipComponent } from './components/help-tooltip/help-tooltip.component';
+import { CommingSoonComponent } from './modules/comming-soon/comming-soon.component';
 const APP_COMPONENTS = [
   HeaderComponent,
   MenuHeaderComponent,
@@ -72,6 +73,7 @@ const APP_COMPONENTS = [
   AcountProfileComponent,
   MainInfoComponent,
   FindPhotosComponent,
+  CommingSoonComponent,
   PagesComponent,
   BlogComponent,
   BlogDetailComponent,
