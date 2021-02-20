@@ -32,6 +32,11 @@ import { ProjectCardComponent } from './modules/profile/project-card/project-car
 
 import { SafeHtmlPipe } from './pipe/safe-html.pipe';
 
+import { AgmCoreModule } from '@agm/core';
+import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+
+
+
 // AoT requires an exported function for factories
 // tslint:disable-next-line:typedef
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -72,6 +77,12 @@ const BOOSTRAP = [TooltipModule.forRoot()];
     }),
     BrowserAnimationsModule,
     ToastrModule.forRoot(), // ToastrModule added
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBdsfrCn5LZZYIw9dyPGVXPFTFbKmaKUOI', //'AIzaSyDXJWjchrU7uMEk_PvKG4b9hmI3p3rEaYU',
+      libraries: ['places']    
+   }),
+   GooglePlaceModule
+   
   ],
   providers: [
     {

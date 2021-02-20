@@ -16,12 +16,12 @@
             required
           >
           <div class="input-group-append">
-            <select class="form-select" [ngStyle]="{'border-top-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px',
-            'border-bottom-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px'}">
-              <option selected value="1">COP</option>
-              <option value="2">USD</option>
-              <option value="3">EUR</option>
-              <option value="4">CHF</option>
+            <!---->
+            <select [(ngModel)]="mainInfo.currency" class="form-select" 
+            [ngStyle]="{'border-top-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px',
+            'border-bottom-right-radius': type != 1 && type != 2 && type != 4 ? '0px':'8px'}"
+            (ngModelChange)="changeCurrency()">
+              <option *ngFor="let currency of currencies" [value]="currency" >{{ currency }}</option>
             </select>
             <span *ngIf="type != 1 && type != 2 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px; color: white !important;">Month</span>
             <div style="margin-left: 10px">
@@ -300,7 +300,9 @@
   </div>
 </div>
 
+<!--LOCATION-->
 <div class="section-location">
+  
   <div class="row">
     <div class="col-12 section-custom">
       <h5>location</h5>
@@ -312,19 +314,21 @@
           [(ngModel)]="mainInfo.country"
           (ngModelChange)="changeCountry()"
           class="form-control-lg form-select"
-          style="width: 100%"
-        >
-          <option selected value="Colombia">Colombia</option>
-          <option selected value="Switzerland">Switzerland</option>
+          style="width: 100%">
+          <option *ngFor="let country of countries"
+            [value]="country.country">{{ country.country }}</option>
         </select>
       </div>
     </div>
-    <div class="col-12 col-lg-4">
+
+    <div class="col-12 col-lg-8">
       <div class="form-group">
         <label class="required">City</label>
         <input
-          [(ngModel)]="mainInfo.city"
-          (ngModelChange)="onChange()"
+          ngx-google-places-autocomplete 
+          #places="ngx-places"
+          [options]= "options"
+          (onAddressChange)="AddressChange($event)"
           aria-describedby="emailHelp"
           class="form-control form-control-lg"
           required
@@ -332,6 +336,7 @@
         />
       </div>
     </div>
+<!--
     <div class="col-12 col-lg-4">
       <div class="form-group">
         <label>Postal code - state</label>
@@ -345,31 +350,15 @@
         />
       </div>
     </div>
+-->
   </div>
-
-
-
+ 
   <div class="map">
     <!--mapa-->
-    <app-map [lng]="mainInfo.lon" [lat]="mainInfo.lat"></app-map>
+    <app-map [lng]="latitude" [lat]="longitude" [zoom]="zoom"></app-map>
     <input [(ngModel)]="coordinates"
-           (ngModelChange)="setCoordinates()"
            id="ocultInfo" style="font-size: 8px;color: white;border: none"/>
-
-    <div style="display: flex; justify-content: flex-end">
-
-      <button class="btn btn-outline-primary" style="width: 10rem;margin: auto;margin-right: 0;" (click)="showCoordinates = !showCoordinates">Coordinates</button>
-    </div>
-    <div style="">
-      <div
-        *ngIf="showCoordinates"
-        style="width: 30rem;margin: auto;margin-right: 0;"
-      >{{coordinates}}<div>
-    </div>
-
   </div>
-</div>
-
 <!--PLANS-->
 <div *ngIf="type == 3 && optionType == 13" style="margin-top: 30px;margin-bottom: 30px">
   <h5 style="margin-bottom: 20px">Plans</h5>

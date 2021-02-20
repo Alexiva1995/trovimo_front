@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {BUILDING_OPTIONS, HOME_DETAILS_OPTIONS, PLACE_DETAILS_OPTIONS, PLACE_EQUIPMENT_OPTIONS, PREFERENCES_OPTIONS} from './checkoptions';
-import {DetailInfo} from '../../../../models/detail-info';
-import {Professional} from '../../../../models/professional';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BUILDING_OPTIONS, HOME_DETAILS_OPTIONS, PLACE_DETAILS_OPTIONS, PLACE_EQUIPMENT_OPTIONS, PREFERENCES_OPTIONS } from './checkoptions';
+import { DetailInfo } from '../../../../models/detail-info';
+import { Professional } from '../../../../models/professional';
+import { COUNTRIES, Country } from 'src/app/models/countries.data';
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
@@ -26,38 +27,55 @@ export class DetailsComponent implements OnInit {
   referenceName = '';
   placeEquipmentInput = '';
   preferencesInput = '';
+  placeDetailsInput = '';
+  currencies = [];
+  countries: Country[];
+  currency: string;
   constructor() {
     this.homeInput = '';
     this.buildingInput = '';
   }
 
   ngOnInit(): void {
+    this.countries = COUNTRIES;
+    this.countries.forEach(country => {
+      if (this.currencies.find(element => element == country.currencyCode)) {
+      } else {
+        let aux = country.currencyCode;
+        this.currencies.push(aux);
+      }
+    });
 
   }
   emitData(skip): void {
-    this.setDetailInfo.emit({data:this.detail,skip });
+    this.setDetailInfo.emit({ data: this.detail, skip });
   }
+
+  /*Home_details*/
   addHomeTags(): void {
     if (this.homeInput !== '') {
       const option = this.homeDetails.find(a => a.toLowerCase() === this.homeInput.toLowerCase())
       if (option) {
-        this.detail.homeDetailsTags.push(option);
+        this.detail.home_details.push(option);
+        this.homeInput = '';
+      } else {
+        this.detail.home_details.push(this.homeInput);
         this.homeInput = '';
       }
     }
     this.emitData(false);
   }
   removeHomeTags(index): void {
-    this.detail.homeDetailsTags.splice(index, 1);
+    this.detail.home_details.splice(index, 1);
     this.emitData(false);
   }
   onChangeDetails(event): void {
     const value = event.target.value;
-    const index = this.detail.homeDetailsTags.findIndex(a => a === value);
+    const index = this.detail.home_details.findIndex(a => a === value);
     if (index >= 0) {
-      this.detail.homeDetailsTags.splice(index, 1);
+      this.detail.home_details.splice(index, 1);
     } else {
-      this.detail.homeDetailsTags.push(value);
+      this.detail.home_details.push(value);
     }
     this.emitData(false);
   }
@@ -66,7 +84,10 @@ export class DetailsComponent implements OnInit {
     if (this.buildingInput !== '') {
       const option = this.buildingDetails.find(a => a.toLowerCase() === this.buildingInput.toLowerCase())
       if (option) {
-        this.detail.buildingTags.push(option);
+        this.detail.builds.push(option);
+        this.buildingInput = '';
+      } else {
+        this.detail.builds.push(this.buildingInput);
         this.buildingInput = '';
       }
     }
@@ -74,16 +95,16 @@ export class DetailsComponent implements OnInit {
   }
   onChangeBuilding(event): void {
     const value = event.target.value;
-    const index =this.detail.buildingTags.findIndex(a => a === value);
+    const index = this.detail.builds.findIndex(a => a === value);
     if (index >= 0) {
-      this.detail.buildingTags.splice(index, 1);
+      this.detail.builds.splice(index, 1);
     } else {
-      this.detail.buildingTags.push(value);
+      this.detail.builds.push(value);
     }
     this.emitData(false);
   }
   removeBuildingTags(index): void {
-    this.detail.buildingTags.splice(index, 1);
+    this.detail.builds.splice(index, 1);
     this.emitData(false);
   }
   /*  */
@@ -93,7 +114,7 @@ export class DetailsComponent implements OnInit {
   /* SERVICES */
   addService(): void {
     if (this.serviceName !== '') {
-      this.detail.services.push([this.serviceName,this.servicePrice]);
+      this.detail.services.push([this.serviceName, this.servicePrice]);
       this.serviceName = '';
       this.servicePrice = 0;
     }
@@ -124,7 +145,10 @@ export class DetailsComponent implements OnInit {
     if (this.placeEquipmentInput !== '') {
       const option = this.homeDetails.find(a => a.toLowerCase() === this.placeEquipmentInput.toLowerCase());
       if (option) {
-        this.detail.placeDetailsTags.push(option);
+        this.detail.placeEquipmetsTags.push(option);
+        this.placeEquipmentInput = '';
+      } else {
+        this.detail.placeEquipmetsTags.push(this.placeEquipmentInput);
         this.placeEquipmentInput = '';
       }
     }
@@ -144,12 +168,15 @@ export class DetailsComponent implements OnInit {
     }
     this.emitData(false);
   }
-  /*  */
+  /*PREFERENCES  */
   addPreferences(): void {
     if (this.preferencesInput !== '') {
       const option = this.preferences.find(a => a.toLowerCase() === this.preferencesInput.toLowerCase());
       if (option) {
         this.detail.preferencesTags.push(option);
+        this.preferencesInput = '';
+      } else {
+        this.detail.preferencesTags.push(this.preferencesInput);
         this.preferencesInput = '';
       }
     }
@@ -166,6 +193,35 @@ export class DetailsComponent implements OnInit {
       this.detail.preferencesTags.splice(index, 1);
     } else {
       this.detail.preferencesTags.push(value);
+    }
+    this.emitData(false);
+  }
+
+  /**Place details */
+  addPlaceDetails(): void {
+    if (this.placeDetailsInput !== '') {
+      const option = this.placeDetails.find(a => a.toLowerCase() === this.placeDetailsInput.toLowerCase());
+      if (option) {
+        this.detail.placeDetailsTags.push(option);
+        this.placeDetailsInput = '';
+      } else {
+        this.detail.placeDetailsTags.push(this.placeDetailsInput);
+        this.placeDetailsInput = '';
+      }
+    }
+    this.emitData(false);
+  }
+  removePlaceDetailsTags(index): void {
+    this.detail.placeDetailsTags.splice(index, 1);
+    this.emitData(false);
+  }
+  onChangePlaceDetails(event): void {
+    const value = event.target.value;
+    const index = this.detail.placeDetailsTags.findIndex(a => a === value);
+    if (index >= 0) {
+      this.detail.placeDetailsTags.splice(index, 1);
+    } else {
+      this.detail.placeDetailsTags.push(value);
     }
     this.emitData(false);
   }

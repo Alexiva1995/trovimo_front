@@ -59,7 +59,7 @@ const routes: Routes = [
   },
   {
     path: 'new',
-    component: NewPublishComponent,
+    component: NewPublishComponent,///Este es el componente donde esta el formulario de subida
   },
   {
     path: 'about-us',
