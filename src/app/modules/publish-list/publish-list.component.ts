@@ -35,7 +35,7 @@ export class PublishListComponent implements OnInit {
   //variables filtros
   location:any;
   min = 0;
-  max = 10000000;
+  max = 1000;
   address: string = '';
   rooms: any = "";
   baths: any = "";
@@ -47,14 +47,27 @@ export class PublishListComponent implements OnInit {
   category:any = "";
   // category: number[] = [1,5];
   categorytemp:any = new Set()
+  builds:any = [];
+  buildsTemp:any = [];
+  home_details:any = [];
+  home_detailsTemp:any = [];
   condition:any = "";
   pieces:any = "";
+  ListedBy:any = "";
   parking:any = "";
   operation:any = "";
   order:any = "R_A";
+  // 1 o 0 virtual tour
   tour:any = "";
   yearmin:any = "";
   yearmax:any = "";
+  // asignar los valores a una ruta en building
+  // {{base_url}}/api/auth/services/optional-options
+  // arreglos de checbox
+  // home_details
+  //building_details
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -110,19 +123,26 @@ export class PublishListComponent implements OnInit {
       if(this.type == 4){
         this.getProject();
       }
+
+      this.getOptions()
+      console.log(      "usuario"    + this.user.id)
   }
 
-  searchProduct(type, user_id) {
+  searchProduct(type?, user_id? ) {
     Swal.fire({
       background: 'transparent',
     })
+
+    type = this.type
+    user_id = this.user.id
+    
 
     Swal.showLoading();
     this.load = 1;
     console.log("ejecutar buscar",this.areamin , this.areamax)
     this.service.searchProduct(type, user_id, this.address, this.min, this.max, this.rooms, this.baths, this.areamin, this.areamax,
-      this.furnished,this.category,this.condition,this.pieces,this.parking,this.operation,this.order,
-      this.tour,this.yearmin,this.yearmax).subscribe(
+      this.furnished,this.category,this.ListedBy , this.condition,this.pieces,this.parking,this.operation,this.order,
+      this.tour,this.yearmin,this.yearmax,this.buildsTemp,this.home_detailsTemp).subscribe(
     (data : any) => {
      console.log(data)
     Swal.close()
@@ -179,11 +199,19 @@ export class PublishListComponent implements OnInit {
   setArea(min, max) {
     this.area.min = min;
     this.area.max = max;
+    
+    this.areamin = min;
+    this.areamax = max;
+
     console.log(this.area);
   }
   setPrice(min, max) {
     this.price.min = min;
     this.price.max = max;
+
+    this.min = min;
+    this.max = max
+
     console.log(this.price);
   }
   getExperts(address, category, type_verification, company, emergency) {
@@ -226,12 +254,36 @@ export class PublishListComponent implements OnInit {
       }
     );
   }
+  getOptions() {
+    this.service.getOptions().subscribe(
+      (res: any) => {
+        this.builds = res.builds
+        this.home_details = res.home_details
+
+        console.log("contruciones" , this.builds)
+        console.log("casas", this.home_details)
+      },
+      (err) => {
+        console.log('Ha Ocurrido un error inesperado.');
+      }
+    );
+  }
+
+
+  locationsearch(){
+      console.log(this.address)
+      if(this.address.length < 1){
+        return
+      }else{
+        this.searchProduct()
+      }
+  }
 
   closemodal(e: Event , c?:string){
     if(this.contador > 1 ){
         if(c == 'call'){
           // se ejecuta cuando se cierra los filtros con max / min
-          this.searchProduct(this.type , this.user)
+          this.searchProduct()
         }
       console.log("cerrar")
       this.openFilter = -2;
@@ -251,6 +303,8 @@ export class PublishListComponent implements OnInit {
           this.searchProduct(this.min , this.max)
         }
       console.log("cerrar")
+      this.min = 0;
+      this.max = 1000;
       this.openFilter = -2;
       this.contador = 1
     }else{
@@ -269,6 +323,8 @@ export class PublishListComponent implements OnInit {
           this.searchProduct(this.areamin , this.areamax)
         }
       console.log("cerrar")
+      this.areamin = 0;
+      this.areamax = 100000;
       this.openFilter = -2;
       this.contador = 1
     }else{
@@ -291,10 +347,15 @@ export class PublishListComponent implements OnInit {
   closemodaltype(e: Event , c?:string){
 
     if(this.contador > 1 ){
-    this.searchProduct(this.type , this.user)
-    console.log("cerrar")
-    this.openFilter = -2;
-    this.contador = 1
+      if(this.category.length < 1){
+        this.openFilter = -2;
+        this.contador = 1
+      }else{       
+        this.searchProduct()
+        console.log("cerrar")
+        this.openFilter = -2;
+        this.contador = 1
+      }
   }else{
     const {type} = e
       if(type == 'click'){
@@ -302,6 +363,46 @@ export class PublishListComponent implements OnInit {
       }
   }
 
+  }
+
+  closemodalmorefilters(e: Event , c?:string){
+
+    if(this.contador > 1 ){
+    this.searchProduct()
+    // console.log("cerrar")
+    this.openFilter = -2;
+    this.contador = 1
+    console.log("more filters")
+  }else{
+    const {type} = e
+      if(type == 'click'){
+        this.contador++
+      }
+  }
+
+  }
+
+
+  collectMoreFilter(value ,event){
+    console.log( value ,  '/' ,event.target.checked)
+      if(event.target.checked){
+        this.home_detailsTemp.push(value)
+      }else{
+        this.home_detailsTemp.splice(this.home_detailsTemp.indexOf(value), 1); 
+      }
+
+      console.log(this.home_detailsTemp)
+  }
+
+  collectMoreFilter2(value ,event){
+    console.log( value ,  '/' ,event.target.checked)
+      if(event.target.checked){
+        this.buildsTemp.push(value)
+      }else{
+        this.buildsTemp.splice(this.buildsTemp.indexOf(value), 1); 
+      }
+
+      console.log(this.buildsTemp)
   }
 
 }

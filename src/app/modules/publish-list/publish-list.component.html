@@ -11,7 +11,7 @@
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
             [(ngModel)]="address"
-            (blur)="searchProduct(type, user_id)"
+            (blur)="locationsearch(type, user_id)"
           />
           <button
             class="btn option"
@@ -255,7 +255,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="rooms = 1; baths=1 ; searchProduct(type, user_id)"
+          (click)="rooms = 1; baths=1 ; searchProduct()"
           [class.active]="filter.bath == 1"
         >
           Any
@@ -264,7 +264,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="baths=1 ; searchProduct(type, user_id)"
+          (click)="baths=1 ; searchProduct()"
           [class.active]="filter.bath == 1"
         >
           +1
@@ -273,7 +273,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="baths=2; searchProduct(type, user_id)"
+          (click)="baths=2; searchProduct()"
           [class.active]="filter.bath == 2"
         >
           +2
@@ -282,7 +282,7 @@
           class="btn option"
           style="width: fit-content; border-radius: 8px; margin: 5px"
           type="button"
-          (click)="baths=3 ; searchProduct(type, user_id)"
+          (click)="baths=3 ; searchProduct()"
           [class.active]="filter.bath == 3"
         >
           +3
@@ -394,7 +394,7 @@
     class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
     *ngIf="openFilter == 6"
     style="position: absolute;width: 430px;"
-    (clickOutside)="closemodalfilter($event)"
+    (clickOutside)="closemodalmorefilters($event)"
   >
     <div class="container">
       <div class="row">
@@ -405,17 +405,17 @@
 
   
             <div class="form-check form-check-inline">
-              <input  [(ngModel)]="operation"  class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="0">
+              <input  [(ngModel)]="operation"  class="form-check-input" type="radio" name="inlineRadioOptions1" id="inlineRadio1" value="0">
               <label class="form-check-label" for="inlineRadio1" 
               style="padding: 0; margin:0; font-size: 12px;">Buy</label>
             </div>
             <div class="form-check form-check-inline">
-              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="1">
+              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio2" value="1">
               <label class="form-check-label" for="inlineRadio2" style="padding: 0; margin:0;
               font-size: 12px;">Rent</label>
             </div>
             <div class="form-check form-check-inline">
-              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="2">
+              <input [(ngModel)]="operation" class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio3" value="2">
               <label class="form-check-label" for="inlineRadio3" 
               style="padding: 0; margin:0; font-size: 12px;">Sold</label>
             </div>
@@ -429,12 +429,12 @@
 
   
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                <input  [(ngModel)]="ListedBy" class="form-check-input" type="radio" name="inlineRadioOptions4" id="inlineRadio4" value="0">
                 <label class="form-check-label" for="inlineRadio4" 
                 style="padding: 0; margin:0; font-size: 12px;">Real state company</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio5" value="option5">
+                <input  [(ngModel)]="ListedBy" class="form-check-input" type="radio" name="inlineRadioOptions5" id="inlineRadio5" value="1">
                 <label class="form-check-label" for="inlineRadio5" style="padding: 0; margin:0;
                 font-size: 12px;">Direct person</label>
               </div>
@@ -477,7 +477,7 @@
               <div class="form-check form-check-inline">
                 <input  [(ngModel)]="condition" class="form-check-input" type="radio" name="inlineRadioOptions9" id="inlineRadio9" value="1">
                 <label class="form-check-label" for="inlineRadio9" style="padding: 0; margin:0;
-                font-size: 12px; margin-left: 1rem;">Used</label>
+                font-size: 12px; margin-left: 0px;">Used</label>
               </div>
             </div>
           </div>
@@ -485,39 +485,40 @@
             <p style="margin-top: 1rem; font-weight: bold;">Home details</p>
             <div style="display: flex; justify-content: space-between;width: 88%;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox1">Balcony</label>
+                <input (click)="collectMoreFilter(8 , $event)"   class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" 
+                 >Balcony</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox2">Pool</label>
-              </div>
-              <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox3">Heating</label>
+                <input (click)="collectMoreFilter(5 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" >Pool</label>
               </div>
             </div>
             <div style="display: flex; justify-content:space-between;width: 88%;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox1">Storage room</label>
+                <input (click)="collectMoreFilter(14 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" >Storage room</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox2">Jacuzzi</label>
+                <input (click)="collectMoreFilter(11 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" >Jacuzzi</label>
               </div>
             </div>
-            <div style="display: flex; justify-content:space-start;width: 88%;">
+            <div style="display: flex; justify-content:space-between;width: 88%;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox1">AC</label>
+                <input (click)="collectMoreFilter(4 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label">AC</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input (click)="collectMoreFilter(3 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label">Heating</label>
               </div>
             </div>
           </div>
         </div>
         <div class="col-6">
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+            <input [(ngModel)]="tour" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="false">
             <label style="padding: 0; margin:0; font-size: 12px;" class="form-check-label" for="inlineCheckbox1">Show listings with virtual tour</label>
           </div>
 
@@ -582,32 +583,32 @@
             <p style="margin-top: 1rem; font-weight: bold;">Building details</p>
             <div style="display: flex; justify-content: space-between;width: 88%;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" for="inlineCheckbox1">Gym</label>
+                <input (click)="collectMoreFilter2(1 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" >Gym</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" for="inlineCheckbox2">Pool</label>
+                <input (click)="collectMoreFilter2(7 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" >Pool</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" for="inlineCheckbox3">Sauna</label>
+                <input (click)="collectMoreFilter2(5 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
+                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" >Sauna</label>
               </div>
             </div>
             <div style="display: flex; justify-content:flex-start;width: 88%;">
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" for="inlineCheckbox1">Security</label>
+                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" >Security</label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label style="padding: 0; margin:0; font-size: 11px; margin-left: 1rem;" class="form-check-label" for="inlineCheckbox2">Elevator</label>
+                <input (click)="collectMoreFilter2(15 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                <label style="padding: 0; margin:0; font-size: 11px; margin-left: 0px;" class="form-check-label">Elevator</label>
               </div>
             </div>
-            <div style="display: flex; justify-content:space-between;width: 88%;">
+            <div style="display: flex; justify-content:space-between;width: 95%;">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" for="inlineCheckbox1">Laundry room</label>
+                <input (click)="collectMoreFilter2(6 , $event)" class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label style="padding: 0; margin:0; font-size: 11px;" class="form-check-label" >Laundry room</label>
               </div>
               <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">

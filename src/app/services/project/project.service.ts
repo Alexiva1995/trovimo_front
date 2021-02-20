@@ -94,13 +94,14 @@ export class ProjectService {
   }
 
   searchProduct(type, user_id, address, min, max, rooms, baths, areamin, areamax,furnished,category,
-    condition,pieces,parking,operation,order,tour,yearmin,yearmax): Observable<any> {
+    condition,pieces,parking,operation,ListedBy,order,tour,yearmin,yearmax,buildsTemp,home_detailsTemp): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${localStorage.getItem('access_token')}`,
       Accept: 'application/json',
     });
+  
+    console.log("min" , min, "max" , max)
 
-    console.log(category)
 
     const formData = new FormData();
     formData.append('type', type);
@@ -120,10 +121,19 @@ export class ProjectService {
     formData.append('pieces', pieces);
     formData.append('parking', parking);
     formData.append('operation', operation);
+    formData.append('listedby', ListedBy);
     formData.append('order', order);
     formData.append('tour', tour);
     formData.append('yearmin', yearmin);
     formData.append('yearmax', yearmax);
+    for (var i = 0; i < buildsTemp.length; i++) {
+      formData.append('building_details[]', buildsTemp[i]);
+  }
+    for (var i = 0; i < home_detailsTemp.length; i++) {
+      formData.append('home_details[]', home_detailsTemp[i]);
+  }
+
+
 
      return this.http.post(this.api + '/auth/services/search-product', formData, {
       headers,
@@ -148,6 +158,17 @@ export class ProjectService {
         formData.append('project_id', id);
      }
     return this.http.post(this.api + '/auth/services/favorite', formData, {
+      headers,
+    });
+  }
+
+  getOptions(): Observable<any> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      Accept: 'application/json',
+    });
+
+    return this.http.get(this.api + '/auth/services/optional-options',{
       headers,
     });
   }
