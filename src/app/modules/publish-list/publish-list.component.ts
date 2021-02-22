@@ -4,7 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
 import { ExpertService } from '../../services/expert/expert.service';
-import { OPTIONS } from 'src/app/models/typeOptions';
+import { Filters, OPTIONS } from 'src/app/models/typeOptions';
+import { SearchService } from 'src/app/services/search/search.service';
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
@@ -30,12 +31,14 @@ export class PublishListComponent implements OnInit {
   price: any = {};
   area: any = {};
   options = OPTIONS;
+  filters: Filters;
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
     private toastr: ToastrService,
     private Project: ProjectService,
-    private Expert: ExpertService
+    private Expert: ExpertService,
+    private searchService: SearchService
   ) {
     this.type = this.route.snapshot.paramMap.get('type');
     console.log(this.type);
@@ -71,6 +74,12 @@ export class PublishListComponent implements OnInit {
       if(this.type == 4){
         this.getProject();
       }
+
+      this.searchService.currentMessage.subscribe(data => {
+        this.filters = data[1];
+        
+
+      })
   }
 
   getProjects() {

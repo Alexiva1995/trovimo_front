@@ -38,7 +38,7 @@ export class MaininfoComponent implements OnInit {
 
   title = 'rou';
   //Local Variable defined 
-  formattedaddress = " ";
+  
   options = {
     componentRestrictions: {
       country: ['co'],
