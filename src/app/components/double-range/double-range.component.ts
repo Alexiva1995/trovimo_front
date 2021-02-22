@@ -28,9 +28,9 @@ export class DoubleRangeComponent implements OnInit {
       translate: (value: number, label: LabelType): string => {
         switch (label) {
           case LabelType.Low:
-            return '<b>Min</b>';
+            return '<b>Min</b>' + value;
           case LabelType.High:
-            return '<b>Max</b>';
+            return '<b>Max</b>' + value;
           default:
             return '' + value;
         }
@@ -38,9 +38,7 @@ export class DoubleRangeComponent implements OnInit {
     };
   }
   show() {
-    console.log(this.value);
-    console.log(this.min);
-    console.log(this.max);
+    console.log(this.min +'-'+ this.value +'-'+this.highValue);
 
     this.setValue.emit({ min: this.value, max: this.highValue });
   }

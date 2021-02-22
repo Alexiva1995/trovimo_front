@@ -4,6 +4,8 @@
     <h1>Where would you like to live?</h1>
     <div class="search">
       <div>
+
+        <!--Tabs-->
         <ul class="nav nav-tabs">
           <li class="nav-item">
             <a
@@ -46,14 +48,21 @@
             >
           </li>
         </ul>
+
+        <!--Search Bar-->
         <div style="display: flex; margin-bottom: 20px">
           <div class="search-bar">
+
             <input
-              type="text"
-              class="form-control"
+              ngx-google-places-autocomplete 
+              #places="ngx-places"
               placeholder="Enter address, city, country"
-              aria-label="Recipient's username"
+              [options]= "optionsAddress"
+              (onAddressChange)="addressChange($event)"
               aria-describedby="basic-addon2"
+              aria-label="Recipient's username"
+              class="form-control form-control-lg"
+              type="text"
             />
             <select *ngIf="type === 3">
               <option value="Shared Office" selected>Shared Office</option>
@@ -67,21 +76,21 @@
               <p>Write your category</p>
               <div class="dropdown-content">
                 <ul>
-                  <li class="tittle">Services</li>
-                  <li>Moving</li>
-                  <li>Cleaning</li>
-                  <li>Real state</li>
-                  <li>Photos</li>
-                  <li>3D Virtual tours</li>
-                  <li>Storage & Transport</li>
-                  <li>Gardeners</li>
-                  <li>Painters</li>
-                  <li>Plumbers</li>
-                  <li>Carpenters</li>
-                  <li>Electricians</li>
-                  <li>Heating & AC</li>
-                  <li>Pool Services</li>
-                  <li>Other Services</li>
+                  <a class="tittle">Services</a>
+                  <a >Moving</a>
+                  <a>Cleaning</a>
+                  <a>Real state</a>
+                  <a>Photos</a>
+                  <a>3D Virtual tours</a>
+                  <a>Storage & Transport</a>
+                  <a>Gardeners</a>
+                  <a>Painters</a>
+                  <a>Plumbers</a>
+                  <a>Carpenters</a>
+                  <a>Electricians</a>
+                  <a>Heating & AC</a>
+                  <a>Pool Services</a>
+                  <a>Other Services</a>
                 </ul>
               </div>
             </div>
@@ -92,28 +101,29 @@
               padding: 15px 20px;
               border-radius: 6px;
               width: fit-content;
-              margin-left: 10px;
-            "
+              margin-left: 10px;"
+              (click)="search()"
             type="button"
           >
             <i class="fas fa-search"></i>
           </button>
         </div>
+
+        <!--Filter button-->
         <div
           class="filter"
           [ngClass]="{ active: showFilter }"
-          *ngIf="type !== 5"
-        >
+          *ngIf="type !== 5">
           <button
             class="btn btn-primary"
             style="border-radius: 6px"
             type="button"
-            (click)="showFilter = !showFilter"
-          >
+            (click)="showFilter = !showFilter">
             <i *ngIf="!showFilter" class="fas fa-plus"></i>
             <i *ngIf="showFilter" class="fas fa-minus"></i> Filters
           </button>
         </div>
+
       </div>
 
       <div class="filter-content" *ngIf="showFilter">
@@ -128,9 +138,11 @@
                 <div *ngFor="let item of options">
                   <button
                     *ngIf="isEnable(item.enable)"
-                    class="btn option oprincipal"
+                    class="btn option oprincipal "
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(item.value, 'type')"
+
                   >
                     <img [src]="item.icon" alt="" />{{ item.label }}
                   </button>
@@ -197,24 +209,26 @@
               <div style="margin-top: 30px" *ngIf="activeFilter == 0">
                 <div style="display: flex; justify-content: space-between">
                   <h6>Price range</h6>
-                  <h6>${{ min }} - ${{ max }}</h6>
+                  <h6>${{ min }} - ${{ maxP }}</h6>
                 </div>
                 <app-double-range
                   [min]="min"
-                  [max]="max"
-                  [steps]="steps"
+                  [max]="maxP"
+                  [steps]="stepsP"
+                  (setValue)="addMinMaxValues($event.min, $event.max, 'price')"
                 ></app-double-range>
               </div>
 
               <div style="margin-top: 30px" *ngIf="activeFilter == 1">
                 <div style="display: flex; justify-content: space-between">
                   <h6>Area range</h6>
-                  <h6>{{ min }}m2 - {{ max }}m2</h6>
+                  <h6>{{ min }}m2 - {{ maxA }}m2</h6>
                 </div>
                 <app-double-range
                   [min]="min"
-                  [max]="max"
-                  [steps]="steps"
+                  [max]="maxA"
+                  [steps]="stepsA"
+                  (setValue)="addMinMaxValues($event.min, $event.max, 'area')"
                 ></app-double-range>
               </div>
 
@@ -225,6 +239,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="addTypeValue(0, 'baths')"
                 >
                   Any
                 </button>
@@ -232,6 +247,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="addTypeValue(1, 'baths')"
                 >
                   +1
                 </button>
@@ -239,6 +255,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="addTypeValue(2, 'baths')"
                 >
                   +2
                 </button>
@@ -246,6 +263,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="addTypeValue(3, 'baths')"
                 >
                   +3
                 </button>
@@ -253,6 +271,7 @@
                   class="btn option"
                   style="width: fit-content; border-radius: 8px; margin: 5px"
                   type="button"
+                  (click)="addTypeValue(4, 'baths')"
                 >
                   +4
                 </button>
@@ -266,6 +285,7 @@
                     class="btn option"
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(0, 'rooms')"
                   >
                     Studio
                   </button>
@@ -273,6 +293,7 @@
                     class="btn option"
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(1, 'rooms')"
                   >
                     +1
                   </button>
@@ -280,6 +301,7 @@
                     class="btn option"
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(2, 'rooms')"
                   >
                     +2
                   </button>
@@ -287,6 +309,7 @@
                     class="btn option"
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(3, 'rooms')"
                   >
                     +3
                   </button>
@@ -294,6 +317,7 @@
                     class="btn option"
                     style="width: fit-content; border-radius: 8px; margin: 5px"
                     type="button"
+                    (click)="addTypeValue(4, 'rooms')"
                   >
                     +4
                   </button>

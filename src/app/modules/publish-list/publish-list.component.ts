@@ -4,10 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
 import { ExpertService } from '../../services/expert/expert.service';
-import { OPTIONS } from 'src/app/models/typeOptions';
+// import { OPTIONS } from 'src/app/models/typeOptions';
 import { ClickOutsideModule } from 'ng-click-outside';
 import Swal from 'sweetalert2';
-
+import { Filters, OPTIONS } from 'src/app/models/typeOptions';
+import { SearchService } from 'src/app/services/search/search.service';
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
