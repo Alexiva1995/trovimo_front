@@ -9,12 +9,19 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import Swal from 'sweetalert2';
 import { Filters, OPTIONS } from 'src/app/models/typeOptions';
 import { SearchService } from 'src/app/services/search/search.service';
+import { MapService } from 'src/app/services/map/map.service';
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
   styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
+  // map
+  latitude: number = -74.297333;
+  longitude: number = 4.570868;
+  zoom: number = 15;
+
+
   type: number;
   openFilter = -1;
   steps = 10;
@@ -62,6 +69,8 @@ export class PublishListComponent implements OnInit {
   tour:any = "";
   yearmin:any = "";
   yearmax:any = "";
+  yearshow1:any
+  yearshow2:any
   // asignar los valores a una ruta en building
   // {{base_url}}/api/auth/services/optional-options
   // arreglos de checbox
@@ -71,6 +80,7 @@ export class PublishListComponent implements OnInit {
 
 
   constructor(
+    private mapService: MapService,
     private route: ActivatedRoute,
     private service: ProjectService,
     private toastr: ToastrService,
@@ -94,6 +104,7 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getLocation()
     if (this.type == 5) {
       this.getServices();
       this.getExperts(
@@ -215,6 +226,16 @@ export class PublishListComponent implements OnInit {
 
     console.log(this.price);
   }
+
+  setYear(min, max) {
+    this.price.min = min;
+    this.price.max = max;
+    this.yearmin = min;
+    this.yearmax = max
+    console.log(this.price);
+  }
+
+  
   getExperts(address, category, type_verification, company, emergency) {
     this.load = 1;
     this.Expert.getExpert(
@@ -405,5 +426,50 @@ export class PublishListComponent implements OnInit {
 
       console.log(this.buildsTemp)
   }
+
+
+
+  datestart(e){
+    const d1 = new Date(e);
+    const y1 = d1.getFullYear()
+    this.yearmin = y1
+    console.log(this.yearmin)
+    this.yearshow1 = y1
+    console.log(this.yearshow1)
+  }
+
+  dateend(e){
+    const d2 = new Date(e);
+    const y2 = d2.getFullYear()
+    this.yearmax = y2
+    this.yearshow2 = y2  
+  }
+
+
+
+
+  getLocation() {
+    this.mapService.getPosition().then(pos => {
+        this.latitude = pos.lng;
+        this.longitude = pos.lat;
+        
+    });
+      if (!this.latitude && !this.longitude ) {
+        this.latitude = 4.570868;
+        this.longitude = -74.297333;
+        this.zoom = 15;
+      }
+    
+  }
+
+
+
+  myEvent(event: any) {
+    console.log(event);
+    const {lat,lon} = event
+    
+    this.latitude = lat
+    this.longitude = lon
+ }
 
 }

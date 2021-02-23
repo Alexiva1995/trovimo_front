@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment.prod';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { isThisTypeNode } from 'typescript';
 
 @Component({
@@ -10,6 +10,9 @@ import { isThisTypeNode } from 'typescript';
 export class PublishCardComponent implements OnInit {
   @Input() type;
   @Input() data;
+  @Output() valueChange = new EventEmitter();
+
+
   baseUrl: string = environment.api;
   url:any;
   constructor() {
@@ -18,6 +21,7 @@ export class PublishCardComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data);
+
     if(this.type==5){
       if (this.data) {
         this.data.photos = JSON.parse(this.data.cover_picture);
@@ -31,4 +35,11 @@ export class PublishCardComponent implements OnInit {
     }
 
   }
+
+  getItem(e){
+    this.valueChange.emit(e)
+  }
+
+
+
 }

@@ -568,14 +568,16 @@
             font-weight: bold;
             display: flex;
             justify-content: space-between;
-            width: 100%;"><span>Built in</span><span>2007 - 2018 </span></p>
-            <div style="display: flex;width: 88%;">
-              <app-double-range style="width: 100%;"
-              [min]="min"
-              [max]="max"
-              [steps]="steps"
-              (setValue)="setPrice($event.min, $event.max)"
-            ></app-double-range>
+            width: 100%;"><span>Built in</span><span>{{yearshow1}} - {{yearshow2}} </span></p>
+            <div style="display: flex;width: 88%;flex-direction: column;">
+              <div>
+                <p style="margin-bottom: 3px;">Start Date</p>
+                <input (ngModelChange)="datestart($event)"  [(ngModel)]="yearmin"  class="form-control" type="date" value="2011-08-19" id="example-date-input">
+              </div>
+              <div>
+                <p style="margin-bottom: 3px;"  (click)="testDATE()"  >End Date</p>
+                <input (ngModelChange)="dateend($event)" [(ngModel)]="yearmax" class="form-control" type="date" value="2011-08-19" id="example-date-input">
+              </div>
             </div>
           </div>
 
@@ -756,6 +758,7 @@
               [type]="type"
               [data]="item"
               *ngIf="item"
+              (valueChange)="myEvent($event)"
             ></app-publish-card>
           </div>
         </div>
@@ -777,15 +780,16 @@
         <div class="row">
           <div class="col-6" *ngFor="let item of projects">
             <app-publish-card
-              [type]="type"
-              [data]="item"
-              *ngIf="item"
+            [type]="type"
+            [data]="item"
+            *ngIf="item"
+            (valueChange)="myEvent($event)"
             ></app-publish-card>
           </div>
         </div>
       </div>
       <div class="col-lg-6" *ngIf="viewType == 0">
-        <app-map [lat]="0" [lng]="0"></app-map>
+        <app-map [lng]="latitude" [lat]="longitude" [zoom]="zoom"></app-map>
       </div>
     </div>
   </div>
@@ -930,6 +934,7 @@
               [type]="type"
               [data]="item"
               *ngIf="item"
+              (valueChange)="myEvent($event)"
             ></app-publish-card>
           </div>
         </div>
