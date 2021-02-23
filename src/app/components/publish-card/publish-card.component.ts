@@ -27,6 +27,7 @@ export class PublishCardComponent implements OnInit {
         this.data.photos = JSON.parse(this.data.cover_picture);
         console.log(this.data);
       }
+      
     }else{
       if (this.data) {
         this.data.photos = JSON.parse(this.data.photos);
