@@ -14,8 +14,10 @@ import { SearchService } from 'src/app/services/search/search.service';
 export class PublishListComponent implements OnInit {
   type: any;
   openFilter = -1;
-  min = 10;
-  max = 10000000;
+  minP = 10;
+  maxP = 100000;
+  minA = 10;
+  maxA = 100000;
   steps = 10;
   viewType = 0;
   projects: Project;
@@ -32,6 +34,7 @@ export class PublishListComponent implements OnInit {
   area: any = {};
   options = OPTIONS;
   filters: Filters;
+  addressFormatted: string;
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
@@ -54,32 +57,101 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.type == 5) {
-      this.getServices();
-      this.getExperts(
-        this.address,
-        this.category,
-        this.type_verification,
-        this.company,
-        this.emergency
-      );
-      this.getProjects();
+
+    this.searchService.currentMessage.subscribe(data => {
+      this.filters = data[1];
+      this.addressFormatted = data[0];
+      this.filter.address = data[4];
+      if (this.filters) {
+        this.setFilters(this.filters);
+
+      } else {
+        switch (this.type) {
+          case '1':
+            this.getProduct();
+            break;
+          case '2':
+            this.getProduct();
+            break;
+          case '3':
+            this.getShared_spaces();
+            break;
+          case '4':
+            this.getProject();
+            break;
+          case '5':
+            this.getServices();
+            this.getExperts(
+              this.address,
+              this.category,
+              this.type_verification,
+              this.company,
+              this.emergency
+            );
+            this.getProjects();
+            break;
+          default:
+            break;
+        }
+      }
+    })
+  }
+
+  setFilters(filters: Filters) {
+    if (filters.area.max != null) {
+      this.filter.areamin = filters.area.min;
+      this.filter.areamax = filters.area.max;
+      this.setArea(filters.area.min, filters.area.max);
     }
-      if(this.type == 1){
-        this.getProduct();
-      }
-      if(this.type == 3){
-        this.getShared_spaces();
-      }
-      if(this.type == 4){
-        this.getProject();
-      }
+    if (filters.price.max != null) {
+      this.filter.pricemin = filters.price.min;
+      this.filter.pricemax = filters.price.max;
+      this.setPrice(filters.price.min, this.filters.price.max);
+    }
 
-      this.searchService.currentMessage.subscribe(data => {
-        this.filters = data[1];
-        
+    this.filter.bath = filters.baths;
+    this.filter.room = filters.rooms;
+    if(this.type != '3'){
+      this.filter.type = filters.type;
+    }
+    
 
-      })
+    let searchType: string;
+    let propertyType: string;
+
+    switch (this.type) {
+      case '1':
+        searchType = 'search-product';
+        propertyType = 'products';
+        break;
+      case '2':
+        searchType = 'search-product';
+        propertyType = 'products';
+        break;
+      case '3':
+        searchType = 'search-shared-space';
+        propertyType = 'shared_spaces';
+        break;
+      case '4':
+        searchType = 'search-project';
+        propertyType = 'project';
+        break;
+      case '5':
+        searchType = 'search-expert';
+        propertyType = 'experts';
+        break;
+      default:
+        break;
+    }
+    
+    console.log(this.filter)
+
+    this.service.searchByType(searchType,this.filter).subscribe(
+      (res)=>{
+        this.projects = res[propertyType];
+        console.log(this.projects);
+      }
+    )
   }
 
   getProjects() {
@@ -97,7 +169,7 @@ export class PublishListComponent implements OnInit {
   getProduct() {
     console.log("entro");
     this.service.getProduct().subscribe(
-      (data : any) => {
+      (data: any) => {
         this.projects = data.products;
         console.log(data);
       },
@@ -110,7 +182,7 @@ export class PublishListComponent implements OnInit {
   getShared_spaces() {
     console.log("entro");
     this.service.getShared().subscribe(
-      (data : any) => {
+      (data: any) => {
         this.projects = data.shared_spaces;
         console.log(data);
       },
@@ -122,7 +194,7 @@ export class PublishListComponent implements OnInit {
   getProject() {
     console.log("entro");
     this.service.getProject().subscribe(
-      (data : any) => {
+      (data: any) => {
         this.projects = data.project;
         console.log(data);
       },
@@ -132,7 +204,6 @@ export class PublishListComponent implements OnInit {
     );
   }
 
-  
   getServices() {
     this.Expert.getAreas().subscribe(
       (data: any) => {
@@ -151,13 +222,11 @@ export class PublishListComponent implements OnInit {
   setArea(min, max) {
     this.area.min = min;
     this.area.max = max;
-    console.log(this.area);
   }
 
   setPrice(min, max) {
     this.price.min = min;
     this.price.max = max;
-    console.log(this.price);
   }
 
   getExperts(address, category, type_verification, company, emergency) {

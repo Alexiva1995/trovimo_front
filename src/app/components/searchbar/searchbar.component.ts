@@ -14,8 +14,8 @@ export class SearchbarComponent implements OnInit {
   min = 0;
   maxA = 10;
   stepsA = 2;
-  maxP = 999999999;
-  stepsP = 1000;
+  maxP = 99999;
+  stepsP = 100;
   options = OPTIONS;
   showFilter = false;
   activeFilter = 0;
@@ -27,6 +27,7 @@ export class SearchbarComponent implements OnInit {
   longitude: number;
 
   formattedaddress = "";
+  country = "";
   optionsAddress = {
     componentRestrictions: {
       country: [],
@@ -34,12 +35,13 @@ export class SearchbarComponent implements OnInit {
   }
 
   constructor(private router: Router,
-              private searchService: SearchService) { }
+              private searchService: SearchService) 
+  {}
 
   ngOnInit(): void {
 
     this.filters = {
-      type: 0,
+      type: 1,
       price: {
         min: null,
         max: null
@@ -48,8 +50,8 @@ export class SearchbarComponent implements OnInit {
         min: null,
         max: null
       },
-      rooms: 0,
-      baths: 0
+      rooms: 1,
+      baths: 1
     }
 
   }
@@ -65,6 +67,10 @@ export class SearchbarComponent implements OnInit {
     this.formattedaddress = address.formatted_address;
     this.latitude = address.geometry.location.lng();
     this.longitude = address.geometry.location.lat();
+    const aux = address.address_components;
+    const country = aux.find(ejm => ejm.types = 'country');
+    this.country = country.long_name;
+
   }
 
   addTypeValue(id: number, type:string){
@@ -78,7 +84,7 @@ export class SearchbarComponent implements OnInit {
 
   search(){
 
-    const data = [this.formattedaddress, this.filters];
+    const data = [this.formattedaddress, this.filters, this.latitude, this.longitude, this.country];
     console.log(data);
     this.searchService.setFilters(data);
     this.router.navigate(['/publish-list/',this.type]);

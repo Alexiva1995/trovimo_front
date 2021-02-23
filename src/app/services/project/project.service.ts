@@ -73,6 +73,28 @@ export class ProjectService {
     );
   }
 
+  searchByType(type, filter?, reqOpts?: any): Observable<any> {
+    reqOpts = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+      }),
+    };
+
+    reqOpts.params = new HttpParams();
+    for (const k in filter) {
+      if (filter[k] !== undefined) {
+        reqOpts.params = reqOpts.params.append(k, filter[k]);
+      }
+    }
+
+    return this.http.post(
+      this.api + '/auth/services/'+type,
+      filter,
+      reqOpts
+    );
+  }
+
   searchProject(filter?, reqOpts?: any): Observable<any> {
     reqOpts = {
       headers: new HttpHeaders({

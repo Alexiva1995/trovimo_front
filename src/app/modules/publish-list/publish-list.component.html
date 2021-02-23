@@ -1,85 +1,41 @@
 <div class="filters" *ngIf="type < 5">
-  <div class="container-fluid">
-    <div style="display: flex; align-items: center">
-      <div style="margin: 0 auto">
-        <input
-          type="text"
-          class="form-control"
-          style="display: inline"
-          placeholder="Location"
-          aria-label="Recipient's username"
-          aria-describedby="basic-addon2"
-        />
-        <button
-          class="btn option"
-          [ngClass]="{ active: openFilter == 0 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          (click)="openFilter = 0"
-        >
+    <div class="container-fluid">
+        <div style="display: flex; align-items: center">
+            <div style="margin: 0 auto">
+                <input type="text" class="form-control" style="display: inline" placeholder="Location" aria-label="Recipient's username" aria-describedby="basic-addon2" [(ngModel)]="addressFormatted" />
+                <button class="btn option" [ngClass]="{ active: openFilter == 0 }" style="width: fit-content; border-radius: 8px" type="button" (click)="openFilter = 0">
           Price
           <img
             src="../../../assets/images/icons_filters/Icon%20metro-money.svg"
             alt=""
           />
         </button>
-        <select
-          class="btn option"
-          [ngClass]="{ active: openFilter == 1 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          id="dropdownForm1"
-          ngbDropdownToggle
-        >
+                <select class="btn option" [ngClass]="{ active: openFilter == 1 }" style="width: fit-content; border-radius: 8px" type="button" id="dropdownForm1" ngbDropdownToggle>
           <option>Residential</option>
           <option>Commercial</option>
 
           <img src="../../../assets/images/icons_filters/cama.svg" alt="" />
         </select>
-        <button
-          class="btn option"
-          [ngClass]="{ active: openFilter == 2 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          (click)="openFilter = 2"
-        >
+                <button class="btn option" [ngClass]="{ active: openFilter == 2 }" style="width: fit-content; border-radius: 8px" type="button" (click)="openFilter = 2">
           Rooms
           <img src="../../../assets/images/icons_filters/cama.svg" alt="" />
         </button>
-        <button
-          class="btn option"
-          [ngClass]="{ active: openFilter == 3 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          (click)="openFilter = 3"
-        >
+                <button class="btn option" [ngClass]="{ active: openFilter == 3 }" style="width: fit-content; border-radius: 8px" type="button" (click)="openFilter = 3">
           Baths
           <img src="../../../assets/images/icons_filters/banera.svg" alt="" />
         </button>
 
-        <button
-          class="btn option"
-          [ngClass]="{ active: openFilter == 4 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          (click)="openFilter = 4"
-        >
+                <button class="btn option" [ngClass]="{ active: openFilter == 4 }" style="width: fit-content; border-radius: 8px" type="button" (click)="openFilter = 4">
           Area
           <img
             src="../../../assets/images/icons_filters/Icon%20ionic-md-resize.svg"
             alt=""
           />
         </button>
-        <button
-          class="btn option"
-          [ngClass]="{ active: openFilter == 5 }"
-          style="width: fit-content; border-radius: 8px"
-          type="button"
-          (click)="openFilter = 5"
-        >
+                <button class="btn option" [ngClass]="{ active: openFilter == 5 }" style="width: fit-content; border-radius: 8px" type="button" (click)="openFilter = 5">
           Type
         </button>
-        <!--     <button
+                <!--     <button
           class="btn option"
           [ngClass]="{ active: openFilter == 6 }"
           style="width: fit-content; border-radius: 8px"
@@ -92,382 +48,224 @@
             alt=""
           />
         </button> -->
-        <button
-          class="btn option"
-          style="
+                <button class="btn option" style="
             width: fit-content;
             border-radius: 8px;
             color: white;
             margin-left: 34px;
-          "
-          type="button"
-          [class.active]="viewType == 0"
-          (click)="viewType = 0"
-        >
+          " type="button" [class.active]="viewType == 0" (click)="viewType = 0">
           <img
             src="../../../assets/images/publish_list/cuadricula.svg"
             alt=""
             style="margin-left: 0 !important"
           />
         </button>
-        <button
-          class="btn option icon-only"
-          [class.active]="viewType == 1"
-          style="
+                <button class="btn option icon-only" [class.active]="viewType == 1" style="
             width: fit-content;
             border-radius: 8px;
             border: none !important;
-          "
-          type="button"
-          (click)="viewType = 1"
-        >
+          " type="button" (click)="viewType = 1">
           <img
             src="../../../assets/images/publish_list/list.svg"
             alt=""
             style="margin-left: 0 !important"
           />
         </button>
-      </div>
-    </div>
-    <div
-      style="
+            </div>
+        </div>
+        <div style="
         width: 20%;
         border-radius: 20px !important;
         position: relative;
         left: 20%;
-      "
-      *ngIf="openFilter == 0"
-      class="shadow-lg p-3 mb-5 bg-white opacity-20"
-    >
-      <div style="display: flex; justify-content: space-between">
-        <h6>Price range</h6>
-        <h6>${{ price.min }} - ${{ price.max }}</h6>
-      </div>
-      <div>
-        <app-double-range
-          [min]="min"
-          [max]="max"
-          [steps]="steps"
-          (setValue)="setPrice($event.min, $event.max)"
-        ></app-double-range>
-      </div>
-    </div>
+      " *ngIf="openFilter == 0" class="shadow-lg p-3 mb-5 bg-white opacity-20">
+            <div style="display: flex; justify-content: space-between">
+                <h6>Price range</h6>
+                <h6>${{ price.min }} - ${{ price.max }}</h6>
+            </div>
+            <div>
+                <app-double-range [min]="minP" [max]="maxP" [steps]="steps" (setValue)="setPrice($event.min, $event.max)"></app-double-range>
+            </div>
+        </div>
 
-    <div
-      style="
+        <div style="
         width: 20%;
         border-radius: 20px !important;
         position: relative;
         left: 20%;
         left: 57%;
-      "
-      class="shadow-lg p-3 mb-5 bg-white opacity-20"
-      *ngIf="openFilter == 4"
-    >
-      <div style="display: flex; justify-content: space-between">
-        <h6>Area range</h6>
-        <h6>{{ area.min }}m2 - {{ area.max }}m2</h6>
-      </div>
-      <app-double-range
-        [min]="min"
-        [max]="max"
-        [steps]="steps"
-        (setValue)="setArea($event.min, $event.max)"
-      ></app-double-range>
-    </div>
+      " class="shadow-lg p-3 mb-5 bg-white opacity-20" *ngIf="openFilter == 4">
+            <div style="display: flex; justify-content: space-between">
+                <h6>Area range</h6>
+                <h6>{{ area.min }}m2 - {{ area.max }}m2</h6>
+            </div>
+            <app-double-range [min]="minA" [max]="maxA" [steps]="steps" (setValue)="setArea($event.min, $event.max)"></app-double-range>
+        </div>
 
-    <div
-      style="
+        <div style="
         width: 20%;
         border-radius: 20px !important;
         position: relative;
         left: 28%;
-      "
-      class="shadow-lg p-3 mb-5 bg-white opacity-20"
-      *ngIf="openFilter == 1"
-    >
-      <!-- BATHS-->
-      <h6>Residential</h6>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = null"
-        [class.active]="filter.bath == null"
-      >
+      " class="shadow-lg p-3 mb-5 bg-white opacity-20" *ngIf="openFilter == 1">
+            <!-- BATHS-->
+            <h6>Residential</h6>
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = null" [class.active]="filter.bath == null">
         Any
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button">
         +1
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button">
         +2
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button">
         +3
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button">
         +4
       </button>
-    </div>
+        </div>
 
-    <div
-      style="
+        <div style="
         width: 20%;
         border-radius: 20px !important;
         position: relative;
         left: 48%;
-      "
-      class="shadow-lg p-3 mb-5 bg-white opacity-20"
-      *ngIf="openFilter == 3"
-    >
-      <!-- BATHS-->
-      <h6>Baths</h6>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = null"
-        [class.active]="filter.bath == null"
-      >
+      " class="shadow-lg p-3 mb-5 bg-white opacity-20" *ngIf="openFilter == 3">
+            <!-- BATHS-->
+            <h6>Baths</h6>
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = null" [class.active]="filter.bath == null">
         Any
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = 1"
-        [class.active]="filter.bath == 1"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = 1" [class.active]="filter.bath == 1">
         +1
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = 2"
-        [class.active]="filter.bath == 2"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = 2" [class.active]="filter.bath == 2">
         +2
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = 3"
-        [class.active]="filter.bath == 3"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = 3" [class.active]="filter.bath == 3">
         +3
       </button>
-      <button
-        class="btn option"
-        style="width: fit-content; border-radius: 8px; margin: 5px"
-        type="button"
-        (click)="filter.bath = 4"
-        [class.active]="filter.bath == 4"
-      >
+            <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.bath = 4" [class.active]="filter.bath == 4">
         +4
       </button>
-    </div>
-    <div
-      style="
+        </div>
+        <div style="
         width: 20%;
         border-radius: 20px !important;
         position: relative;
         left: 39%;
-      "
-      class="shadow-lg p-3 mb-5 bg-white opacity-20"
-      *ngIf="openFilter == 2"
-    >
-      <!-- ROOMS-->
-      <h6>Rooms</h6>
-      <div>
-        <button
-          class="btn option"
-          style="width: fit-content; border-radius: 8px; margin: 5px"
-          type="button"
-          (click)="filter.room = null"
-          [class.active]="filter.room == null"
-        >
+      " class="shadow-lg p-3 mb-5 bg-white opacity-20" *ngIf="openFilter == 2">
+            <!-- ROOMS-->
+            <h6>Rooms</h6>
+            <div>
+                <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.room = null" [class.active]="filter.room == null">
           Studio
         </button>
-        <button
-          class="btn option"
-          style="width: fit-content; border-radius: 8px; margin: 5px"
-          type="button"
-          (click)="filter.room = 1"
-          [class.active]="filter.room == 1"
-        >
+                <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.room = 1" [class.active]="filter.room == 1">
           +1
         </button>
-        <button
-          class="btn option"
-          style="width: fit-content; border-radius: 8px; margin: 5px"
-          type="button"
-          (click)="filter.room = 2"
-          [class.active]="filter.room == 2"
-        >
+                <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.room = 2" [class.active]="filter.room == 2">
           +2
         </button>
-        <button
-          class="btn option"
-          style="width: fit-content; border-radius: 8px; margin: 5px"
-          type="button"
-          (click)="filter.room = 3"
-          [class.active]="filter.room == 3"
-        >
+                <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.room = 3" [class.active]="filter.room == 3">
           +3
         </button>
-        <button
-          class="btn option"
-          style="width: fit-content; border-radius: 8px; margin: 5px"
-          type="button"
-          (click)="filter.room = 4"
-          [class.active]="filter.room == 4"
-        >
+                <button class="btn option" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.room = 4" [class.active]="filter.room == 4">
           +4
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
-  <div
-    class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20"
-    *ngIf="openFilter == 5"
-  >
-    <div class="container">
-      <div class="col-lg-12">
-        <h6>Type</h6>
-        <div style="display: flex; flex-wrap: wrap">
-          <div *ngFor="let item of options" style="order: 5">
-            <button
-              class="btn option oprincipal"
-              style="width: fit-content; border-radius: 8px; margin: 5px"
-              type="button"
-            >
+    <div class="filter-content shadow-lg p-3 mb-5 bg-white opacity-20" *ngIf="openFilter == 5">
+        <div class="container">
+            <div class="col-lg-12">
+                <h6>Type</h6>
+                <div style="display: flex; flex-wrap: wrap">
+                    <div *ngFor="let item of options" style="order: 5">
+                        <button class="btn option oprincipal" style="width: fit-content; border-radius: 8px; margin: 5px" type="button" (click)="filter.type = item.value">
               <img [src]="item.icon" alt="" />{{ item.label }}
             </button>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div class="container-fluid" *ngIf="type < 5">
-  <div class="row">
-    <div class="col-lg-6" *ngIf="viewType == 0">
-      <div style="display: flex; justify-content: space-between">
-        <div>
-          <h6>Apartments in rent</h6>
-          <p>{{ projects?.length }} Results</p>
-        </div>
-        <select style="width: 30%" class="form-control" name="" id="">
+    <div class="row">
+        <div class="col-lg-6" *ngIf="viewType == 0">
+            <div style="display: flex; justify-content: space-between">
+                <div>
+                    <h6>Apartments in rent</h6>
+                    <p>{{ projects?.length }} Results</p>
+                </div>
+                <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
           <option value="Price (high to low)">Price (high to low)</option>
           <option value="Area(low to high)">Area(low to high)</option>
           <option value="Area (high to low)">Area (high to low)</option>
         </select>
-      </div>
+            </div>
 
-      <div class="row">
-        <div class="col-6" *ngFor="let item of projects">
-          <app-publish-card
-            [type]="type"
-            [data]="item"
-            *ngIf="item"
-          ></app-publish-card>
+            <div class="row">
+                <div class="col-6" *ngFor="let item of projects">
+                    <app-publish-card [type]="type" [data]="item" *ngIf="item"></app-publish-card>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="col-lg-4" *ngIf="viewType == 1">
-      <div style="display: flex; justify-content: space-between">
-        <div>
-          <h6>Apartments in rent</h6>
-          <p>{{ projects?.length }} Results</p>
-        </div>
-        <select style="width: 30%" class="form-control" name="" id="">
+        <div class="col-lg-4" *ngIf="viewType == 1">
+            <div style="display: flex; justify-content: space-between">
+                <div>
+                    <h6>Apartments in rent</h6>
+                    <p>{{ projects?.length }} Results</p>
+                </div>
+                <select style="width: 30%" class="form-control" name="" id="">
           <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
-          <option value="Price (low to high)">Price (low to high)</option>
+          <option value="Price (high to low)">Price (high to low)</option>
+          <option value="Area(low to high)">Area (low to high)</option>
+          <option value="Area (high to low)">Area (high to low)</option>
         </select>
-      </div>
+            </div>
 
-      <div class="row">
-        <div class="col-6" *ngFor="let item of projects">
-          <app-publish-card
-            [type]="type"
-            [data]="item"
-            *ngIf="item"
-          ></app-publish-card>
+            <div class="row">
+                <div class="col-6" *ngFor="let item of projects">
+                    <app-publish-card [type]="type" [data]="item" *ngIf="item"></app-publish-card>
+                </div>
+            </div>
         </div>
-      </div>
+
+        <div class="col-lg-6" *ngIf="viewType == 0">
+            <app-map [lng]="0.2" [lat]="0.1" [zoom]="9"></app-map>
+        </div>
     </div>
-    
-    <div class="col-lg-6" *ngIf="viewType == 0">
-      <app-map [lng]="0.2" [lat]="0.1" [zoom]="9"></app-map>
-    </div>
-  </div>
 </div>
 
-<div
-  class="container-fluid"
-  style="background-color: #d8d8d8"
-  *ngIf="type == 5"
->
-  <div class="row pt-3 pb-3">
-    <div
-      class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12"
-      style="padding-left: 10%"
-    >
-      <input
-        type="text"
-        placeholder="constructoras"
-        style="width: 80%; border-radius: 50px"
-        [(ngModel)]="company"
-        (change)="
+<div class="container-fluid" style="background-color: #d8d8d8" *ngIf="type == 5">
+    <div class="row pt-3 pb-3">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12" style="padding-left: 10%">
+            <input type="text" placeholder="constructoras" style="width: 80%; border-radius: 50px" [(ngModel)]="company" (change)="
           getExperts(address, category, type_verification, company, emergency)
-        "
-      />
+        " />
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 text-right">
+            <p>
+                Find Experts/ <b>{{ experts?.length }} Results for "Constructs"</b>
+            </p>
+        </div>
+        <div class="col-lg-1 col-sm-12"></div>
     </div>
-    <div class="col-lg-5 col-md-5 col-sm-12 text-right">
-      <p>
-        Find Experts/ <b>{{ experts?.length }} Results for "Constructs"</b>
-      </p>
-    </div>
-    <div class="col-lg-1 col-sm-12"></div>
-  </div>
 </div>
 
 <div class="container-fluid pt-3 pb-3" *ngIf="type == 5">
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
-      <div class="row pt-2 pb-2">
-        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
-          <input
-            type="text"
-            placeholder="Location"
-            class="form-control"
-            style="display: inline; height: 30px"
-            [(ngModel)]="address"
-            (change)="
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+            <div class="row pt-2 pb-2">
+                <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+                    <input type="text" placeholder="Location" class="form-control" style="display: inline; height: 30px" [(ngModel)]="address" (change)="
               getExperts(
                 address,
                 category,
@@ -475,15 +273,10 @@
                 company,
                 emergency
               )
-            "
-          />
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
-          <select
-            class="form-control"
-            style="display: inline; height: 30px"
-            [(ngModel)]="category"
-            (change)="
+            " />
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+                    <select class="form-control" style="display: inline; height: 30px" [(ngModel)]="category" (change)="
               getExperts(
                 address,
                 category,
@@ -491,20 +284,15 @@
                 company,
                 emergency
               )
-            "
-          >
+            ">
             <option value="" selected disabled>Category</option>
             <option value="{{ service.id }}" *ngFor="let service of services">
               {{ service.services }}
             </option>
           </select>
-        </div>
-        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
-          <select
-            class="form-control"
-            style="display: inline; height: 30px"
-            [(ngModel)]="type_verification"
-            (change)="
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+                    <select class="form-control" style="display: inline; height: 30px" [(ngModel)]="type_verification" (change)="
               getExperts(
                 address,
                 category,
@@ -512,8 +300,7 @@
                 company,
                 emergency
               )
-            "
-          >
+            ">
             <option value="" selected disabled>Verification</option>
             <option value="">All</option>
             <option value="2">Only companies</option>
@@ -521,14 +308,9 @@
             <option value="3">Companies verified</option>
             <option value="4">User Verified</option>
           </select>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6 text-left">
-          <input
-            type="checkbox"
-            value="1"
-            style="display: inline"
-            [(ngModel)]="emergency"
-            (change)="
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 text-left">
+                    <input type="checkbox" value="1" style="display: inline" [(ngModel)]="emergency" (change)="
               getExperts(
                 address,
                 category,
@@ -536,47 +318,38 @@
                 company,
                 emergency
               )
-            "
-          />
-          24/7 Emergency moments
-        </div>
-        <div class="col-lg-1 col-md-6 col-sm-6 text-left"></div>
-        <div class="col-lg-2 col-md-6 col-sm-6 text-left">
-          <select class="form-control" style="display: inline; height: 30px">
+            " /> 24/7 Emergency moments
+                </div>
+                <div class="col-lg-1 col-md-6 col-sm-6 text-left"></div>
+                <div class="col-lg-2 col-md-6 col-sm-6 text-left">
+                    <select class="form-control" style="display: inline; height: 30px">
             <option value="">Most recent</option>
             <option value="">Review - Low to high</option>
             <option value="">Review - High to low</option>
           </select>
+                </div>
+            </div>
         </div>
-      </div>
+        <div class="col-1"></div>
     </div>
-    <div class="col-1"></div>
-  </div>
 </div>
 
 <div class="container-fluid" *ngIf="type == 5 && load != 1">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="row">
-        <div
-          class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12"
-          *ngFor="let item of experts"
-        >
-          <app-publish-card
-            [type]="type"
-            [data]="item"
-            *ngIf="item"
-          ></app-publish-card>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-xs-12" *ngFor="let item of experts">
+                    <app-publish-card [type]="type" [data]="item" *ngIf="item"></app-publish-card>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div class="container-fluid" *ngIf="type == 5 && load == 1">
-  <div class="row">
-    <div class="col-lg-12 text-center">
-      <i class="fas fa-spinner fa-spin fa-2x"></i>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <i class="fas fa-spinner fa-spin fa-2x"></i>
+        </div>
     </div>
-  </div>
 </div>
