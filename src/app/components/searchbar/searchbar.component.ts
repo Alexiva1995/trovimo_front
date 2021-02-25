@@ -41,7 +41,7 @@ export class SearchbarComponent implements OnInit {
   ngOnInit(): void {
 
     this.filters = {
-      type: 1,
+      type: null,
       price: {
         min: null,
         max: null
@@ -50,8 +50,8 @@ export class SearchbarComponent implements OnInit {
         min: null,
         max: null
       },
-      rooms: 1,
-      baths: 1
+      rooms: null,
+      baths: null
     }
 
   }

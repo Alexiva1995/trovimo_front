@@ -74,6 +74,7 @@ export class ProjectService {
   }
 
   searchByType(type, filter?, reqOpts?: any): Observable<any> {
+    console.log(type);
     reqOpts = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',

@@ -12,7 +12,7 @@ import { SearchService } from 'src/app/services/search/search.service';
   styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
-  type: any;
+  type: any = null;
   openFilter = -1;
   minP = 10;
   maxP = 100000;
@@ -33,7 +33,7 @@ export class PublishListComponent implements OnInit {
   price: any = {};
   area: any = {};
   options = OPTIONS;
-  filters: Filters;
+  filters: Filters = null;
   addressFormatted: string;
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +43,7 @@ export class PublishListComponent implements OnInit {
     private Expert: ExpertService,
     private searchService: SearchService
   ) {
+    
     this.type = this.route.snapshot.paramMap.get('type');
     console.log(this.type);
 
@@ -57,42 +58,19 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.searchService.currentMessage.subscribe(data => {
       this.filters = data[1];
-      this.addressFormatted = data[0];
-      this.filter.address = data[4];
-      if (this.filters) {
-        this.setFilters(this.filters);
+      if (data[0] != "") {
+        this.addressFormatted = data[0];
+        this.filter.address = data[4];
+      }
 
+      if (this.filters) {
+        console.log('si filtros');
+        this.setFilters(this.filters);
       } else {
-        switch (this.type) {
-          case '1':
-            this.getProduct();
-            break;
-          case '2':
-            this.getProduct();
-            break;
-          case '3':
-            this.getShared_spaces();
-            break;
-          case '4':
-            this.getProject();
-            break;
-          case '5':
-            this.getServices();
-            this.getExperts(
-              this.address,
-              this.category,
-              this.type_verification,
-              this.company,
-              this.emergency
-            );
-            this.getProjects();
-            break;
-          default:
-            break;
-        }
+        console.log('no filtros');
+        this.getByType();
       }
     })
   }
@@ -106,15 +84,14 @@ export class PublishListComponent implements OnInit {
     if (filters.price.max != null) {
       this.filter.pricemin = filters.price.min;
       this.filter.pricemax = filters.price.max;
-      this.setPrice(filters.price.min, this.filters.price.max);
+      this.setPrice(filters.price.min, filters.price.max);
     }
-
-    this.filter.bath = filters.baths;
-    this.filter.room = filters.rooms;
-    if(this.type != '3'){
-      this.filter.type = filters.type;
+    if (filters.baths != null) {
+      this.filter.bath = filters.baths;
     }
-    
+    if (filters.rooms != null) {
+      this.filter.room = filters.rooms;
+    }
 
     let searchType: string;
     let propertyType: string;
@@ -143,15 +120,52 @@ export class PublishListComponent implements OnInit {
       default:
         break;
     }
-    
-    console.log(this.filter)
 
-    this.service.searchByType(searchType,this.filter).subscribe(
-      (res)=>{
-        this.projects = res[propertyType];
-        console.log(this.projects);
-      }
-    )
+    console.log(this.filter);
+
+    if (this.filter.length > 0 || this.filter) {
+    console.log('si hay 2');
+      
+      this.service.searchByType(searchType, this.filter).subscribe(
+        (res) => {
+          this.projects = res[propertyType];
+          console.log(this.projects);
+        }
+      )
+    } else {
+      console.log('no hay 2');
+      this.getByType();
+    }
+  }
+
+  getByType(){
+    switch (this.type) {
+      case '1':
+        this.getProduct();
+        break;
+      case '2':
+        this.getProduct();
+        break;
+      case '3':
+        this.getShared_spaces();
+        break;
+      case '4':
+        this.getProject();
+        break;
+      case '5':
+        this.getServices();
+        this.getExperts(
+          this.address,
+          this.category,
+          this.type_verification,
+          this.company,
+          this.emergency
+        );
+        this.getProjects();
+        break;
+      default:
+        break;
+    }
   }
 
   getProjects() {
