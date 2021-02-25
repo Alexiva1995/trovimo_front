@@ -11,15 +11,18 @@ export class PublishCardComponent implements OnInit {
   @Input() type;
   @Input() data;
   baseUrl: string = environment.api;
-  constructor() {}
+  url:any;
+  constructor() {
+    this.url= "profile/";
+  }
 
   ngOnInit(): void {
-    console.log(this.data);
     if(this.type==5){
       if (this.data) {
         this.data.photos = JSON.parse(this.data.cover_picture);
         console.log(this.data);
       }
+      
     }else{
       if (this.data) {
         this.data.photos = JSON.parse(this.data.photos);

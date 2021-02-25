@@ -4,17 +4,20 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Project } from 'src/app/models/project.model';
 import { ExpertService } from '../../services/expert/expert.service';
-import { OPTIONS } from 'src/app/models/typeOptions';
+import { Filters, OPTIONS } from 'src/app/models/typeOptions';
+import { SearchService } from 'src/app/services/search/search.service';
 @Component({
   selector: 'app-publish-list',
   templateUrl: './publish-list.component.html',
   styleUrls: ['./publish-list.component.scss'],
 })
 export class PublishListComponent implements OnInit {
-  type: number;
+  type: any;
   openFilter = -1;
-  min = 10;
-  max = 10000000;
+  minP = 10;
+  maxP = 100000;
+  minA = 10;
+  maxA = 100000;
   steps = 10;
   viewType = 0;
   projects: Project;
@@ -30,16 +33,17 @@ export class PublishListComponent implements OnInit {
   price: any = {};
   area: any = {};
   options = OPTIONS;
+  filters: Filters;
+  addressFormatted: string;
   constructor(
     private route: ActivatedRoute,
     private service: ProjectService,
     private toastr: ToastrService,
-    private Expert: ExpertService
+    private Project: ProjectService,
+    private Expert: ExpertService,
+    private searchService: SearchService
   ) {
-    this.type = parseFloat(this.route.snapshot.paramMap.get('type'));
-    this.filter.option = parseFloat(this.route.snapshot.paramMap.get('option'));
-
-    this.filter.type = this.type;
+    this.type = this.route.snapshot.paramMap.get('type');
     console.log(this.type);
 
     this.route.queryParams.subscribe((params) => {
@@ -53,51 +57,101 @@ export class PublishListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getData();
+
+    this.searchService.currentMessage.subscribe(data => {
+      this.filters = data[1];
+      this.addressFormatted = data[0];
+      this.filter.address = data[4];
+      if (this.filters) {
+        this.setFilters(this.filters);
+
+      } else {
+        switch (this.type) {
+          case '1':
+            this.getProduct();
+            break;
+          case '2':
+            this.getProduct();
+            break;
+          case '3':
+            this.getShared_spaces();
+            break;
+          case '4':
+            this.getProject();
+            break;
+          case '5':
+            this.getServices();
+            this.getExperts(
+              this.address,
+              this.category,
+              this.type_verification,
+              this.company,
+              this.emergency
+            );
+            this.getProjects();
+            break;
+          default:
+            break;
+        }
+      }
+    })
   }
 
-  getData() {
-    console.log(this.type);
+  setFilters(filters: Filters) {
+    if (filters.area.max != null) {
+      this.filter.areamin = filters.area.min;
+      this.filter.areamax = filters.area.max;
+      this.setArea(filters.area.min, filters.area.max);
+    }
+    if (filters.price.max != null) {
+      this.filter.pricemin = filters.price.min;
+      this.filter.pricemax = filters.price.max;
+      this.setPrice(filters.price.min, this.filters.price.max);
+    }
+
+    this.filter.bath = filters.baths;
+    this.filter.room = filters.rooms;
+    if(this.type != '3'){
+      this.filter.type = filters.type;
+    }
+    
+
+    let searchType: string;
+    let propertyType: string;
 
     switch (this.type) {
-      case 1: {
-        this.getServices();
-        this.getProducts();
+      case '1':
+        searchType = 'search-product';
+        propertyType = 'products';
         break;
-      }
-      case 2: {
-        this.getServices();
-        this.getProducts();
+      case '2':
+        searchType = 'search-product';
+        propertyType = 'products';
         break;
-      }
-      case 3: {
-        this.getServices();
-        this.getSharedSpace();
+      case '3':
+        searchType = 'search-shared-space';
+        propertyType = 'shared_spaces';
         break;
-      }
-      case 4: {
-        this.getServices();
-        this.getProjects();
+      case '4':
+        searchType = 'search-project';
+        propertyType = 'project';
         break;
-      }
-      case 5: {
-        this.getServices();
-        this.getExperts(
-          this.address,
-          this.category,
-          this.type_verification,
-          this.company,
-          this.emergency
-        );
-        this.getProjects();
+      case '5':
+        searchType = 'search-expert';
+        propertyType = 'experts';
         break;
-      }
-      default: {
-        this.getServices();
-        this.getProducts();
+      default:
         break;
-      }
     }
+    
+    console.log(this.filter)
+
+    this.service.searchByType(searchType,this.filter).subscribe(
+      (res)=>{
+        this.projects = res[propertyType];
+        console.log(this.projects);
+      }
+    )
   }
 
   getProjects() {
@@ -111,6 +165,45 @@ export class PublishListComponent implements OnInit {
       }
     );
   }
+
+  getProduct() {
+    console.log("entro");
+    this.service.getProduct().subscribe(
+      (data: any) => {
+        this.projects = data.products;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
+  getShared_spaces() {
+    console.log("entro");
+    this.service.getShared().subscribe(
+      (data: any) => {
+        this.projects = data.shared_spaces;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+  getProject() {
+    console.log("entro");
+    this.service.getProject().subscribe(
+      (data: any) => {
+        this.projects = data.project;
+        console.log(data);
+      },
+      (err) => {
+        this.toastr.error('Error al realizar al consulta.');
+      }
+    );
+  }
+
 
   getServices() {
     this.Expert.getAreas().subscribe(
@@ -130,13 +223,11 @@ export class PublishListComponent implements OnInit {
   setArea(min, max) {
     this.area.min = min;
     this.area.max = max;
-    console.log(this.area);
   }
 
   setPrice(min, max) {
     this.price.min = min;
     this.price.max = max;
-    console.log(this.price);
   }
 
   getExperts(address, category, type_verification, company, emergency) {
@@ -153,28 +244,6 @@ export class PublishListComponent implements OnInit {
         this.load = 0;
       },
       (errorServicio) => {
-        console.log('Ha Ocurrido un error inesperado.');
-      }
-    );
-  }
-
-  getSharedSpace() {
-    this.service.getSharedSpace(this.filter).subscribe(
-      (res: any) => {
-        this.projects = res.shared_spaces;
-      },
-      (err) => {
-        console.log('Ha Ocurrido un error inesperado.');
-      }
-    );
-  }
-
-  getProducts() {
-    this.service.searchProducts(this.filter).subscribe(
-      (res: any) => {
-        this.projects = res.shared_spaces;
-      },
-      (err) => {
         console.log('Ha Ocurrido un error inesperado.');
       }
     );

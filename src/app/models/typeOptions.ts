@@ -86,3 +86,19 @@ export const OPTIONS = [
 
 ];
 
+
+export interface Filters {
+    type: number,
+    price: {
+      min: number,
+      max: number,
+    },
+    area: {
+      min: number,
+      max: number,
+    },
+    rooms: number,
+    baths: number
+}
+
+

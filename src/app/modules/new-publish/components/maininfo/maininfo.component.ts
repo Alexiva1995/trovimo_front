@@ -1,9 +1,13 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
-import {MainInfo} from '../../../../models/main-info';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MapService} from '../../../../services/map/map.service';
-import {Plans} from '../../../../models/plans';
-import {TypeProperty} from '../../../../models/type-property';
+import { Component, Input, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { MainInfo } from '../../../../models/main-info';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MapService } from '../../../../services/map/map.service';
+import { Plans } from '../../../../models/plans';
+import { TypeProperty } from '../../../../models/type-property';
+import { GooglePlaceDirective } from 'ngx-google-places-autocomplete/ngx-google-places-autocomplete.directive';
+import { ComponentRestrictions } from 'ngx-google-places-autocomplete/objects/options/componentRestrictions';
+import { COUNTRIES, Country } from 'src/app/models/countries.data';
+import { Coordinates } from 'src/app/models/coordinates.model';
 
 @Component({
   selector: 'app-maininfo',
@@ -19,27 +23,110 @@ export class MaininfoComponent implements OnInit {
   @Input() videos = [];
   @Input() videosReader = [];
   @Output() setMainInfo = new EventEmitter();
+  @ViewChild('places') places: GooglePlaceDirective;
   years = [];
   videoUrl: string;
   coordinates = '';
-  keyword = 'place_name';
-  data = [];
+  showCoordinates = false
+
+  latitude: number = -74.297333;
+  longitude: number = 4.570868;
+  zoom: number = 10;
+  countries: Country[]; 
+  currencies = [];
+
+
+  title = 'rou';
+  //Local Variable defined 
+  
+  options = {
+    componentRestrictions: {
+      country: ['co'],
+    }
+  }
   constructor(
-    private sanitizer: DomSanitizer,
+    private sanitizer: DomSanitizer, 
     private mapService: MapService
-  ) {
+  ) { 
+    
   }
 
   ngOnInit(): void {
+    this.mainInfo.lat = this.latitude;
+    this.mainInfo.lon = this.longitude;
     this.getYearBuilt();
     this.coordinates = this.mainInfo.lon + ',' + this.mainInfo.lat;
+    this.getLocation();
+    this.countries = COUNTRIES;
+    this.countries.forEach(country =>{
+      if (this.currencies.find(element => element == country.currencyCode)) {
+      } else {
+        let aux = country.currencyCode;
+        this.currencies.push(aux);
+      }
+    });
   }
+
+  public AddressChange(address: any) {
+    //setting address from API to local variable 
+    this.latitude = address.geometry.location.lng();
+    this.longitude = address.geometry.location.lat();
+    this.zoom = 18;
+    this.mainInfo.city = address.formatted_address;
+    const aux = address.address_components;
+    const postalCode = aux.find(ejm => ejm.types = 'postal_code');
+    this.mainInfo.postal_code = postalCode.long_name;
+    this.mainInfo.lat = this.latitude;
+    this.mainInfo.lon = this.longitude;
+    
+  }
+
+  getLocation() {
+    this.mapService.getPosition().then(pos => {
+        this.latitude = pos.lng;
+        this.longitude = pos.lat;
+        
+    });
+      if (!this.latitude && !this.longitude ) {
+        this.latitude = 4.570868;
+        this.longitude = -74.297333;
+        this.zoom = 10;
+      }
+    
+  }
+
   getYearBuilt(): any {
     const actualYear = new Date().getFullYear();
     for (let i = 0; i < 100; i++) {
       this.years[i] = actualYear - i;
     }
   }
+
+  changeCountry(): void {
+    this.mainInfo.city = '';
+    this.mainInfo.postal_code = '';
+    let code = this.countries.find(name => name.country === this.mainInfo.country);
+    this.mainInfo.currency = code.currencyCode;
+    this.changeConfig(code.code);
+    this.emitData();
+  }
+
+  changeCurrency(): void {
+    this.mainInfo.city = '';
+    this.mainInfo.postal_code = '';
+    let code = this.countries.find(name => name.currencyCode === this.mainInfo.currency);
+    this.mainInfo.country = code.country;
+    this.changeConfig(code.code);
+    this.emitData();
+  }
+
+  changeConfig(country) {
+    this.places.options.componentRestrictions = new ComponentRestrictions({
+        country: country
+    });
+    this.places.reset();
+  }
+
   addImage(files): void {
     if (files.length === 0) {
       return;
@@ -82,7 +169,7 @@ export class MaininfoComponent implements OnInit {
       return;
     }
     this.videos.push(this.videoUrl);
-    this.videosReader.push( this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl));
+    this.videosReader.push(this.sanitizer.bypassSecurityTrustResourceUrl(this.videoUrl.replace("watch?v=", "embed/")));
     this.videoUrl = '';
   }
   isVideoUrl(index): boolean {
@@ -94,6 +181,7 @@ export class MaininfoComponent implements OnInit {
     this.emitData();
   }
   onChange(): void {
+    this.checkCoordinates();
     this.emitData();
   }
   emitData(): void {
@@ -106,51 +194,23 @@ export class MaininfoComponent implements OnInit {
       videosReader: this.videosReader
     });
   }
-  setCoordinates(): void {
-    const coordinates = this.coordinates.split(',');
-    this.mainInfo.lon = coordinates[0];
-    this.mainInfo.lat = coordinates[1];
-    console.log(this.coordinates);
-    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
-  }
-  changeCountry(): void {
-    switch (this.mainInfo.country) {
-      case 'Colombia': {
-        this.mapService.changeCenterMap('-73.129056', '3.06508799999999');
-        this.mainInfo.city = '';
-        this.mainInfo.postal_code = '';
-        break;
-      }
-      case 'Switzerland': {
-        this.mapService.changeCenterMap('8.23439191387853', '46.8024955829499');
-        this.mainInfo.city = '';
-        this.mainInfo.postal_code = '';
-        break;
-      }
-    }
-    this.emitData();
-  }
+
   addPlans(): void {
     this.mainInfo.plans.push(new Plans());
   }
   addProperty(): void {
     this.mainInfo.typesp.push(new TypeProperty());
   }
-  onChangeSearch(searchText): void {
-    this.mapService.getPointBySearch(searchText).subscribe(
-      response => {
-        console.log(response);
-        this.mainInfo.city = searchText;
-        this.data = response.features;
-      }
-    );
+
+  checkCoordinates(){
+    let coordinates: Coordinates;
+    this.mapService.currentMessage.subscribe(data => {
+      coordinates = data;
+      this.mainInfo.lat = coordinates.latitude;
+      this.mainInfo.lon = coordinates.longitude;
+    })
   }
-  selectEvent(event): void {
-    console.log(event);
-    this.mainInfo.lon = event.center[0];
-    this.mainInfo.lat = event.center[1];
-    console.log(this.coordinates);
-    this.mainInfo.city = event.place_name;
-    this.mapService.changeCenterMap(this.mainInfo.lon,  this.mainInfo.lat);
-  }
+
+
+
 }

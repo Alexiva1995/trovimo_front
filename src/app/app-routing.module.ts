@@ -36,9 +36,10 @@ const routes: Routes = [
     path: 'auth',
     component: AuthComponent,
     children: [
-      { path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] },
-      { path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] },
-    ],
+      {path: 'sign-in', component: SignInComponent, canActivate: [AuthGuard] },
+      {path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard] }
+    ]
+
   },
   {
     path: 'account-profile',
@@ -49,16 +50,16 @@ const routes: Routes = [
     component: FindExpertsComponent,
   },
   {
-    path: 'publish-list/:type/:option',
+    path: 'publish-list/:type',
     component: PublishListComponent,
   },
   {
-    path: 'profile',
+    path: 'profile/:id',
     component: ProfileComponent,
   },
   {
     path: 'new',
-    component: NewPublishComponent,
+    component: NewPublishComponent,///Este es el componente donde esta el formulario de subida
   },
   {
     path: 'about-us',
@@ -90,7 +91,7 @@ const routes: Routes = [
     path: 'blog/:id',
     component: BlogDetailComponent,
   },
-  { path: '**', redirectTo: '' },
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

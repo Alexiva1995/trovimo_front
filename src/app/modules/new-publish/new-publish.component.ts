@@ -3,8 +3,9 @@ import { MainInfo } from '../../models/main-info';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../services/auth/auth.service';
 import { ProjectService } from '../../services/project/project.service';
-import { DetailInfo } from '../../models/detail-info';
-import { Router } from '@angular/router';
+import { DetailInfo, SharedDetailInfo } from '../../models/detail-info';
+import { MapService } from 'src/app/services/map/map.service';
+import { Coordinates } from 'src/app/models/coordinates.model';
 
 @Component({
   selector: 'app-new-publish',
@@ -17,17 +18,23 @@ export class NewPublishComponent implements OnInit {
   optionType = 0;
   mainInfo: MainInfo;
   detail: DetailInfo;
+  sharedDeatil: SharedDetailInfo;
   images = [];
   imagesReader = [];
   videos = [];
   videosReader = [];
+  optionId = '';
+  optionVideoType = '';
+  optionPhotoType = '';
+  optionalType = '';
+  photoType = '';
   constructor(
     private authService: AuthService,
     private projectService: ProjectService,
-    private router: Router
-  ) {}
+    private mapService: MapService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   setPage(i: number): void {
     this.page = i;
@@ -56,7 +63,11 @@ export class NewPublishComponent implements OnInit {
     this.videos = data.videos;
   }
   setDetailInfo(data): void {
-    this.detail = data.data;
+    if (this.mainInfo.option_id == 3) {
+      this.sharedDeatil = data.data;
+    } else {
+      this.detail = data.data;
+    }
     if (data.skip) {
       this.onSave();
     }
@@ -68,44 +79,13 @@ export class NewPublishComponent implements OnInit {
     );
   }
   async onSave() {
-    let typeName = '';
-    let videoTypeName = '';
-    let imageTypeName = '';
-    let detailTypeName = '';
-    let typeId = '';
-    switch (this.mainInfo.category_id) {
-      case 3: {
-        typeName = 'new-shared-space';
-        videoTypeName = 'add-video-shared-space';
-        imageTypeName = 'add-photo-shared-space';
-        detailTypeName = 'optional-shared-space';
-        typeId = 'shared_space_id';
-        break;
-      }
-      case 4: {
-        typeName = 'new-project';
-        videoTypeName = 'add-video-project';
-        imageTypeName = 'add-photo-project';
-        detailTypeName = 'optional-project';
-        typeId = 'project_id';
-        break;
-      }
-      default: {
-        typeName = 'new-product';
-        videoTypeName = 'add-video-product';
-        imageTypeName = 'add-photo-product';
-        detailTypeName = 'optional-product';
-        typeId = 'product_id';
-        break;
-      }
-    }
+    this.checkCoordinates();
     if (!this.authService.isLogged()) {
       Swal.fire({
         icon: 'error',
         title: 'Authentication required',
         text: 'You need log in to create a project',
       });
-      this.router.navigateByUrl('/auth/sign-in');
       return;
     }
     Swal.fire({
@@ -116,73 +96,146 @@ export class NewPublishComponent implements OnInit {
         Swal.update({
           text: 'Saving data project',
         });
-        this.projectService.createProject(this.mainInfo, typeName).subscribe(
-          async (response) => {
-            const id = response.message.id;
-            Swal.update({
-              text: 'Uploading multimedia files',
-            });
-            for await (const video of this.videos) {
-              const formData = new FormData();
-              formData.append('video', video);
-              formData.append(typeId, id);
-              this.projectService
-                .uploadVideo(formData, videoTypeName)
-                .subscribe(
-                  (responseVideo) => {
-                    console.log(responseVideo);
-                  },
-                  (err) => {
-                    Swal.fire({
-                      title: 'An error ocurred',
-                      icon: 'error',
-                    });
-                  }
-                );
-            }
-            for await (const image of this.images) {
-              const formData = new FormData();
-              formData.append('photo', image);
-              formData.append(typeId, id);
-              this.projectService
-                .uploadImage(formData, imageTypeName)
-                .subscribe(
-                  (responseImage) => {
-                    console.log(responseImage);
-                  },
-                  (err) => {
-                    Swal.fire({
-                      title: 'An error ocurred',
-                      icon: 'error',
-                    });
-                  }
-                );
-            }
-            Swal.update({
-              text: 'Saving detail information',
-            });
-            this.detail[typeId] = id;
-            this.projectService
-              .saveDetailInfo(this.detail, detailTypeName)
-              .subscribe((responseDetail) => {});
-            Swal.fire({
-              title: 'Your project has been created successfully',
-              icon: 'success',
-            }).then((result) => {
-              /* Read more about isConfirmed, isDenied below */
-              if (result.isConfirmed) {
-                this.router.navigate(['publish-detail']);
+
+        switch (this.mainInfo.option_id) {
+          case 1:
+            this.optionId = 'new-product';
+            this.optionVideoType = 'add-video-product';
+            this.optionPhotoType = 'add-photo-product';
+            this.optionalType = 'optional-product';
+            this.photoType = 'product_id';
+            break;
+          case 2:
+            this.optionId = 'new-product';
+            this.optionVideoType = 'add-video-product';
+            this.optionPhotoType = 'add-photo-product';
+            this.optionalType = 'optional-product';
+            this.photoType = 'product_id';
+            break;
+          case 3:
+            this.optionId = 'new-shared-space';
+            this.optionVideoType = 'add-video-shared-space';
+            this.optionPhotoType = 'add-photo-shared-space';
+            this.optionalType = 'optional-shared-space';
+            this.setSharedSpace();
+            break;
+          case 4:
+            this.optionId = 'new-project';
+            this.optionVideoType = 'add-video-project';
+            this.optionPhotoType = 'add-photo-project';
+            this.optionalType = 'optional-project';
+            this.photoType = 'project_id';
+          default:
+            break;
+        }
+
+
+        this.projectService
+          .createProject(this.mainInfo, this.optionId)
+          .subscribe(
+            async (response) => {
+              console.log(response);
+              const id = response.message.id;
+              Swal.update({
+                text: 'Uploading multimedia files',
+              });
+              for await (const video of this.videos) {
+                const formData = new FormData();
+                formData.append('video', video);
+                if (this.mainInfo.option_id == 3) {
+                  formData.append('shared_space_id', id);
+                  formData.append('type', '2');
+                }
+
+                formData.append(this.photoType, id);
+                this.projectService
+                  .uploadVideo(formData, this.optionVideoType)
+                  .subscribe(
+                    (responseVideo) => {
+                      console.log(responseVideo);
+                    },
+                    (err) => {
+                      console.log(err);
+                      Swal.fire({
+                        title: 'An error ocurred',
+                        icon: 'error',
+                      });
+                    }
+                  );
               }
-            });
-          },
-          (err) => {
-            Swal.fire({
-              title: 'An error ocurred',
-              icon: 'error',
-            });
-          }
-        );
+              for await (const image of this.images) {
+                const formData = new FormData();
+                formData.append('photo', image);
+                formData.append(this.photoType, id);
+                if (this.mainInfo.option_id == 3) {
+                  formData.append('shared_space_id', id);
+                }
+                this.projectService
+                  .uploadImage(formData, this.optionPhotoType)
+                  .subscribe(
+                    (responseImage) => {
+                      console.log(responseImage);
+                    },
+                    (err) => {
+                      Swal.fire({
+                        title: 'An error ocurred',
+                        icon: 'error',
+                      });
+                    }
+                  );
+              }
+              Swal.update({
+                text: 'Saving detail information',
+              });
+
+              if (this.mainInfo.option_id == 3) {
+                this.sharedDeatil.shared_space_id = id;
+                this.projectService
+                  .saveDetailInfo(this.sharedDeatil, this.optionalType)
+                  .subscribe((responseDetail) => { });
+                Swal.fire({
+                  title: 'Your project has been created successfully',
+                  icon: 'success',
+                });
+              } else {
+                this.detail.product_id = id;
+                this.projectService
+                  .saveDetailInfo(this.detail, this.optionalType)
+                  .subscribe((responseDetail) => { });
+                Swal.fire({
+                  title: 'Your project has been created successfully',
+                  icon: 'success',
+                });
+              }
+
+            },
+            (err) => {
+              console.log(err);
+              Swal.fire({
+                title: 'An error ocurred',
+                icon: 'error',
+              });
+            }
+          );
       },
     });
+  }
+
+  setSharedSpace(): void {
+    delete this.mainInfo.peths;
+    delete this.mainInfo.furnished;
+    delete this.mainInfo.typesp;
+    delete this.mainInfo.bathroom;
+    delete this.mainInfo.show_available_date;
+    delete this.mainInfo.available_date;
+  }
+
+  checkCoordinates(){
+    let coordinates: Coordinates;
+    this.mapService.currentMessage.subscribe(data => {
+      coordinates = data;
+      this.mainInfo.lat = coordinates.latitude;
+      this.mainInfo.lon = coordinates.longitude;
+    })
   }
 }

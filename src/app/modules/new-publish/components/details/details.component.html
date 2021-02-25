@@ -16,10 +16,9 @@
       </button>
     </div>
 
-
   </div>
   <div class="tags">
-    <div *ngFor="let homeDetails of detail.homeDetailsTags;let i = index" class="tag-item">
+    <div *ngFor="let homeDetails of detail.home_details;let i = index" class="tag-item">
       {{homeDetails}}
       <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
     </div>
@@ -33,7 +32,7 @@
         [name]="homeDetail"
         [value]="homeDetail"
         (change)="onChangeDetails($event)"
-        [checked]="isChecked('homeDetailsTags',homeDetail)"
+        [checked]="isChecked('home_details',homeDetail)"
       >
       <label class="custom-control-label" [for]="homeDetail">
         {{homeDetail}}
@@ -57,9 +56,9 @@
     </div>
   </div>
   <div class="tags">
-    <div *ngFor="let building of detail.buildingTags;let i = index" class="tag-item">
+    <div *ngFor="let building of detail.builds;let i = index" class="tag-item">
       {{building}}
-      <i class="fas fa-times-circle" (click)="removeBuildingTags(i)"></i>
+      <i class="fas fa-times-circle" (click)="removebuilds(i)"></i>
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
@@ -71,7 +70,7 @@
         [id]="buildingDetail"
         [value]="buildingDetail"
         (change)="onChangeBuilding($event)"
-        [checked]="isChecked('buildingTags', buildingDetail)"
+        [checked]="isChecked('builds', buildingDetail)"
       >
       <label class="custom-control-label" [for]="buildingDetail">
         {{buildingDetail}}
@@ -94,7 +93,7 @@
     </div>
   </div>
   <div class="tags">
-    <div *ngFor="let building of detail.buildingTags;let i = index" class="tag-item">
+    <div *ngFor="let building of detail.builds;let i = index" class="tag-item">
       {{building}}
       <i class="fas fa-times-circle" (click)="removeBuildingTags(i)"></i>
     </div>
@@ -108,7 +107,7 @@
         [id]="buildingDetail"
         [value]="buildingDetail"
         (change)="onChangeBuilding($event)"
-        [checked]="isChecked('buildingTags', buildingDetail)"
+        [checked]="isChecked('builds', buildingDetail)"
       >
       <label class="custom-control-label" [for]="buildingDetail">
         {{buildingDetail}}
@@ -140,9 +139,8 @@
             [(ngModel)]="servicePrice"
           >
           <div class="input-group-append">
-            <select class="form-select">
-              <option selected value="1">COP</option>
-              <option value="2">USD</option>
+            <select [(ngModel)]="currency" class="form-select">
+              <option *ngFor="let currency of currencies" [value]="currency" >{{ currency }}</option>
             </select>
             <span *ngIf="type != 1 && type != 4"  class="input-group-text-custom" style="border-top-right-radius: 8px;border-bottom-right-radius: 8px">Month</span>
           </div>
@@ -156,7 +154,7 @@
   </div>
   <div class="tags">
     <div *ngFor="let service of detail.services;let i = index" class="tag-item">
-      {{service[0]}} - {{service[1]}} COP
+      {{service[0]}} - {{service[1]}} {{currency}}
       <i class="fas fa-times-circle" (click)="removeService(i)"></i>
     </div>
   </div>
@@ -354,9 +352,9 @@
     <label>Add or select the options from the list</label>
     <div style="display: flex;align-items: baseline">
       <div class="form-group">
-        <input [(ngModel)]="homeInput" class="form-control-lg" type="text">
+        <input [(ngModel)]="placeDetailsInput" class="form-control-lg" type="text">
       </div>
-      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addHomeTags()">
+      <button class="btn btn-primary" style="width: 38px;margin-left: 30px;" (click)="addPlaceDetails()">
         <i class="fas fa-plus"></i>
       </button>
     </div>
@@ -364,7 +362,7 @@
   <div class="tags">
     <div *ngFor="let placeDetail of detail.placeDetailsTags;let i = index" class="tag-item">
       {{placeDetail}}
-      <i class="fas fa-times-circle" (click)="removeHomeTags(i)"></i>
+      <i class="fas fa-times-circle" (click)="removePlaceDetailsTags(i)"></i>
     </div>
   </div>
   <div style="display: flex;flex-wrap: wrap">
@@ -375,8 +373,8 @@
         [id]="placeDetail"
         [name]="placeDetail"
         [value]="placeDetail"
-        (change)="onChangeDetails($event)"
-        [checked]="isChecked('homeDetailsTags',placeDetail)"
+        (change)="onChangePlaceDetails($event)"
+        [checked]="isChecked('placeDetailsTags',placeDetail)"
       >
       <label class="custom-control-label" [for]="placeDetail">
         {{placeDetail}}
